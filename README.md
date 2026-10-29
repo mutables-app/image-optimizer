@@ -1,4 +1,4 @@
-# Image Workspace
+# Mutables Image Optimizer
 
 A standalone Rust/Emscripten image optimizer with an optional Cloudflare Computer filesystem adapter. This project is separate from the upstream workers-rs checkout.
 
