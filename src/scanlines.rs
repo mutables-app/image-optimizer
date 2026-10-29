@@ -173,7 +173,7 @@ pub fn resize(
         rows_open(
             input.as_ptr(),
             input.len(),
-            16_000_000,
+            32_000_000,
             &mut ctx,
             &mut sw,
             &mut sh,

@@ -1,0 +1,31 @@
+{
+  "timestamp": "2026-10-29T17:12:51.082Z",
+  "concurrency": 2,
+  "inputPixels": 32000000,
+  "inputBytes": 6047674,
+  "totalRoundTripMs": 1536.9590819999999,
+  "sharedIsolate": false,
+  "note": "Two independent outputs passed RIFF/WebP signature and frame-dimension checks. Equal isolate markers prove the pair shared an isolate; different markers prove they did not.",
+  "results": [
+    {
+      "index": 0,
+      "status": 200,
+      "outputBytes": 58682,
+      "outputDimensions": "800x400",
+      "wasmLinearMemoryCapacityBytes": 124583936,
+      "colo": "WAW",
+      "isolateMarker": "eef646b6-95eb-4e7e-b036-f23412d9ea6a",
+      "roundTripMs": 1399.2063799999999
+    },
+    {
+      "index": 1,
+      "status": 200,
+      "outputBytes": 58682,
+      "outputDimensions": "800x400",
+      "wasmLinearMemoryCapacityBytes": 124583936,
+      "colo": "WAW",
+      "isolateMarker": "bdabc616-c0b6-42e9-a7f9-93f0cb121632",
+      "roundTripMs": 1474.634699
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "timestamp": "2026-10-29T17:09:32Z",
+  "concurrency": 2,
+  "inputPixels": 32000000,
+  "inputBytes": 6047674,
+  "totalRoundTripMs": 1856.12,
+  "note": "Two concurrent 32MP progressive JPEG requests to test Worker. RIFF/WebP frame signatures and dimensions parsed. Latency and colo do not identify whether requests shared an isolate.",
+  "cloudflareAnalytics": {
+    "bucket": "2026-10-29T17:09:30Z",
+    "requests": 2,
+    "errors": 0,
+    "cpuTimeP50Microseconds": 664374,
+    "cpuTimeP99Microseconds": 1110566,
+    "memoryUsageBytesP50": 127906056,
+    "memoryUsageBytesP90": 134357250,
+    "memoryUsageBytesP99": 134357250,
+    "note": "Invocation metrics aggregate both requests; Cloudflare analytics does not expose an isolate ID for proving routing. Memory is near the documented 128 MB per-isolate ceiling."
+  },
+  "results": [
+    {
+      "index": 0,
+      "status": 200,
+      "outputBytes": 58682,
+      "outputDimensions": "800x400",
+      "format": "WEBP",
+      "wasmLinearMemoryCapacityBytes": 124583936,
+      "colo": "WAW",
+      "roundTripMs": 1853.87
+    },
+    {
+      "index": 1,
+      "status": 200,
+      "outputBytes": 58682,
+      "outputDimensions": "800x400",
+      "format": "WEBP",
+      "wasmLinearMemoryCapacityBytes": 113573888,
+      "colo": "WAW",
+      "roundTripMs": 1141.62
+    }
+  ]
+}

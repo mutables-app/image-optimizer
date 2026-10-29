@@ -20,7 +20,7 @@ Progressive/multi-scan JPEG needs coefficient storage inside the codec. Adam7 PN
 
 For WebP, `speed: 'fast'` selects a faster internal encoder setting and enables scaled JPEG decoding where beneficial. The fast encoder can produce larger files. For JPEG output, `speed: 'fast'` enables scaled JPEG decoding; the JPEG encoder uses the same settings in both modes. Omit speed for full-resolution decoding and the default WebP encoder. `.webp({lossless: true})` uses lossless WebP encoding and disables scaled decoding; resizing still changes pixels.
 
-20 MiB input limit, 16 million source pixels. `image(input,{maxPixels: ...})` bounds output pixels: 8 million by default, maximum 16 million. Dimensions are limited to 16383. WASM linear memory is capped at 256 MiB; codec buffers and large outputs can still exhaust available memory. Image processing runs synchronously inside the terminal method's promise.
+20 MiB input limit and 32 million source pixels for streaming inputs. Buffered progressive/multi-scan JPEGs and Adam7 PNGs are capped at 24 million pixels based on deployed Worker memory measurements. `image(input,{maxPixels: ...})` bounds output pixels: 8 million by default, maximum 16 million. Dimensions are limited to 16383. The WASM build allows up to 256 MiB of linear memory; Cloudflare Worker isolates are limited to 128 MiB total across JavaScript and WebAssembly. Image processing runs synchronously inside the terminal method's promise.
 
 Node uses a file-based WASM loader; Workers use a static `.wasm` import. Configure your bundler to treat that file as a WebAssembly module. Requires WebAssembly SIMD and modern WASM exception handling. Workers tested with compatibility date 2026-09-02 and `new_module_registry`.
 

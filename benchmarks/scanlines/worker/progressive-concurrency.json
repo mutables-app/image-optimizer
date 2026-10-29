@@ -1,0 +1,28 @@
+{
+  "timestamp": "2026-10-29T17:03:39.052Z",
+  "concurrency": 2,
+  "inputPixels": 24000000,
+  "inputBytes": 4856016,
+  "totalRoundTripMs": 4490.051634,
+  "note": "Two independent outputs were decoded and validated. This does not measure total isolate memory or prove both requests shared one isolate.",
+  "results": [
+    {
+      "index": 0,
+      "status": 200,
+      "outputBytes": 94554,
+      "outputDimensions": "800x533",
+      "wasmLinearMemoryCapacityBytes": 94633984,
+      "colo": "WAW",
+      "roundTripMs": 4489.4775899999995
+    },
+    {
+      "index": 1,
+      "status": 200,
+      "outputBytes": 94554,
+      "outputDimensions": "800x533",
+      "wasmLinearMemoryCapacityBytes": 94633984,
+      "colo": "WAW",
+      "roundTripMs": 1099.77568
+    }
+  ]
+}

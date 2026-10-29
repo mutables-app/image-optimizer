@@ -3,7 +3,7 @@
 [![npm: image-optimizer](https://img.shields.io/npm/v/%40mutables.app%2Fimage-optimizer?label=%40mutables.app%2Fimage-optimizer)](https://www.npmjs.com/package/@mutables.app/image-optimizer)
 [![npm: image-computer](https://img.shields.io/npm/v/%40mutables.app%2Fimage-computer?label=%40mutables.app%2Fimage-computer)](https://www.npmjs.com/package/@mutables.app/image-computer)
 
-**New in v0.2.0:** scanline decoding/resizing in both speed modes, JPEG output and lower peak memory for large resizes. The benchmarks show a CPU trade-off; this release focuses on memory efficiency.
+**New in v0.2.2:** Streaming JPEG/PNG source limit raised to 32 megapixels. Buffered progressive/multi-scan JPEG and Adam7 PNG inputs are capped at 24 megapixels after Worker memory tests; file-size, dimension and output-pixel limits are unchanged. v0.2.0 introduced scanline decoding/resizing in both speed modes and JPEG output.
 
 An image-processing pipeline written in Rust and compiled to WebAssembly for Node.js and Cloudflare Workers. It links JPEG, PNG, and WebP codec libraries into the same Emscripten module as the Rust resize pipeline, so the image pixels stay inside WASM instead of crossing between JavaScript libraries at each stage.
 
@@ -16,7 +16,7 @@ const webp = await image(inputBytes)
   .bytes();
 ```
 
-`speed: 'fast'` selects a faster internal WebP encoder setting and enables scaled JPEG decoding for resized images when the target permits it. That can avoid decoding every source pixel and reduce peak pixel-buffer memory for large JPEGs. All JPEG/PNG sources are capped at 16 megapixels; `maxPixels` bounds the output (8 million by default). PNG inputs and `lossless: true` requests retain full-resolution row decoding. Omit `speed` to keep the existing WebP encoder setting; scanline processing applies in both modes. The fast path can produce larger files; the trade-off depends on the image. `.blob()` returns an `image/webp` Blob, or `image/jpeg` after `.jpeg()`. Image work runs synchronously in the isolate, inside the returned promise.
+`speed: 'fast'` selects a faster internal WebP encoder setting and enables scaled JPEG decoding for resized images when the target permits it. That can avoid decoding every source pixel and reduce peak pixel-buffer memory for large JPEGs. Streaming JPEG/PNG inputs are capped at 32 megapixels; progressive or multi-scan JPEGs and Adam7 PNGs use buffered codec paths and are capped at 24 megapixels. `maxPixels` bounds the output (8 million by default). PNG inputs and `lossless: true` requests retain full-resolution row decoding. Omit `speed` to keep the existing WebP encoder setting; scanline processing applies in both modes. The fast path can produce larger files; the trade-off depends on the image. `.blob()` returns an `image/webp` Blob, or `image/jpeg` after `.jpeg()`. Image work runs synchronously in the isolate, inside the returned promise.
 
 ## Architecture
 
@@ -96,9 +96,9 @@ The published v0.1.0 Worker benchmark (before scanlines) compares two internal W
 ## Limits
 
 - JPEG and PNG input; WebP and JPEG output. No animation, HEIC, AVIF, rotation, or metadata API.
-- 20 MiB maximum input and 16 million source pixels. The default output pixel limit (`maxPixels`) is 8 million and can be raised to 16 million. Source and output dimensions are limited to 16383; WASM memory is capped at 256 MiB. Codec allocations and large outputs can still exceed a Worker’s available memory.
+- 20 MiB maximum input and 32 million source pixels for streaming paths. Buffered progressive/multi-scan JPEG and Adam7 PNG paths are capped at 24 million pixels based on deployed Worker memory measurements. The default output pixel limit (`maxPixels`) is 8 million and can be raised to 16 million. Source and output dimensions are limited to 16383. The WASM build allows up to 256 MiB of linear memory, while a Cloudflare Worker isolate is limited to 128 MiB total across JavaScript and WebAssembly.
 - PNG alpha is preserved in WebP; JPEG composites onto white. EXIF orientation and ICC color management are not applied; metadata is not copied. JPEGs with decoder warnings are rejected.
-- Resizing uses scanline Lanczos3 with premultiplied alpha. `speed: 'fast'` enables scaled JPEG decoding for eligible resized lossy requests; the 16-megapixel source ceiling applies in both modes.
+- Resizing uses scanline Lanczos3 with premultiplied alpha. `speed: 'fast'` enables scaled JPEG decoding for eligible resized lossy requests; the 32-megapixel source ceiling applies in both modes.
 
 ## Development
 

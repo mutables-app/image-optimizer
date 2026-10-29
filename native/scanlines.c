@@ -8,6 +8,8 @@
 #include <jpeglib.h>
 #include <spng.h>
 
+#define MAX_BUFFERED_SOURCE_PIXELS 24000000u
+
 typedef struct {
     struct jpeg_error_mgr base;
     jmp_buf jump;
@@ -49,6 +51,9 @@ int rows_open(const uint8_t *data, size_t size, uint32_t max_source,
         // Adam7 passes revisit rows. Preserve compatibility using a bounded
         // complete decode, rather than claiming these are sequential rows.
         r->buffered = !!header.interlace_method;
+        if (r->buffered && (uint64_t)r->w*r->h > MAX_BUFFERED_SOURCE_PIXELS) {
+            rows_close(r); return 2;
+        }
     } else if (size >= 2 && data[0] == 0xff && data[1] == 0xd8) {
         r->jpeg.err = jpeg_std_error(&r->error.base);
         r->error.base.error_exit = row_error;
@@ -59,6 +64,10 @@ int rows_open(const uint8_t *data, size_t size, uint32_t max_source,
         jpeg_read_header(&r->jpeg, TRUE);
         r->w = r->jpeg.image_width; r->h = r->jpeg.image_height;
         if (!r->w || !r->h || r->w > 16383 || r->h > 16383 || (uint64_t)r->w*r->h > max_source) {
+            rows_close(r); return 2;
+        }
+        r->buffered = r->jpeg.progressive_mode || jpeg_has_multiple_scans(&r->jpeg);
+        if (r->buffered && (uint64_t)r->w*r->h > MAX_BUFFERED_SOURCE_PIXELS) {
             rows_close(r); return 2;
         }
         r->cmyk = r->jpeg.jpeg_color_space == JCS_CMYK || r->jpeg.jpeg_color_space == JCS_YCCK;
@@ -174,5 +183,5 @@ int rows_jpeg_finish(RowEncoder *e, uint8_t **bytes, size_t *size) {
     *bytes=e->bytes; *size=e->size; return 0;
 }
 // Flags describe codec-internal buffering, independently of the Rust row window.
-int rows_buffered(RowDecoder *r) { return r->png ? r->buffered : r->jpeg.progressive_mode || jpeg_has_multiple_scans(&r->jpeg); }
+int rows_buffered(RowDecoder *r) { return r->buffered; }
 int rows_opaque(RowDecoder *r) { return !r->png; }

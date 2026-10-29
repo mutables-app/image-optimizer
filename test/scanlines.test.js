@@ -5,7 +5,7 @@ import {spawnSync} from 'node:child_process';
 import {crc32} from 'node:zlib';
 import {image} from '@mutables.app/image-optimizer';
 import {optimizeWorkspaceImage} from '@mutables.app/image-computer';
-import {scanline_experiment,experiment} from '../packages/optimizer/dist/optimizer.node.js';
+import {scanline_experiment,experiment,linear_memory_bytes} from '../packages/optimizer/dist/optimizer.node.js';
 import {rgbaPng,specialPng} from './helpers/png.js';
 const fixture=async name=>readFile(new URL(`./fixtures/${name}`,import.meta.url));
 function decode(bytes) {
@@ -78,6 +78,18 @@ test('4K JPEG avoids full source pixels in both speed settings',async()=>{
   assert.equal(decode(result.take_bytes()).width,800);
  }
 });
+test('24MP progressive JPEG converts under the source limit and stays within the WASM memory cap',async()=>{
+ const input=await fixture('input-24mp-progressive.jpg');
+ const webp=await image(input).resize(800).webp({speed:'fast'}).bytes();
+ const jpeg=await image(input).resize(800).jpeg({speed:'fast'}).bytes();
+ assert.ok(webp.byteLength>0); assert.ok(jpeg.byteLength>0);
+ const memory=linear_memory_bytes();
+ assert.ok(memory<=256*1024*1024,`WASM linear memory ${memory} exceeds 256 MiB`);
+});
+test('32MP progressive JPEG is rejected before its buffered decode approaches the Worker isolate limit',async()=>{
+ const input=await fixture('input-32mp-progressive.jpg');
+ await assert.rejects(image(input).resize(800).webp({speed:'fast'}).bytes(),/limit/);
+});
 test('extreme aspect ratios keep the row window bounded',()=>{
  for(const [sw,sh,ow,oh] of [[1,16000,16000,1],[16000,1,1,16000],[31,127,127,1],[31,1,1,127]]) {
   const result=scan(rgbaPng(sw,sh,color),ow,oh);
@@ -112,9 +124,11 @@ test('truncated JPEGs and PNGs fail cleanly, including after rows have already b
   for(const format of ['webp','jpeg']) await assert.rejects(image(input).resize(16)[format]().bytes(),/decode failed/);
  }
  await assert.rejects(image(png,{maxPixels:10}).resize(20).bytes(),/limit/);
- // A source header above the source ceiling must fail before pixel allocation.
- const oversized=Buffer.from(png);oversized.writeUInt32BE(4001,16);oversized.writeUInt32BE(4000,20);oversized.writeUInt32BE(crc32(oversized.subarray(12,29)),29);
+ // A source header above the new 32MP ceiling must fail before pixel allocation.
+ const oversized=Buffer.from(png);oversized.writeUInt32BE(8193,16);oversized.writeUInt32BE(4000,20);oversized.writeUInt32BE(crc32(oversized.subarray(12,29)),29);
  await assert.rejects(image(oversized).resize(16).bytes(),/limit/);
+ const tooWide=Buffer.from(png);tooWide.writeUInt32BE(16384,16);tooWide.writeUInt32BE(1,20);tooWide.writeUInt32BE(crc32(tooWide.subarray(12,29)),29);
+ await assert.rejects(image(tooWide).resize(16).bytes(),/decode failed|limit/);
  assert.equal(decode(await image(png).resize(16).bytes()).width,16);
 });
 

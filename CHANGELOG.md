@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.2 — 2026-10-29
+
+- Raise the streaming source image limit from 16 to 32 megapixels while retaining the 20 MiB input, 16,383-pixel dimension and 16-megapixel output limits. Cap buffered progressive/multi-scan JPEG and Adam7 PNG input at 24 megapixels after deployed Worker memory measurements.
+- Test a 24-megapixel progressive JPEG through the public optimizer and measure WASM memory use before release.
+
 ## 0.2.1 — 2026-10-29
 
 - Use libwebp's RGBX import path for JPEG input, which is always opaque, and avoid processing an unnecessary alpha channel during WebP encoding.

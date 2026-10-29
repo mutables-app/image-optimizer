@@ -1,0 +1,58 @@
+{
+  "timestamp": "2026-10-29T16:59:30.444Z",
+  "note": "Successful deployed Worker conversions demonstrate compatibility; WASM linear-memory capacity is high-water capacity, not live allocation or total isolate RSS.",
+  "results": [
+    {
+      "format": "webp",
+      "speed": "default",
+      "status": 200,
+      "sourcePixels": 24000000,
+      "sourceBytes": 4856016,
+      "outputBytes": 109864,
+      "outputDimensions": "800x533",
+      "wasmLinearMemoryCapacityBytes": 94633984,
+      "codecBuffered": "true",
+      "colo": "WAW",
+      "roundTripMs": 1690.223421
+    },
+    {
+      "format": "webp",
+      "speed": "fast",
+      "status": 200,
+      "sourcePixels": 24000000,
+      "sourceBytes": 4856016,
+      "outputBytes": 94554,
+      "outputDimensions": "800x533",
+      "wasmLinearMemoryCapacityBytes": 94371840,
+      "codecBuffered": "true",
+      "colo": "WAW",
+      "roundTripMs": 1701.092261
+    },
+    {
+      "format": "jpeg",
+      "speed": "default",
+      "status": 200,
+      "sourcePixels": 24000000,
+      "sourceBytes": 4856016,
+      "outputBytes": 97725,
+      "outputDimensions": "800x533",
+      "wasmLinearMemoryCapacityBytes": 94633984,
+      "codecBuffered": "false",
+      "colo": "WAW",
+      "roundTripMs": 1220.382654
+    },
+    {
+      "format": "jpeg",
+      "speed": "fast",
+      "status": 200,
+      "sourcePixels": 24000000,
+      "sourceBytes": 4856016,
+      "outputBytes": 94099,
+      "outputDimensions": "800x533",
+      "wasmLinearMemoryCapacityBytes": 94371840,
+      "codecBuffered": "false",
+      "colo": "WAW",
+      "roundTripMs": 972.0168519999997
+    }
+  ]
+}

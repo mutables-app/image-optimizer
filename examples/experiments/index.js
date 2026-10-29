@@ -1,4 +1,7 @@
-import { experiment, scanline_experiment, optimize_jpeg } from '../../packages/optimizer/dist/optimizer.js';
+import { experiment, scanline_experiment, optimize_jpeg, linear_memory_bytes } from '../../packages/optimizer/dist/optimizer.js';
+// Lazily initialized in a request handler because Workers disallow random
+// value generation in global scope.
+let isolateMarker;
 function integer(value, fallback, max) {
  const n = value === null ? fallback : Number(value);
  if (!Number.isInteger(n) || n < 1 || n > max) throw new RangeError(`Expected integer 1–${max}`);
@@ -6,7 +9,8 @@ function integer(value, fallback, max) {
 }
 export default {
  async fetch(request, env) {
-  if (request.method === 'GET' && new URL(request.url).pathname === '/health') return Response.json({ok:true,engine:'Rust/Emscripten + libjpeg-turbo/libspng/libwebp',version:'0.2.0'});
+  isolateMarker ??= crypto.randomUUID();
+  if (request.method === 'GET' && new URL(request.url).pathname === '/health') return Response.json({ok:true,engine:'Rust/Emscripten + libjpeg-turbo/libspng/libwebp',version:'0.2.2'});
   if (!env.BENCHMARK_TOKEN || request.headers.get('authorization') !== `Bearer ${env.BENCHMARK_TOKEN}`) return new Response('Unauthorized', {status:401});
   if (request.method !== 'POST') return new Response('POST an image', {status:405});
   try {
@@ -27,7 +31,8 @@ export default {
    const pipeline = url.searchParams.get('pipeline') ?? 'reference';
    if (!['reference','scanlines','jpeg'].includes(pipeline)) throw new RangeError('pipeline must be reference, scanlines or jpeg');
    const start = performance.now();
-   // Use the same 16MP limit for both A/B arms, including the full 4K reference.
+   // maxPixels bounds output. The source decoder allows 32MP streaming paths
+   // and applies a 24MP cap to buffered progressive/multi-scan inputs.
    const result = pipeline === 'jpeg' ? null : (pipeline === 'scanlines' ? scanline_experiment : experiment)(input,width,height,true,true,quality,url.searchParams.get('lossless') === 'true',16_000_000,scaled,method,false);
    const decoded = result ? `${result.decoded_width}x${result.decoded_height}` : 'row-encoder';
    const dimensions = result ? `${result.output_width}x${result.output_height}` : 'see-jpeg';
@@ -44,6 +49,8 @@ export default {
     'x-observed-transform-ms':String(elapsed),
     'x-worker-colo':request.cf?.colo ?? 'local',
     'x-decoded-dimensions':decoded,'x-output-dimensions':dimensions,'x-webp-method':String(method),'x-scaled-jpeg':String(scaled),
+    'x-wasm-linear-memory-bytes':String(linear_memory_bytes()),
+    'x-worker-isolate-marker':isolateMarker,
    }});
   } catch(error) { return Response.json({error:String(error?.message ?? error)},{status:400}); }
  }

@@ -192,7 +192,7 @@ dependencies = [
 
 [[package]]
 name = "workspace-image"
-version = "0.2.1"
+version = "0.2.2"
 dependencies = [
  "cc",
  "fast_image_resize",

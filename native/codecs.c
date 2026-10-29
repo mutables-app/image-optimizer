@@ -5,9 +5,8 @@
 #include <spng.h>
 #include <webp/encode.h>
 
-// Scaled JPEG decoding may accept a larger source than the normal decoded
-// pixel limit, but only while producing a smaller bounded intermediate.
-#define MAX_SCALED_JPEG_SOURCE_PIXELS 16000000u
+#define MAX_SOURCE_PIXELS 32000000u
+#define MAX_BUFFERED_SOURCE_PIXELS 24000000u
 
 // All allocated buffers cross the FFI with an explicit owner and release call.
 int decode_image(const uint8_t *data, size_t size, uint32_t max_pixels,
@@ -23,7 +22,7 @@ int decode_image(const uint8_t *data, size_t size, uint32_t max_pixels,
         if (!err) err = spng_set_chunk_limits(ctx, 1024 * 1024, 4 * 1024 * 1024);
         if (!err) err = spng_set_png_buffer(ctx, data, size);
         if (!err) err = spng_get_ihdr(ctx, &header);
-        if (!err && (uint64_t)header.width * header.height > max_pixels) {
+        if (!err && (uint64_t)header.width * header.height > MAX_BUFFERED_SOURCE_PIXELS) {
             spng_ctx_free(ctx); return 2;
         }
         if (!err) err = spng_decoded_image_size(ctx, SPNG_FMT_RGBA8, &bytes);
@@ -45,6 +44,7 @@ int decode_image(const uint8_t *data, size_t size, uint32_t max_pixels,
         int original_w = tj3Get(ctx, TJPARAM_JPEGWIDTH);
         int original_h = tj3Get(ctx, TJPARAM_JPEGHEIGHT);
         int lossless = tj3Get(ctx, TJPARAM_LOSSLESS);
+        int progressive = tj3Get(ctx, TJPARAM_PROGRESSIVE);
         if (original_w <= 0 || original_h <= 0 || original_w > 16383 || original_h > 16383) {
             tj3Destroy(ctx); return 2;
         }
@@ -70,8 +70,8 @@ int decode_image(const uint8_t *data, size_t size, uint32_t max_pixels,
         }
         uint64_t source_area = (uint64_t)original_w * original_h;
         uint64_t decoded_area = (uint64_t)w * h;
-        if (source_area > max_pixels &&
-            (!can_scale || source_area > MAX_SCALED_JPEG_SOURCE_PIXELS || decoded_area > max_pixels)) {
+        if (source_area > MAX_SOURCE_PIXELS || (progressive && source_area > MAX_BUFFERED_SOURCE_PIXELS) || (source_area > max_pixels &&
+            (!can_scale || decoded_area > max_pixels))) {
             tj3Destroy(ctx); return 2;
         }
         *pixels = malloc((size_t)w * h * 4);
