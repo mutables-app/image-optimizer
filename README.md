@@ -96,9 +96,21 @@ The published v0.1.0 Worker benchmark (before scanlines) compares two internal W
 ## Limits
 
 - JPEG, PNG, HEIC/HEIF, and AVIF input; WebP and JPEG output. No animation, rotation, or metadata API.
-- 20 MiB maximum input; lowzag-compatible progressive JPEGs support up to 64 million source pixels, baseline JPEG and non-interlaced PNG up to 32 million, and unsupported progressive/multi-scan JPEG and Adam7 PNG up to 24 million. Non-grid HEIF/HEIC and AVIF remain capped at 8 million; tiled HEIF grids support up to 64 million. The default output pixel limit (`maxPixels`) is 8 million and can be raised to 16 million. Source and output dimensions are limited to 16383. The WASM build allows up to 256 MiB of linear memory, while a Cloudflare Worker isolate is limited to 128 MiB total across JavaScript and WebAssembly.
+
+| Input type | Maximum source pixels | Decode path |
+| --- | ---: | --- |
+| Baseline JPEG | 32 MP | Sequential scanline decode; eligible resized JPEGs can use scaled decode with `speed: 'fast'`. |
+| Non-interlaced PNG | 32 MP | Sequential scanline decode. |
+| Lowzag-compatible progressive JPEG | 64 MP | Reduced coefficient decode when resizing; full-resolution fallback retains the 24 MP buffered limit. |
+| Other progressive or multi-scan JPEG | 24 MP | Buffered codec compatibility path. |
+| Adam7/interlaced PNG | 24 MP | Complete-image compatibility decode before resizing. |
+| Non-grid HEIC/HEIF and AVIF | 8 MP | Full source image is decoded into memory. |
+| Tiled/grid HEIF/HEIC or AVIF | 64 MP | Decodes one tile row at a time. |
+
+All formats share a 20 MiB input limit and a 16,383-pixel dimension limit. The default output pixel limit (`maxPixels`) is 8 MP and can be raised to 16 MP. The Wasm build allows up to 256 MiB of linear memory; Cloudflare Worker isolates have a 128 MiB total limit across JavaScript and WebAssembly.
+
 - PNG alpha is preserved in WebP; JPEG composites onto white. EXIF orientation and ICC color management are not applied; metadata is not copied. JPEGs with decoder warnings are rejected.
-- Resizing uses scanline Lanczos3 with premultiplied alpha. `speed: 'fast'` enables scaled JPEG decoding for eligible resized lossy requests; the 32-megapixel source ceiling applies in both modes.
+- Resizing uses scanline Lanczos3 with premultiplied alpha. `speed: 'fast'` enables scaled JPEG decoding for eligible resized lossy requests.
 
 ## Development
 

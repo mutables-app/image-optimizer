@@ -20,7 +20,19 @@ Supported progressive JPEGs use lowzag's reduced coefficient storage and decode 
 
 For WebP, `speed: 'fast'` selects a faster internal encoder setting and enables scaled JPEG decoding where beneficial. The fast encoder can produce larger files. For JPEG output, `speed: 'fast'` enables scaled JPEG decoding; the JPEG encoder uses the same settings in both modes. Omit speed for full-resolution decoding and the default WebP encoder. `.webp({lossless: true})` uses lossless WebP encoding and disables scaled decoding; resizing still changes pixels.
 
-20 MiB input limit; lowzag-compatible progressive JPEGs support up to 64 million source pixels, baseline JPEG and non-interlaced PNG up to 32 million, and unsupported progressive/multi-scan JPEGs and Adam7 PNGs up to 24 million. Non-grid HEIF/HEIC and AVIF are capped at 8 million; tiled HEIF grids are capped at 64 million. `image(input,{maxPixels: ...})` bounds output pixels: 8 million by default, maximum 16 million. Dimensions are limited to 16383. The WASM build allows up to 256 MiB of linear memory; Cloudflare Worker isolates are limited to 128 MiB total across JavaScript and WebAssembly. Image processing runs synchronously inside the terminal method's promise.
+## Input and output limits
+
+| Input type | Maximum source pixels | Decode path |
+| --- | ---: | --- |
+| Baseline JPEG | 32 MP | Sequential scanline decode; eligible resized JPEGs can use scaled decode with `speed: 'fast'`. |
+| Non-interlaced PNG | 32 MP | Sequential scanline decode. |
+| Lowzag-compatible progressive JPEG | 64 MP | Reduced coefficient decode when resizing; full-resolution fallback retains the 24 MP buffered limit. |
+| Other progressive or multi-scan JPEG | 24 MP | Buffered codec compatibility path. |
+| Adam7/interlaced PNG | 24 MP | Complete-image compatibility decode before resizing. |
+| Non-grid HEIC/HEIF and AVIF | 8 MP | Full source image is decoded into memory. |
+| Tiled/grid HEIF/HEIC or AVIF | 64 MP | Decodes one tile row at a time. |
+
+All formats share a 20 MiB input limit and a 16,383-pixel dimension limit. `image(input,{maxPixels: ...})` bounds output pixels: 8 MP by default, maximum 16 MP. The Wasm build allows up to 256 MiB of linear memory; Cloudflare Worker isolates have a 128 MiB total limit across JavaScript and WebAssembly. Image processing runs synchronously inside the terminal method's promise.
 
 Node uses a file-based WASM loader; Workers use a static `.wasm` import. Configure your bundler to treat that file as a WebAssembly module. Requires WebAssembly SIMD and modern WASM exception handling. Workers tested with compatibility date 2026-09-02 and `new_module_registry`.
 
