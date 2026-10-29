@@ -1,0 +1,565 @@
+{
+  "note": "Trace samples may be missing or uneven. CPU is Cloudflare CPU, not request round trip. p95 with small sample counts is descriptive only. Headers and deployment hostnames are excluded.",
+  "groups": [
+    {
+      "image": "food-2400.jpg",
+      "width": 800,
+      "speed": "default",
+      "pipeline": "reference",
+      "traceCount": 7,
+      "successfulTraces": 7,
+      "outcomes": {
+        "ok": 7
+      },
+      "medianCpuMs": 319,
+      "p95CpuMs": 391,
+      "maxCpuMs": 391
+    },
+    {
+      "image": "food-2400.jpg",
+      "width": 800,
+      "speed": "default",
+      "pipeline": "scanlines",
+      "traceCount": 8,
+      "successfulTraces": 8,
+      "outcomes": {
+        "ok": 8
+      },
+      "medianCpuMs": 351.5,
+      "p95CpuMs": 619,
+      "maxCpuMs": 619
+    },
+    {
+      "image": "food-2400.jpg",
+      "width": 800,
+      "speed": "fast",
+      "pipeline": "reference",
+      "traceCount": 4,
+      "successfulTraces": 4,
+      "outcomes": {
+        "ok": 4
+      },
+      "medianCpuMs": 161.0,
+      "p95CpuMs": 167,
+      "maxCpuMs": 167
+    },
+    {
+      "image": "food-2400.jpg",
+      "width": 800,
+      "speed": "fast",
+      "pipeline": "scanlines",
+      "traceCount": 5,
+      "successfulTraces": 5,
+      "outcomes": {
+        "ok": 5
+      },
+      "medianCpuMs": 177,
+      "p95CpuMs": 262,
+      "maxCpuMs": 262
+    },
+    {
+      "image": "food-2400.jpg",
+      "width": 1600,
+      "speed": "default",
+      "pipeline": "reference",
+      "traceCount": 8,
+      "successfulTraces": 8,
+      "outcomes": {
+        "ok": 8
+      },
+      "medianCpuMs": 805.0,
+      "p95CpuMs": 1289,
+      "maxCpuMs": 1289
+    },
+    {
+      "image": "food-2400.jpg",
+      "width": 1600,
+      "speed": "default",
+      "pipeline": "scanlines",
+      "traceCount": 8,
+      "successfulTraces": 8,
+      "outcomes": {
+        "ok": 8
+      },
+      "medianCpuMs": 910.0,
+      "p95CpuMs": 1241,
+      "maxCpuMs": 1241
+    },
+    {
+      "image": "food-2400.jpg",
+      "width": 1600,
+      "speed": "fast",
+      "pipeline": "reference",
+      "traceCount": 8,
+      "successfulTraces": 8,
+      "outcomes": {
+        "ok": 8
+      },
+      "medianCpuMs": 329.5,
+      "p95CpuMs": 514,
+      "maxCpuMs": 514
+    },
+    {
+      "image": "food-2400.jpg",
+      "width": 1600,
+      "speed": "fast",
+      "pipeline": "scanlines",
+      "traceCount": 8,
+      "successfulTraces": 8,
+      "outcomes": {
+        "ok": 8
+      },
+      "medianCpuMs": 398.0,
+      "p95CpuMs": 646,
+      "maxCpuMs": 646
+    },
+    {
+      "image": "gradient-1920.png",
+      "width": 800,
+      "speed": "default",
+      "pipeline": "reference",
+      "traceCount": 8,
+      "successfulTraces": 8,
+      "outcomes": {
+        "ok": 8
+      },
+      "medianCpuMs": 241.5,
+      "p95CpuMs": 278,
+      "maxCpuMs": 278
+    },
+    {
+      "image": "gradient-1920.png",
+      "width": 800,
+      "speed": "default",
+      "pipeline": "scanlines",
+      "traceCount": 7,
+      "successfulTraces": 7,
+      "outcomes": {
+        "ok": 7
+      },
+      "medianCpuMs": 294,
+      "p95CpuMs": 412,
+      "maxCpuMs": 412
+    },
+    {
+      "image": "gradient-1920.png",
+      "width": 800,
+      "speed": "fast",
+      "pipeline": "reference",
+      "traceCount": 7,
+      "successfulTraces": 7,
+      "outcomes": {
+        "ok": 7
+      },
+      "medianCpuMs": 178,
+      "p95CpuMs": 229,
+      "maxCpuMs": 229
+    },
+    {
+      "image": "gradient-1920.png",
+      "width": 800,
+      "speed": "fast",
+      "pipeline": "scanlines",
+      "traceCount": 7,
+      "successfulTraces": 7,
+      "outcomes": {
+        "ok": 7
+      },
+      "medianCpuMs": 220,
+      "p95CpuMs": 301,
+      "maxCpuMs": 301
+    },
+    {
+      "image": "gradient-1920.png",
+      "width": 1600,
+      "speed": "default",
+      "pipeline": "reference",
+      "traceCount": 8,
+      "successfulTraces": 8,
+      "outcomes": {
+        "ok": 8
+      },
+      "medianCpuMs": 496.0,
+      "p95CpuMs": 741,
+      "maxCpuMs": 741
+    },
+    {
+      "image": "gradient-1920.png",
+      "width": 1600,
+      "speed": "default",
+      "pipeline": "scanlines",
+      "traceCount": 8,
+      "successfulTraces": 8,
+      "outcomes": {
+        "ok": 8
+      },
+      "medianCpuMs": 568.5,
+      "p95CpuMs": 802,
+      "maxCpuMs": 802
+    },
+    {
+      "image": "gradient-1920.png",
+      "width": 1600,
+      "speed": "fast",
+      "pipeline": "reference",
+      "traceCount": 8,
+      "successfulTraces": 8,
+      "outcomes": {
+        "ok": 8
+      },
+      "medianCpuMs": 243.5,
+      "p95CpuMs": 327,
+      "maxCpuMs": 327
+    },
+    {
+      "image": "gradient-1920.png",
+      "width": 1600,
+      "speed": "fast",
+      "pipeline": "scanlines",
+      "traceCount": 8,
+      "successfulTraces": 8,
+      "outcomes": {
+        "ok": 8
+      },
+      "medianCpuMs": 327.0,
+      "p95CpuMs": 502,
+      "maxCpuMs": 502
+    },
+    {
+      "image": "input-4k.jpg",
+      "width": 800,
+      "speed": "default",
+      "pipeline": "reference",
+      "traceCount": 8,
+      "successfulTraces": 8,
+      "outcomes": {
+        "ok": 8
+      },
+      "medianCpuMs": 339.5,
+      "p95CpuMs": 547,
+      "maxCpuMs": 547
+    },
+    {
+      "image": "input-4k.jpg",
+      "width": 800,
+      "speed": "default",
+      "pipeline": "scanlines",
+      "traceCount": 7,
+      "successfulTraces": 7,
+      "outcomes": {
+        "ok": 7
+      },
+      "medianCpuMs": 396,
+      "p95CpuMs": 700,
+      "maxCpuMs": 700
+    },
+    {
+      "image": "input-4k.jpg",
+      "width": 800,
+      "speed": "fast",
+      "pipeline": "reference",
+      "traceCount": 4,
+      "successfulTraces": 4,
+      "outcomes": {
+        "ok": 4
+      },
+      "medianCpuMs": 106.5,
+      "p95CpuMs": 165,
+      "maxCpuMs": 165
+    },
+    {
+      "image": "input-4k.jpg",
+      "width": 800,
+      "speed": "fast",
+      "pipeline": "scanlines",
+      "traceCount": 3,
+      "successfulTraces": 3,
+      "outcomes": {
+        "ok": 3
+      },
+      "medianCpuMs": 124,
+      "p95CpuMs": 125,
+      "maxCpuMs": 125
+    },
+    {
+      "image": "input-4k.jpg",
+      "width": 1600,
+      "speed": "default",
+      "pipeline": "reference",
+      "traceCount": 8,
+      "successfulTraces": 8,
+      "outcomes": {
+        "ok": 8
+      },
+      "medianCpuMs": 722.0,
+      "p95CpuMs": 1166,
+      "maxCpuMs": 1166
+    },
+    {
+      "image": "input-4k.jpg",
+      "width": 1600,
+      "speed": "default",
+      "pipeline": "scanlines",
+      "traceCount": 8,
+      "successfulTraces": 8,
+      "outcomes": {
+        "ok": 8
+      },
+      "medianCpuMs": 793.0,
+      "p95CpuMs": 924,
+      "maxCpuMs": 924
+    },
+    {
+      "image": "input-4k.jpg",
+      "width": 1600,
+      "speed": "fast",
+      "pipeline": "reference",
+      "traceCount": 8,
+      "successfulTraces": 8,
+      "outcomes": {
+        "ok": 8
+      },
+      "medianCpuMs": 245.5,
+      "p95CpuMs": 407,
+      "maxCpuMs": 407
+    },
+    {
+      "image": "input-4k.jpg",
+      "width": 1600,
+      "speed": "fast",
+      "pipeline": "scanlines",
+      "traceCount": 7,
+      "successfulTraces": 7,
+      "outcomes": {
+        "ok": 7
+      },
+      "medianCpuMs": 330,
+      "p95CpuMs": 482,
+      "maxCpuMs": 482
+    },
+    {
+      "image": "landscape-2400.jpg",
+      "width": 800,
+      "speed": "default",
+      "pipeline": "reference",
+      "traceCount": 8,
+      "successfulTraces": 8,
+      "outcomes": {
+        "ok": 8
+      },
+      "medianCpuMs": 308.5,
+      "p95CpuMs": 518,
+      "maxCpuMs": 518
+    },
+    {
+      "image": "landscape-2400.jpg",
+      "width": 800,
+      "speed": "default",
+      "pipeline": "scanlines",
+      "traceCount": 6,
+      "successfulTraces": 6,
+      "outcomes": {
+        "ok": 6
+      },
+      "medianCpuMs": 355.5,
+      "p95CpuMs": 494,
+      "maxCpuMs": 494
+    },
+    {
+      "image": "landscape-2400.jpg",
+      "width": 800,
+      "speed": "fast",
+      "pipeline": "reference",
+      "traceCount": 5,
+      "successfulTraces": 5,
+      "outcomes": {
+        "ok": 5
+      },
+      "medianCpuMs": 134,
+      "p95CpuMs": 150,
+      "maxCpuMs": 150
+    },
+    {
+      "image": "landscape-2400.jpg",
+      "width": 800,
+      "speed": "fast",
+      "pipeline": "scanlines",
+      "traceCount": 2,
+      "successfulTraces": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "medianCpuMs": 221.0,
+      "p95CpuMs": 280,
+      "maxCpuMs": 280
+    },
+    {
+      "image": "landscape-2400.jpg",
+      "width": 1600,
+      "speed": "default",
+      "pipeline": "reference",
+      "traceCount": 8,
+      "successfulTraces": 8,
+      "outcomes": {
+        "ok": 8
+      },
+      "medianCpuMs": 747.5,
+      "p95CpuMs": 1022,
+      "maxCpuMs": 1022
+    },
+    {
+      "image": "landscape-2400.jpg",
+      "width": 1600,
+      "speed": "default",
+      "pipeline": "scanlines",
+      "traceCount": 8,
+      "successfulTraces": 8,
+      "outcomes": {
+        "ok": 8
+      },
+      "medianCpuMs": 880.0,
+      "p95CpuMs": 1256,
+      "maxCpuMs": 1256
+    },
+    {
+      "image": "landscape-2400.jpg",
+      "width": 1600,
+      "speed": "fast",
+      "pipeline": "reference",
+      "traceCount": 8,
+      "successfulTraces": 8,
+      "outcomes": {
+        "ok": 8
+      },
+      "medianCpuMs": 309.0,
+      "p95CpuMs": 544,
+      "maxCpuMs": 544
+    },
+    {
+      "image": "landscape-2400.jpg",
+      "width": 1600,
+      "speed": "fast",
+      "pipeline": "scanlines",
+      "traceCount": 8,
+      "successfulTraces": 8,
+      "outcomes": {
+        "ok": 8
+      },
+      "medianCpuMs": 346.0,
+      "p95CpuMs": 636,
+      "maxCpuMs": 636
+    },
+    {
+      "image": "photo-1920.jpg",
+      "width": 800,
+      "speed": "default",
+      "pipeline": "reference",
+      "traceCount": 8,
+      "successfulTraces": 8,
+      "outcomes": {
+        "ok": 8
+      },
+      "medianCpuMs": 344.5,
+      "p95CpuMs": 422,
+      "maxCpuMs": 422
+    },
+    {
+      "image": "photo-1920.jpg",
+      "width": 800,
+      "speed": "default",
+      "pipeline": "scanlines",
+      "traceCount": 8,
+      "successfulTraces": 8,
+      "outcomes": {
+        "ok": 8
+      },
+      "medianCpuMs": 399.5,
+      "p95CpuMs": 428,
+      "maxCpuMs": 428
+    },
+    {
+      "image": "photo-1920.jpg",
+      "width": 800,
+      "speed": "fast",
+      "pipeline": "reference",
+      "traceCount": 5,
+      "successfulTraces": 5,
+      "outcomes": {
+        "ok": 5
+      },
+      "medianCpuMs": 182,
+      "p95CpuMs": 284,
+      "maxCpuMs": 284
+    },
+    {
+      "image": "photo-1920.jpg",
+      "width": 800,
+      "speed": "fast",
+      "pipeline": "scanlines",
+      "traceCount": 5,
+      "successfulTraces": 5,
+      "outcomes": {
+        "ok": 5
+      },
+      "medianCpuMs": 181,
+      "p95CpuMs": 307,
+      "maxCpuMs": 307
+    },
+    {
+      "image": "photo-1920.jpg",
+      "width": 1600,
+      "speed": "default",
+      "pipeline": "reference",
+      "traceCount": 8,
+      "successfulTraces": 8,
+      "outcomes": {
+        "ok": 8
+      },
+      "medianCpuMs": 797.5,
+      "p95CpuMs": 1289,
+      "maxCpuMs": 1289
+    },
+    {
+      "image": "photo-1920.jpg",
+      "width": 1600,
+      "speed": "default",
+      "pipeline": "scanlines",
+      "traceCount": 8,
+      "successfulTraces": 8,
+      "outcomes": {
+        "ok": 8
+      },
+      "medianCpuMs": 898.0,
+      "p95CpuMs": 1291,
+      "maxCpuMs": 1291
+    },
+    {
+      "image": "photo-1920.jpg",
+      "width": 1600,
+      "speed": "fast",
+      "pipeline": "reference",
+      "traceCount": 8,
+      "successfulTraces": 8,
+      "outcomes": {
+        "ok": 8
+      },
+      "medianCpuMs": 324.5,
+      "p95CpuMs": 509,
+      "maxCpuMs": 509
+    },
+    {
+      "image": "photo-1920.jpg",
+      "width": 1600,
+      "speed": "fast",
+      "pipeline": "scanlines",
+      "traceCount": 8,
+      "successfulTraces": 8,
+      "outcomes": {
+        "ok": 8
+      },
+      "medianCpuMs": 383.5,
+      "p95CpuMs": 648,
+      "maxCpuMs": 648
+    }
+  ]
+}

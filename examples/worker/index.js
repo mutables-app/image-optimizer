@@ -26,8 +26,10 @@ export default {
         const height = number(url.searchParams.get('height'));
         if (width !== undefined || height !== undefined) pipeline.resize(width, height, {fit: url.searchParams.get('fit') ?? 'inside', withoutEnlargement: true});
         const speed = url.searchParams.get('speed') ?? undefined;
-        const result = await pipeline.webp({ quality: number(url.searchParams.get('quality')), speed }).bytes();
-        return new Response(result, {headers: {'content-type': 'image/webp'}});
+        const format = url.searchParams.get('format') ?? 'webp';
+        if (!['webp', 'jpeg'].includes(format)) throw new TypeError('format must be webp or jpeg');
+        const result = await pipeline[format]({ quality: number(url.searchParams.get('quality')), speed }).bytes();
+        return new Response(result, {headers: {'content-type': format === 'jpeg' ? 'image/jpeg' : 'image/webp'}});
       }
       const match = url.pathname.match(/^\/workspaces\/([a-zA-Z0-9_-]+)\/(files\/.*|optimize)$/);
       if (match) {
@@ -44,7 +46,7 @@ export default {
               await workspace.fs.writeFile(path, await boundedBody(request));
               return new Response(null, {status: 204});
             }
-            if (request.method === 'GET') return new Response(await workspace.fs.readFile(path), {headers: {'content-type': path.endsWith('.webp') ? 'image/webp' : 'application/octet-stream'}});
+            if (request.method === 'GET') return new Response(await workspace.fs.readFile(path), {headers: {'content-type': path.endsWith('.webp') ? 'image/webp' : /\.jpe?g$/.test(path) ? 'image/jpeg' : 'application/octet-stream'}});
           }
         } finally { workspace[Symbol.dispose](); }
       }

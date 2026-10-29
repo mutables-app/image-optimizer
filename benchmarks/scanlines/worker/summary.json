@@ -1,0 +1,362 @@
+[
+  {
+    "image": "photo-1920.jpg",
+    "width": 800,
+    "speed": "default",
+    "pipeline": "reference",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 518.4869059999996
+  },
+  {
+    "image": "photo-1920.jpg",
+    "width": 800,
+    "speed": "default",
+    "pipeline": "scanlines",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 559.3791480000004
+  },
+  {
+    "image": "photo-1920.jpg",
+    "width": 800,
+    "speed": "fast",
+    "pipeline": "reference",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 279.9494855000012
+  },
+  {
+    "image": "photo-1920.jpg",
+    "width": 800,
+    "speed": "fast",
+    "pipeline": "scanlines",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 274.49308550000114
+  },
+  {
+    "image": "photo-1920.jpg",
+    "width": 1600,
+    "speed": "default",
+    "pipeline": "reference",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 992.4841049999977
+  },
+  {
+    "image": "photo-1920.jpg",
+    "width": 1600,
+    "speed": "default",
+    "pipeline": "scanlines",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 1081.0774390000006
+  },
+  {
+    "image": "photo-1920.jpg",
+    "width": 1600,
+    "speed": "fast",
+    "pipeline": "reference",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 454.89157700000214
+  },
+  {
+    "image": "photo-1920.jpg",
+    "width": 1600,
+    "speed": "fast",
+    "pipeline": "scanlines",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 492.609775500001
+  },
+  {
+    "image": "landscape-2400.jpg",
+    "width": 800,
+    "speed": "default",
+    "pipeline": "reference",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 424.92305649999616
+  },
+  {
+    "image": "landscape-2400.jpg",
+    "width": 800,
+    "speed": "default",
+    "pipeline": "scanlines",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 443.87913599999956
+  },
+  {
+    "image": "landscape-2400.jpg",
+    "width": 800,
+    "speed": "fast",
+    "pipeline": "reference",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 225.0474809999978
+  },
+  {
+    "image": "landscape-2400.jpg",
+    "width": 800,
+    "speed": "fast",
+    "pipeline": "scanlines",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 237.58003350000217
+  },
+  {
+    "image": "landscape-2400.jpg",
+    "width": 1600,
+    "speed": "default",
+    "pipeline": "reference",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 913.8030245000045
+  },
+  {
+    "image": "landscape-2400.jpg",
+    "width": 1600,
+    "speed": "default",
+    "pipeline": "scanlines",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 1055.1073869999964
+  },
+  {
+    "image": "landscape-2400.jpg",
+    "width": 1600,
+    "speed": "fast",
+    "pipeline": "reference",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 474.4420420000024
+  },
+  {
+    "image": "landscape-2400.jpg",
+    "width": 1600,
+    "speed": "fast",
+    "pipeline": "scanlines",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 472.14590450000105
+  },
+  {
+    "image": "food-2400.jpg",
+    "width": 800,
+    "speed": "default",
+    "pipeline": "reference",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 435.26143250000314
+  },
+  {
+    "image": "food-2400.jpg",
+    "width": 800,
+    "speed": "default",
+    "pipeline": "scanlines",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 478.20246949999273
+  },
+  {
+    "image": "food-2400.jpg",
+    "width": 800,
+    "speed": "fast",
+    "pipeline": "reference",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 245.32549049999943
+  },
+  {
+    "image": "food-2400.jpg",
+    "width": 800,
+    "speed": "fast",
+    "pipeline": "scanlines",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 292.2343769999934
+  },
+  {
+    "image": "food-2400.jpg",
+    "width": 1600,
+    "speed": "default",
+    "pipeline": "reference",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 975.3704665000041
+  },
+  {
+    "image": "food-2400.jpg",
+    "width": 1600,
+    "speed": "default",
+    "pipeline": "scanlines",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 1067.383885999996
+  },
+  {
+    "image": "food-2400.jpg",
+    "width": 1600,
+    "speed": "fast",
+    "pipeline": "reference",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 476.8675634999963
+  },
+  {
+    "image": "food-2400.jpg",
+    "width": 1600,
+    "speed": "fast",
+    "pipeline": "scanlines",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 507.86237199999596
+  },
+  {
+    "image": "input-4k.jpg",
+    "width": 800,
+    "speed": "default",
+    "pipeline": "reference",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 479.15738049999345
+  },
+  {
+    "image": "input-4k.jpg",
+    "width": 800,
+    "speed": "default",
+    "pipeline": "scanlines",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 600.9746405000042
+  },
+  {
+    "image": "input-4k.jpg",
+    "width": 800,
+    "speed": "fast",
+    "pipeline": "reference",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 184.49746349999623
+  },
+  {
+    "image": "input-4k.jpg",
+    "width": 800,
+    "speed": "fast",
+    "pipeline": "scanlines",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 189.10519750000094
+  },
+  {
+    "image": "input-4k.jpg",
+    "width": 1600,
+    "speed": "default",
+    "pipeline": "reference",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 899.6116865000222
+  },
+  {
+    "image": "input-4k.jpg",
+    "width": 1600,
+    "speed": "default",
+    "pipeline": "scanlines",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 963.6289595000126
+  },
+  {
+    "image": "input-4k.jpg",
+    "width": 1600,
+    "speed": "fast",
+    "pipeline": "reference",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 367.78543699999864
+  },
+  {
+    "image": "input-4k.jpg",
+    "width": 1600,
+    "speed": "fast",
+    "pipeline": "scanlines",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 455.8492479999986
+  },
+  {
+    "image": "gradient-1920.png",
+    "width": 800,
+    "speed": "default",
+    "pipeline": "reference",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 473.69056000000273
+  },
+  {
+    "image": "gradient-1920.png",
+    "width": 800,
+    "speed": "default",
+    "pipeline": "scanlines",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 554.9366799999989
+  },
+  {
+    "image": "gradient-1920.png",
+    "width": 800,
+    "speed": "fast",
+    "pipeline": "reference",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 396.6518305000063
+  },
+  {
+    "image": "gradient-1920.png",
+    "width": 800,
+    "speed": "fast",
+    "pipeline": "scanlines",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 464.2338099999906
+  },
+  {
+    "image": "gradient-1920.png",
+    "width": 1600,
+    "speed": "default",
+    "pipeline": "reference",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 744.4197994999995
+  },
+  {
+    "image": "gradient-1920.png",
+    "width": 1600,
+    "speed": "default",
+    "pipeline": "scanlines",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 813.9058329999971
+  },
+  {
+    "image": "gradient-1920.png",
+    "width": 1600,
+    "speed": "fast",
+    "pipeline": "reference",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 501.01170149998507
+  },
+  {
+    "image": "gradient-1920.png",
+    "width": 1600,
+    "speed": "fast",
+    "pipeline": "scanlines",
+    "requests": 8,
+    "successes": 8,
+    "medianRoundTripMs": 561.4304879999981
+  }
+]

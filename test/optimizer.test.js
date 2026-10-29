@@ -30,8 +30,10 @@ test('fast speed selects the internal fast encoder while omission keeps the exis
  assert.throws(()=>pipeline().webp({speed:'slow'}),/speed/);
  assert.throws(()=>pipeline().webp({method:1}),/method/);
 });
-test('fast speed resizes a 4K JPEG above the default source pixel cap', async () => {
- await assert.rejects(image(jpeg4k).resize(800).webp().bytes(), /pixel or dimension limit/);
+test('scanlines resize a 4K JPEG above the default output pixel cap at either speed', async () => {
+ const normal = decode(await image(jpeg4k).resize(800).webp().bytes());
+ assert.deepEqual([normal.width,normal.height],[800,450]);
+ await assert.rejects(image(jpeg4k).webp().bytes(), /pixel or dimension limit/);
  const out = decode(await image(jpeg4k).resize(800).webp({speed:'fast'}).bytes());
  assert.deepEqual([out.width,out.height],[800,450]);
 });

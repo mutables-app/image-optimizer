@@ -1,0 +1,4004 @@
+{
+  "timestamp": "2026-10-29T14:49:17.593Z",
+  "runtime": "v24.19.0",
+  "architecture": "arm64",
+  "notes": [
+    "One warmup, then repeated transforms in a fresh process per case.",
+    "CPU is local Node process CPU, not Cloudflare CPU.",
+    "WASM capacity is high-water linear-memory capacity, not live heap or whole-process memory.",
+    "Reference and scanline cases match quality, scaling and WebP encoder settings. JPEG has no legacy encoder baseline.",
+    "rowStorageEstimateBytes excludes coefficients, codec-internal buffers, input, encoded output and the WebP destination."
+  ],
+  "results": [
+    {
+      "inputPath": "benchmarks/photo-1920.jpg",
+      "width": 320,
+      "kind": "reference",
+      "speed": "default",
+      "inputBytes": 1063708,
+      "outputBytes": 9068,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 51904512,
+      "highWaterWasmBytes": 51904512,
+      "source": [
+        1920,
+        2880
+      ],
+      "decoded": [
+        1920,
+        2880
+      ],
+      "output": [
+        213,
+        320
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 229.79501599999992,
+      "medianCpuMs": 234.921,
+      "samples": [
+        {
+          "wallMs": 232.50051599999995,
+          "cpuMs": 332.573
+        },
+        {
+          "wallMs": 231.273147,
+          "cpuMs": 257.079
+        },
+        {
+          "wallMs": 229.79501599999992,
+          "cpuMs": 232.082
+        },
+        {
+          "wallMs": 226.15479000000005,
+          "cpuMs": 226.664
+        },
+        {
+          "wallMs": 228.3402050000002,
+          "cpuMs": 234.921
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/photo-1920.jpg",
+      "width": 320,
+      "kind": "scanlines",
+      "speed": "default",
+      "inputBytes": 1063708,
+      "outputBytes": 9114,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 20185088,
+      "highWaterWasmBytes": 20185088,
+      "source": [
+        1920,
+        2880
+      ],
+      "decoded": [
+        1920,
+        2880
+      ],
+      "output": [
+        213,
+        320
+      ],
+      "rowStorageEstimateBytes": 66516,
+      "codecBuffered": true,
+      "medianWallMs": 224.3392960000001,
+      "medianCpuMs": 229.037,
+      "samples": [
+        {
+          "wallMs": 226.61659200000003,
+          "cpuMs": 319.502
+        },
+        {
+          "wallMs": 224.51965800000005,
+          "cpuMs": 245.183
+        },
+        {
+          "wallMs": 222.693083,
+          "cpuMs": 229.037
+        },
+        {
+          "wallMs": 223.0741270000001,
+          "cpuMs": 223.832
+        },
+        {
+          "wallMs": 224.3392960000001,
+          "cpuMs": 224.15
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/photo-1920.jpg",
+      "width": 320,
+      "kind": "jpeg",
+      "speed": "default",
+      "inputBytes": 1063708,
+      "outputBytes": 11893,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 20185088,
+      "highWaterWasmBytes": 20185088,
+      "medianWallMs": 202.29765299999985,
+      "medianCpuMs": 203.187,
+      "samples": [
+        {
+          "wallMs": 202.483974,
+          "cpuMs": 216.154
+        },
+        {
+          "wallMs": 201.87157000000002,
+          "cpuMs": 210.377
+        },
+        {
+          "wallMs": 202.10593200000005,
+          "cpuMs": 203.187
+        },
+        {
+          "wallMs": 202.29765299999985,
+          "cpuMs": 202.323
+        },
+        {
+          "wallMs": 203.0957390000001,
+          "cpuMs": 202.384
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/photo-1920.jpg",
+      "width": 320,
+      "kind": "reference",
+      "speed": "fast",
+      "inputBytes": 1063708,
+      "outputBytes": 9758,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 20185088,
+      "highWaterWasmBytes": 20185088,
+      "source": [
+        1920,
+        2880
+      ],
+      "decoded": [
+        240,
+        360
+      ],
+      "output": [
+        213,
+        320
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 89.95046400000001,
+      "medianCpuMs": 114.203,
+      "samples": [
+        {
+          "wallMs": 89.95046400000001,
+          "cpuMs": 114.203
+        },
+        {
+          "wallMs": 90.30942600000003,
+          "cpuMs": 137.518
+        },
+        {
+          "wallMs": 91.50147499999997,
+          "cpuMs": 165.789
+        },
+        {
+          "wallMs": 87.35784499999994,
+          "cpuMs": 87.055
+        },
+        {
+          "wallMs": 87.04024299999992,
+          "cpuMs": 90.662
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/photo-1920.jpg",
+      "width": 320,
+      "kind": "scanlines",
+      "speed": "fast",
+      "inputBytes": 1063708,
+      "outputBytes": 9780,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 20185088,
+      "highWaterWasmBytes": 20185088,
+      "source": [
+        1920,
+        2880
+      ],
+      "decoded": [
+        240,
+        360
+      ],
+      "output": [
+        213,
+        320
+      ],
+      "rowStorageEstimateBytes": 32916,
+      "codecBuffered": true,
+      "medianWallMs": 90.31402599999996,
+      "medianCpuMs": 109.824,
+      "samples": [
+        {
+          "wallMs": 92.188681,
+          "cpuMs": 109.824
+        },
+        {
+          "wallMs": 91.91467799999998,
+          "cpuMs": 125.309
+        },
+        {
+          "wallMs": 90.31402599999996,
+          "cpuMs": 160.159
+        },
+        {
+          "wallMs": 89.78274199999998,
+          "cpuMs": 97.175
+        },
+        {
+          "wallMs": 89.69554200000005,
+          "cpuMs": 92.097
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/photo-1920.jpg",
+      "width": 320,
+      "kind": "jpeg",
+      "speed": "fast",
+      "inputBytes": 1063708,
+      "outputBytes": 11305,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 20185088,
+      "highWaterWasmBytes": 20185088,
+      "medianWallMs": 85.417191,
+      "medianCpuMs": 88.892,
+      "samples": [
+        {
+          "wallMs": 90.319627,
+          "cpuMs": 135.547
+        },
+        {
+          "wallMs": 85.67583200000001,
+          "cpuMs": 92.045
+        },
+        {
+          "wallMs": 85.049868,
+          "cpuMs": 84.996
+        },
+        {
+          "wallMs": 85.32195000000002,
+          "cpuMs": 88.892
+        },
+        {
+          "wallMs": 85.417191,
+          "cpuMs": 85.39
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/photo-1920.jpg",
+      "width": 800,
+      "kind": "reference",
+      "speed": "default",
+      "inputBytes": 1063708,
+      "outputBytes": 58142,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 62324736,
+      "highWaterWasmBytes": 62324736,
+      "source": [
+        1920,
+        2880
+      ],
+      "decoded": [
+        1920,
+        2880
+      ],
+      "output": [
+        533,
+        800
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 621.92375,
+      "medianCpuMs": 365.611,
+      "samples": [
+        {
+          "wallMs": 431.3448230000001,
+          "cpuMs": 402.249
+        },
+        {
+          "wallMs": 621.92375,
+          "cpuMs": 365.611
+        },
+        {
+          "wallMs": 709.701798,
+          "cpuMs": 362.941
+        },
+        {
+          "wallMs": 518.5107870000002,
+          "cpuMs": 358.208
+        },
+        {
+          "wallMs": 1030.157443,
+          "cpuMs": 366.571
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/photo-1920.jpg",
+      "width": 800,
+      "kind": "scanlines",
+      "speed": "default",
+      "inputBytes": 1063708,
+      "outputBytes": 57882,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 24248320,
+      "highWaterWasmBytes": 24248320,
+      "source": [
+        1920,
+        2880
+      ],
+      "decoded": [
+        1920,
+        2880
+      ],
+      "output": [
+        533,
+        800
+      ],
+      "rowStorageEstimateBytes": 108756,
+      "codecBuffered": true,
+      "medianWallMs": 374.2056010000001,
+      "medianCpuMs": 380.52,
+      "samples": [
+        {
+          "wallMs": 375.620012,
+          "cpuMs": 419.262
+        },
+        {
+          "wallMs": 371.390261,
+          "cpuMs": 380.52
+        },
+        {
+          "wallMs": 374.2056010000001,
+          "cpuMs": 382.466
+        },
+        {
+          "wallMs": 381.6812160000002,
+          "cpuMs": 370.46
+        },
+        {
+          "wallMs": 368.16823699999986,
+          "cpuMs": 368.131
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/photo-1920.jpg",
+      "width": 800,
+      "kind": "jpeg",
+      "speed": "default",
+      "inputBytes": 1063708,
+      "outputBytes": 68153,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 20185088,
+      "highWaterWasmBytes": 20185088,
+      "medianWallMs": 234.45649000000003,
+      "medianCpuMs": 236.626,
+      "samples": [
+        {
+          "wallMs": 235.78026100000005,
+          "cpuMs": 250.298
+        },
+        {
+          "wallMs": 234.45649000000003,
+          "cpuMs": 237.978
+        },
+        {
+          "wallMs": 235.62789900000007,
+          "cpuMs": 236.626
+        },
+        {
+          "wallMs": 234.11020699999995,
+          "cpuMs": 233.759
+        },
+        {
+          "wallMs": 234.09724700000015,
+          "cpuMs": 234.254
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/photo-1920.jpg",
+      "width": 800,
+      "kind": "reference",
+      "speed": "fast",
+      "inputBytes": 1063708,
+      "outputBytes": 62694,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 22544384,
+      "highWaterWasmBytes": 22544384,
+      "source": [
+        1920,
+        2880
+      ],
+      "decoded": [
+        720,
+        1080
+      ],
+      "output": [
+        533,
+        800
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 137.076732,
+      "medianCpuMs": 139.344,
+      "samples": [
+        {
+          "wallMs": 138.521702,
+          "cpuMs": 192.244
+        },
+        {
+          "wallMs": 139.76443100000006,
+          "cpuMs": 150.013
+        },
+        {
+          "wallMs": 137.076732,
+          "cpuMs": 138.24
+        },
+        {
+          "wallMs": 136.98225100000002,
+          "cpuMs": 139.344
+        },
+        {
+          "wallMs": 136.8417300000001,
+          "cpuMs": 138.317
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/photo-1920.jpg",
+      "width": 800,
+      "kind": "scanlines",
+      "speed": "fast",
+      "inputBytes": 1063708,
+      "outputBytes": 62730,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 24248320,
+      "highWaterWasmBytes": 24248320,
+      "source": [
+        1920,
+        2880
+      ],
+      "decoded": [
+        720,
+        1080
+      ],
+      "output": [
+        533,
+        800
+      ],
+      "rowStorageEstimateBytes": 84756,
+      "codecBuffered": true,
+      "medianWallMs": 153.01160900000002,
+      "medianCpuMs": 156.82,
+      "samples": [
+        {
+          "wallMs": 164.130251,
+          "cpuMs": 226.967
+        },
+        {
+          "wallMs": 153.58545300000003,
+          "cpuMs": 158.698
+        },
+        {
+          "wallMs": 152.78476799999999,
+          "cpuMs": 153.923
+        },
+        {
+          "wallMs": 153.01160900000002,
+          "cpuMs": 155.586
+        },
+        {
+          "wallMs": 152.87496800000008,
+          "cpuMs": 156.82
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/photo-1920.jpg",
+      "width": 800,
+      "kind": "jpeg",
+      "speed": "fast",
+      "inputBytes": 1063708,
+      "outputBytes": 67690,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 20185088,
+      "highWaterWasmBytes": 20185088,
+      "medianWallMs": 128.13170599999995,
+      "medianCpuMs": 128.248,
+      "samples": [
+        {
+          "wallMs": 130.07024,
+          "cpuMs": 141.778
+        },
+        {
+          "wallMs": 128.13170599999995,
+          "cpuMs": 127.981
+        },
+        {
+          "wallMs": 127.93838399999993,
+          "cpuMs": 128.248
+        },
+        {
+          "wallMs": 128.22426699999994,
+          "cpuMs": 128.054
+        },
+        {
+          "wallMs": 128.12514599999997,
+          "cpuMs": 130.231
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/photo-1920.jpg",
+      "width": 1600,
+      "kind": "reference",
+      "speed": "default",
+      "inputBytes": 1063708,
+      "outputBytes": 223614,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 77725696,
+      "highWaterWasmBytes": 77725696,
+      "source": [
+        1920,
+        2880
+      ],
+      "decoded": [
+        1920,
+        2880
+      ],
+      "output": [
+        1067,
+        1600
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 783.7734240000002,
+      "medianCpuMs": 786.777,
+      "samples": [
+        {
+          "wallMs": 788.8721019999999,
+          "cpuMs": 804.127
+        },
+        {
+          "wallMs": 783.7734240000002,
+          "cpuMs": 788.159
+        },
+        {
+          "wallMs": 784.302948,
+          "cpuMs": 786.777
+        },
+        {
+          "wallMs": 782.2970140000002,
+          "cpuMs": 781.975
+        },
+        {
+          "wallMs": 782.5988160000006,
+          "cpuMs": 784.838
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/photo-1920.jpg",
+      "width": 1600,
+      "kind": "scanlines",
+      "speed": "default",
+      "inputBytes": 1063708,
+      "outputBytes": 224596,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 32047104,
+      "highWaterWasmBytes": 32047104,
+      "source": [
+        1920,
+        2880
+      ],
+      "decoded": [
+        1920,
+        2880
+      ],
+      "output": [
+        1067,
+        1600
+      ],
+      "rowStorageEstimateBytes": 179244,
+      "codecBuffered": true,
+      "medianWallMs": 847.6456559999999,
+      "medianCpuMs": 850.61,
+      "samples": [
+        {
+          "wallMs": 847.7131360000001,
+          "cpuMs": 857.293
+        },
+        {
+          "wallMs": 847.6456559999999,
+          "cpuMs": 850.61
+        },
+        {
+          "wallMs": 848.517863,
+          "cpuMs": 851.677
+        },
+        {
+          "wallMs": 847.1357719999996,
+          "cpuMs": 846.968
+        },
+        {
+          "wallMs": 846.8916909999998,
+          "cpuMs": 847.041
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/photo-1920.jpg",
+      "width": 1600,
+      "kind": "jpeg",
+      "speed": "default",
+      "inputBytes": 1063708,
+      "outputBytes": 267800,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 24248320,
+      "highWaterWasmBytes": 24248320,
+      "medianWallMs": 331.6128480000001,
+      "medianCpuMs": 335.208,
+      "samples": [
+        {
+          "wallMs": 331.627207,
+          "cpuMs": 342.248
+        },
+        {
+          "wallMs": 331.6128480000001,
+          "cpuMs": 335.961
+        },
+        {
+          "wallMs": 331.46116600000005,
+          "cpuMs": 335.208
+        },
+        {
+          "wallMs": 332.3976539999999,
+          "cpuMs": 333.575
+        },
+        {
+          "wallMs": 331.55388700000003,
+          "cpuMs": 331.566
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/photo-1920.jpg",
+      "width": 1600,
+      "kind": "reference",
+      "speed": "fast",
+      "inputBytes": 1063708,
+      "outputBytes": 233374,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 34865152,
+      "highWaterWasmBytes": 34865152,
+      "source": [
+        1920,
+        2880
+      ],
+      "decoded": [
+        1200,
+        1800
+      ],
+      "output": [
+        1067,
+        1600
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 295.006617,
+      "medianCpuMs": 295.827,
+      "samples": [
+        {
+          "wallMs": 296.68566899999996,
+          "cpuMs": 315.343
+        },
+        {
+          "wallMs": 295.4982600000001,
+          "cpuMs": 295.827
+        },
+        {
+          "wallMs": 295.006617,
+          "cpuMs": 296.087
+        },
+        {
+          "wallMs": 294.72993500000007,
+          "cpuMs": 294.574
+        },
+        {
+          "wallMs": 294.149011,
+          "cpuMs": 295.068
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/photo-1920.jpg",
+      "width": 1600,
+      "kind": "scanlines",
+      "speed": "fast",
+      "inputBytes": 1063708,
+      "outputBytes": 233620,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 26607616,
+      "highWaterWasmBytes": 26607616,
+      "source": [
+        1920,
+        2880
+      ],
+      "decoded": [
+        1200,
+        1800
+      ],
+      "output": [
+        1067,
+        1600
+      ],
+      "rowStorageEstimateBytes": 164844,
+      "codecBuffered": true,
+      "medianWallMs": 359.00229000000013,
+      "medianCpuMs": 360.555,
+      "samples": [
+        {
+          "wallMs": 360.62142099999994,
+          "cpuMs": 367.496
+        },
+        {
+          "wallMs": 357.22011699999996,
+          "cpuMs": 357.832
+        },
+        {
+          "wallMs": 359.00229000000013,
+          "cpuMs": 360.555
+        },
+        {
+          "wallMs": 378.07691,
+          "cpuMs": 379.495
+        },
+        {
+          "wallMs": 355.1351809999999,
+          "cpuMs": 357.071
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/photo-1920.jpg",
+      "width": 1600,
+      "kind": "jpeg",
+      "speed": "fast",
+      "inputBytes": 1063708,
+      "outputBytes": 267373,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 24248320,
+      "highWaterWasmBytes": 24248320,
+      "medianWallMs": 251.9583399999999,
+      "medianCpuMs": 256.217,
+      "samples": [
+        {
+          "wallMs": 252.60922400000004,
+          "cpuMs": 256.65
+        },
+        {
+          "wallMs": 251.80685799999992,
+          "cpuMs": 251.93
+        },
+        {
+          "wallMs": 251.9583399999999,
+          "cpuMs": 256.961
+        },
+        {
+          "wallMs": 252.6305440000001,
+          "cpuMs": 256.217
+        },
+        {
+          "wallMs": 251.354736,
+          "cpuMs": 253.001
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/landscape-2400.jpg",
+      "width": 320,
+      "kind": "reference",
+      "speed": "default",
+      "inputBytes": 939296,
+      "outputBytes": 15788,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 42795008,
+      "highWaterWasmBytes": 42795008,
+      "source": [
+        2400,
+        1600
+      ],
+      "decoded": [
+        2400,
+        1600
+      ],
+      "output": [
+        320,
+        213
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 176.069979,
+      "medianCpuMs": 181.683,
+      "samples": [
+        {
+          "wallMs": 178.86216000000002,
+          "cpuMs": 279.611
+        },
+        {
+          "wallMs": 176.54098300000004,
+          "cpuMs": 200.146
+        },
+        {
+          "wallMs": 176.069979,
+          "cpuMs": 179.992
+        },
+        {
+          "wallMs": 175.80977699999994,
+          "cpuMs": 181.683
+        },
+        {
+          "wallMs": 175.3816149999999,
+          "cpuMs": 179.303
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/landscape-2400.jpg",
+      "width": 320,
+      "kind": "scanlines",
+      "speed": "default",
+      "inputBytes": 939296,
+      "outputBytes": 15750,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        2400,
+        1600
+      ],
+      "decoded": [
+        2400,
+        1600
+      ],
+      "output": [
+        320,
+        213
+      ],
+      "rowStorageEstimateBytes": 90240,
+      "codecBuffered": true,
+      "medianWallMs": 176.87474599999996,
+      "medianCpuMs": 182.316,
+      "samples": [
+        {
+          "wallMs": 192.89838400000002,
+          "cpuMs": 294.029
+        },
+        {
+          "wallMs": 176.97330599999998,
+          "cpuMs": 197.011
+        },
+        {
+          "wallMs": 176.87474599999996,
+          "cpuMs": 182.316
+        },
+        {
+          "wallMs": 176.23149999999998,
+          "cpuMs": 178.696
+        },
+        {
+          "wallMs": 176.23682000000008,
+          "cpuMs": 179.389
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/landscape-2400.jpg",
+      "width": 320,
+      "kind": "jpeg",
+      "speed": "default",
+      "inputBytes": 939296,
+      "outputBytes": 18107,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "medianWallMs": 152.497525,
+      "medianCpuMs": 155.927,
+      "samples": [
+        {
+          "wallMs": 153.692614,
+          "cpuMs": 161.184
+        },
+        {
+          "wallMs": 152.497525,
+          "cpuMs": 164.066
+        },
+        {
+          "wallMs": 151.74091900000008,
+          "cpuMs": 153.727
+        },
+        {
+          "wallMs": 152.327004,
+          "cpuMs": 153.047
+        },
+        {
+          "wallMs": 153.40817200000004,
+          "cpuMs": 155.927
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/landscape-2400.jpg",
+      "width": 320,
+      "kind": "reference",
+      "speed": "fast",
+      "inputBytes": 939296,
+      "outputBytes": 17162,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        2400,
+        1600
+      ],
+      "decoded": [
+        600,
+        400
+      ],
+      "output": [
+        320,
+        213
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 79.03426399999995,
+      "medianCpuMs": 99.228,
+      "samples": [
+        {
+          "wallMs": 91.77347700000001,
+          "cpuMs": 126.297
+        },
+        {
+          "wallMs": 80.72227600000002,
+          "cpuMs": 99.228
+        },
+        {
+          "wallMs": 79.03426399999995,
+          "cpuMs": 147.536
+        },
+        {
+          "wallMs": 77.27257000000003,
+          "cpuMs": 77.412
+        },
+        {
+          "wallMs": 76.96832799999993,
+          "cpuMs": 84.445
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/landscape-2400.jpg",
+      "width": 320,
+      "kind": "scanlines",
+      "speed": "fast",
+      "inputBytes": 939296,
+      "outputBytes": 17116,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        2400,
+        1600
+      ],
+      "decoded": [
+        600,
+        400
+      ],
+      "output": [
+        320,
+        213
+      ],
+      "rowStorageEstimateBytes": 54240,
+      "codecBuffered": true,
+      "medianWallMs": 80.86631700000004,
+      "medianCpuMs": 101.245,
+      "samples": [
+        {
+          "wallMs": 81.56400100000002,
+          "cpuMs": 101.245
+        },
+        {
+          "wallMs": 80.86631700000004,
+          "cpuMs": 114.399
+        },
+        {
+          "wallMs": 81.083078,
+          "cpuMs": 155.998
+        },
+        {
+          "wallMs": 80.82567700000004,
+          "cpuMs": 80.034
+        },
+        {
+          "wallMs": 80.37127299999997,
+          "cpuMs": 84.136
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/landscape-2400.jpg",
+      "width": 320,
+      "kind": "jpeg",
+      "speed": "fast",
+      "inputBytes": 939296,
+      "outputBytes": 17711,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "medianWallMs": 74.56871000000001,
+      "medianCpuMs": 80.009,
+      "samples": [
+        {
+          "wallMs": 75.88824,
+          "cpuMs": 112.723
+        },
+        {
+          "wallMs": 80.05719099999999,
+          "cpuMs": 85.814
+        },
+        {
+          "wallMs": 74.56871000000001,
+          "cpuMs": 80.009
+        },
+        {
+          "wallMs": 74.31178899999998,
+          "cpuMs": 74.251
+        },
+        {
+          "wallMs": 74.196348,
+          "cpuMs": 74.49
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/landscape-2400.jpg",
+      "width": 800,
+      "kind": "reference",
+      "speed": "default",
+      "inputBytes": 939296,
+      "outputBytes": 82992,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 42795008,
+      "highWaterWasmBytes": 42795008,
+      "source": [
+        2400,
+        1600
+      ],
+      "decoded": [
+        2400,
+        1600
+      ],
+      "output": [
+        800,
+        533
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 314.70824300000004,
+      "medianCpuMs": 320.553,
+      "samples": [
+        {
+          "wallMs": 317.426703,
+          "cpuMs": 365.617
+        },
+        {
+          "wallMs": 314.09183799999994,
+          "cpuMs": 325.455
+        },
+        {
+          "wallMs": 314.70824300000004,
+          "cpuMs": 320.553
+        },
+        {
+          "wallMs": 314.9866850000001,
+          "cpuMs": 319.421
+        },
+        {
+          "wallMs": 314.3387600000001,
+          "cpuMs": 314.141
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/landscape-2400.jpg",
+      "width": 800,
+      "kind": "scanlines",
+      "speed": "default",
+      "inputBytes": 939296,
+      "outputBytes": 83014,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        2400,
+        1600
+      ],
+      "decoded": [
+        2400,
+        1600
+      ],
+      "output": [
+        800,
+        533
+      ],
+      "rowStorageEstimateBytes": 153600,
+      "codecBuffered": true,
+      "medianWallMs": 328.128422,
+      "medianCpuMs": 337.34,
+      "samples": [
+        {
+          "wallMs": 329.821434,
+          "cpuMs": 371.733
+        },
+        {
+          "wallMs": 328.7918669999999,
+          "cpuMs": 338.489
+        },
+        {
+          "wallMs": 327.9425799999999,
+          "cpuMs": 337.34
+        },
+        {
+          "wallMs": 328.128422,
+          "cpuMs": 330.022
+        },
+        {
+          "wallMs": 328.0265810000001,
+          "cpuMs": 329.637
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/landscape-2400.jpg",
+      "width": 800,
+      "kind": "jpeg",
+      "speed": "default",
+      "inputBytes": 939296,
+      "outputBytes": 95907,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "medianWallMs": 182.59290799999997,
+      "medianCpuMs": 185.078,
+      "samples": [
+        {
+          "wallMs": 183.669156,
+          "cpuMs": 192.038
+        },
+        {
+          "wallMs": 183.026751,
+          "cpuMs": 190.046
+        },
+        {
+          "wallMs": 182.59290799999997,
+          "cpuMs": 185.078
+        },
+        {
+          "wallMs": 182.45278599999995,
+          "cpuMs": 183.803
+        },
+        {
+          "wallMs": 182.25042499999995,
+          "cpuMs": 183.553
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/landscape-2400.jpg",
+      "width": 800,
+      "kind": "reference",
+      "speed": "fast",
+      "inputBytes": 939296,
+      "outputBytes": 90726,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        2400,
+        1600
+      ],
+      "decoded": [
+        900,
+        600
+      ],
+      "output": [
+        800,
+        533
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 121.04477399999996,
+      "medianCpuMs": 124.184,
+      "samples": [
+        {
+          "wallMs": 125.10544299999998,
+          "cpuMs": 183.777
+        },
+        {
+          "wallMs": 122.561824,
+          "cpuMs": 136.929
+        },
+        {
+          "wallMs": 121.04477399999996,
+          "cpuMs": 122.949
+        },
+        {
+          "wallMs": 121.044173,
+          "cpuMs": 124.184
+        },
+        {
+          "wallMs": 120.205647,
+          "cpuMs": 121.237
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/landscape-2400.jpg",
+      "width": 800,
+      "kind": "scanlines",
+      "speed": "fast",
+      "inputBytes": 939296,
+      "outputBytes": 89764,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        2400,
+        1600
+      ],
+      "decoded": [
+        900,
+        600
+      ],
+      "output": [
+        800,
+        533
+      ],
+      "rowStorageEstimateBytes": 123600,
+      "codecBuffered": true,
+      "medianWallMs": 136.71552899999995,
+      "medianCpuMs": 138.443,
+      "samples": [
+        {
+          "wallMs": 145.402713,
+          "cpuMs": 198.362
+        },
+        {
+          "wallMs": 136.759569,
+          "cpuMs": 143.257
+        },
+        {
+          "wallMs": 136.71552899999995,
+          "cpuMs": 138.443
+        },
+        {
+          "wallMs": 136.037644,
+          "cpuMs": 137.892
+        },
+        {
+          "wallMs": 135.89464199999998,
+          "cpuMs": 136.974
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/landscape-2400.jpg",
+      "width": 800,
+      "kind": "jpeg",
+      "speed": "fast",
+      "inputBytes": 939296,
+      "outputBytes": 94786,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "medianWallMs": 105.96394200000003,
+      "medianCpuMs": 108.763,
+      "samples": [
+        {
+          "wallMs": 111.72398500000003,
+          "cpuMs": 120.65
+        },
+        {
+          "wallMs": 105.909942,
+          "cpuMs": 108.763
+        },
+        {
+          "wallMs": 105.96394200000003,
+          "cpuMs": 105.86
+        },
+        {
+          "wallMs": 105.71046000000001,
+          "cpuMs": 105.954
+        },
+        {
+          "wallMs": 108.86828400000002,
+          "cpuMs": 108.787
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/landscape-2400.jpg",
+      "width": 1600,
+      "kind": "reference",
+      "speed": "default",
+      "inputBytes": 939296,
+      "outputBytes": 287186,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 58064896,
+      "highWaterWasmBytes": 58064896,
+      "source": [
+        2400,
+        1600
+      ],
+      "decoded": [
+        2400,
+        1600
+      ],
+      "output": [
+        1600,
+        1067
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 769.9629220000002,
+      "medianCpuMs": 773.622,
+      "samples": [
+        {
+          "wallMs": 769.159317,
+          "cpuMs": 783.622
+        },
+        {
+          "wallMs": 770.0677629999998,
+          "cpuMs": 773.622
+        },
+        {
+          "wallMs": 769.2519179999999,
+          "cpuMs": 771.651
+        },
+        {
+          "wallMs": 769.9629220000002,
+          "cpuMs": 774.786
+        },
+        {
+          "wallMs": 770.1118830000005,
+          "cpuMs": 770.465
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/landscape-2400.jpg",
+      "width": 1600,
+      "kind": "scanlines",
+      "speed": "default",
+      "inputBytes": 939296,
+      "outputBytes": 286258,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 25886720,
+      "highWaterWasmBytes": 25886720,
+      "source": [
+        2400,
+        1600
+      ],
+      "decoded": [
+        2400,
+        1600
+      ],
+      "output": [
+        1600,
+        1067
+      ],
+      "rowStorageEstimateBytes": 259200,
+      "codecBuffered": true,
+      "medianWallMs": 829.0502390000001,
+      "medianCpuMs": 832.73,
+      "samples": [
+        {
+          "wallMs": 831.595057,
+          "cpuMs": 833.285
+        },
+        {
+          "wallMs": 830.9921329999997,
+          "cpuMs": 836.445
+        },
+        {
+          "wallMs": 829.0502390000001,
+          "cpuMs": 832.73
+        },
+        {
+          "wallMs": 828.2233529999994,
+          "cpuMs": 829.544
+        },
+        {
+          "wallMs": 828.7039560000003,
+          "cpuMs": 831.059
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/landscape-2400.jpg",
+      "width": 1600,
+      "kind": "jpeg",
+      "speed": "default",
+      "inputBytes": 939296,
+      "outputBytes": 341803,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "medianWallMs": 279.77654499999994,
+      "medianCpuMs": 282.776,
+      "samples": [
+        {
+          "wallMs": 282.008642,
+          "cpuMs": 282.776
+        },
+        {
+          "wallMs": 279.80594500000007,
+          "cpuMs": 287.661
+        },
+        {
+          "wallMs": 279.44162299999994,
+          "cpuMs": 281.545
+        },
+        {
+          "wallMs": 279.77654499999994,
+          "cpuMs": 280.96
+        },
+        {
+          "wallMs": 279.24710099999993,
+          "cpuMs": 283.09
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/landscape-2400.jpg",
+      "width": 1600,
+      "kind": "reference",
+      "speed": "fast",
+      "inputBytes": 939296,
+      "outputBytes": 315634,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 34734080,
+      "highWaterWasmBytes": 34734080,
+      "source": [
+        2400,
+        1600
+      ],
+      "decoded": [
+        1800,
+        1200
+      ],
+      "output": [
+        1600,
+        1067
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 291.43823,
+      "medianCpuMs": 292.678,
+      "samples": [
+        {
+          "wallMs": 293.920249,
+          "cpuMs": 310.243
+        },
+        {
+          "wallMs": 291.43823,
+          "cpuMs": 296.284
+        },
+        {
+          "wallMs": 291.01662699999997,
+          "cpuMs": 292.385
+        },
+        {
+          "wallMs": 290.75290500000006,
+          "cpuMs": 291.568
+        },
+        {
+          "wallMs": 292.94384200000013,
+          "cpuMs": 292.678
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/landscape-2400.jpg",
+      "width": 1600,
+      "kind": "scanlines",
+      "speed": "fast",
+      "inputBytes": 939296,
+      "outputBytes": 315308,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 25821184,
+      "highWaterWasmBytes": 25821184,
+      "source": [
+        2400,
+        1600
+      ],
+      "decoded": [
+        1800,
+        1200
+      ],
+      "output": [
+        1600,
+        1067
+      ],
+      "rowStorageEstimateBytes": 247200,
+      "codecBuffered": true,
+      "medianWallMs": 346.00587300000007,
+      "medianCpuMs": 349.692,
+      "samples": [
+        {
+          "wallMs": 346.469237,
+          "cpuMs": 352.276
+        },
+        {
+          "wallMs": 346.00587300000007,
+          "cpuMs": 350.156
+        },
+        {
+          "wallMs": 345.2023469999999,
+          "cpuMs": 346.463
+        },
+        {
+          "wallMs": 346.709239,
+          "cpuMs": 349.692
+        },
+        {
+          "wallMs": 345.81751299999996,
+          "cpuMs": 345.797
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/landscape-2400.jpg",
+      "width": 1600,
+      "kind": "jpeg",
+      "speed": "fast",
+      "inputBytes": 939296,
+      "outputBytes": 342133,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "medianWallMs": 236.3974250000001,
+      "medianCpuMs": 238.777,
+      "samples": [
+        {
+          "wallMs": 236.862548,
+          "cpuMs": 238.124
+        },
+        {
+          "wallMs": 236.212943,
+          "cpuMs": 240.141
+        },
+        {
+          "wallMs": 236.3974250000001,
+          "cpuMs": 236.359
+        },
+        {
+          "wallMs": 236.10390200000006,
+          "cpuMs": 238.777
+        },
+        {
+          "wallMs": 236.76294699999994,
+          "cpuMs": 239.308
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/food-2400.jpg",
+      "width": 320,
+      "kind": "reference",
+      "speed": "default",
+      "inputBytes": 1197090,
+      "outputBytes": 14480,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 43188224,
+      "highWaterWasmBytes": 43188224,
+      "source": [
+        2400,
+        1600
+      ],
+      "decoded": [
+        2400,
+        1600
+      ],
+      "output": [
+        320,
+        213
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 187.76162599999998,
+      "medianCpuMs": 193.21,
+      "samples": [
+        {
+          "wallMs": 204.47578899999996,
+          "cpuMs": 297.383
+        },
+        {
+          "wallMs": 189.79111999999998,
+          "cpuMs": 203.754
+        },
+        {
+          "wallMs": 186.471817,
+          "cpuMs": 189.867
+        },
+        {
+          "wallMs": 187.26342199999988,
+          "cpuMs": 192.31
+        },
+        {
+          "wallMs": 187.76162599999998,
+          "cpuMs": 193.21
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/food-2400.jpg",
+      "width": 320,
+      "kind": "scanlines",
+      "speed": "default",
+      "inputBytes": 1197090,
+      "outputBytes": 14494,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        2400,
+        1600
+      ],
+      "decoded": [
+        2400,
+        1600
+      ],
+      "output": [
+        320,
+        213
+      ],
+      "rowStorageEstimateBytes": 90240,
+      "codecBuffered": true,
+      "medianWallMs": 188.51023099999998,
+      "medianCpuMs": 192.881,
+      "samples": [
+        {
+          "wallMs": 205.50955600000003,
+          "cpuMs": 292.703
+        },
+        {
+          "wallMs": 188.73187299999995,
+          "cpuMs": 208.79
+        },
+        {
+          "wallMs": 188.43138999999996,
+          "cpuMs": 192.881
+        },
+        {
+          "wallMs": 188.11870900000008,
+          "cpuMs": 190.572
+        },
+        {
+          "wallMs": 188.51023099999998,
+          "cpuMs": 192.031
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/food-2400.jpg",
+      "width": 320,
+      "kind": "jpeg",
+      "speed": "default",
+      "inputBytes": 1197090,
+      "outputBytes": 17633,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "medianWallMs": 165.78830400000004,
+      "medianCpuMs": 167.595,
+      "samples": [
+        {
+          "wallMs": 166.52878899999996,
+          "cpuMs": 173.008
+        },
+        {
+          "wallMs": 166.177746,
+          "cpuMs": 177.512
+        },
+        {
+          "wallMs": 164.929577,
+          "cpuMs": 167.595
+        },
+        {
+          "wallMs": 165.78830400000004,
+          "cpuMs": 167.125
+        },
+        {
+          "wallMs": 164.64253500000007,
+          "cpuMs": 166.308
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/food-2400.jpg",
+      "width": 320,
+      "kind": "reference",
+      "speed": "fast",
+      "inputBytes": 1197090,
+      "outputBytes": 15976,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        2400,
+        1600
+      ],
+      "decoded": [
+        600,
+        400
+      ],
+      "output": [
+        320,
+        213
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 88.93333699999994,
+      "medianCpuMs": 115.477,
+      "samples": [
+        {
+          "wallMs": 103.62604500000003,
+          "cpuMs": 134.95
+        },
+        {
+          "wallMs": 94.01449400000001,
+          "cpuMs": 115.477
+        },
+        {
+          "wallMs": 88.86741599999999,
+          "cpuMs": 154.425
+        },
+        {
+          "wallMs": 88.93333699999994,
+          "cpuMs": 91.701
+        },
+        {
+          "wallMs": 88.646614,
+          "cpuMs": 98.215
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/food-2400.jpg",
+      "width": 320,
+      "kind": "scanlines",
+      "speed": "fast",
+      "inputBytes": 1197090,
+      "outputBytes": 15938,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        2400,
+        1600
+      ],
+      "decoded": [
+        600,
+        400
+      ],
+      "output": [
+        320,
+        213
+      ],
+      "rowStorageEstimateBytes": 54240,
+      "codecBuffered": true,
+      "medianWallMs": 92.66432399999997,
+      "medianCpuMs": 111.842,
+      "samples": [
+        {
+          "wallMs": 97.53028,
+          "cpuMs": 111.842
+        },
+        {
+          "wallMs": 92.916766,
+          "cpuMs": 125.008
+        },
+        {
+          "wallMs": 92.18155999999999,
+          "cpuMs": 160.445
+        },
+        {
+          "wallMs": 92.66432399999997,
+          "cpuMs": 93.696
+        },
+        {
+          "wallMs": 91.69815599999993,
+          "cpuMs": 99.133
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/food-2400.jpg",
+      "width": 320,
+      "kind": "jpeg",
+      "speed": "fast",
+      "inputBytes": 1197090,
+      "outputBytes": 17432,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "medianWallMs": 86.22519699999998,
+      "medianCpuMs": 90.023,
+      "samples": [
+        {
+          "wallMs": 88.09449000000001,
+          "cpuMs": 119.64
+        },
+        {
+          "wallMs": 86.22519699999998,
+          "cpuMs": 97.176
+        },
+        {
+          "wallMs": 86.24339700000002,
+          "cpuMs": 90.023
+        },
+        {
+          "wallMs": 85.96467399999995,
+          "cpuMs": 85.722
+        },
+        {
+          "wallMs": 85.855234,
+          "cpuMs": 86.125
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/food-2400.jpg",
+      "width": 800,
+      "kind": "reference",
+      "speed": "default",
+      "inputBytes": 1197090,
+      "outputBytes": 68408,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 43188224,
+      "highWaterWasmBytes": 43188224,
+      "source": [
+        2400,
+        1600
+      ],
+      "decoded": [
+        2400,
+        1600
+      ],
+      "output": [
+        800,
+        533
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 321.3773719999999,
+      "medianCpuMs": 327.063,
+      "samples": [
+        {
+          "wallMs": 322.15157700000003,
+          "cpuMs": 364.189
+        },
+        {
+          "wallMs": 322.59270000000015,
+          "cpuMs": 334.831
+        },
+        {
+          "wallMs": 320.317084,
+          "cpuMs": 327.063
+        },
+        {
+          "wallMs": 321.3773719999999,
+          "cpuMs": 325.444
+        },
+        {
+          "wallMs": 320.2606830000002,
+          "cpuMs": 320.151
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/food-2400.jpg",
+      "width": 800,
+      "kind": "scanlines",
+      "speed": "default",
+      "inputBytes": 1197090,
+      "outputBytes": 68582,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        2400,
+        1600
+      ],
+      "decoded": [
+        2400,
+        1600
+      ],
+      "output": [
+        800,
+        533
+      ],
+      "rowStorageEstimateBytes": 153600,
+      "codecBuffered": true,
+      "medianWallMs": 335.26695400000017,
+      "medianCpuMs": 344.905,
+      "samples": [
+        {
+          "wallMs": 338.006615,
+          "cpuMs": 376.386
+        },
+        {
+          "wallMs": 335.30379500000004,
+          "cpuMs": 349.214
+        },
+        {
+          "wallMs": 335.1181529999999,
+          "cpuMs": 344.905
+        },
+        {
+          "wallMs": 335.26695400000017,
+          "cpuMs": 336.284
+        },
+        {
+          "wallMs": 334.76487099999986,
+          "cpuMs": 336.313
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/food-2400.jpg",
+      "width": 800,
+      "kind": "jpeg",
+      "speed": "default",
+      "inputBytes": 1197090,
+      "outputBytes": 83662,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "medianWallMs": 196.13284799999997,
+      "medianCpuMs": 198.487,
+      "samples": [
+        {
+          "wallMs": 196.13284799999997,
+          "cpuMs": 204.628
+        },
+        {
+          "wallMs": 197.04009399999995,
+          "cpuMs": 201.439
+        },
+        {
+          "wallMs": 196.20832799999994,
+          "cpuMs": 198.487
+        },
+        {
+          "wallMs": 195.999726,
+          "cpuMs": 197.333
+        },
+        {
+          "wallMs": 195.961366,
+          "cpuMs": 197.59
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/food-2400.jpg",
+      "width": 800,
+      "kind": "reference",
+      "speed": "fast",
+      "inputBytes": 1197090,
+      "outputBytes": 77868,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        2400,
+        1600
+      ],
+      "decoded": [
+        900,
+        600
+      ],
+      "output": [
+        800,
+        533
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 131.90209300000004,
+      "medianCpuMs": 133.799,
+      "samples": [
+        {
+          "wallMs": 146.928925,
+          "cpuMs": 208.495
+        },
+        {
+          "wallMs": 132.97834200000005,
+          "cpuMs": 146.29
+        },
+        {
+          "wallMs": 131.90209300000004,
+          "cpuMs": 133.799
+        },
+        {
+          "wallMs": 131.50917100000004,
+          "cpuMs": 133.405
+        },
+        {
+          "wallMs": 130.87556600000005,
+          "cpuMs": 130.953
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/food-2400.jpg",
+      "width": 800,
+      "kind": "scanlines",
+      "speed": "fast",
+      "inputBytes": 1197090,
+      "outputBytes": 77796,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        2400,
+        1600
+      ],
+      "decoded": [
+        900,
+        600
+      ],
+      "output": [
+        800,
+        533
+      ],
+      "rowStorageEstimateBytes": 123600,
+      "codecBuffered": true,
+      "medianWallMs": 146.91056400000002,
+      "medianCpuMs": 149.314,
+      "samples": [
+        {
+          "wallMs": 152.42136500000004,
+          "cpuMs": 209.447
+        },
+        {
+          "wallMs": 147.55416899999994,
+          "cpuMs": 154.727
+        },
+        {
+          "wallMs": 146.90864499999998,
+          "cpuMs": 148.705
+        },
+        {
+          "wallMs": 146.91056400000002,
+          "cpuMs": 149.314
+        },
+        {
+          "wallMs": 146.31579999999997,
+          "cpuMs": 147.102
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/food-2400.jpg",
+      "width": 800,
+      "kind": "jpeg",
+      "speed": "fast",
+      "inputBytes": 1197090,
+      "outputBytes": 83822,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "medianWallMs": 116.73602099999994,
+      "medianCpuMs": 117.073,
+      "samples": [
+        {
+          "wallMs": 124.333878,
+          "cpuMs": 136.227
+        },
+        {
+          "wallMs": 116.83890199999996,
+          "cpuMs": 119.528
+        },
+        {
+          "wallMs": 116.49081999999999,
+          "cpuMs": 116.399
+        },
+        {
+          "wallMs": 116.73602099999994,
+          "cpuMs": 117.073
+        },
+        {
+          "wallMs": 116.712222,
+          "cpuMs": 116.641
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/food-2400.jpg",
+      "width": 1600,
+      "kind": "reference",
+      "speed": "default",
+      "inputBytes": 1197090,
+      "outputBytes": 301072,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 58458112,
+      "highWaterWasmBytes": 58458112,
+      "source": [
+        2400,
+        1600
+      ],
+      "decoded": [
+        2400,
+        1600
+      ],
+      "output": [
+        1600,
+        1067
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 835.2307639999999,
+      "medianCpuMs": 833.734,
+      "samples": [
+        {
+          "wallMs": 835.2307639999999,
+          "cpuMs": 848.011
+        },
+        {
+          "wallMs": 829.23172,
+          "cpuMs": 832.395
+        },
+        {
+          "wallMs": 831.1415339999999,
+          "cpuMs": 833.734
+        },
+        {
+          "wallMs": 865.9952309999999,
+          "cpuMs": 829.998
+        },
+        {
+          "wallMs": 1246.402438,
+          "cpuMs": 849.648
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/food-2400.jpg",
+      "width": 1600,
+      "kind": "scanlines",
+      "speed": "default",
+      "inputBytes": 1197090,
+      "outputBytes": 301608,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 21823488,
+      "highWaterWasmBytes": 21823488,
+      "source": [
+        2400,
+        1600
+      ],
+      "decoded": [
+        2400,
+        1600
+      ],
+      "output": [
+        1600,
+        1067
+      ],
+      "rowStorageEstimateBytes": 259200,
+      "codecBuffered": true,
+      "medianWallMs": 862.5300459999999,
+      "medianCpuMs": 864.449,
+      "samples": [
+        {
+          "wallMs": 862.8787679999998,
+          "cpuMs": 864.449
+        },
+        {
+          "wallMs": 862.5162049999999,
+          "cpuMs": 870.442
+        },
+        {
+          "wallMs": 862.5300459999999,
+          "cpuMs": 866.558
+        },
+        {
+          "wallMs": 913.2167400000003,
+          "cpuMs": 863.561
+        },
+        {
+          "wallMs": 861.7567600000002,
+          "cpuMs": 863.555
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/food-2400.jpg",
+      "width": 1600,
+      "kind": "jpeg",
+      "speed": "default",
+      "inputBytes": 1197090,
+      "outputBytes": 335969,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "medianWallMs": 293.85040800000013,
+      "medianCpuMs": 295.74,
+      "samples": [
+        {
+          "wallMs": 292.91648100000003,
+          "cpuMs": 294.655
+        },
+        {
+          "wallMs": 293.85040800000013,
+          "cpuMs": 300.881
+        },
+        {
+          "wallMs": 294.23945100000014,
+          "cpuMs": 295.74
+        },
+        {
+          "wallMs": 293.87384900000006,
+          "cpuMs": 295.203
+        },
+        {
+          "wallMs": 292.37447799999995,
+          "cpuMs": 297.085
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/food-2400.jpg",
+      "width": 1600,
+      "kind": "reference",
+      "speed": "fast",
+      "inputBytes": 1197090,
+      "outputBytes": 330840,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 34996224,
+      "highWaterWasmBytes": 34996224,
+      "source": [
+        2400,
+        1600
+      ],
+      "decoded": [
+        1800,
+        1200
+      ],
+      "output": [
+        1600,
+        1067
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 310.21008900000015,
+      "medianCpuMs": 312.889,
+      "samples": [
+        {
+          "wallMs": 321.65905399999997,
+          "cpuMs": 331.931
+        },
+        {
+          "wallMs": 310.21008900000015,
+          "cpuMs": 313.101
+        },
+        {
+          "wallMs": 309.73168499999997,
+          "cpuMs": 311.184
+        },
+        {
+          "wallMs": 310.8946940000001,
+          "cpuMs": 312.889
+        },
+        {
+          "wallMs": 309.7228060000002,
+          "cpuMs": 309.627
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/food-2400.jpg",
+      "width": 1600,
+      "kind": "scanlines",
+      "speed": "fast",
+      "inputBytes": 1197090,
+      "outputBytes": 327430,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 21757952,
+      "highWaterWasmBytes": 21757952,
+      "source": [
+        2400,
+        1600
+      ],
+      "decoded": [
+        1800,
+        1200
+      ],
+      "output": [
+        1600,
+        1067
+      ],
+      "rowStorageEstimateBytes": 247200,
+      "codecBuffered": true,
+      "medianWallMs": 364.24376800000005,
+      "medianCpuMs": 368.24,
+      "samples": [
+        {
+          "wallMs": 368.31459899999993,
+          "cpuMs": 370.904
+        },
+        {
+          "wallMs": 366.34562399999993,
+          "cpuMs": 368.24
+        },
+        {
+          "wallMs": 363.6050029999999,
+          "cpuMs": 364.486
+        },
+        {
+          "wallMs": 364.24376800000005,
+          "cpuMs": 368.788
+        },
+        {
+          "wallMs": 363.521123,
+          "cpuMs": 363.423
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/food-2400.jpg",
+      "width": 1600,
+      "kind": "jpeg",
+      "speed": "fast",
+      "inputBytes": 1197090,
+      "outputBytes": 337132,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "medianWallMs": 247.9325100000001,
+      "medianCpuMs": 249.763,
+      "samples": [
+        {
+          "wallMs": 247.91075,
+          "cpuMs": 251.484
+        },
+        {
+          "wallMs": 248.07523100000003,
+          "cpuMs": 252.08
+        },
+        {
+          "wallMs": 247.9325100000001,
+          "cpuMs": 247.867
+        },
+        {
+          "wallMs": 247.58362699999998,
+          "cpuMs": 249.763
+        },
+        {
+          "wallMs": 247.96290999999997,
+          "cpuMs": 249.739
+        }
+      ]
+    },
+    {
+      "inputPath": "test/fixtures/input-4k.jpg",
+      "width": 320,
+      "kind": "reference",
+      "speed": "default",
+      "inputBytes": 1218439,
+      "outputBytes": 15174,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 83558400,
+      "highWaterWasmBytes": 83558400,
+      "source": [
+        3840,
+        2160
+      ],
+      "decoded": [
+        3840,
+        2160
+      ],
+      "output": [
+        320,
+        180
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 263.7222260000001,
+      "medianCpuMs": 275.647,
+      "samples": [
+        {
+          "wallMs": 267.198892,
+          "cpuMs": 364.551
+        },
+        {
+          "wallMs": 265.431519,
+          "cpuMs": 276.418
+        },
+        {
+          "wallMs": 262.9121799999999,
+          "cpuMs": 275.647
+        },
+        {
+          "wallMs": 263.7222260000001,
+          "cpuMs": 268.205
+        },
+        {
+          "wallMs": 263.30382299999997,
+          "cpuMs": 269.509
+        }
+      ]
+    },
+    {
+      "inputPath": "test/fixtures/input-4k.jpg",
+      "width": 320,
+      "kind": "scanlines",
+      "speed": "default",
+      "inputBytes": 1218439,
+      "outputBytes": 15252,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        3840,
+        2160
+      ],
+      "decoded": [
+        3840,
+        2160
+      ],
+      "output": [
+        320,
+        180
+      ],
+      "rowStorageEstimateBytes": 113920,
+      "codecBuffered": false,
+      "medianWallMs": 224.806779,
+      "medianCpuMs": 235.168,
+      "samples": [
+        {
+          "wallMs": 226.48379099999994,
+          "cpuMs": 322.798
+        },
+        {
+          "wallMs": 224.806779,
+          "cpuMs": 236.913
+        },
+        {
+          "wallMs": 224.22429499999998,
+          "cpuMs": 235.168
+        },
+        {
+          "wallMs": 225.69878599999993,
+          "cpuMs": 231.895
+        },
+        {
+          "wallMs": 223.8185719999999,
+          "cpuMs": 225.084
+        }
+      ]
+    },
+    {
+      "inputPath": "test/fixtures/input-4k.jpg",
+      "width": 320,
+      "kind": "jpeg",
+      "speed": "default",
+      "inputBytes": 1218439,
+      "outputBytes": 16920,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "medianWallMs": 202.3965340000001,
+      "medianCpuMs": 206.386,
+      "samples": [
+        {
+          "wallMs": 202.85897699999998,
+          "cpuMs": 211.526
+        },
+        {
+          "wallMs": 203.14593900000006,
+          "cpuMs": 206.386
+        },
+        {
+          "wallMs": 202.3965340000001,
+          "cpuMs": 206.788
+        },
+        {
+          "wallMs": 202.38305400000013,
+          "cpuMs": 205.455
+        },
+        {
+          "wallMs": 201.719249,
+          "cpuMs": 202.238
+        }
+      ]
+    },
+    {
+      "inputPath": "test/fixtures/input-4k.jpg",
+      "width": 320,
+      "kind": "reference",
+      "speed": "fast",
+      "inputBytes": 1218439,
+      "outputBytes": 16372,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        3840,
+        2160
+      ],
+      "decoded": [
+        480,
+        270
+      ],
+      "output": [
+        320,
+        180
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 32.718920999999995,
+      "medianCpuMs": 61.658,
+      "samples": [
+        {
+          "wallMs": 33.880730000000014,
+          "cpuMs": 54.081
+        },
+        {
+          "wallMs": 32.718920999999995,
+          "cpuMs": 65.15
+        },
+        {
+          "wallMs": 31.931916,
+          "cpuMs": 49.917
+        },
+        {
+          "wallMs": 31.116630000000015,
+          "cpuMs": 61.658
+        },
+        {
+          "wallMs": 32.97312299999999,
+          "cpuMs": 63.771
+        }
+      ]
+    },
+    {
+      "inputPath": "test/fixtures/input-4k.jpg",
+      "width": 320,
+      "kind": "scanlines",
+      "speed": "fast",
+      "inputBytes": 1218439,
+      "outputBytes": 16464,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        3840,
+        2160
+      ],
+      "decoded": [
+        480,
+        270
+      ],
+      "output": [
+        320,
+        180
+      ],
+      "rowStorageEstimateBytes": 51840,
+      "codecBuffered": false,
+      "medianWallMs": 33.70052800000002,
+      "medianCpuMs": 61.724,
+      "samples": [
+        {
+          "wallMs": 37.81627900000001,
+          "cpuMs": 55.472
+        },
+        {
+          "wallMs": 34.771896999999996,
+          "cpuMs": 61.724
+        },
+        {
+          "wallMs": 33.70052800000002,
+          "cpuMs": 66.211
+        },
+        {
+          "wallMs": 33.502526999999986,
+          "cpuMs": 66.524
+        },
+        {
+          "wallMs": 33.300926000000004,
+          "cpuMs": 42.701
+        }
+      ]
+    },
+    {
+      "inputPath": "test/fixtures/input-4k.jpg",
+      "width": 320,
+      "kind": "jpeg",
+      "speed": "fast",
+      "inputBytes": 1218439,
+      "outputBytes": 16310,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "medianWallMs": 28.340329999999994,
+      "medianCpuMs": 31.828,
+      "samples": [
+        {
+          "wallMs": 29.024414000000007,
+          "cpuMs": 49.388
+        },
+        {
+          "wallMs": 30.005700999999988,
+          "cpuMs": 30.979
+        },
+        {
+          "wallMs": 27.915806000000003,
+          "cpuMs": 31.828
+        },
+        {
+          "wallMs": 28.340329999999994,
+          "cpuMs": 33.526
+        },
+        {
+          "wallMs": 27.699963999999994,
+          "cpuMs": 30.15
+        }
+      ]
+    },
+    {
+      "inputPath": "test/fixtures/input-4k.jpg",
+      "width": 800,
+      "kind": "reference",
+      "speed": "default",
+      "inputBytes": 1218439,
+      "outputBytes": 85032,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 84934656,
+      "highWaterWasmBytes": 84934656,
+      "source": [
+        3840,
+        2160
+      ],
+      "decoded": [
+        3840,
+        2160
+      ],
+      "output": [
+        800,
+        450
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 355.66482500000006,
+      "medianCpuMs": 363.531,
+      "samples": [
+        {
+          "wallMs": 358.66392700000006,
+          "cpuMs": 409.558
+        },
+        {
+          "wallMs": 356.0121079999999,
+          "cpuMs": 364.8
+        },
+        {
+          "wallMs": 355.66482500000006,
+          "cpuMs": 363.531
+        },
+        {
+          "wallMs": 354.403055,
+          "cpuMs": 362.615
+        },
+        {
+          "wallMs": 354.6717369999999,
+          "cpuMs": 354.703
+        }
+      ]
+    },
+    {
+      "inputPath": "test/fixtures/input-4k.jpg",
+      "width": 800,
+      "kind": "scanlines",
+      "speed": "default",
+      "inputBytes": 1218439,
+      "outputBytes": 84900,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        3840,
+        2160
+      ],
+      "decoded": [
+        3840,
+        2160
+      ],
+      "output": [
+        800,
+        450
+      ],
+      "rowStorageEstimateBytes": 182400,
+      "codecBuffered": false,
+      "medianWallMs": 361.470468,
+      "medianCpuMs": 367.998,
+      "samples": [
+        {
+          "wallMs": 364.109967,
+          "cpuMs": 421.788
+        },
+        {
+          "wallMs": 361.9308709999999,
+          "cpuMs": 367.998
+        },
+        {
+          "wallMs": 361.470468,
+          "cpuMs": 366.946
+        },
+        {
+          "wallMs": 361.468388,
+          "cpuMs": 372.275
+        },
+        {
+          "wallMs": 360.864063,
+          "cpuMs": 360.836
+        }
+      ]
+    },
+    {
+      "inputPath": "test/fixtures/input-4k.jpg",
+      "width": 800,
+      "kind": "jpeg",
+      "speed": "default",
+      "inputBytes": 1218439,
+      "outputBytes": 92791,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "medianWallMs": 234.153008,
+      "medianCpuMs": 236.698,
+      "samples": [
+        {
+          "wallMs": 234.83745300000004,
+          "cpuMs": 245.742
+        },
+        {
+          "wallMs": 234.153008,
+          "cpuMs": 236.698
+        },
+        {
+          "wallMs": 233.48208299999988,
+          "cpuMs": 235.215
+        },
+        {
+          "wallMs": 234.6121310000001,
+          "cpuMs": 238.536
+        },
+        {
+          "wallMs": 233.17636100000004,
+          "cpuMs": 234.05
+        }
+      ]
+    },
+    {
+      "inputPath": "test/fixtures/input-4k.jpg",
+      "width": 800,
+      "kind": "reference",
+      "speed": "fast",
+      "inputBytes": 1218439,
+      "outputBytes": 86440,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        3840,
+        2160
+      ],
+      "decoded": [
+        960,
+        540
+      ],
+      "output": [
+        800,
+        450
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 83.32549399999999,
+      "medianCpuMs": 90.539,
+      "samples": [
+        {
+          "wallMs": 84.24126200000003,
+          "cpuMs": 145.955
+        },
+        {
+          "wallMs": 84.60706399999998,
+          "cpuMs": 91.069
+        },
+        {
+          "wallMs": 83.32549399999999,
+          "cpuMs": 90.539
+        },
+        {
+          "wallMs": 82.261687,
+          "cpuMs": 87.276
+        },
+        {
+          "wallMs": 82.73145099999999,
+          "cpuMs": 87.747
+        }
+      ]
+    },
+    {
+      "inputPath": "test/fixtures/input-4k.jpg",
+      "width": 800,
+      "kind": "scanlines",
+      "speed": "fast",
+      "inputBytes": 1218439,
+      "outputBytes": 87070,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        3840,
+        2160
+      ],
+      "decoded": [
+        960,
+        540
+      ],
+      "output": [
+        800,
+        450
+      ],
+      "rowStorageEstimateBytes": 124800,
+      "codecBuffered": false,
+      "medianWallMs": 96.471272,
+      "medianCpuMs": 99.352,
+      "samples": [
+        {
+          "wallMs": 98.39544700000002,
+          "cpuMs": 164.213
+        },
+        {
+          "wallMs": 96.471272,
+          "cpuMs": 106.506
+        },
+        {
+          "wallMs": 97.779762,
+          "cpuMs": 98.359
+        },
+        {
+          "wallMs": 94.42501699999997,
+          "cpuMs": 99.352
+        },
+        {
+          "wallMs": 94.3070560000001,
+          "cpuMs": 95.826
+        }
+      ]
+    },
+    {
+      "inputPath": "test/fixtures/input-4k.jpg",
+      "width": 800,
+      "kind": "jpeg",
+      "speed": "fast",
+      "inputBytes": 1218439,
+      "outputBytes": 88279,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "medianWallMs": 65.33764200000002,
+      "medianCpuMs": 67.162,
+      "samples": [
+        {
+          "wallMs": 69.33547200000001,
+          "cpuMs": 78.108
+        },
+        {
+          "wallMs": 65.454363,
+          "cpuMs": 70.236
+        },
+        {
+          "wallMs": 65.14748100000003,
+          "cpuMs": 65.538
+        },
+        {
+          "wallMs": 65.16624100000001,
+          "cpuMs": 65.463
+        },
+        {
+          "wallMs": 65.33764200000002,
+          "cpuMs": 67.162
+        }
+      ]
+    },
+    {
+      "inputPath": "test/fixtures/input-4k.jpg",
+      "width": 1600,
+      "kind": "reference",
+      "speed": "default",
+      "inputBytes": 1218439,
+      "outputBytes": 266568,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 90177536,
+      "highWaterWasmBytes": 90177536,
+      "source": [
+        3840,
+        2160
+      ],
+      "decoded": [
+        3840,
+        2160
+      ],
+      "output": [
+        1600,
+        900
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 731.7065600000001,
+      "medianCpuMs": 737.852,
+      "samples": [
+        {
+          "wallMs": 731.3589970000002,
+          "cpuMs": 741.694
+        },
+        {
+          "wallMs": 732.415526,
+          "cpuMs": 733.185
+        },
+        {
+          "wallMs": 731.6415999999999,
+          "cpuMs": 737.909
+        },
+        {
+          "wallMs": 731.7065600000001,
+          "cpuMs": 734.056
+        },
+        {
+          "wallMs": 738.201568,
+          "cpuMs": 737.852
+        }
+      ]
+    },
+    {
+      "inputPath": "test/fixtures/input-4k.jpg",
+      "width": 1600,
+      "kind": "scanlines",
+      "speed": "default",
+      "inputBytes": 1218439,
+      "outputBytes": 266686,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        3840,
+        2160
+      ],
+      "decoded": [
+        3840,
+        2160
+      ],
+      "output": [
+        1600,
+        900
+      ],
+      "rowStorageEstimateBytes": 288000,
+      "codecBuffered": false,
+      "medianWallMs": 806.6997139999994,
+      "medianCpuMs": 809.813,
+      "samples": [
+        {
+          "wallMs": 1361.83369,
+          "cpuMs": 826.784
+        },
+        {
+          "wallMs": 879.566131,
+          "cpuMs": 814.798
+        },
+        {
+          "wallMs": 806.2093099999997,
+          "cpuMs": 809.813
+        },
+        {
+          "wallMs": 805.4838650000002,
+          "cpuMs": 808.247
+        },
+        {
+          "wallMs": 806.6997139999994,
+          "cpuMs": 806.434
+        }
+      ]
+    },
+    {
+      "inputPath": "test/fixtures/input-4k.jpg",
+      "width": 1600,
+      "kind": "jpeg",
+      "speed": "default",
+      "inputBytes": 1218439,
+      "outputBytes": 317389,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "medianWallMs": 323.163945,
+      "medianCpuMs": 324.479,
+      "samples": [
+        {
+          "wallMs": 323.710189,
+          "cpuMs": 330.701
+        },
+        {
+          "wallMs": 322.15693699999986,
+          "cpuMs": 324.46
+        },
+        {
+          "wallMs": 323.21286499999997,
+          "cpuMs": 324.479
+        },
+        {
+          "wallMs": 323.163945,
+          "cpuMs": 326.645
+        },
+        {
+          "wallMs": 323.10110499999996,
+          "cpuMs": 323.059
+        }
+      ]
+    },
+    {
+      "inputPath": "test/fixtures/input-4k.jpg",
+      "width": 1600,
+      "kind": "reference",
+      "speed": "fast",
+      "inputBytes": 1218439,
+      "outputBytes": 285772,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 36569088,
+      "highWaterWasmBytes": 36569088,
+      "source": [
+        3840,
+        2160
+      ],
+      "decoded": [
+        1920,
+        1080
+      ],
+      "output": [
+        1600,
+        900
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 234.27244899999994,
+      "medianCpuMs": 235.657,
+      "samples": [
+        {
+          "wallMs": 235.282016,
+          "cpuMs": 252.996
+        },
+        {
+          "wallMs": 233.770805,
+          "cpuMs": 233.594
+        },
+        {
+          "wallMs": 234.27244899999994,
+          "cpuMs": 235.657
+        },
+        {
+          "wallMs": 235.21609599999988,
+          "cpuMs": 236.842
+        },
+        {
+          "wallMs": 234.161648,
+          "cpuMs": 234.376
+        }
+      ]
+    },
+    {
+      "inputPath": "test/fixtures/input-4k.jpg",
+      "width": 1600,
+      "kind": "scanlines",
+      "speed": "fast",
+      "inputBytes": 1218439,
+      "outputBytes": 283038,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        3840,
+        2160
+      ],
+      "decoded": [
+        1920,
+        1080
+      ],
+      "output": [
+        1600,
+        900
+      ],
+      "rowStorageEstimateBytes": 249600,
+      "codecBuffered": false,
+      "medianWallMs": 286.23947299999986,
+      "medianCpuMs": 288.585,
+      "samples": [
+        {
+          "wallMs": 287.554602,
+          "cpuMs": 302.408
+        },
+        {
+          "wallMs": 286.19067200000006,
+          "cpuMs": 285.439
+        },
+        {
+          "wallMs": 286.23947299999986,
+          "cpuMs": 287.692
+        },
+        {
+          "wallMs": 287.32936100000006,
+          "cpuMs": 290.448
+        },
+        {
+          "wallMs": 286.13123199999995,
+          "cpuMs": 288.585
+        }
+      ]
+    },
+    {
+      "inputPath": "test/fixtures/input-4k.jpg",
+      "width": 1600,
+      "kind": "jpeg",
+      "speed": "fast",
+      "inputBytes": 1218439,
+      "outputBytes": 309523,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "medianWallMs": 187.07594100000006,
+      "medianCpuMs": 188.076,
+      "samples": [
+        {
+          "wallMs": 187.02409999999998,
+          "cpuMs": 194.831
+        },
+        {
+          "wallMs": 188.56707200000005,
+          "cpuMs": 188.076
+        },
+        {
+          "wallMs": 187.853786,
+          "cpuMs": 187.558
+        },
+        {
+          "wallMs": 186.38717499999996,
+          "cpuMs": 187.958
+        },
+        {
+          "wallMs": 187.07594100000006,
+          "cpuMs": 189.596
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/gradient-1920.png",
+      "width": 320,
+      "kind": "reference",
+      "speed": "default",
+      "inputBytes": 5065643,
+      "outputBytes": 7630,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 28442624,
+      "highWaterWasmBytes": 28442624,
+      "source": [
+        1920,
+        1080
+      ],
+      "decoded": [
+        1920,
+        1080
+      ],
+      "output": [
+        320,
+        180
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 92.86408499999999,
+      "medianCpuMs": 102.558,
+      "samples": [
+        {
+          "wallMs": 98.85685000000001,
+          "cpuMs": 191.207
+        },
+        {
+          "wallMs": 94.683539,
+          "cpuMs": 113.739
+        },
+        {
+          "wallMs": 92.86408499999999,
+          "cpuMs": 102.558
+        },
+        {
+          "wallMs": 91.89315900000008,
+          "cpuMs": 96.544
+        },
+        {
+          "wallMs": 91.65139599999998,
+          "cpuMs": 95.31
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/gradient-1920.png",
+      "width": 320,
+      "kind": "scanlines",
+      "speed": "default",
+      "inputBytes": 5065643,
+      "outputBytes": 7652,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        1920,
+        1080
+      ],
+      "decoded": [
+        1920,
+        1080
+      ],
+      "output": [
+        320,
+        180
+      ],
+      "rowStorageEstimateBytes": 75520,
+      "codecBuffered": false,
+      "medianWallMs": 97.53199900000004,
+      "medianCpuMs": 106.393,
+      "samples": [
+        {
+          "wallMs": 103.971567,
+          "cpuMs": 202.66
+        },
+        {
+          "wallMs": 98.05576300000001,
+          "cpuMs": 106.393
+        },
+        {
+          "wallMs": 97.53199900000004,
+          "cpuMs": 106.87
+        },
+        {
+          "wallMs": 96.70251399999995,
+          "cpuMs": 100.494
+        },
+        {
+          "wallMs": 96.32259099999999,
+          "cpuMs": 99.872
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/gradient-1920.png",
+      "width": 320,
+      "kind": "jpeg",
+      "speed": "default",
+      "inputBytes": 5065643,
+      "outputBytes": 13205,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "medianWallMs": 78.84450199999992,
+      "medianCpuMs": 81.415,
+      "samples": [
+        {
+          "wallMs": 81.258839,
+          "cpuMs": 89.795
+        },
+        {
+          "wallMs": 78.816621,
+          "cpuMs": 79.803
+        },
+        {
+          "wallMs": 79.38898599999999,
+          "cpuMs": 81.415
+        },
+        {
+          "wallMs": 78.49789900000007,
+          "cpuMs": 78.455
+        },
+        {
+          "wallMs": 78.84450199999992,
+          "cpuMs": 81.502
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/gradient-1920.png",
+      "width": 320,
+      "kind": "reference",
+      "speed": "fast",
+      "inputBytes": 5065643,
+      "outputBytes": 8590,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 28442624,
+      "highWaterWasmBytes": 28442624,
+      "source": [
+        1920,
+        1080
+      ],
+      "decoded": [
+        1920,
+        1080
+      ],
+      "output": [
+        320,
+        180
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 79.46634599999999,
+      "medianCpuMs": 106.76,
+      "samples": [
+        {
+          "wallMs": 94.64409900000001,
+          "cpuMs": 119.448
+        },
+        {
+          "wallMs": 92.74388400000004,
+          "cpuMs": 106.76
+        },
+        {
+          "wallMs": 79.46634599999999,
+          "cpuMs": 144.654
+        },
+        {
+          "wallMs": 79.106424,
+          "cpuMs": 80.829
+        },
+        {
+          "wallMs": 79.1778250000001,
+          "cpuMs": 87.106
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/gradient-1920.png",
+      "width": 320,
+      "kind": "scanlines",
+      "speed": "fast",
+      "inputBytes": 5065643,
+      "outputBytes": 8612,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        1920,
+        1080
+      ],
+      "decoded": [
+        1920,
+        1080
+      ],
+      "output": [
+        320,
+        180
+      ],
+      "rowStorageEstimateBytes": 75520,
+      "codecBuffered": false,
+      "medianWallMs": 84.28990200000004,
+      "medianCpuMs": 100.974,
+      "samples": [
+        {
+          "wallMs": 91.828158,
+          "cpuMs": 122.491
+        },
+        {
+          "wallMs": 95.86438800000002,
+          "cpuMs": 100.974
+        },
+        {
+          "wallMs": 81.74080300000003,
+          "cpuMs": 149.388
+        },
+        {
+          "wallMs": 84.28990200000004,
+          "cpuMs": 83.796
+        },
+        {
+          "wallMs": 81.68096300000002,
+          "cpuMs": 84.339
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/gradient-1920.png",
+      "width": 320,
+      "kind": "jpeg",
+      "speed": "fast",
+      "inputBytes": 5065643,
+      "outputBytes": 13205,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "medianWallMs": 79.11546399999997,
+      "medianCpuMs": 81.365,
+      "samples": [
+        {
+          "wallMs": 79.49678700000001,
+          "cpuMs": 96.858
+        },
+        {
+          "wallMs": 79.11546399999997,
+          "cpuMs": 79.477
+        },
+        {
+          "wallMs": 78.61413999999996,
+          "cpuMs": 81.365
+        },
+        {
+          "wallMs": 78.51622000000003,
+          "cpuMs": 78.47
+        },
+        {
+          "wallMs": 81.69688300000007,
+          "cpuMs": 83.823
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/gradient-1920.png",
+      "width": 800,
+      "kind": "reference",
+      "speed": "default",
+      "inputBytes": 5065643,
+      "outputBytes": 21044,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 29818880,
+      "highWaterWasmBytes": 29818880,
+      "source": [
+        1920,
+        1080
+      ],
+      "decoded": [
+        1920,
+        1080
+      ],
+      "output": [
+        800,
+        450
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 180.36209099999996,
+      "medianCpuMs": 185.68,
+      "samples": [
+        {
+          "wallMs": 199.77983500000005,
+          "cpuMs": 250.977
+        },
+        {
+          "wallMs": 189.01815499999998,
+          "cpuMs": 192.208
+        },
+        {
+          "wallMs": 177.3415090000001,
+          "cpuMs": 179.804
+        },
+        {
+          "wallMs": 180.36209099999996,
+          "cpuMs": 185.68
+        },
+        {
+          "wallMs": 175.471495,
+          "cpuMs": 177.819
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/gradient-1920.png",
+      "width": 800,
+      "kind": "scanlines",
+      "speed": "default",
+      "inputBytes": 5065643,
+      "outputBytes": 21040,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        1920,
+        1080
+      ],
+      "decoded": [
+        1920,
+        1080
+      ],
+      "output": [
+        800,
+        450
+      ],
+      "rowStorageEstimateBytes": 144000,
+      "codecBuffered": false,
+      "medianWallMs": 192.73538299999996,
+      "medianCpuMs": 197.335,
+      "samples": [
+        {
+          "wallMs": 194.290634,
+          "cpuMs": 270.802
+        },
+        {
+          "wallMs": 192.63358200000005,
+          "cpuMs": 197.335
+        },
+        {
+          "wallMs": 192.75050199999998,
+          "cpuMs": 197.579
+        },
+        {
+          "wallMs": 192.73538299999996,
+          "cpuMs": 195.756
+        },
+        {
+          "wallMs": 192.29589899999996,
+          "cpuMs": 194.653
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/gradient-1920.png",
+      "width": 800,
+      "kind": "jpeg",
+      "speed": "default",
+      "inputBytes": 5065643,
+      "outputBytes": 46208,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "medianWallMs": 101.96063299999997,
+      "medianCpuMs": 101.868,
+      "samples": [
+        {
+          "wallMs": 102.583077,
+          "cpuMs": 117.626
+        },
+        {
+          "wallMs": 101.96063299999997,
+          "cpuMs": 101.868
+        },
+        {
+          "wallMs": 101.89799199999999,
+          "cpuMs": 101.862
+        },
+        {
+          "wallMs": 101.92495199999996,
+          "cpuMs": 101.865
+        },
+        {
+          "wallMs": 102.09383300000002,
+          "cpuMs": 104.714
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/gradient-1920.png",
+      "width": 800,
+      "kind": "reference",
+      "speed": "fast",
+      "inputBytes": 5065643,
+      "outputBytes": 24952,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 29818880,
+      "highWaterWasmBytes": 29818880,
+      "source": [
+        1920,
+        1080
+      ],
+      "decoded": [
+        1920,
+        1080
+      ],
+      "output": [
+        800,
+        450
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 102.32539499999996,
+      "medianCpuMs": 106.52,
+      "samples": [
+        {
+          "wallMs": 103.30432200000001,
+          "cpuMs": 178.9
+        },
+        {
+          "wallMs": 102.34639600000003,
+          "cpuMs": 109.689
+        },
+        {
+          "wallMs": 101.84571199999999,
+          "cpuMs": 104.01
+        },
+        {
+          "wallMs": 102.32539499999996,
+          "cpuMs": 105.744
+        },
+        {
+          "wallMs": 101.94795299999998,
+          "cpuMs": 106.52
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/gradient-1920.png",
+      "width": 800,
+      "kind": "scanlines",
+      "speed": "fast",
+      "inputBytes": 5065643,
+      "outputBytes": 24790,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        1920,
+        1080
+      ],
+      "decoded": [
+        1920,
+        1080
+      ],
+      "output": [
+        800,
+        450
+      ],
+      "rowStorageEstimateBytes": 144000,
+      "codecBuffered": false,
+      "medianWallMs": 119.039759,
+      "medianCpuMs": 122.49,
+      "samples": [
+        {
+          "wallMs": 129.872799,
+          "cpuMs": 200.524
+        },
+        {
+          "wallMs": 119.55196200000006,
+          "cpuMs": 123.475
+        },
+        {
+          "wallMs": 119.039759,
+          "cpuMs": 120.949
+        },
+        {
+          "wallMs": 118.89519799999994,
+          "cpuMs": 121.863
+        },
+        {
+          "wallMs": 118.73251599999992,
+          "cpuMs": 122.49
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/gradient-1920.png",
+      "width": 800,
+      "kind": "jpeg",
+      "speed": "fast",
+      "inputBytes": 5065643,
+      "outputBytes": 46208,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "medianWallMs": 101.71831100000009,
+      "medianCpuMs": 101.69,
+      "samples": [
+        {
+          "wallMs": 102.716839,
+          "cpuMs": 118.684
+        },
+        {
+          "wallMs": 101.720711,
+          "cpuMs": 101.69
+        },
+        {
+          "wallMs": 101.54042900000007,
+          "cpuMs": 101.508
+        },
+        {
+          "wallMs": 101.66027099999997,
+          "cpuMs": 101.603
+        },
+        {
+          "wallMs": 101.71831100000009,
+          "cpuMs": 103.935
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/gradient-1920.png",
+      "width": 1600,
+      "kind": "reference",
+      "speed": "default",
+      "inputBytes": 5065643,
+      "outputBytes": 41440,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 42008576,
+      "highWaterWasmBytes": 42008576,
+      "source": [
+        1920,
+        1080
+      ],
+      "decoded": [
+        1920,
+        1080
+      ],
+      "output": [
+        1600,
+        900
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 431.17554199999995,
+      "medianCpuMs": 431.852,
+      "samples": [
+        {
+          "wallMs": 430.76998000000003,
+          "cpuMs": 444.794
+        },
+        {
+          "wallMs": 430.2535750000002,
+          "cpuMs": 429.561
+        },
+        {
+          "wallMs": 433.5293200000001,
+          "cpuMs": 431.852
+        },
+        {
+          "wallMs": 438.81883900000025,
+          "cpuMs": 436.337
+        },
+        {
+          "wallMs": 431.17554199999995,
+          "cpuMs": 430.71
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/gradient-1920.png",
+      "width": 1600,
+      "kind": "scanlines",
+      "speed": "default",
+      "inputBytes": 5065643,
+      "outputBytes": 41556,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        1920,
+        1080
+      ],
+      "decoded": [
+        1920,
+        1080
+      ],
+      "output": [
+        1600,
+        900
+      ],
+      "rowStorageEstimateBytes": 249600,
+      "codecBuffered": false,
+      "medianWallMs": 483.18392599999993,
+      "medianCpuMs": 484.67,
+      "samples": [
+        {
+          "wallMs": 483.21324700000014,
+          "cpuMs": 493.723
+        },
+        {
+          "wallMs": 483.18392599999993,
+          "cpuMs": 483.173
+        },
+        {
+          "wallMs": 482.3958799999998,
+          "cpuMs": 484.67
+        },
+        {
+          "wallMs": 483.18148599999995,
+          "cpuMs": 482.608
+        },
+        {
+          "wallMs": 497.0271480000001,
+          "cpuMs": 499.581
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/gradient-1920.png",
+      "width": 1600,
+      "kind": "jpeg",
+      "speed": "default",
+      "inputBytes": 5065643,
+      "outputBytes": 117504,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "medianWallMs": 179.77740600000016,
+      "medianCpuMs": 179.734,
+      "samples": [
+        {
+          "wallMs": 180.37121099999996,
+          "cpuMs": 189.38
+        },
+        {
+          "wallMs": 179.53956499999993,
+          "cpuMs": 179.337
+        },
+        {
+          "wallMs": 179.79140699999994,
+          "cpuMs": 179.734
+        },
+        {
+          "wallMs": 179.77740600000016,
+          "cpuMs": 179.698
+        },
+        {
+          "wallMs": 179.61916500000007,
+          "cpuMs": 182.005
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/gradient-1920.png",
+      "width": 1600,
+      "kind": "reference",
+      "speed": "fast",
+      "inputBytes": 5065643,
+      "outputBytes": 44886,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 42008576,
+      "highWaterWasmBytes": 42008576,
+      "source": [
+        1920,
+        1080
+      ],
+      "decoded": [
+        1920,
+        1080
+      ],
+      "output": [
+        1600,
+        900
+      ],
+      "rowStorageEstimateBytes": 0,
+      "codecBuffered": true,
+      "medianWallMs": 187.92982699999993,
+      "medianCpuMs": 187.596,
+      "samples": [
+        {
+          "wallMs": 191.988857,
+          "cpuMs": 219.352
+        },
+        {
+          "wallMs": 187.92982699999993,
+          "cpuMs": 187.404
+        },
+        {
+          "wallMs": 186.00989300000003,
+          "cpuMs": 186.801
+        },
+        {
+          "wallMs": 187.02994,
+          "cpuMs": 187.596
+        },
+        {
+          "wallMs": 189.37835800000016,
+          "cpuMs": 189.652
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/gradient-1920.png",
+      "width": 1600,
+      "kind": "scanlines",
+      "speed": "fast",
+      "inputBytes": 5065643,
+      "outputBytes": 49710,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "source": [
+        1920,
+        1080
+      ],
+      "decoded": [
+        1920,
+        1080
+      ],
+      "output": [
+        1600,
+        900
+      ],
+      "rowStorageEstimateBytes": 249600,
+      "codecBuffered": false,
+      "medianWallMs": 239.084605,
+      "medianCpuMs": 242.118,
+      "samples": [
+        {
+          "wallMs": 243.89103999999998,
+          "cpuMs": 262.318
+        },
+        {
+          "wallMs": 246.86602199999993,
+          "cpuMs": 245.72
+        },
+        {
+          "wallMs": 238.639361,
+          "cpuMs": 239.59
+        },
+        {
+          "wallMs": 238.33171900000002,
+          "cpuMs": 238.678
+        },
+        {
+          "wallMs": 239.084605,
+          "cpuMs": 242.118
+        }
+      ]
+    },
+    {
+      "inputPath": "benchmarks/gradient-1920.png",
+      "width": 1600,
+      "kind": "jpeg",
+      "speed": "fast",
+      "inputBytes": 5065643,
+      "outputBytes": 117504,
+      "initialWasmBytes": 16777216,
+      "firstTransformWasmBytes": 16777216,
+      "highWaterWasmBytes": 16777216,
+      "medianWallMs": 179.38572399999998,
+      "medianCpuMs": 181.107,
+      "samples": [
+        {
+          "wallMs": 199.05142900000004,
+          "cpuMs": 210.184
+        },
+        {
+          "wallMs": 178.81607999999994,
+          "cpuMs": 178.757
+        },
+        {
+          "wallMs": 182.45466699999997,
+          "cpuMs": 182.13
+        },
+        {
+          "wallMs": 179.1138820000001,
+          "cpuMs": 178.686
+        },
+        {
+          "wallMs": 179.38572399999998,
+          "cpuMs": 181.107
+        }
+      ]
+    }
+  ]
+}

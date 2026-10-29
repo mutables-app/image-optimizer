@@ -4,7 +4,7 @@ const dimension = value => {
   if (!Number.isInteger(value) || value < 1 || value > 16383) throw new RangeError('Dimensions must be integers from 1 to 16383');
   return value;
 };
-export function createImage(optimize) {
+export function createImage(optimize, optimizeJpeg) {
   return function image(input, { maxPixels = 8_000_000 } = {}) {
     if (!Number.isInteger(maxPixels) || maxPixels < 1 || maxPixels > 16_000_000) throw new RangeError('maxPixels must be 1–16000000');
     // Snapshot byte input: callers can reuse or mutate their input while awaiting.
@@ -23,6 +23,7 @@ export function createImage(optimize) {
     else throw new TypeError('Expected Blob, ArrayBuffer, or typed array');
     if (snapshot.byteLength > MAX_INPUT) throw new RangeError('Input exceeds 20 MiB');
     let width = 0, height = 0, inside = false, withoutEnlargement = false;
+    let format = 'webp';
     let quality = 80, lossless = false, method = -1, scaled = false;
     const pipeline = {
       resize(w, h, options = {}) {
@@ -34,6 +35,7 @@ export function createImage(optimize) {
         return pipeline;
       },
       webp(options = {}) {
+        format = 'webp';
         quality = options.quality ?? 80; lossless = options.lossless ?? false;
         if (options.method !== undefined) throw new TypeError('method is internal; use speed: "fast"');
         if (options.speed !== undefined && options.speed !== 'fast') throw new RangeError('speed must be "fast"');
@@ -43,13 +45,25 @@ export function createImage(optimize) {
         if (typeof lossless !== 'boolean') throw new TypeError('lossless must be boolean');
         return pipeline;
       },
+      jpeg(options = {}) {
+        quality = options.quality ?? 80;
+        if (!Number.isFinite(quality) || quality < 0 || quality > 100) throw new RangeError('quality must be 0–100');
+        if (options.speed !== undefined && options.speed !== 'fast') throw new RangeError('speed must be "fast"');
+        if (options.lossless !== undefined) throw new TypeError('JPEG output does not support lossless');
+        if (options.method !== undefined) throw new TypeError('method is internal; use speed: "fast"');
+        format = 'jpeg'; scaled = options.speed === 'fast'; lossless = false;
+        return pipeline;
+      },
       async bytes() {
-        const args = [width, height, inside, withoutEnlargement, quality, lossless, maxPixels, method, scaled];
+        const encode = format === 'jpeg' ? optimizeJpeg : optimize;
+        const args = format === 'jpeg'
+          ? [width, height, inside, withoutEnlargement, quality, maxPixels, scaled]
+          : [width, height, inside, withoutEnlargement, quality, lossless, maxPixels, method, scaled];
         const bytes = snapshot instanceof Blob ? new Uint8Array(await snapshot.arrayBuffer()) : snapshot;
-        try { return optimize(bytes, ...args); }
+        try { return encode(bytes, ...args); }
         catch (error) { throw error instanceof Error ? error : new Error(String(error)); }
       },
-      async blob() { return new Blob([await pipeline.bytes()], { type: 'image/webp' }); },
+      async blob() { const type = format === 'jpeg' ? 'image/jpeg' : 'image/webp'; return new Blob([await pipeline.bytes()], { type }); },
     };
     return pipeline;
   };

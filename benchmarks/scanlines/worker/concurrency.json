@@ -1,0 +1,1926 @@
+{
+  "timestamp": "2026-10-29T14:55:50.606Z",
+  "note": "Two waves per concurrency, one client, one deployment. This measures incoming concurrent requests, not simultaneous CPU work within one isolate, sustained capacity or global scaling limits.",
+  "results": [
+    {
+      "image": "photo-1920.jpg",
+      "width": 800,
+      "speed": "default",
+      "format": "webp",
+      "concurrency": 1,
+      "requests": 2,
+      "successes": 2,
+      "elapsedMs": 2230.664641,
+      "completedRequestsPerSecond": 0.8965937609982496,
+      "p50LatencyMs": 1354.487007,
+      "p95LatencyMs": 1354.487007,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1354.487007,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 876.0027519999999,
+          "bytes": 57882
+        }
+      ]
+    },
+    {
+      "image": "photo-1920.jpg",
+      "width": 800,
+      "speed": "default",
+      "format": "webp",
+      "concurrency": 2,
+      "requests": 4,
+      "successes": 4,
+      "elapsedMs": 1738.6540050000003,
+      "completedRequestsPerSecond": 2.3006302510429606,
+      "p50LatencyMs": 735.7591160000002,
+      "p95LatencyMs": 1001.5111590000001,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 667.3402499999997,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1001.5111590000001,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 675.8367939999998,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 735.7591160000002,
+          "bytes": 57882
+        }
+      ]
+    },
+    {
+      "image": "photo-1920.jpg",
+      "width": 800,
+      "speed": "default",
+      "format": "webp",
+      "concurrency": 4,
+      "requests": 8,
+      "successes": 8,
+      "elapsedMs": 2245.3996700000002,
+      "completedRequestsPerSecond": 3.5628401067681637,
+      "p50LatencyMs": 911.5651740000003,
+      "p95LatencyMs": 1322.9288539999998,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 618.045646,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 885.3514209999998,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 962.7180729999995,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1322.9288539999998,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 671.0813580000004,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 733.2905370000008,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 911.5651740000003,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 921.4429280000004,
+          "bytes": 57882
+        }
+      ]
+    },
+    {
+      "image": "photo-1920.jpg",
+      "width": 800,
+      "speed": "default",
+      "format": "webp",
+      "concurrency": 8,
+      "requests": 16,
+      "successes": 16,
+      "elapsedMs": 1922.9275269999998,
+      "completedRequestsPerSecond": 8.320646397403204,
+      "p50LatencyMs": 697.4567530000004,
+      "p95LatencyMs": 1010.3117839999995,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 467.87425600000006,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 583.3519889999998,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 638.8315999999995,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 657.6634990000002,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 697.4567530000004,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 704.115882,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 734.1133829999999,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 905.8416120000002,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 470.1233140000004,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 539.8177880000003,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 621.2944299999999,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 663.853024,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 737.4855689999995,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 769.7942869999997,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 940.1919860000007,
+          "bytes": 57882
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1010.3117839999995,
+          "bytes": 57882
+        }
+      ]
+    },
+    {
+      "image": "photo-1920.jpg",
+      "width": 800,
+      "speed": "default",
+      "format": "jpeg",
+      "concurrency": 1,
+      "requests": 2,
+      "successes": 2,
+      "elapsedMs": 1100.9050929999994,
+      "completedRequestsPerSecond": 1.8166870266263733,
+      "p50LatencyMs": 758.5886439999995,
+      "p95LatencyMs": 758.5886439999995,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 342.26536899999974,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 758.5886439999995,
+          "bytes": 68153
+        }
+      ]
+    },
+    {
+      "image": "photo-1920.jpg",
+      "width": 800,
+      "speed": "default",
+      "format": "jpeg",
+      "concurrency": 2,
+      "requests": 4,
+      "successes": 4,
+      "elapsedMs": 1199.0776989999995,
+      "completedRequestsPerSecond": 3.33589725114219,
+      "p50LatencyMs": 581.6166170000015,
+      "p95LatencyMs": 758.5406440000006,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 344.15310299999874,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 439.5867679999992,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 581.6166170000015,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 758.5406440000006,
+          "bytes": 68153
+        }
+      ]
+    },
+    {
+      "image": "photo-1920.jpg",
+      "width": 800,
+      "speed": "default",
+      "format": "jpeg",
+      "concurrency": 4,
+      "requests": 8,
+      "successes": 8,
+      "elapsedMs": 1052.8102589999999,
+      "completedRequestsPerSecond": 7.598710148967118,
+      "p50LatencyMs": 444.5260440000002,
+      "p95LatencyMs": 550.81279,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 322.8930659999987,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 444.5260440000002,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 527.5038569999997,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 550.81279,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 317.4535049999995,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 417.570165000001,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 419.4105390000004,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 498.74372500000027,
+          "bytes": 68153
+        }
+      ]
+    },
+    {
+      "image": "photo-1920.jpg",
+      "width": 800,
+      "speed": "default",
+      "format": "jpeg",
+      "concurrency": 8,
+      "requests": 16,
+      "successes": 16,
+      "elapsedMs": 1649.6787480000003,
+      "completedRequestsPerSecond": 9.698858046997158,
+      "p50LatencyMs": 461.31952900000033,
+      "p95LatencyMs": 914.3711959999982,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 330.54744200000096,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 331.5928100000001,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 461.04252599999927,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 474.0295420000002,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 578.6017549999997,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 598.867823999999,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 715.871849000001,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 734.5119869999999,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 326.872335,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 350.66323100000045,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 369.8973330000008,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 408.0511350000015,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 447.14622299999974,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 461.31952900000033,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 625.0793379999996,
+          "bytes": 68153
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 914.3711959999982,
+          "bytes": 68153
+        }
+      ]
+    },
+    {
+      "image": "photo-1920.jpg",
+      "width": 800,
+      "speed": "fast",
+      "format": "webp",
+      "concurrency": 1,
+      "requests": 2,
+      "successes": 2,
+      "elapsedMs": 751.2923110000011,
+      "completedRequestsPerSecond": 2.6620796868504053,
+      "p50LatencyMs": 443.90616000000045,
+      "p95LatencyMs": 443.90616000000045,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 443.90616000000045,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 307.35383100000035,
+          "bytes": 62730
+        }
+      ]
+    },
+    {
+      "image": "photo-1920.jpg",
+      "width": 800,
+      "speed": "fast",
+      "format": "webp",
+      "concurrency": 2,
+      "requests": 4,
+      "successes": 4,
+      "elapsedMs": 1166.5411789999998,
+      "completedRequestsPerSecond": 3.4289402483236304,
+      "p50LatencyMs": 543.9592189999985,
+      "p95LatencyMs": 621.1151490000011,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 355.84534899999926,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 621.1151490000011,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 417.64616600000045,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 543.9592189999985,
+          "bytes": 62730
+        }
+      ]
+    },
+    {
+      "image": "photo-1920.jpg",
+      "width": 800,
+      "speed": "fast",
+      "format": "webp",
+      "concurrency": 4,
+      "requests": 8,
+      "successes": 8,
+      "elapsedMs": 1166.3294569999998,
+      "completedRequestsPerSecond": 6.859125397190411,
+      "p50LatencyMs": 402.3501319999996,
+      "p95LatencyMs": 757.9201189999985,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 351.47555699999975,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 446.67346,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 738.1584930000008,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 757.9201189999985,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 253.43095300000095,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 330.28895999999986,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 359.53701700000056,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 402.3501319999996,
+          "bytes": 62730
+        }
+      ]
+    },
+    {
+      "image": "photo-1920.jpg",
+      "width": 800,
+      "speed": "fast",
+      "format": "webp",
+      "concurrency": 8,
+      "requests": 16,
+      "successes": 16,
+      "elapsedMs": 1368.1575479999992,
+      "completedRequestsPerSecond": 11.694559609300207,
+      "p50LatencyMs": 357.8365640000011,
+      "p95LatencyMs": 745.7924700000021,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 282.0468039999996,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 281.1259170000012,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 346.0045960000007,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 349.5251019999996,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 421.6162750000003,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 480.40702899999815,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 717.6115019999997,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 745.7924700000021,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 284.45030199999746,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 283.97005799999897,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 295.0128189999996,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 343.2085360000019,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 357.8365640000011,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 429.17717099999936,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 450.95369199999914,
+          "bytes": 62730
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 617.3048009999984,
+          "bytes": 62730
+        }
+      ]
+    },
+    {
+      "image": "photo-1920.jpg",
+      "width": 800,
+      "speed": "fast",
+      "format": "jpeg",
+      "concurrency": 1,
+      "requests": 2,
+      "successes": 2,
+      "elapsedMs": 615.0608240000001,
+      "completedRequestsPerSecond": 3.2517109234712036,
+      "p50LatencyMs": 380.7135329999983,
+      "p95LatencyMs": 380.7135329999983,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 380.7135329999983,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 234.3228510000008,
+          "bytes": 67690
+        }
+      ]
+    },
+    {
+      "image": "photo-1920.jpg",
+      "width": 800,
+      "speed": "fast",
+      "format": "jpeg",
+      "concurrency": 2,
+      "requests": 4,
+      "successes": 4,
+      "elapsedMs": 971.2492160000002,
+      "completedRequestsPerSecond": 4.118407442812288,
+      "p50LatencyMs": 478.43277500000113,
+      "p95LatencyMs": 492.06455599999754,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 258.17542700000195,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 478.43277500000113,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 346.3372789999994,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 492.06455599999754,
+          "bytes": 67690
+        }
+      ]
+    },
+    {
+      "image": "photo-1920.jpg",
+      "width": 800,
+      "speed": "fast",
+      "format": "jpeg",
+      "concurrency": 4,
+      "requests": 8,
+      "successes": 8,
+      "elapsedMs": 972.1079019999997,
+      "completedRequestsPerSecond": 8.229539111389718,
+      "p50LatencyMs": 343.24833600000056,
+      "p95LatencyMs": 492.4105980000022,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 211.23268000000098,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 343.24833600000056,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 416.6876390000034,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 492.4105980000022,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 277.6269309999989,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 282.3261659999989,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 314.4322429999993,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 478.37109500000224,
+          "bytes": 67690
+        }
+      ]
+    },
+    {
+      "image": "photo-1920.jpg",
+      "width": 800,
+      "speed": "fast",
+      "format": "jpeg",
+      "concurrency": 8,
+      "requests": 16,
+      "successes": 16,
+      "elapsedMs": 1075.6177470000002,
+      "completedRequestsPerSecond": 14.875172936320094,
+      "p50LatencyMs": 366.176026000001,
+      "p95LatencyMs": 626.927472000003,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 256.8679770000017,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 262.78486200000043,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 291.81651599999896,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 301.5651079999989,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 384.0859180000007,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 386.12957299999835,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 415.956553,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 439.49088699999993,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 258.35054899999886,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 270.580919,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 286.89600000000064,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 361.4091100000005,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 366.176026000001,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 404.8139510000001,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 453.95375400000194,
+          "bytes": 67690
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 626.927472000003,
+          "bytes": 67690
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "width": 800,
+      "speed": "default",
+      "format": "webp",
+      "concurrency": 1,
+      "requests": 2,
+      "successes": 2,
+      "elapsedMs": 1166.1315360000008,
+      "completedRequestsPerSecond": 1.715072389569609,
+      "p50LatencyMs": 617.4396810000035,
+      "p95LatencyMs": 617.4396810000035,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 548.6654939999971,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 617.4396810000035,
+          "bytes": 84900
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "width": 800,
+      "speed": "default",
+      "format": "webp",
+      "concurrency": 2,
+      "requests": 4,
+      "successes": 4,
+      "elapsedMs": 1604.024891000001,
+      "completedRequestsPerSecond": 2.4937268881820596,
+      "p50LatencyMs": 733.5209389999982,
+      "p95LatencyMs": 934.100101,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 605.0502700000034,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 669.0739439999998,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 733.5209389999982,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 934.100101,
+          "bytes": 84900
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "width": 800,
+      "speed": "default",
+      "format": "webp",
+      "concurrency": 4,
+      "requests": 8,
+      "successes": 8,
+      "elapsedMs": 1529.3352589999995,
+      "completedRequestsPerSecond": 5.231030902426871,
+      "p50LatencyMs": 638.3833970000014,
+      "p95LatencyMs": 863.7270620000018,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 555.9519080000027,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 634.9853309999999,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 655.7499649999991,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 661.5163270000012,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 409.3063839999995,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 537.6378930000028,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 638.3833970000014,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 863.7270620000018,
+          "bytes": 84900
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "width": 800,
+      "speed": "default",
+      "format": "webp",
+      "concurrency": 8,
+      "requests": 16,
+      "successes": 16,
+      "elapsedMs": 1861.7799550000018,
+      "completedRequestsPerSecond": 8.593926450346805,
+      "p50LatencyMs": 617.9309649999996,
+      "p95LatencyMs": 1086.8499900000024,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 474.2789840000005,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 554.1700550000023,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 596.876650000002,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 617.9309649999996,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 644.9759650000015,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 715.3190850000028,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 776.4830570000013,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1086.8499900000024,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 443.92007999999987,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 456.368731999999,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 562.3203140000005,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 607.7194899999995,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 617.6287630000006,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 646.8059790000007,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 652.7381419999983,
+          "bytes": 84900
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 765.7668970000013,
+          "bytes": 84900
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "width": 800,
+      "speed": "default",
+      "format": "jpeg",
+      "concurrency": 1,
+      "requests": 2,
+      "successes": 2,
+      "elapsedMs": 1147.4437980000002,
+      "completedRequestsPerSecond": 1.7430047584779393,
+      "p50LatencyMs": 613.4391319999995,
+      "p95LatencyMs": 613.4391319999995,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 613.4391319999995,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 533.8787849999972,
+          "bytes": 92791
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "width": 800,
+      "speed": "default",
+      "format": "jpeg",
+      "concurrency": 2,
+      "requests": 4,
+      "successes": 4,
+      "elapsedMs": 1130.1660300000003,
+      "completedRequestsPerSecond": 3.5393029818813426,
+      "p50LatencyMs": 529.8966340000006,
+      "p95LatencyMs": 600.2446740000014,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 263.4376669999983,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 529.8966340000006,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 508.5058769999996,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 600.2446740000014,
+          "bytes": 92791
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "width": 800,
+      "speed": "default",
+      "format": "jpeg",
+      "concurrency": 4,
+      "requests": 8,
+      "successes": 8,
+      "elapsedMs": 1244.0738310000015,
+      "completedRequestsPerSecond": 6.43048651989529,
+      "p50LatencyMs": 423.3753680000009,
+      "p95LatencyMs": 687.773960999999,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 269.0828680000013,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 384.5927609999999,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 446.39897799999744,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 552.8322850000004,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 274.9799119999989,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 410.20339100000274,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 423.3753680000009,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 687.773960999999,
+          "bytes": 92791
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "width": 800,
+      "speed": "default",
+      "format": "jpeg",
+      "concurrency": 8,
+      "requests": 16,
+      "successes": 16,
+      "elapsedMs": 1357.6800309999999,
+      "completedRequestsPerSecond": 11.784809111624918,
+      "p50LatencyMs": 414.53646300000037,
+      "p95LatencyMs": 691.1598269999995,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 316.6526190000004,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 396.08704699999726,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 395.0995189999994,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 400.16215600000214,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 414.53646300000037,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 446.0862159999997,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 523.8542310000012,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 658.960669,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 314.9158459999999,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 348.29017300000123,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 365.112298,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 390.8406880000002,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 463.304623,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 540.5211140000029,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 581.8168590000023,
+          "bytes": 92791
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 691.1598269999995,
+          "bytes": 92791
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "width": 800,
+      "speed": "fast",
+      "format": "webp",
+      "concurrency": 1,
+      "requests": 2,
+      "successes": 2,
+      "elapsedMs": 644.5557220000046,
+      "completedRequestsPerSecond": 3.1029124895426583,
+      "p50LatencyMs": 328.70518900000025,
+      "p95LatencyMs": 328.70518900000025,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 328.70518900000025,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 315.78809300000285,
+          "bytes": 87070
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "width": 800,
+      "speed": "fast",
+      "format": "webp",
+      "concurrency": 2,
+      "requests": 4,
+      "successes": 4,
+      "elapsedMs": 683.081686999998,
+      "completedRequestsPerSecond": 5.855815016162206,
+      "p50LatencyMs": 255.27976599999965,
+      "p95LatencyMs": 426.90275400000246,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 162.83604300000297,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 255.27976599999965,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 165.14082000000053,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 426.90275400000246,
+          "bytes": 87070
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "width": 800,
+      "speed": "fast",
+      "format": "webp",
+      "concurrency": 4,
+      "requests": 8,
+      "successes": 8,
+      "elapsedMs": 682.9416060000003,
+      "completedRequestsPerSecond": 11.714032253586256,
+      "p50LatencyMs": 170.27081799999723,
+      "p95LatencyMs": 380.576092000003,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 155.2810279999976,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 163.90105100000073,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 170.27081799999723,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 380.576092000003,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 155.77227100000164,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 165.3844620000018,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 201.7677709999989,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 298.7975679999945,
+          "bytes": 87070
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "width": 800,
+      "speed": "fast",
+      "format": "webp",
+      "concurrency": 8,
+      "requests": 16,
+      "successes": 16,
+      "elapsedMs": 995.8855180000028,
+      "completedRequestsPerSecond": 16.06610369446095,
+      "p50LatencyMs": 301.7055489999984,
+      "p95LatencyMs": 523.4070270000011,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 168.4294849999933,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 206.28012400000443,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 218.3099729999958,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 271.00472199999786,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 285.4515090000059,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 358.8540109999958,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 443.4851570000028,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 465.3776779999971,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 204.95071400000597,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 226.8485559999972,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 252.08158299999923,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 301.7055489999984,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 344.4790659999999,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 390.1618029999954,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 441.3530210000026,
+          "bytes": 87070
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 523.4070270000011,
+          "bytes": 87070
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "width": 800,
+      "speed": "fast",
+      "format": "jpeg",
+      "concurrency": 1,
+      "requests": 2,
+      "successes": 2,
+      "elapsedMs": 360.31690199999866,
+      "completedRequestsPerSecond": 5.550669393799371,
+      "p50LatencyMs": 221.48491600000125,
+      "p95LatencyMs": 221.48491600000125,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 138.8050660000008,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 221.48491600000125,
+          "bytes": 88279
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "width": 800,
+      "speed": "fast",
+      "format": "jpeg",
+      "concurrency": 2,
+      "requests": 4,
+      "successes": 4,
+      "elapsedMs": 563.9401270000017,
+      "completedRequestsPerSecond": 7.092951553702772,
+      "p50LatencyMs": 277.82341299999825,
+      "p95LatencyMs": 286.0898740000048,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 120.01956699999573,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 286.0898740000048,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 229.96933899999567,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 277.82341299999825,
+          "bytes": 88279
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "width": 800,
+      "speed": "fast",
+      "format": "jpeg",
+      "concurrency": 4,
+      "requests": 8,
+      "successes": 8,
+      "elapsedMs": 706.9148230000064,
+      "completedRequestsPerSecond": 11.31678066396965,
+      "p50LatencyMs": 308.2956780000022,
+      "p95LatencyMs": 447.0383030000012,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 308.2956780000022,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 314.9455670000025,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 423.74069100000634,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 447.0383030000012,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 133.2406650000048,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 220.8135919999986,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 251.4309379999977,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 259.8524399999951,
+          "bytes": 88279
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "width": 800,
+      "speed": "fast",
+      "format": "jpeg",
+      "concurrency": 8,
+      "requests": 16,
+      "successes": 16,
+      "elapsedMs": 1066.6410809999943,
+      "completedRequestsPerSecond": 15.000359807068117,
+      "p50LatencyMs": 254.41064000000188,
+      "p95LatencyMs": 631.6351070000019,
+      "samples": [
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 165.50774300000194,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 172.09587199999805,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 241.0479009999981,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 247.34014800000296,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 277.8344530000031,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 299.16977100000076,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 433.3269619999992,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 631.6351070000019,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 178.8036409999986,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 198.24922499999957,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 206.5197660000049,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 211.25508000000264,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 254.41064000000188,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 272.5426940000034,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 295.9351070000048,
+          "bytes": 88279
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "latencyMs": 425.85430699999415,
+          "bytes": 88279
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6006 @@
+{
+  "timestamp": "2026-10-29T14:57:25.170Z",
+  "note": "Bounded burst stress from one client, one deployment. Concurrent incoming requests are not proof of parallel execution inside one isolate. Two waves per level; this does not establish sustained/global capacity. Every successful response is checked for its format signature and one output per configuration/level is independently decoded.",
+  "results": [
+    {
+      "image": "input-4k.jpg",
+      "inputBytes": 1218439,
+      "width": 800,
+      "height": 450,
+      "format": "webp",
+      "speed": "fast",
+      "concurrency": 8,
+      "waves": 2,
+      "requests": 16,
+      "successes": 16,
+      "elapsedMs": 1429.4140810000001,
+      "completedRequestsPerSecond": 11.193397499489162,
+      "p50LatencyMs": 451.496896,
+      "p95LatencyMs": 709.743484,
+      "maxLatencyMs": 709.743484,
+      "independentlyValidated": true,
+      "samples": [
+        {
+          "wave": 0,
+          "index": 3,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 396.40472800000003,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 1,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 404.523709,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 0,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 514.065918,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 5,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 451.496896,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 2,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 581.670418,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 6,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 588.652549,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 4,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 664.082307,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 7,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 709.743484,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 2,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 190.60184900000002,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 1,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 226.5227940000001,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 0,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 265.2484390000001,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 6,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 262.64898000000005,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 3,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 270.849281,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 7,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 481.420757,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 4,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 580.466209,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 5,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 640.060169,
+          "bytes": 87070
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "inputBytes": 1218439,
+      "width": 800,
+      "height": 450,
+      "format": "webp",
+      "speed": "fast",
+      "concurrency": 16,
+      "waves": 2,
+      "requests": 32,
+      "successes": 32,
+      "elapsedMs": 1185.9804820000002,
+      "completedRequestsPerSecond": 26.981894293939988,
+      "p50LatencyMs": 372.7269939999999,
+      "p95LatencyMs": 564.9900539999999,
+      "maxLatencyMs": 610.6373909999998,
+      "independentlyValidated": true,
+      "samples": [
+        {
+          "wave": 0,
+          "index": 1,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 248.098393,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 3,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 249.12660099999994,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 8,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 372.7269939999999,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 7,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 402.808176,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 6,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 404.939472,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 13,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 421.68639600000006,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 4,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 440.281573,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 10,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 438.22443799999974,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 11,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 437.8326350000002,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 2,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 525.755165,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 5,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 523.960511,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 12,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 524.5503550000001,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 9,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 530.3543180000001,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 14,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 543.5290559999999,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 0,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 564.9900539999999,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 15,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 610.6373909999998,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 1,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 224.84778099999994,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 3,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 272.78773599999977,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 5,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 275.11927300000025,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 13,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 264.55555400000003,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 11,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 301.28590499999973,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 4,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 344.9332690000001,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 2,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 352.2003219999997,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 10,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 347.05524400000013,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 9,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 357.73652300000003,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 7,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 363.26664299999993,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 15,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 355.24386500000037,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 12,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 363.42580499999985,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 14,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 367.285754,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 8,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 427.80247999999983,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 6,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 484.82274199999983,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 0,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 552.0133179999998,
+          "bytes": 87070
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "inputBytes": 1218439,
+      "width": 800,
+      "height": 450,
+      "format": "webp",
+      "speed": "fast",
+      "concurrency": 32,
+      "waves": 2,
+      "requests": 64,
+      "successes": 64,
+      "elapsedMs": 1637.9416220000003,
+      "completedRequestsPerSecond": 39.07343164150937,
+      "p50LatencyMs": 444.3261629999997,
+      "p95LatencyMs": 649.748881,
+      "maxLatencyMs": 817.692841,
+      "independentlyValidated": true,
+      "samples": [
+        {
+          "wave": 0,
+          "index": 2,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 250.97097399999984,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 13,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 304.082367,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 1,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 334.07306900000003,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 6,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 327.4374590000002,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 8,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 326.70601399999987,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 7,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 384.458521,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 11,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 392.4131790000001,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 3,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 412.69864899999993,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 0,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 468.27805999999964,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 10,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 447.3844650000001,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 16,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 443.33247600000004,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 14,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 450.1444459999998,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 24,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 453.07818799999995,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 15,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 479.256981,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 22,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 508.12967400000025,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 5,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 548.221211,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 26,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 532.2808129999999,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 12,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 559.347413,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 19,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 563.1906800000002,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 9,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 589.1457920000003,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 20,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 579.017758,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 4,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 605.077671,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 17,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 591.3254889999998,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 30,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 568.5136400000001,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 23,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 588.414147,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 27,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 585.3439240000002,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 18,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 609.609383,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 25,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 603.205457,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 31,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 599.9629130000003,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 21,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 649.748881,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 29,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 784.5209570000002,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 28,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 817.692841,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 10,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 235.3588590000004,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 14,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 243.25311699999975,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 7,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 259.9993609999997,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 1,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 270.41855799999985,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 13,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 267.15373399999953,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 6,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 288.02000799999996,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 30,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 249.4689629999998,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 3,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 303.2677600000002,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 27,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 311.4441809999994,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 20,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 329.1274309999999,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 26,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 349.2938210000002,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 17,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 374.487447,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 8,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 391.60049300000037,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 11,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 383.98299700000007,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 5,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 411.5629610000001,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 25,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 378.9855600000001,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 15,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 393.047904,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 12,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 418.87137500000017,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 22,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 411.3254390000002,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 23,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 412.9686109999998,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 28,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 409.2791440000001,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 4,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 451.26789400000007,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 9,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 445.5870920000002,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 29,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 432.56303600000047,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 21,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 444.3261629999997,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 16,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 458.2092250000005,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 0,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 498.2441610000001,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 18,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 470.1117940000004,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 19,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 475.30371200000036,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 24,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 509.0205209999999,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 2,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 608.0918519999996,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 31,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 724.4262720000002,
+          "bytes": 87070
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "inputBytes": 1218439,
+      "width": 800,
+      "height": 450,
+      "format": "webp",
+      "speed": "fast",
+      "concurrency": 64,
+      "waves": 2,
+      "requests": 128,
+      "successes": 128,
+      "elapsedMs": 1753.2485130000005,
+      "completedRequestsPerSecond": 73.00733412913493,
+      "p50LatencyMs": 502.3725919999997,
+      "p95LatencyMs": 819.4017739999999,
+      "maxLatencyMs": 911.7967369999997,
+      "independentlyValidated": true,
+      "samples": [
+        {
+          "wave": 0,
+          "index": 2,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 456.65193400000044,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 6,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 450.89437199999975,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 3,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 456.98829600000045,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 8,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 449.1053179999999,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 1,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 461.7258919999995,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 17,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 436.3668639999996,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 25,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 423.89973199999986,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 20,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 433.13148,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 31,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 409.48074499999984,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 13,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 446.67029999999977,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 5,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 460.9310059999998,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 0,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 483.77509400000054,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 29,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 436.499425,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 26,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 445.0052479999995,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 27,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 448.75435500000003,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 32,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 451.7797380000002,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 10,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 502.3725919999997,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 12,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 504.87189000000035,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 16,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 510.68265299999985,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 14,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 515.8204109999997,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 15,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 522.736022,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 23,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 515.039205,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 21,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 518.6045120000008,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 30,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 504.581048,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 19,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 523.7020700000003,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 22,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 527.4410969999999,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 4,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 575.6481730000005,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 18,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 558.9441699999998,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 28,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 547.030041,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 9,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 584.6782400000002,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 11,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 583.6953130000002,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 24,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 626.9955520000003,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 38,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 603.1153760000007,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 7,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 663.0826589999997,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 57,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 591.6040510000003,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 55,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 602.106288,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 48,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 620.3929439999993,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 35,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 651.8423360000006,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 53,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 649.950562,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 47,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 662.4590940000007,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 36,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 695.8621009999997,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 34,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 711.0129730000008,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 45,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 721.6884919999993,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 52,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 715.891329,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 56,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 719.581956,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 37,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 760.0653350000002,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 46,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 749.9341009999998,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 59,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 725.4377600000007,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 51,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 746.3864739999999,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 42,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 768.4927170000001,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 54,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 751.0729889999993,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 39,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 783.0537050000003,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 58,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 765.7263780000003,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 60,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 769.1158029999997,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 62,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 765.8534589999999,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 61,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 777.5805849999997,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 49,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 802.9948119999999,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 44,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 819.4017739999999,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 43,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 831.970386,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 40,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 838.5573560000003,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 33,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 857.0078110000004,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 50,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 880.3644649999997,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 41,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 911.7967369999997,
+          "bytes": 87070
+        },
+        {
+          "wave": 0,
+          "index": 63,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 886.8782719999999,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 3,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 256.6040560000001,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 12,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 255.26992599999994,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 1,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 265.28363999999965,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 9,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 263.8969500000003,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 20,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 260.4183640000001,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 16,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 267.93369900000016,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 10,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 279.37142399999993,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 27,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 273.19821800000045,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 23,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 276.1842399999996,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 34,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 277.9337740000001,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 30,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 282.0117630000004,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 28,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 284.6089030000003,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 41,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 276.679564,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 22,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 295.23022200000014,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 33,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 290.0593829999998,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 38,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 288.84457400000065,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 43,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 290.01798299999973,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 44,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 289.72801999999956,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 14,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 313.60795699999926,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 5,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 336.25432399999954,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 55,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 322.2304600000007,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 15,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 351.508597,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 13,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 368.9890860000005,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 0,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 382.25846400000046,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 11,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 386.34709399999974,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 56,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 362.4275179999995,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 48,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 369.3306480000001,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 19,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 398.27002300000004,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 42,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 383.2493910000003,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 6,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 406.12956100000065,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 49,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 378.9035590000003,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 29,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 398.67622500000016,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 25,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 408.2440969999998,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 8,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 417.55648500000007,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 4,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 436.4454249999999,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 31,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 423.7145299999993,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 21,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 436.02162099999987,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 37,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 428.0584429999999,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 40,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 447.56482700000015,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 51,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 443.15839400000004,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 50,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 445.7193729999999,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 59,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 441.65690300000006,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 54,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 453.7752729999993,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 46,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 463.44678399999975,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 53,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 462.84609999999975,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 57,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 458.97431099999994,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 39,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 478.54241600000023,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 2,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 504.91437100000076,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 7,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 525.2038409999996,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 26,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 522.8173420000003,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 24,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 543.6770569999999,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 63,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 518.6936320000004,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 18,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 561.1443060000001,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 47,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 546.1000350000004,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 17,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 571.6694640000005,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 36,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 568.0367569999999,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 62,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 567.605474,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 45,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 597.7136559999999,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 32,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 613.0135689999997,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 58,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 592.9066999999995,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 61,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 611.0173139999997,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 35,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 660.6559210000005,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 60,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 661.1657249999998,
+          "bytes": 87070
+        },
+        {
+          "wave": 1,
+          "index": 52,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 713.0259879999994,
+          "bytes": 87070
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "inputBytes": 1218439,
+      "width": 800,
+      "height": 450,
+      "format": "webp",
+      "speed": "default",
+      "concurrency": 8,
+      "waves": 2,
+      "requests": 16,
+      "successes": 16,
+      "elapsedMs": 2665.8334160000004,
+      "completedRequestsPerSecond": 6.001875400004363,
+      "p50LatencyMs": 576.1054560000002,
+      "p95LatencyMs": 1443.8883479999995,
+      "maxLatencyMs": 1443.8883479999995,
+      "independentlyValidated": true,
+      "samples": [
+        {
+          "wave": 0,
+          "index": 1,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 431.64966899999945,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 2,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 439.6036869999998,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 3,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 454.3149969999995,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 6,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 564.3674489999994,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 4,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 576.1054560000002,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 5,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 718.9728320000004,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 0,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 739.6101850000005,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 7,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1203.3679299999994,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 3,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 485.630987999999,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 1,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 509.4122439999992,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 7,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 500.80962,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 5,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 600.3787549999997,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 6,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 623.0023229999988,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 0,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 861.3638439999995,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 2,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1150.5755009999993,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 4,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1443.8883479999995,
+          "bytes": 84900
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "inputBytes": 1218439,
+      "width": 800,
+      "height": 450,
+      "format": "webp",
+      "speed": "default",
+      "concurrency": 16,
+      "waves": 2,
+      "requests": 32,
+      "successes": 32,
+      "elapsedMs": 2129.731055,
+      "completedRequestsPerSecond": 15.025371360798417,
+      "p50LatencyMs": 614.4520599999996,
+      "p95LatencyMs": 1056.0843229999991,
+      "maxLatencyMs": 1158.4173979999996,
+      "independentlyValidated": true,
+      "samples": [
+        {
+          "wave": 0,
+          "index": 2,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 480.7533519999997,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 1,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 521.0797700000003,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 8,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 513.678754999999,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 12,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 515.4010080000007,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 3,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 541.7655630000008,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 10,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 586.5180130000008,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 11,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 608.9828990000005,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 13,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 614.4520599999996,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 5,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 631.7771479999992,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 6,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 632.9977170000002,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 7,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 646.9080599999998,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 0,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 679.8617830000003,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 14,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 671.055918,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 4,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 692.0493929999993,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 15,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 901.041256999999,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 9,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 944.9553809999998,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 6,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 430.5471409999991,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 9,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 476.2433179999989,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 14,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 469.62503000000106,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 1,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 504.81380999999965,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 12,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 525.964446,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 2,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 569.1156040000005,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 5,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 596.8780100000004,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 10,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 596.2330450000009,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 0,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 631.0574219999999,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 11,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 642.1941049999987,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 13,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 697.1701910000011,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 15,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 719.853599,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 3,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 747.9625260000012,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 4,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 803.755978000001,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 8,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1056.0843229999991,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 7,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1158.4173979999996,
+          "bytes": 84900
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "inputBytes": 1218439,
+      "width": 800,
+      "height": 450,
+      "format": "webp",
+      "speed": "default",
+      "concurrency": 32,
+      "waves": 2,
+      "requests": 64,
+      "successes": 64,
+      "elapsedMs": 2552.116135,
+      "completedRequestsPerSecond": 25.07722870534651,
+      "p50LatencyMs": 701.7657039999995,
+      "p95LatencyMs": 1141.343232000001,
+      "maxLatencyMs": 1315.0867170000001,
+      "independentlyValidated": true,
+      "samples": [
+        {
+          "wave": 0,
+          "index": 0,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 529.3948710000004,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 6,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 533.0810180000008,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 9,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 540.6821550000004,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 4,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 562.6522370000002,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 3,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 565.0523350000003,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 14,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 542.0567649999994,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 10,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 550.6173480000016,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 11,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 553.6961310000006,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 15,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 611.3073970000005,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 13,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 659.3972719999983,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 2,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 689.3475340000005,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 21,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 656.8588130000007,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 17,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 665.0161540000008,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 18,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 677.7631279999987,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 12,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 693.9106869999996,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 5,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 723.6051469999984,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 23,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 690.3849000000009,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 20,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 712.3401030000005,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 28,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 722.647699000001,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 1,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 780.8324489999995,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 30,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 727.0275710000005,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 19,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 828.2743190000001,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 8,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 867.7614509999985,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 25,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 853.7191469999998,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 22,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 876.4518360000002,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 26,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 911.0866119999991,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 31,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 972.0580620000001,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 16,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1002.5123270000004,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 24,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1032.6705899999997,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 29,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1141.343232000001,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 7,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1200.7417909999986,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 27,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1315.0867170000001,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 0,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 443.9641609999999,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 2,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 455.988969,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 12,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 472.63701200000105,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 8,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 483.2282500000001,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 14,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 486.58399500000087,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 15,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 521.1084900000005,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 21,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 529.9461150000006,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 23,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 539.575945999999,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 22,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 578.5691939999997,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 17,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 601.5195640000002,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 19,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 633.8283229999997,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 10,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 641.4640189999991,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 4,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 652.6281419999996,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 28,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 679.54702,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 29,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 682.643164000001,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 3,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 708.8619170000002,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 25,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 701.7657039999995,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 20,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 705.9513760000009,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 5,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 715.6748079999998,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 1,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 729.2506679999988,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 30,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 721.3114089999999,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 24,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 747.4203219999999,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 9,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 784.779598000001,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 13,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 797.7580139999991,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 11,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 822.4253559999997,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 6,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 937.8602090000004,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 27,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 933.2925360000008,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 18,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1029.058003,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 7,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1041.343213,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 31,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1056.7540870000012,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 26,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1135.62003,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 16,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1169.7869219999993,
+          "bytes": 84900
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "inputBytes": 1218439,
+      "width": 800,
+      "height": 450,
+      "format": "webp",
+      "speed": "default",
+      "concurrency": 64,
+      "waves": 2,
+      "requests": 128,
+      "successes": 128,
+      "elapsedMs": 2907.8538839999983,
+      "completedRequestsPerSecond": 44.01871796389067,
+      "p50LatencyMs": 771.6145799999995,
+      "p95LatencyMs": 1267.7761259999988,
+      "maxLatencyMs": 1427.2013850000003,
+      "independentlyValidated": true,
+      "samples": [
+        {
+          "wave": 0,
+          "index": 0,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 578.8700369999988,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 2,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 584.0875550000001,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 9,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 582.7018650000009,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 1,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 610.5409099999997,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 11,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 607.1461650000001,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 14,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 606.3122000000003,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 3,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 625.3885009999995,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 22,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 640.6628939999991,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 21,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 658.1746630000016,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 31,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 653.2824669999991,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 20,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 712.2488620000004,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 5,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 753.591848,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 13,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 750.0398210000003,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 7,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 764.5627289999993,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 4,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 782.1449389999998,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 10,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 785.1895210000002,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 23,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 771.6145799999995,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 17,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 793.0519400000012,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 6,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 810.1250250000012,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 8,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 819.1444519999986,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 26,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 799.7735090000006,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 29,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 807.5759269999999,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 19,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 837.5133070000011,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 37,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 822.6709179999998,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 25,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 853.701747000001,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 42,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 830.8200580000012,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 30,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 850.4015630000013,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 35,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 871.5850399999999,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 12,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 920.7833229999997,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 50,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 855.8272429999997,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 34,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 886.5670310000005,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 59,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 885.6067830000011,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 44,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 916.1494480000001,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 18,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 968.104553000001,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 28,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 978.5133900000001,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 33,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 995.0653920000004,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 54,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 962.863754,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 43,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 991.6194059999998,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 16,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1042.556301999999,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 45,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1007.165121,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 41,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1016.3385890000009,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 39,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1024.5678100000005,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 38,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1032.0106250000008,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 52,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1004.723704,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 27,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1052.9448589999993,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 49,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1022.6372350000001,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 56,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1008.6719319999993,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 24,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1086.7313089999989,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 58,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1023.4902020000009,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 47,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1071.6199969999998,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 51,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1062.3911690000004,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 57,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1068.1202520000006,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 61,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1112.4904989999995,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 63,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1110.335803,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 36,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1191.1079599999994,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 32,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1216.78895,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 53,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1186.0120819999993,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 15,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1301.231013999999,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 48,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1250.1297160000013,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 46,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1277.5847589999994,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 62,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1267.7761259999988,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 55,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1286.2434630000007,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 60,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1288.0255959999995,
+          "bytes": 84900
+        },
+        {
+          "wave": 0,
+          "index": 40,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1427.2013850000003,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 2,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 477.64144899999883,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 5,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 495.0084570000017,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 10,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 494.2635310000005,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 8,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 504.9919710000013,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 3,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 510.337211,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 11,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 506.730983999998,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 14,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 516.7054980000012,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 37,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 509.92548800000077,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 27,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 515.0151650000007,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 38,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 516.5978959999993,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 20,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 527.90762,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 31,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 521.9948569999997,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 19,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 530.9075620000003,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 12,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 543.5858560000015,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 47,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 523.0841449999989,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 21,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 543.1168930000003,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 18,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 546.9132399999999,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 36,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 541.6799219999975,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 9,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 573.9949610000003,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 48,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 563.2046009999995,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 53,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 565.7373000000007,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 15,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 592.6683789999988,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 7,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 612.3888840000018,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 55,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 583.0105480000002,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 30,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 597.3295729999991,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 13,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 613.0119289999984,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 17,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 611.415718000002,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 0,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 627.9571600000017,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 35,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 606.8582440000009,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 24,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 623.3123650000016,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 29,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 636.924226000001,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 59,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 634.5426080000016,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 33,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 647.6748660000012,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 6,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 674.8275460000004,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 49,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 655.6217639999995,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 40,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 661.6807289999997,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 45,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 659.996916,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 41,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 662.2228119999982,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 39,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 679.075777,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 1,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 711.1808549999987,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 51,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 683.8524929999985,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 28,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 696.5367459999998,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 23,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 704.8703269999987,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 32,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 701.2749409999997,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 44,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 696.1110229999995,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 22,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 733.4724990000013,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 26,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 733.245297999998,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 57,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 726.9517309999992,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 61,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 737.1106459999992,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 34,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 772.4957869999998,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 52,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 808.1023300000015,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 46,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 828.7548829999996,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 58,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 824.5264520000001,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 50,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 862.9017750000003,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 63,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 889.0372090000019,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 4,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 926.2525239999995,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 42,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 952.3242760000012,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 25,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 977.6334229999993,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 62,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 998.1712950000001,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 60,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1011.1577110000017,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 54,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1023.2591600000014,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 43,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1079.5628959999995,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 16,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1139.8800219999976,
+          "bytes": 84900
+        },
+        {
+          "wave": 1,
+          "index": 56,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1377.1342539999987,
+          "bytes": 84900
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "inputBytes": 1218439,
+      "width": 800,
+      "height": 450,
+      "format": "jpeg",
+      "speed": "default",
+      "concurrency": 8,
+      "waves": 2,
+      "requests": 16,
+      "successes": 16,
+      "elapsedMs": 1402.495121,
+      "completedRequestsPerSecond": 11.408239330338462,
+      "p50LatencyMs": 463.4053840000015,
+      "p95LatencyMs": 828.1890379999968,
+      "maxLatencyMs": 828.1890379999968,
+      "independentlyValidated": true,
+      "samples": [
+        {
+          "wave": 0,
+          "index": 2,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 368.21068000000014,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 6,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 370.31785599999785,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 1,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 389.61535899999944,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 7,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 509.6001249999972,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 5,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 516.3641749999988,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 3,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 585.7275669999981,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 4,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 751.8854350000001,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 0,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 828.1890379999968,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 3,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 354.2957779999997,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 7,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 382.1668639999989,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 1,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 418.5836930000005,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 6,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 421.59523400000035,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 0,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 463.4053840000015,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 5,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 475.0887900000016,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 4,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 486.4513939999997,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 2,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 568.644640999999,
+          "bytes": 92791
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "inputBytes": 1218439,
+      "width": 800,
+      "height": 450,
+      "format": "jpeg",
+      "speed": "default",
+      "concurrency": 16,
+      "waves": 2,
+      "requests": 32,
+      "successes": 32,
+      "elapsedMs": 1365.960532000001,
+      "completedRequestsPerSecond": 23.42673836494126,
+      "p50LatencyMs": 430.982344,
+      "p95LatencyMs": 582.1583009999995,
+      "maxLatencyMs": 807.6443269999982,
+      "independentlyValidated": true,
+      "samples": [
+        {
+          "wave": 0,
+          "index": 2,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 318.1106710000022,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 3,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 337.26189200000226,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 1,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 341.8713260000004,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 7,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 415.93699299999935,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 4,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 427.00639500000034,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 12,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 430.982344,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 9,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 436.5102249999982,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 10,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 443.5540770000007,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 11,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 449.40272099999856,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 8,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 465.7101210000001,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 14,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 456.33629199999996,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 15,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 458.26418600000034,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 0,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 509.58864500000345,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 6,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 506.9464650000009,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 13,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 582.1583009999995,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 5,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 807.6443269999982,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 5,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 306.91222800000105,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 4,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 310.42825399999856,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 2,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 324.337356,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 1,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 350.57479100000273,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 7,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 346.79032200000074,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 10,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 355.4502259999972,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 13,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 356.2817930000019,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 8,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 368.1595199999974,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 9,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 370.03425400000197,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 11,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 369.0918869999987,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 0,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 461.1523269999998,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 15,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 439.18992499999877,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 6,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 465.4622789999994,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 12,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 479.71062399999937,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 3,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 503.5045600000012,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 14,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 528.5270249999994,
+          "bytes": 92791
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "inputBytes": 1218439,
+      "width": 800,
+      "height": 450,
+      "format": "jpeg",
+      "speed": "default",
+      "concurrency": 32,
+      "waves": 2,
+      "requests": 64,
+      "successes": 64,
+      "elapsedMs": 1833.4953459999997,
+      "completedRequestsPerSecond": 34.90600624627929,
+      "p50LatencyMs": 520.8802480000013,
+      "p95LatencyMs": 763.8494829999981,
+      "maxLatencyMs": 915.5391640000016,
+      "independentlyValidated": true,
+      "samples": [
+        {
+          "wave": 0,
+          "index": 0,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 358.91597099999854,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 7,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 343.7524200000007,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 3,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 381.7002599999978,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 2,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 397.2402949999996,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 1,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 400.4564790000004,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 11,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 388.0901080000003,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 6,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 399.8261139999995,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 16,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 419.94830300000103,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 9,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 436.3662640000002,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 4,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 463.38286399999924,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 22,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 483.37965200000326,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 28,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 470.4851559999988,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 5,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 521.6483740000003,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 8,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 516.9594600000019,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 26,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 489.2694949999968,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 25,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 521.0412099999994,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 15,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 542.2859669999998,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 13,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 551.4519939999991,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 12,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 572.9950330000029,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 27,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 548.6250540000001,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 14,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 581.4814560000013,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 20,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 606.4524009999986,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 23,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 606.564241,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 24,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 608.1406130000032,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 10,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 650.4761260000014,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 21,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 690.8177839999989,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 19,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 720.0648800000017,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 17,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 759.8532540000015,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 29,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 734.7195479999973,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 30,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 763.8494829999981,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 18,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 896.4872230000001,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 31,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 915.5391640000016,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 4,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 319.9864840000009,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 1,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 355.0043430000005,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 17,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 355.7559079999992,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 12,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 361.0307470000007,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 9,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 365.7124220000005,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 7,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 367.75979700000244,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 22,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 356.72787600000083,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 23,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 355.6461070000005,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 14,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 369.1070870000003,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 10,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 378.6819579999974,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 3,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 392.28025799999887,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 13,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 386.3603750000002,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 24,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 426.5071910000006,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 27,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 425.754864999999,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 0,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 465.65395999999964,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 5,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 486.63775499999974,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 8,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 505.8151770000004,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 15,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 520.8802480000013,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 11,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 545.4722699999984,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 6,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 568.639600999999,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 28,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 544.164499999999,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 19,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 562.3983549999975,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 26,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 586.3248120000026,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 2,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 624.2850519999993,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 21,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 646.2064140000002,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 31,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 683.1113270000023,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 20,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 702.2311479999989,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 30,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 699.1905249999982,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 16,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 721.1946480000006,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 25,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 716.7950560000027,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 29,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 712.6055049999995,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 18,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 838.231112999998,
+          "bytes": 92791
+        }
+      ]
+    },
+    {
+      "image": "input-4k.jpg",
+      "inputBytes": 1218439,
+      "width": 800,
+      "height": 450,
+      "format": "jpeg",
+      "speed": "default",
+      "concurrency": 64,
+      "waves": 2,
+      "requests": 128,
+      "successes": 128,
+      "elapsedMs": 2154.3263160000024,
+      "completedRequestsPerSecond": 59.41532582569068,
+      "p50LatencyMs": 549.1049370000001,
+      "p95LatencyMs": 921.7007290000001,
+      "maxLatencyMs": 1062.2307679999976,
+      "independentlyValidated": true,
+      "samples": [
+        {
+          "wave": 0,
+          "index": 0,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 460.87352499999906,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 16,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 437.28171100000327,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 3,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 458.8505100000002,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 5,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 458.9526709999991,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 2,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 470.11339299999963,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 4,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 470.23139399999855,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 1,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 475.9230759999991,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 10,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 464.2672700000003,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 6,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 479.12325999999666,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 9,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 476.4428799999987,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 24,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 451.9075789999988,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 13,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 484.26273800000126,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 17,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 474.9715890000007,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 30,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 445.2001289999971,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 8,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 502.93011500000284,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 28,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 486.31167300000016,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 20,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 506.07753899999807,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 15,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 520.2892439999996,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 27,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 583.6198320000003,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 7,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 622.8913619999985,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 12,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 621.2184689999995,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 19,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 621.5407920000034,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 32,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 595.8918420000009,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 29,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 622.982082999999,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 11,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 666.7185260000006,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 14,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 670.6325150000011,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 21,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 660.0761170000005,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 26,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 674.307381999999,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 25,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 678.9816969999993,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 37,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 672.1586060000009,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 40,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 668.876902,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 43,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 672.645330000003,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 44,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 679.6925819999997,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 23,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 720.1678810000012,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 48,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 688.4618459999983,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 50,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 689.4842540000027,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 59,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 689.8220970000002,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 35,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 726.5150070000018,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 38,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 727.1690920000001,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 33,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 736.2301989999978,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 41,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 727.1394120000004,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 36,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 748.7240119999988,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 52,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 727.7975369999986,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 46,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 765.4986960000024,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 53,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 759.28341,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 31,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 796.2021620000014,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 63,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 754.7608569999975,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 34,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 829.7581309999987,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 18,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 872.274684,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 39,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 833.3418369999999,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 22,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 875.4531879999995,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 57,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 815.0137809999978,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 56,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 831.0508199999967,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 42,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 852.681779999999,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 62,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 850.0384799999993,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 54,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 863.1473369999985,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 55,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 891.8003080000017,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 58,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 888.7351259999996,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 61,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 896.2221409999984,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 49,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 943.318169000002,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 45,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 978.503349999999,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 47,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1003.9755770000011,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 51,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1062.2307679999976,
+          "bytes": 92791
+        },
+        {
+          "wave": 0,
+          "index": 60,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 1050.3539610000007,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 7,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 344.1059419999983,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 2,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 348.19425299999784,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 8,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 356.9456369999971,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 6,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 368.18868100000327,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 3,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 381.4839389999979,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 33,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 375.66417499999807,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 12,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 393.6562279999998,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 17,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 397.53233700000055,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 20,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 397.4038560000008,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 27,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 400.8876820000005,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 28,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 402.8511760000001,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 15,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 413.78589700000157,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 19,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 412.53616800000236,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 21,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 415.34106899999824,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 31,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 403.01753800000006,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 35,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 409.353024,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 25,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 423.5285700000022,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 44,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 408.57149800000116,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 53,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 406.37228200000027,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 26,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 432.49743500000113,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 48,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 416.96368000000075,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 47,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 418.7848539999977,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 9,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 450.84329100000105,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 4,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 461.2633280000009,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 1,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 464.554151999997,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 41,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 440.23985299999913,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 50,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 437.2624309999992,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 5,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 466.5455269999984,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 22,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 466.71276800000123,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 40,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 452.1570599999977,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 60,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 443.8361999999979,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 51,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 450.58316900000136,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 37,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 457.73342200000116,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 16,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 500.5599779999975,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 52,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 481.7752790000013,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 11,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 529.3768310000014,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 23,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 526.1898480000018,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 0,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 538.0324949999995,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 34,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 514.650203000001,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 54,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 510.3348499999993,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 24,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 549.1049370000001,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 63,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 526.1495270000014,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 38,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 538.3567370000019,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 32,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 542.0812850000002,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 39,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 545.0725469999998,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 58,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 539.6554669999969,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 29,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 559.069449999999,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 43,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 554.0664130000005,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 13,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 586.7008549999991,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 59,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 563.7980050000006,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 14,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 594.055389000001,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 18,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 619.0931339999988,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 45,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 607.9614919999985,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 10,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 641.2229769999976,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 61,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 655.6615239999992,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 62,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 675.5395510000017,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 46,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 724.7833150000006,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 42,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 726.9894109999987,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 57,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 738.4764959999993,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 30,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 773.2475530000011,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 56,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 765.2704139999987,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 36,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 907.893587999999,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 55,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 921.7007290000001,
+          "bytes": 92791
+        },
+        {
+          "wave": 1,
+          "index": 49,
+          "ok": true,
+          "status": 200,
+          "latencyMs": 965.9204969999992,
+          "bytes": 92791
+        }
+      ]
+    }
+  ]
+}

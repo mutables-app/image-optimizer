@@ -1,6 +1,6 @@
 {
   "name": "@mutables.app/image-optimizer",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "license": "MIT",
   "repository": {
@@ -22,5 +22,12 @@
   ],
   "sideEffects": [
     "./dist/*"
-  ]
+  ],
+  "homepage": "https://github.com/mutables-app/image-optimizer#readme",
+  "bugs": {
+    "url": "https://github.com/mutables-app/image-optimizer/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }

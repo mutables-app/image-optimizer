@@ -22,7 +22,10 @@ export async function optimizeWorkspaceImage(workspace, inputPath, outputPath, o
   } else input = source;
   const pipeline = image(input, { maxPixels: options.maxPixels });
   if (options.width !== undefined || options.height !== undefined) pipeline.resize(options.width, options.height, {fit: options.fit ?? 'inside', withoutEnlargement: options.withoutEnlargement ?? true});
-  const output = await pipeline.webp({quality: options.quality, lossless: options.lossless, speed: options.speed}).bytes();
+  const format = options.format ?? 'webp';
+  if (!['webp', 'jpeg'].includes(format)) throw new TypeError('format must be webp or jpeg');
+  if (format === 'jpeg' && options.lossless !== undefined) throw new TypeError('JPEG output does not support lossless');
+  const output = await pipeline[format]({quality: options.quality, ...(format === 'webp' ? {lossless: options.lossless} : {}), speed: options.speed}).bytes();
   await workspace.fs.writeFile(outputPath, output);
-  return {path: outputPath, bytes: output.byteLength, contentType: 'image/webp'};
+  return {path: outputPath, bytes: output.byteLength, contentType: format === 'jpeg' ? 'image/jpeg' : 'image/webp'};
 }

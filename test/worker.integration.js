@@ -13,6 +13,13 @@ async function request(path, init) {
 const direct = await request('/optimize?width=8',{method:'POST',body:input});
 assert.equal(direct.headers.get('content-type'),'image/webp');
 await direct.arrayBuffer();
+const jpeg = await request('/optimize?width=8&format=jpeg',{method:'POST',body:input});
+assert.equal(jpeg.headers.get('content-type'),'image/jpeg');
+const jpegDecoded = spawnSync('python3',['test/decode-image.py'],{input:new Uint8Array(await jpeg.arrayBuffer())});
+assert.equal(jpegDecoded.status,0,jpegDecoded.stderr.toString());
+assert.deepEqual([JSON.parse(jpegDecoded.stdout).width,JSON.parse(jpegDecoded.stdout).height],[8,4]);
+const largeDefault = await request('/optimize?width=800',{method:'POST',body:input4k});
+assert.equal(largeDefault.status,200);await largeDefault.arrayBuffer();
 const fast = await request('/optimize?width=8&speed=fast',{method:'POST',body:input});
 const fastBytes = new Uint8Array(await fast.arrayBuffer());
 const largeFast = await request('/optimize?width=800&speed=fast',{method:'POST',body:input4k});
@@ -22,6 +29,10 @@ assert.deepEqual([JSON.parse(largeDecoded.stdout).width,JSON.parse(largeDecoded.
 await request('/workspaces/integration/files/input.png',{method:'PUT',body:input});
 const result = await request('/workspaces/integration/optimize',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({input:'/input.png',output:'/output.webp',width:8,speed:'fast'})});
 assert.equal((await result.json()).path,'/output.webp');
+const jpegResult = await request('/workspaces/integration/optimize',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({input:'/input.png',output:'/output.jpg',width:8,format:'jpeg'})});
+assert.equal((await jpegResult.json()).contentType,'image/jpeg');
+const storedJpeg = await request('/workspaces/integration/files/output.jpg');
+assert.equal(storedJpeg.headers.get('content-type'),'image/jpeg');await storedJpeg.arrayBuffer();
 const stored = new Uint8Array(await (await request('/workspaces/integration/files/output.webp')).arrayBuffer());
 assert.deepEqual(stored,fastBytes);
 const checked = spawnSync('python3',['test/decode-webp.py'],{input:stored});

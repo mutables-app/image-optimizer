@@ -7,3 +7,7 @@ packages/optimizer/dist/
 /benchmarks/permanent/
 .dev.vars
 .dev.vars.*
+/benchmarks/scanlines/local/*.webp
+/benchmarks/scanlines/local/*.jpg
+/benchmarks/scanlines/worker/*.webp
+/benchmarks/scanlines/worker/*.jpg
