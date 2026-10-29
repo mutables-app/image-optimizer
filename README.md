@@ -1,48 +1,86 @@
 # Mutables Image Optimizer
 
-A standalone Rust/Emscripten image optimizer with an optional Cloudflare Computer filesystem adapter. This project is separate from the upstream workers-rs checkout.
-
-## Standalone optimizer
+An image-processing pipeline written in Rust and compiled to WebAssembly for Node.js and Cloudflare Workers. It links JPEG, PNG, and WebP codec libraries into the same Emscripten module as the Rust resize pipeline, so the image pixels stay inside WASM instead of crossing between JavaScript libraries at each stage.
 
 ```js
 import { image } from '@mutables.app/image-optimizer';
-const bytes = await image(inputBytes)
+
+const webp = await image(inputBytes)
   .resize(800, 600, { fit: 'inside', withoutEnlargement: true })
   .webp({ quality: 80, speed: 'fast' })
   .bytes();
 ```
 
-Accepts Blob, ArrayBuffer and typed-array input. Input is sniffed as JPEG or PNG. Width-only resizing preserves aspect ratio; two dimensions default to `fill`. Output is always WebP, with optional lossless encoding. Set `speed: 'fast'` to request the measured fast encoding path; the encoder choice is internal. Omit `speed` to retain the existing default. The fast path can produce larger files, with image-dependent trade-offs. `.blob()` returns an `image/webp` Blob. Terminals return promises, but CPU work runs synchronously in the isolate; it is not moved to a background thread.
+`speed: 'fast'` selects an internal encoder setting. Omit `speed` to keep the existing default. The fast path can produce larger files; the trade-off depends on the image. `.blob()` returns an `image/webp` Blob. Image work runs synchronously in the isolate, inside the returned promise.
 
-The optimizer has no Computer dependency. Node selects a separate loader automatically through package exports. Workers use a statically imported WebAssembly module. A standalone Worker is in `examples/standalone`; run `npx wrangler dev --config examples/standalone/wrangler.jsonc`.
+## Architecture
 
-## Computer adapter
+The project uses the `wasm32-unknown-emscripten` Rust target with wasm-bindgen’s Emscripten integration. Emscripten links the Rust pipeline and native codec libraries compiled for WebAssembly into one module; the generated JavaScript glue loads that module in Workers or Node.js. This is the integration described in [Cloudflare’s Emscripten target announcement](https://blog.cloudflare.com/rust-workers-emscripten-target/).
+
+```mermaid
+flowchart LR
+  API[JavaScript API<br/>Node.js or Worker] --> BIND[wasm-bindgen bindings]
+  BIND --> RUST[Rust pipeline<br/>decode · resize · encode]
+  RUST --> RESIZE[fast_image_resize<br/>WASM SIMD128]
+  RUST --> CABI[C ABI bridge]
+  CABI --> CODECS[libjpeg-turbo · libspng · libwebp]
+  RESIZE --> LINK[Emscripten link<br/>wasm32-unknown-emscripten]
+  CODECS --> LINK
+  LINK --> WASM[WebAssembly module + JS glue]
+  WASM --> HOST[Cloudflare Workers or Node.js]
+```
+
+JPEG and PNG decoding, resizing, and WebP encoding execute in the compiled module. The codec libraries are **compiled to WebAssembly**; they are not native host binaries running outside the Worker sandbox. Workers load the Wasm module statically. Node.js uses a separate file-based loader. The optional Computer adapter sits around the same optimizer and reads and writes files through `workspace.fs`.
+
+Cloudflare describes the Emscripten Rust target support as an experimental preview. This project demonstrates the image-processing use case; it does not imply native machine-code execution or guarantee a performance gain over other Workers image libraries.
+
+## Packages
+
+### `@mutables.app/image-optimizer`
+
+Accepts a `Blob`, `ArrayBuffer`, or typed array. JPEG and PNG input are sniffed automatically. Width-only resizing preserves aspect ratio; two dimensions default to `fill`.
+
+```js
+import { image } from '@mutables.app/image-optimizer';
+
+const bytes = await image(inputBytes)
+  .resize(800, 600, { fit: 'inside', withoutEnlargement: true })
+  .webp({ quality: 80 })
+  .bytes();
+```
+
+### `@mutables.app/image-computer`
+
+An optional adapter for [Cloudflare Computer](https://www.npmjs.com/package/@cloudflare/computer). It reads an image from the Computer workspace, runs the same WASM optimizer in the Worker, then writes the WebP back to the workspace filesystem.
 
 ```js
 import { optimizeWorkspaceImage } from '@mutables.app/image-computer';
+
 await optimizeWorkspaceImage(workspace, '/input.jpg', '/output.webp', {
-  width: 800, height: 600, fit: 'inside', quality: 80, speed: 'fast',
+  width: 800,
+  height: 600,
+  fit: 'inside',
+  quality: 80,
+  speed: 'fast',
 });
 ```
 
-Pass a Computer Workspace or Workspace stub with `fs.readFile` and `fs.writeFile`. Binary reads are consumed as streams and bounded before buffering. The adapter does not start a container or execution backend: it runs the WASM optimizer in the Worker and saves the result to Computer's SQLite-backed filesystem. Input and output paths must differ. Existing output files can be overwritten.
+The adapter accepts a Computer Workspace or compatible object with `fs.readFile` and `fs.writeFile`. Streamed reads are bounded before buffering. Input and output paths must differ; an existing output file is overwritten.
 
-## Local integration example
+## Performance evidence
 
-```sh
-npm install
-npm run dev
-curl -X POST --data-binary @test/fixtures/input.jpg 'http://localhost:8787/optimize?width=80' -o /tmp/direct.webp
-curl -X PUT --data-binary @test/fixtures/input.jpg http://localhost:8787/workspaces/demo/files/input.jpg
-curl -X POST -H 'content-type: application/json' --data '{"input":"/input.jpg","output":"/output.webp","width":80}' http://localhost:8787/workspaces/demo/optimize
-curl http://localhost:8787/workspaces/demo/files/output.webp -o /tmp/workspace.webp
-```
+The current Worker benchmark compares two internal WebP encoder settings on three photos at 320, 800, and 1600 pixels. All 288 image requests returned valid WebP. The `speed: 'fast'` setting had lower median CPU in six of nine image-size cases and in all three 1600-pixel cases, while its files were about 2–12% larger. CPU traces were sampled and uneven across cases. These results are preliminary, image-specific measurements—not a comparison against Bun or other optimizers. See [the full benchmark notes](benchmarks/experiments/RESULTS.md).
 
-`wrangler.jsonc` registers an SQLite Durable Object. The demo intentionally has no login or workspace authorization; add those before exposing it to users. No Cloudflare deployment is performed by the build/test scripts.
+## Limits
 
-## Build
+- JPEG and PNG input; WebP output. No animation, HEIC, AVIF, rotation, or metadata API.
+- 20 MiB maximum input. The default pixel limit is 8 million and can be raised to 16 million. Source and output dimensions are limited to 16383; WASM memory is capped at 256 MiB.
+- PNG alpha is preserved. EXIF orientation and ICC color management are not applied; metadata is not copied. JPEGs with decoder warnings are rejected.
+- Resizing uses the default Lanczos3 filter with alpha handling. Scaled JPEG decoding remains experimental and is not exposed in the public API.
 
-Prerequisites: Python 3.12+, CMake 3.16+, Make, Rust beta with the `wasm32-unknown-emscripten` target, Emscripten **6.0.10**, and `wasm-bindgen` CLI **0.2.129** on PATH. The build downloads pinned codec release tags from GitHub. Set `EMSDK` to the installed SDK and `EM_CONFIG` to its generated config file. If CMake is outside PATH, set `CMAKE`.
+## Development
+
+Prerequisites: Python 3.12+, CMake 3.16+, Make, Rust beta with `wasm32-unknown-emscripten`, Emscripten **6.0.10**, and wasm-bindgen CLI **0.2.129**. The build downloads pinned codec source releases. Set `EMSDK` to the SDK directory and `EM_CONFIG` to its generated config file; set `CMAKE` if CMake is outside `PATH`.
 
 ```sh
 export EMSDK=/path/to/emsdk
@@ -52,19 +90,14 @@ npm test
 npm run check:worker
 ```
 
-With the combined dev server running, `npm run test:worker` exercises the real Computer storage flow. On this host, Node/npm are installed under `$HOME/.cache/worker-build/emsdk-6.0.10/node/24.19.0_64bit/bin`; add that directory to PATH if needed. Package archives are in `.build/artifacts/`.
+To try the local Worker and Computer integration:
 
-Libraries: libjpeg-turbo 3.1.3, libspng 0.7.4, libwebp 1.6.0, and fast_image_resize (Cargo.lock pins its version). The resize path uses WASM SIMD128. Specialized codec SIMD is disabled in the current build: libjpeg-turbo assembly, libspng's architecture-specific SIMD, and libwebp's SIMD source paths. See [`benchmarks/experiments/RESULTS.md`](benchmarks/experiments/RESULTS.md) for the binary/build audit. No claim of Bun-equivalent speed is made. Third-party notices are in `licenses/`, and Cargo/npm lockfiles record dependencies.
+```sh
+npm install
+npm run dev
+curl -X POST --data-binary @test/fixtures/input.jpg 'http://localhost:8787/optimize?width=80&speed=fast' -o /tmp/direct.webp
+```
 
-## Limits and current scope
+`npm run test:worker` exercises the Computer storage flow while the dev server is running. The Worker example has no authentication or workspace authorization; secure it before exposing it. Build details, codec flags, test requirements, and benchmark artifacts are documented in the repository.
 
-- JPEG/PNG input only; WebP output only. No animation, HEIC, AVIF, rotation, or metadata API.
-- Maximum input 20 MiB; default 8 million pixels, configurable up to 16 million. Source and output dimensions cannot exceed 16383. WASM linear memory is capped at 256 MiB; complex images may still exhaust memory before reaching those limits.
-- PNG alpha is preserved. EXIF orientation and ICC color management are not applied; metadata is not copied. JPEGs with decoder warnings are rejected.
-- SIMD resizer uses its default Lanczos3 filter with alpha handling. No alternate filter API yet. JPEG scaled decoding is experimental and is not exposed by the package API.
-- CPU time and peak memory must be measured on representative production images before choosing Worker limits. The public `.webp({speed: 'fast'})` option selects an internal encoder setting; omitting it preserves the prior default. Experiment data and limitations are in [`benchmarks/experiments/RESULTS.md`](benchmarks/experiments/RESULTS.md). This project has no Bun/native performance comparison.
-
-Tests exercise real codecs, malformed input, limits, resize modes, alpha, and the adapter. The independent output validator needs Python 3 and native `libwebp.so.7` (available on this Linux host). The Worker integration test requires Wrangler/workerd.
-
-
-This repository does not deploy or operate a public image-processing service. Historical benchmark notes in `benchmarks/experiments/RESULTS.md` come from the maintainer's own test deployments; endpoint URLs and account-specific deployment data are omitted.
+This repository contains source packages and examples; it does not deploy or operate a public image-processing service. No Cloudflare deployment is performed by the build or test scripts.
