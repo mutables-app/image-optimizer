@@ -77,9 +77,13 @@ jobs:
       - name: Stage optimizer package for approval
         working-directory: packages/optimizer
         run: npm stage publish --access public
+        env:
+          NODE_AUTH_TOKEN: ''
         if: (github.ref_type == 'tag' || (github.event_name == 'workflow_dispatch' && inputs.publish)) && steps.optimizer-version.outputs.published != 'true'
 
       - name: Stage Computer adapter for approval
         working-directory: packages/computer
         run: npm stage publish --access public
+        env:
+          NODE_AUTH_TOKEN: ''
         if: (github.ref_type == 'tag' || (github.event_name == 'workflow_dispatch' && inputs.publish)) && steps.computer-version.outputs.published != 'true'
