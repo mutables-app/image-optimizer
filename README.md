@@ -1,5 +1,8 @@
 # Mutables Image Optimizer
 
+[![npm: image-optimizer](https://img.shields.io/npm/v/%40mutables.app%2Fimage-optimizer?label=%40mutables.app%2Fimage-optimizer)](https://www.npmjs.com/package/@mutables.app/image-optimizer)
+[![npm: image-computer](https://img.shields.io/npm/v/%40mutables.app%2Fimage-computer?label=%40mutables.app%2Fimage-computer)](https://www.npmjs.com/package/@mutables.app/image-computer)
+
 An image-processing pipeline written in Rust and compiled to WebAssembly for Node.js and Cloudflare Workers. It links JPEG, PNG, and WebP codec libraries into the same Emscripten module as the Rust resize pipeline, so the image pixels stay inside WASM instead of crossing between JavaScript libraries at each stage.
 
 ```js
@@ -36,7 +39,7 @@ Cloudflare describes the Emscripten Rust target support as an experimental previ
 
 ## Packages
 
-### `@mutables.app/image-optimizer`
+### [`@mutables.app/image-optimizer`](https://www.npmjs.com/package/@mutables.app/image-optimizer)
 
 Accepts a `Blob`, `ArrayBuffer`, or typed array. JPEG and PNG input are sniffed automatically. Width-only resizing preserves aspect ratio; two dimensions default to `fill`.
 
@@ -49,7 +52,7 @@ const bytes = await image(inputBytes)
   .bytes();
 ```
 
-### `@mutables.app/image-computer`
+### [`@mutables.app/image-computer`](https://www.npmjs.com/package/@mutables.app/image-computer)
 
 An optional adapter for [Cloudflare Computer](https://www.npmjs.com/package/@cloudflare/computer). It reads an image from the Computer workspace, runs the same WASM optimizer in the Worker, then writes the WebP back to the workspace filesystem.
 
@@ -76,7 +79,7 @@ The current Worker benchmark compares two internal WebP encoder settings on thre
 - JPEG and PNG input; WebP output. No animation, HEIC, AVIF, rotation, or metadata API.
 - 20 MiB maximum input. The default pixel limit is 8 million and can be raised to 16 million. Source and output dimensions are limited to 16383; WASM memory is capped at 256 MiB.
 - PNG alpha is preserved. EXIF orientation and ICC color management are not applied; metadata is not copied. JPEGs with decoder warnings are rejected.
-- Resizing uses the default Lanczos3 filter with alpha handling. Scaled JPEG decoding remains experimental and is not exposed in the public API.
+- Resizing uses the default Lanczos3 filter with alpha handling. `speed: 'fast'` enables scaled JPEG decoding for eligible resized lossy requests; JPEG sources are capped at 16 megapixels on that path.
 
 ## Development
 
