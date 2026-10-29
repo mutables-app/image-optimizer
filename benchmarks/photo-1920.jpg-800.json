@@ -1,0 +1,116 @@
+{
+  "timestamp": "2026-10-29T11:32:07.270Z",
+  "url": "[maintainer test endpoint omitted]",
+  "input": "benchmarks/photo-1920.jpg",
+  "inputBytes": 1063708,
+  "firstRequest": {
+    "run": 0,
+    "status": 400,
+    "ok": false,
+    "roundTripMs": 191.23188900000002,
+    "colo": null,
+    "error": "{\"error\":\"Cannot perform %TypedArray%.prototype.set on a detached or out-of-bounds ArrayBuffer\"}"
+  },
+  "warmRuns": 10,
+  "warmSuccesses": 5,
+  "failures": 6,
+  "p50Ms": 307.200104,
+  "p95Ms": 492.448428,
+  "outputBytes": 58142,
+  "results": [
+    {
+      "run": 0,
+      "status": 400,
+      "ok": false,
+      "roundTripMs": 191.23188900000002,
+      "colo": null,
+      "error": "{\"error\":\"Cannot perform %TypedArray%.prototype.set on a detached or out-of-bounds ArrayBuffer\"}"
+    },
+    {
+      "run": 1,
+      "status": 200,
+      "ok": true,
+      "roundTripMs": 492.448428,
+      "colo": "ARN",
+      "outputBytes": 58142,
+      "observedTransformMs": 0
+    },
+    {
+      "run": 2,
+      "status": 400,
+      "ok": false,
+      "roundTripMs": 63.36042699999996,
+      "colo": null,
+      "error": "{\"error\":\"Cannot perform %TypedArray%.prototype.set on a detached or out-of-bounds ArrayBuffer\"}"
+    },
+    {
+      "run": 3,
+      "status": 200,
+      "ok": true,
+      "roundTripMs": 307.200104,
+      "colo": "ARN",
+      "outputBytes": 58142,
+      "observedTransformMs": 0
+    },
+    {
+      "run": 4,
+      "status": 400,
+      "ok": false,
+      "roundTripMs": 51.81558200000018,
+      "colo": null,
+      "error": "{\"error\":\"Cannot perform %TypedArray%.prototype.set on a detached or out-of-bounds ArrayBuffer\"}"
+    },
+    {
+      "run": 5,
+      "status": 200,
+      "ok": true,
+      "roundTripMs": 301.9919050000001,
+      "colo": "ARN",
+      "outputBytes": 58142,
+      "observedTransformMs": 0
+    },
+    {
+      "run": 6,
+      "status": 400,
+      "ok": false,
+      "roundTripMs": 58.34286999999995,
+      "colo": null,
+      "error": "{\"error\":\"Cannot perform %TypedArray%.prototype.set on a detached or out-of-bounds ArrayBuffer\"}"
+    },
+    {
+      "run": 7,
+      "status": 200,
+      "ok": true,
+      "roundTripMs": 311.02565200000004,
+      "colo": "ARN",
+      "outputBytes": 58142,
+      "observedTransformMs": 0
+    },
+    {
+      "run": 8,
+      "status": 400,
+      "ok": false,
+      "roundTripMs": 73.000898,
+      "colo": null,
+      "error": "{\"error\":\"Cannot perform %TypedArray%.prototype.set on a detached or out-of-bounds ArrayBuffer\"}"
+    },
+    {
+      "run": 9,
+      "status": 200,
+      "ok": true,
+      "roundTripMs": 303.14479299999994,
+      "colo": "ARN",
+      "outputBytes": 58142,
+      "observedTransformMs": 0
+    },
+    {
+      "run": 10,
+      "status": 400,
+      "ok": false,
+      "roundTripMs": 58.00110700000005,
+      "colo": null,
+      "error": "{\"error\":\"Cannot perform %TypedArray%.prototype.set on a detached or out-of-bounds ArrayBuffer\"}"
+    }
+  ],
+  "note": "Sequential HTTP round trips include upload/download and network latency. First request is not proof of a cold start. Worker timers are not CPU measurements. Percentiles include successful warm requests only; compare failure counts too."
+}

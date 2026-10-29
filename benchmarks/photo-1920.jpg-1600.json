@@ -1,0 +1,113 @@
+{
+  "timestamp": "2026-10-29T11:32:09.585Z",
+  "url": "[maintainer test endpoint omitted]",
+  "input": "benchmarks/photo-1920.jpg",
+  "inputBytes": 1063708,
+  "firstRequest": {
+    "run": 0,
+    "status": 400,
+    "ok": false,
+    "roundTripMs": 204.784269,
+    "colo": null,
+    "error": "{\"error\":\"Cannot perform %TypedArray%.prototype.set on a detached or out-of-bounds ArrayBuffer\"}"
+  },
+  "warmRuns": 10,
+  "warmSuccesses": 2,
+  "failures": 9,
+  "p50Ms": 691.7440960000001,
+  "p95Ms": 750.0280859999999,
+  "outputBytes": 223614,
+  "results": [
+    {
+      "run": 0,
+      "status": 400,
+      "ok": false,
+      "roundTripMs": 204.784269,
+      "colo": null,
+      "error": "{\"error\":\"Cannot perform %TypedArray%.prototype.set on a detached or out-of-bounds ArrayBuffer\"}"
+    },
+    {
+      "run": 1,
+      "status": 503,
+      "ok": false,
+      "roundTripMs": 167.84411699999998,
+      "colo": null,
+      "error": "Cloudflare 1102: resource limits exceeded"
+    },
+    {
+      "run": 2,
+      "status": 400,
+      "ok": false,
+      "roundTripMs": 58.26343000000003,
+      "colo": null,
+      "error": "{\"error\":\"Cannot perform %TypedArray%.prototype.set on a detached or out-of-bounds ArrayBuffer\"}"
+    },
+    {
+      "run": 3,
+      "status": 200,
+      "ok": true,
+      "roundTripMs": 750.0280859999999,
+      "colo": "ARN",
+      "outputBytes": 223614,
+      "observedTransformMs": 0
+    },
+    {
+      "run": 4,
+      "status": 400,
+      "ok": false,
+      "roundTripMs": 65.67156399999999,
+      "colo": null,
+      "error": "{\"error\":\"Cannot perform %TypedArray%.prototype.set on a detached or out-of-bounds ArrayBuffer\"}"
+    },
+    {
+      "run": 5,
+      "status": 200,
+      "ok": true,
+      "roundTripMs": 691.7440960000001,
+      "colo": "ARN",
+      "outputBytes": 223614,
+      "observedTransformMs": 0
+    },
+    {
+      "run": 6,
+      "status": 400,
+      "ok": false,
+      "roundTripMs": 61.43461300000013,
+      "colo": null,
+      "error": "{\"error\":\"Cannot perform %TypedArray%.prototype.set on a detached or out-of-bounds ArrayBuffer\"}"
+    },
+    {
+      "run": 7,
+      "status": 503,
+      "ok": false,
+      "roundTripMs": 71.7847690000001,
+      "colo": null,
+      "error": "Cloudflare 1102: resource limits exceeded"
+    },
+    {
+      "run": 8,
+      "status": 400,
+      "ok": false,
+      "roundTripMs": 58.377629999999954,
+      "colo": null,
+      "error": "{\"error\":\"Cannot perform %TypedArray%.prototype.set on a detached or out-of-bounds ArrayBuffer\"}"
+    },
+    {
+      "run": 9,
+      "status": 503,
+      "ok": false,
+      "roundTripMs": 62.84862299999986,
+      "colo": null,
+      "error": "Cloudflare 1102: resource limits exceeded"
+    },
+    {
+      "run": 10,
+      "status": 503,
+      "ok": false,
+      "roundTripMs": 56.53733600000032,
+      "colo": null,
+      "error": "Cloudflare 1102: resource limits exceeded"
+    }
+  ],
+  "note": "Sequential HTTP round trips include upload/download and network latency. First request is not proof of a cold start. Worker timers are not CPU measurements. Percentiles include successful warm requests only; compare failure counts too."
+}

@@ -1,0 +1,9 @@
+{
+  "name": "image-workspace",
+  "main": "examples/worker/index.js",
+  "compatibility_date": "2026-09-02",
+  "compatibility_flags": ["nodejs_compat", "new_module_registry"],
+  "durable_objects": {"bindings": [{"name": "IMAGES", "class_name": "ImageWorkspace"}]},
+  "migrations": [{"tag": "v1", "new_sqlite_classes": ["ImageWorkspace"]}],
+  "rules": [{"type": "CompiledWasm", "globs": ["**/*.wasm"], "fallthrough": true}]
+}

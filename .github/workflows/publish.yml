@@ -1,0 +1,61 @@
+name: Publish npm packages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish both npm packages after validation
+        type: boolean
+        default: false
+        required: true
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: emscripten-core/setup-emsdk@v15
+        with:
+          version: 6.0.10
+          actions-cache-folder: emsdk-cache
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: beta
+          targets: wasm32-unknown-emscripten
+
+      - run: cargo install wasm-bindgen-cli --version 0.2.129 --locked
+
+      - run: sudo apt-get update && sudo apt-get install -y cmake ninja-build python3 python3-pil
+
+      - run: npm ci
+
+      - name: Build WebAssembly packages
+        run: EM_CONFIG="$EMSDK/.emscripten" bash scripts/build.sh
+        env:
+          CMAKE: cmake
+
+      - run: npm test
+      - run: npm run check:worker
+
+      - name: Publish optimizer
+        working-directory: packages/optimizer
+        run: npm publish --access public
+        if: github.event_name == 'workflow_dispatch' && inputs.publish
+
+      - name: Publish Computer adapter
+        working-directory: packages/computer
+        run: npm publish --access public
+        if: github.event_name == 'workflow_dispatch' && inputs.publish

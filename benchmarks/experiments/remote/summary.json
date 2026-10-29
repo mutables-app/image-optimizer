@@ -1,0 +1,262 @@
+[
+  {
+    "case": "jpeg",
+    "width": 320,
+    "scaled": false,
+    "method": 4,
+    "requests": 6,
+    "successes": 6,
+    "p50Ms": 424.92949699999986,
+    "outputBytes": 9068,
+    "metrics": {
+      "width": 213,
+      "height": 320,
+      "rgbMse": 26.84310935,
+      "rgbPsnrDb": 33.84248,
+      "identicalRgb": false,
+      "maxChannelError": 45,
+      "alphaRmse": 0.0
+    },
+    "report": "benchmarks/experiments/remote/jpeg-320-scaled0-m4/photo-1920.jpg-320.json"
+  },
+  {
+    "case": "jpeg",
+    "width": 320,
+    "scaled": true,
+    "method": 4,
+    "requests": 6,
+    "successes": 6,
+    "p50Ms": 241.450022,
+    "outputBytes": 8478,
+    "metrics": {
+      "width": 213,
+      "height": 320,
+      "rgbMse": 31.94225352,
+      "rgbPsnrDb": 33.08715,
+      "identicalRgb": false,
+      "maxChannelError": 57,
+      "alphaRmse": 0.0
+    },
+    "report": "benchmarks/experiments/remote/jpeg-320-scaled1-m4/photo-1920.jpg-320.json"
+  },
+  {
+    "case": "jpeg",
+    "width": 320,
+    "scaled": true,
+    "method": 0,
+    "requests": 6,
+    "successes": 6,
+    "p50Ms": 176.749505,
+    "outputBytes": 11924,
+    "metrics": {
+      "width": 213,
+      "height": 320,
+      "rgbMse": 31.22312207,
+      "rgbPsnrDb": 33.18604,
+      "identicalRgb": false,
+      "maxChannelError": 52,
+      "alphaRmse": 0.0
+    },
+    "report": "benchmarks/experiments/remote/jpeg-320-scaled1-m0/photo-1920.jpg-320.json"
+  },
+  {
+    "case": "jpeg",
+    "width": 800,
+    "scaled": false,
+    "method": 4,
+    "requests": 6,
+    "successes": 6,
+    "p50Ms": 539.8737859999997,
+    "outputBytes": 58142,
+    "metrics": {
+      "width": 533,
+      "height": 800,
+      "rgbMse": 22.16490228,
+      "rgbPsnrDb": 34.67415,
+      "identicalRgb": false,
+      "maxChannelError": 48,
+      "alphaRmse": 0.0
+    },
+    "report": "benchmarks/experiments/remote/jpeg-800-scaled0-m4/photo-1920.jpg-800.json"
+  },
+  {
+    "case": "jpeg",
+    "width": 800,
+    "scaled": true,
+    "method": 4,
+    "requests": 6,
+    "successes": 6,
+    "p50Ms": 553.3397639999998,
+    "outputBytes": 57186,
+    "metrics": {
+      "width": 533,
+      "height": 800,
+      "rgbMse": 22.87879065,
+      "rgbPsnrDb": 34.53647,
+      "identicalRgb": false,
+      "maxChannelError": 54,
+      "alphaRmse": 0.0
+    },
+    "report": "benchmarks/experiments/remote/jpeg-800-scaled1-m4/photo-1920.jpg-800.json"
+  },
+  {
+    "case": "jpeg",
+    "width": 800,
+    "scaled": true,
+    "method": 0,
+    "requests": 6,
+    "successes": 6,
+    "p50Ms": 233.1533609999999,
+    "outputBytes": 76754,
+    "metrics": {
+      "width": 533,
+      "height": 800,
+      "rgbMse": 22.20325672,
+      "rgbPsnrDb": 34.66664,
+      "identicalRgb": false,
+      "maxChannelError": 48,
+      "alphaRmse": 0.0
+    },
+    "report": "benchmarks/experiments/remote/jpeg-800-scaled1-m0/photo-1920.jpg-800.json"
+  },
+  {
+    "case": "jpeg",
+    "width": 1600,
+    "scaled": false,
+    "method": 4,
+    "requests": 6,
+    "successes": 6,
+    "p50Ms": 881.2471049999995,
+    "outputBytes": 223614,
+    "metrics": {
+      "width": 1067,
+      "height": 1600,
+      "rgbMse": 16.36630897,
+      "rgbPsnrDb": 35.9913,
+      "identicalRgb": false,
+      "maxChannelError": 45,
+      "alphaRmse": 0.0
+    },
+    "report": "benchmarks/experiments/remote/jpeg-1600-scaled0-m4/photo-1920.jpg-1600.json"
+  },
+  {
+    "case": "jpeg",
+    "width": 1600,
+    "scaled": true,
+    "method": 4,
+    "requests": 6,
+    "successes": 6,
+    "p50Ms": 803.7542930000004,
+    "outputBytes": 224826,
+    "metrics": {
+      "width": 1067,
+      "height": 1600,
+      "rgbMse": 16.45591788,
+      "rgbPsnrDb": 35.96758,
+      "identicalRgb": false,
+      "maxChannelError": 44,
+      "alphaRmse": 0.0
+    },
+    "report": "benchmarks/experiments/remote/jpeg-1600-scaled1-m4/photo-1920.jpg-1600.json"
+  },
+  {
+    "case": "jpeg",
+    "width": 1600,
+    "scaled": true,
+    "method": 0,
+    "requests": 6,
+    "successes": 6,
+    "p50Ms": 347.454244,
+    "outputBytes": 272048,
+    "metrics": {
+      "width": 1067,
+      "height": 1600,
+      "rgbMse": 16.51426546,
+      "rgbPsnrDb": 35.95221,
+      "identicalRgb": false,
+      "maxChannelError": 43,
+      "alphaRmse": 0.0
+    },
+    "report": "benchmarks/experiments/remote/jpeg-1600-scaled1-m0/photo-1920.jpg-1600.json"
+  },
+  {
+    "case": "png",
+    "width": 800,
+    "scaled": false,
+    "method": 4,
+    "requests": 6,
+    "successes": 6,
+    "p50Ms": 370.6482950000002,
+    "outputBytes": 21044,
+    "metrics": {
+      "width": 800,
+      "height": 450,
+      "rgbMse": 110.93084815,
+      "rgbPsnrDb": 27.68028,
+      "identicalRgb": false,
+      "maxChannelError": 130,
+      "alphaRmse": 0.0
+    },
+    "report": "benchmarks/experiments/remote/png-800-scaled0-m4/gradient-1920.png-800.json"
+  },
+  {
+    "case": "png",
+    "width": 800,
+    "scaled": false,
+    "method": 0,
+    "requests": 6,
+    "successes": 6,
+    "p50Ms": 320.611766,
+    "outputBytes": 25582,
+    "metrics": {
+      "width": 800,
+      "height": 450,
+      "rgbMse": 79.03960926,
+      "rgbPsnrDb": 29.15236,
+      "identicalRgb": false,
+      "maxChannelError": 128,
+      "alphaRmse": 0.0
+    },
+    "report": "benchmarks/experiments/remote/png-800-scaled0-m0/gradient-1920.png-800.json"
+  },
+  {
+    "case": "png",
+    "width": 1600,
+    "scaled": false,
+    "method": 4,
+    "requests": 6,
+    "successes": 6,
+    "p50Ms": 688.0742790000002,
+    "outputBytes": 41440,
+    "metrics": {
+      "width": 1600,
+      "height": 900,
+      "rgbMse": 47.21455532,
+      "rgbPsnrDb": 31.39004,
+      "identicalRgb": false,
+      "maxChannelError": 139,
+      "alphaRmse": 0.0
+    },
+    "report": "benchmarks/experiments/remote/png-1600-scaled0-m4/gradient-1920.png-1600.json"
+  },
+  {
+    "case": "png",
+    "width": 1600,
+    "scaled": false,
+    "method": 0,
+    "requests": 6,
+    "successes": 6,
+    "p50Ms": 554.317852,
+    "outputBytes": 46534,
+    "metrics": {
+      "width": 1600,
+      "height": 900,
+      "rgbMse": 44.66938935,
+      "rgbPsnrDb": 31.6307,
+      "identicalRgb": false,
+      "maxChannelError": 152,
+      "alphaRmse": 0.0
+    },
+    "report": "benchmarks/experiments/remote/png-1600-scaled0-m0/gradient-1920.png-1600.json"
+  }
+]

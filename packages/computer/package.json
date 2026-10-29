@@ -1,0 +1,7 @@
+{
+ "name": "@mutables.app/image-computer", "version": "0.1.0", "type": "module", "license": "MIT",
+ "repository": {"type": "git", "url": "https://github.com/mutables-app/image-optimizer.git"},
+ "exports": {".": {"types": "./index.d.ts", "default": "./index.js"}},
+ "dependencies": {"@mutables.app/image-optimizer": "0.1.0"},
+ "peerDependencies": {"@cloudflare/computer": "^0.8.0"}
+}

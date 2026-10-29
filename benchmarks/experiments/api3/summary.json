@@ -1,0 +1,226 @@
+[
+  {
+    "input": "jpeg",
+    "width": 320,
+    "scaled": false,
+    "method": 4,
+    "requests": 4,
+    "successes": 4,
+    "p50RoundTripMs": 435.7100160000002,
+    "bytes": 9068,
+    "dimensions": [
+      213,
+      320
+    ],
+    "rgbPsnrDb": 33.84248,
+    "report": "benchmarks/experiments/api3/jpeg-320-scaled0-m4/photo-1920.jpg-320.json"
+  },
+  {
+    "input": "jpeg",
+    "width": 320,
+    "scaled": true,
+    "method": 4,
+    "requests": 4,
+    "successes": 4,
+    "p50RoundTripMs": 322.838303,
+    "bytes": 8478,
+    "dimensions": [
+      213,
+      320
+    ],
+    "rgbPsnrDb": 33.08715,
+    "report": "benchmarks/experiments/api3/jpeg-320-scaled1-m4/photo-1920.jpg-320.json"
+  },
+  {
+    "input": "jpeg",
+    "width": 320,
+    "scaled": true,
+    "method": 2,
+    "requests": 4,
+    "successes": 4,
+    "p50RoundTripMs": 205.21539500000006,
+    "bytes": 8722,
+    "dimensions": [
+      213,
+      320
+    ],
+    "rgbPsnrDb": 32.99969,
+    "report": "benchmarks/experiments/api3/jpeg-320-scaled1-m2/photo-1920.jpg-320.json"
+  },
+  {
+    "input": "jpeg",
+    "width": 320,
+    "scaled": true,
+    "method": 0,
+    "requests": 4,
+    "successes": 4,
+    "p50RoundTripMs": 246.60526000000004,
+    "bytes": 11924,
+    "dimensions": [
+      213,
+      320
+    ],
+    "rgbPsnrDb": 33.18604,
+    "report": "benchmarks/experiments/api3/jpeg-320-scaled1-m0/photo-1920.jpg-320.json"
+  },
+  {
+    "input": "jpeg",
+    "width": 800,
+    "scaled": false,
+    "method": 4,
+    "requests": 4,
+    "successes": 4,
+    "p50RoundTripMs": 622.117272,
+    "bytes": 58142,
+    "dimensions": [
+      533,
+      800
+    ],
+    "rgbPsnrDb": 34.67415,
+    "report": "benchmarks/experiments/api3/jpeg-800-scaled0-m4/photo-1920.jpg-800.json"
+  },
+  {
+    "input": "jpeg",
+    "width": 800,
+    "scaled": true,
+    "method": 4,
+    "requests": 4,
+    "successes": 4,
+    "p50RoundTripMs": 490.52469999999994,
+    "bytes": 57186,
+    "dimensions": [
+      533,
+      800
+    ],
+    "rgbPsnrDb": 34.53647,
+    "report": "benchmarks/experiments/api3/jpeg-800-scaled1-m4/photo-1920.jpg-800.json"
+  },
+  {
+    "input": "jpeg",
+    "width": 800,
+    "scaled": true,
+    "method": 2,
+    "requests": 4,
+    "successes": 4,
+    "p50RoundTripMs": 341.49371999999994,
+    "bytes": 57786,
+    "dimensions": [
+      533,
+      800
+    ],
+    "rgbPsnrDb": 34.35461,
+    "report": "benchmarks/experiments/api3/jpeg-800-scaled1-m2/photo-1920.jpg-800.json"
+  },
+  {
+    "input": "jpeg",
+    "width": 1600,
+    "scaled": false,
+    "method": 4,
+    "requests": 4,
+    "successes": 4,
+    "p50RoundTripMs": 1205.61818,
+    "bytes": 223614,
+    "dimensions": [
+      1067,
+      1600
+    ],
+    "rgbPsnrDb": 35.9913,
+    "report": "benchmarks/experiments/api3/jpeg-1600-scaled0-m4/photo-1920.jpg-1600.json"
+  },
+  {
+    "input": "jpeg",
+    "width": 1600,
+    "scaled": true,
+    "method": 4,
+    "requests": 4,
+    "successes": 4,
+    "p50RoundTripMs": 1127.083399,
+    "bytes": 224826,
+    "dimensions": [
+      1067,
+      1600
+    ],
+    "rgbPsnrDb": 35.96758,
+    "report": "benchmarks/experiments/api3/jpeg-1600-scaled1-m4/photo-1920.jpg-1600.json"
+  },
+  {
+    "input": "jpeg",
+    "width": 1600,
+    "scaled": true,
+    "method": 2,
+    "requests": 4,
+    "successes": 4,
+    "p50RoundTripMs": 665.1303890000002,
+    "bytes": 229456,
+    "dimensions": [
+      1067,
+      1600
+    ],
+    "rgbPsnrDb": 35.70117,
+    "report": "benchmarks/experiments/api3/jpeg-1600-scaled1-m2/photo-1920.jpg-1600.json"
+  },
+  {
+    "input": "png",
+    "width": 800,
+    "scaled": false,
+    "method": 4,
+    "requests": 4,
+    "successes": 4,
+    "p50RoundTripMs": 436.75290399999994,
+    "bytes": 21044,
+    "dimensions": [
+      800,
+      450
+    ],
+    "rgbPsnrDb": 27.68028,
+    "report": "benchmarks/experiments/api3/png-800-scaled0-m4/gradient-1920.png-800.json"
+  },
+  {
+    "input": "png",
+    "width": 800,
+    "scaled": false,
+    "method": 2,
+    "requests": 4,
+    "successes": 4,
+    "p50RoundTripMs": 650.7054439999999,
+    "bytes": 22962,
+    "dimensions": [
+      800,
+      450
+    ],
+    "rgbPsnrDb": 29.05289,
+    "report": "benchmarks/experiments/api3/png-800-scaled0-m2/gradient-1920.png-800.json"
+  },
+  {
+    "input": "png",
+    "width": 1600,
+    "scaled": false,
+    "method": 4,
+    "requests": 4,
+    "successes": 4,
+    "p50RoundTripMs": 858.2460950000002,
+    "bytes": 41440,
+    "dimensions": [
+      1600,
+      900
+    ],
+    "rgbPsnrDb": 31.39004,
+    "report": "benchmarks/experiments/api3/png-1600-scaled0-m4/gradient-1920.png-1600.json"
+  },
+  {
+    "input": "png",
+    "width": 1600,
+    "scaled": false,
+    "method": 2,
+    "requests": 4,
+    "successes": 4,
+    "p50RoundTripMs": 706.4192149999999,
+    "bytes": 42764,
+    "dimensions": [
+      1600,
+      900
+    ],
+    "rgbPsnrDb": 31.5923,
+    "report": "benchmarks/experiments/api3/png-1600-scaled0-m2/gradient-1920.png-1600.json"
+  }
+]

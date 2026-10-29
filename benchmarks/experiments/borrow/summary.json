@@ -1,0 +1,68 @@
+[
+  {
+    "input": "jpeg",
+    "width": 800,
+    "scaled": true,
+    "method": 2,
+    "requests": 4,
+    "successes": 4,
+    "p50RoundTripMs": 268.091099,
+    "bytes": 57786,
+    "report": "benchmarks/experiments/borrow/jpeg-800-scaled1-m2/photo-1920.jpg-800.json"
+  },
+  {
+    "input": "jpeg",
+    "width": 800,
+    "scaled": true,
+    "method": 4,
+    "requests": 4,
+    "successes": 4,
+    "p50RoundTripMs": 362.45603499999993,
+    "bytes": 57186,
+    "report": "benchmarks/experiments/borrow/jpeg-800-scaled1-m4/photo-1920.jpg-800.json"
+  },
+  {
+    "input": "jpeg",
+    "width": 1600,
+    "scaled": true,
+    "method": 2,
+    "requests": 4,
+    "successes": 4,
+    "p50RoundTripMs": 477.50372500000003,
+    "bytes": 229456,
+    "report": "benchmarks/experiments/borrow/jpeg-1600-scaled1-m2/photo-1920.jpg-1600.json"
+  },
+  {
+    "input": "jpeg",
+    "width": 1600,
+    "scaled": true,
+    "method": 4,
+    "requests": 4,
+    "successes": 4,
+    "p50RoundTripMs": 854.3417860000002,
+    "bytes": 224826,
+    "report": "benchmarks/experiments/borrow/jpeg-1600-scaled1-m4/photo-1920.jpg-1600.json"
+  },
+  {
+    "input": "png",
+    "width": 800,
+    "scaled": false,
+    "method": 4,
+    "requests": 4,
+    "successes": 4,
+    "p50RoundTripMs": 526.7534879999998,
+    "bytes": 21044,
+    "report": "benchmarks/experiments/borrow/png-800-scaled0-m4/gradient-1920.png-800.json"
+  },
+  {
+    "input": "png",
+    "width": 1600,
+    "scaled": false,
+    "method": 4,
+    "requests": 4,
+    "successes": 4,
+    "p50RoundTripMs": 716.4566089999998,
+    "bytes": 41440,
+    "report": "benchmarks/experiments/borrow/png-1600-scaled0-m4/gradient-1920.png-1600.json"
+  }
+]

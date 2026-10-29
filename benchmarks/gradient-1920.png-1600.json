@@ -1,0 +1,111 @@
+{
+  "timestamp": "2026-10-29T11:32:13.983Z",
+  "url": "[maintainer test endpoint omitted]",
+  "input": "benchmarks/gradient-1920.png",
+  "inputBytes": 5065643,
+  "firstRequest": {
+    "run": 0,
+    "status": 503,
+    "ok": false,
+    "roundTripMs": 256.95073299999996,
+    "colo": null,
+    "error": "Cloudflare 1102: resource limits exceeded"
+  },
+  "warmRuns": 10,
+  "warmSuccesses": 0,
+  "failures": 11,
+  "p50Ms": null,
+  "p95Ms": null,
+  "outputBytes": null,
+  "results": [
+    {
+      "run": 0,
+      "status": 503,
+      "ok": false,
+      "roundTripMs": 256.95073299999996,
+      "colo": null,
+      "error": "Cloudflare 1102: resource limits exceeded"
+    },
+    {
+      "run": 1,
+      "status": 503,
+      "ok": false,
+      "roundTripMs": 181.77625900000004,
+      "colo": null,
+      "error": "Cloudflare 1102: resource limits exceeded"
+    },
+    {
+      "run": 2,
+      "status": 503,
+      "ok": false,
+      "roundTripMs": 90.29522500000002,
+      "colo": null,
+      "error": "Cloudflare 1102: resource limits exceeded"
+    },
+    {
+      "run": 3,
+      "status": 503,
+      "ok": false,
+      "roundTripMs": 94.35393500000009,
+      "colo": null,
+      "error": "Cloudflare 1102: resource limits exceeded"
+    },
+    {
+      "run": 4,
+      "status": 503,
+      "ok": false,
+      "roundTripMs": 84.14753999999994,
+      "colo": null,
+      "error": "Cloudflare 1102: resource limits exceeded"
+    },
+    {
+      "run": 5,
+      "status": 503,
+      "ok": false,
+      "roundTripMs": 92.62380199999996,
+      "colo": null,
+      "error": "Cloudflare 1102: resource limits exceeded"
+    },
+    {
+      "run": 6,
+      "status": 503,
+      "ok": false,
+      "roundTripMs": 81.15339800000004,
+      "colo": null,
+      "error": "Cloudflare 1102: resource limits exceeded"
+    },
+    {
+      "run": 7,
+      "status": 503,
+      "ok": false,
+      "roundTripMs": 90.04042400000003,
+      "colo": null,
+      "error": "Cloudflare 1102: resource limits exceeded"
+    },
+    {
+      "run": 8,
+      "status": 503,
+      "ok": false,
+      "roundTripMs": 78.42077799999993,
+      "colo": null,
+      "error": "Cloudflare 1102: resource limits exceeded"
+    },
+    {
+      "run": 9,
+      "status": 503,
+      "ok": false,
+      "roundTripMs": 74.5203489999999,
+      "colo": null,
+      "error": "Cloudflare 1102: resource limits exceeded"
+    },
+    {
+      "run": 10,
+      "status": 503,
+      "ok": false,
+      "roundTripMs": 92.99424500000009,
+      "colo": null,
+      "error": "Cloudflare 1102: resource limits exceeded"
+    }
+  ],
+  "note": "Sequential HTTP round trips include upload/download and network latency. First request is not proof of a cold start. Worker timers are not CPU measurements. Percentiles include successful warm requests only; compare failure counts too."
+}

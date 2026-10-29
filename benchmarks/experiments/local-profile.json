@@ -1,0 +1,2638 @@
+{
+  "timestamp": "2026-10-29T11:57:40.383Z",
+  "runtime": "v24.19.0",
+  "architecture": "arm64",
+  "repetitions": 6,
+  "warmSamplesPerVariant": 5,
+  "rows": [
+    {
+      "input": "benchmarks/photo-1920.jpg",
+      "width": 320,
+      "scaled": false,
+      "method": 0,
+      "inputBytes": 1063708,
+      "decodedDimensions": [
+        1920,
+        2880
+      ],
+      "decodedRgbaBytes": 22118400,
+      "outputBytes": 12916,
+      "samples": [
+        {
+          "outerMs": 200.766842,
+          "decodeMs": 139.63395100000025,
+          "decodedCopyMs": 0.002199999999902502,
+          "resizeMs": 56.243375000000015,
+          "encodeMs": 4.677714999999807,
+          "encodedCopyMs": 0.0022000000003572495
+        },
+        {
+          "outerMs": 201.424086,
+          "decodeMs": 139.564711,
+          "decodedCopyMs": 0.0020000000004074536,
+          "resizeMs": 57.01521999999977,
+          "encodeMs": 4.641955000000053,
+          "encodedCopyMs": 0.0019999999999527063
+        },
+        {
+          "outerMs": 200.11851699999988,
+          "decodeMs": 139.3147480000007,
+          "decodedCopyMs": 0.0017199999992953963,
+          "resizeMs": 55.96961300000021,
+          "encodeMs": 4.623873999999887,
+          "encodedCopyMs": 0.0025599999999030842
+        },
+        {
+          "outerMs": 208.44841900000029,
+          "decodeMs": 139.85723299999972,
+          "decodedCopyMs": 0.0028800000000046566,
+          "resizeMs": 63.73322999999982,
+          "encodeMs": 4.599634000000151,
+          "encodedCopyMs": 0.0020400000003064633
+        },
+        {
+          "outerMs": 246.53329899999972,
+          "decodeMs": 186.07673400000022,
+          "decodedCopyMs": 0.0020000000004074536,
+          "resizeMs": 55.6378109999996,
+          "encodeMs": 4.652634000000035,
+          "encodedCopyMs": 0.0018799999998009298
+        }
+      ],
+      "medians": {
+        "outerMs": 201.424086,
+        "decodeMs": 139.63395100000025,
+        "decodedCopyMs": 0.0020000000004074536,
+        "resizeMs": 56.243375000000015,
+        "encodeMs": 4.641955000000053,
+        "encodedCopyMs": 0.0020400000003064633
+      },
+      "metrics": {
+        "width": 213,
+        "height": 320,
+        "rgbMse": 26.27526408,
+        "rgbPsnrDb": 33.93533,
+        "identicalRgb": false,
+        "maxChannelError": 43,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/jpeg-320-scaled0-method0.webp"
+    },
+    {
+      "input": "benchmarks/photo-1920.jpg",
+      "width": 320,
+      "scaled": false,
+      "method": 2,
+      "inputBytes": 1063708,
+      "decodedDimensions": [
+        1920,
+        2880
+      ],
+      "decodedRgbaBytes": 22118400,
+      "outputBytes": 9272,
+      "samples": [
+        {
+          "outerMs": 204.871032,
+          "decodeMs": 139.91887300000008,
+          "decodedCopyMs": 0.0024399999997513078,
+          "resizeMs": 56.57029700000021,
+          "encodeMs": 8.174979999999778,
+          "encodedCopyMs": 0.0023600000004080357
+        },
+        {
+          "outerMs": 207.08424799999966,
+          "decodeMs": 142.0765690000003,
+          "decodedCopyMs": 0.0023599999999532884,
+          "resizeMs": 56.616697999999815,
+          "encodeMs": 8.195341000000099,
+          "encodedCopyMs": 0.0019600000000536966
+        },
+        {
+          "outerMs": 204.371349,
+          "decodeMs": 139.48851000000013,
+          "decodedCopyMs": 0.001999999999497959,
+          "resizeMs": 56.5034169999999,
+          "encodeMs": 8.182060000000092,
+          "encodedCopyMs": 0.0026400000006105984
+        },
+        {
+          "outerMs": 212.36188800000036,
+          "decodeMs": 140.68175900000006,
+          "decodedCopyMs": 0.0029600000007121707,
+          "resizeMs": 63.366706999999224,
+          "encodeMs": 8.112300000000687,
+          "encodedCopyMs": 0.0023999999993975507
+        },
+        {
+          "outerMs": 203.4960629999996,
+          "decodeMs": 139.25098799999978,
+          "decodedCopyMs": 0.002320000000509026,
+          "resizeMs": 55.84541300000001,
+          "encodeMs": 8.167660000000069,
+          "encodedCopyMs": 0.0020399999993969686
+        }
+      ],
+      "medians": {
+        "outerMs": 204.871032,
+        "decodeMs": 139.91887300000008,
+        "decodedCopyMs": 0.0023599999999532884,
+        "resizeMs": 56.57029700000021,
+        "encodeMs": 8.174979999999778,
+        "encodedCopyMs": 0.0023600000004080357
+      },
+      "metrics": {
+        "width": 213,
+        "height": 320,
+        "rgbMse": 27.86548807,
+        "rgbPsnrDb": 33.68014,
+        "identicalRgb": false,
+        "maxChannelError": 50,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/jpeg-320-scaled0-method2.webp"
+    },
+    {
+      "input": "benchmarks/photo-1920.jpg",
+      "width": 320,
+      "scaled": false,
+      "method": 4,
+      "inputBytes": 1063708,
+      "decodedDimensions": [
+        1920,
+        2880
+      ],
+      "decodedRgbaBytes": 22118400,
+      "outputBytes": 9068,
+      "samples": [
+        {
+          "outerMs": 219.75190199999997,
+          "decodeMs": 139.75927200000024,
+          "decodedCopyMs": 0.0018799999998009298,
+          "resizeMs": 56.9051800000002,
+          "encodeMs": 22.869169000000056,
+          "encodedCopyMs": 0.002199999999902502
+        },
+        {
+          "outerMs": 220.25378600000022,
+          "decodeMs": 140.35091599999987,
+          "decodedCopyMs": 0.002280000000155269,
+          "resizeMs": 56.85385999999971,
+          "encodeMs": 22.868769000000157,
+          "encodedCopyMs": 0.002280000000155269
+        },
+        {
+          "outerMs": 218.95077599999968,
+          "decodeMs": 139.58638999999948,
+          "decodedCopyMs": 0.0020400000003064633,
+          "resizeMs": 56.443217000000004,
+          "encodeMs": 22.697527000000264,
+          "encodedCopyMs": 0.00183999999990192
+        },
+        {
+          "outerMs": 218.98909700000058,
+          "decodeMs": 139.39962900000046,
+          "decodedCopyMs": 0.002199999999902502,
+          "resizeMs": 56.68913799999973,
+          "encodeMs": 22.72404800000004,
+          "encodedCopyMs": 0.0023600000004080357
+        },
+        {
+          "outerMs": 218.5307730000004,
+          "decodeMs": 139.27466800000002,
+          "decodedCopyMs": 0.0019200000006094342,
+          "resizeMs": 56.24509500000022,
+          "encodeMs": 22.81156799999917,
+          "encodedCopyMs": 0.0021600000000034925
+        }
+      ],
+      "medians": {
+        "outerMs": 218.98909700000058,
+        "decodeMs": 139.58638999999948,
+        "decodedCopyMs": 0.0020400000003064633,
+        "resizeMs": 56.68913799999973,
+        "encodeMs": 22.81156799999917,
+        "encodedCopyMs": 0.002199999999902502
+      },
+      "metrics": {
+        "width": 213,
+        "height": 320,
+        "rgbMse": 26.84310935,
+        "rgbPsnrDb": 33.84248,
+        "identicalRgb": false,
+        "maxChannelError": 45,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/jpeg-320-scaled0-method4.webp"
+    },
+    {
+      "input": "benchmarks/photo-1920.jpg",
+      "width": 320,
+      "scaled": false,
+      "method": 6,
+      "inputBytes": 1063708,
+      "decodedDimensions": [
+        1920,
+        2880
+      ],
+      "decodedRgbaBytes": 22118400,
+      "outputBytes": 8518,
+      "samples": [
+        {
+          "outerMs": 225.85710699999981,
+          "decodeMs": 139.77119200000016,
+          "decodedCopyMs": 0.0017199999997501436,
+          "resizeMs": 56.84093900000016,
+          "encodeMs": 29.043734999999742,
+          "encodedCopyMs": 0.0025600000003578316
+        },
+        {
+          "outerMs": 226.0164279999999,
+          "decodeMs": 139.67923100000007,
+          "decodedCopyMs": 0.0018000000000029104,
+          "resizeMs": 57.212062999999944,
+          "encodeMs": 28.928172999999788,
+          "encodedCopyMs": 0.0027600000003076275
+        },
+        {
+          "outerMs": 233.5968439999997,
+          "decodeMs": 141.4723240000003,
+          "decodedCopyMs": 0.002440000000206055,
+          "resizeMs": 62.950104999999894,
+          "encodeMs": 28.93745299999955,
+          "encodedCopyMs": 0.0030810000007477356
+        },
+        {
+          "outerMs": 225.22670299999936,
+          "decodeMs": 139.11238700000013,
+          "decodedCopyMs": 0.0020000000004074536,
+          "resizeMs": 57.11034099999961,
+          "encodeMs": 28.80181300000004,
+          "encodedCopyMs": 0.0025599999999030842
+        },
+        {
+          "outerMs": 224.79577899999913,
+          "decodeMs": 139.17514699999992,
+          "decodedCopyMs": 0.0022800000006100163,
+          "resizeMs": 56.59425800000008,
+          "encodeMs": 28.79841199999919,
+          "encodedCopyMs": 0.00304000000051019
+        }
+      ],
+      "medians": {
+        "outerMs": 225.85710699999981,
+        "decodeMs": 139.67923100000007,
+        "decodedCopyMs": 0.0020000000004074536,
+        "resizeMs": 57.11034099999961,
+        "encodeMs": 28.928172999999788,
+        "encodedCopyMs": 0.0027600000003076275
+      },
+      "metrics": {
+        "width": 213,
+        "height": 320,
+        "rgbMse": 27.47379695,
+        "rgbPsnrDb": 33.74162,
+        "identicalRgb": false,
+        "maxChannelError": 49,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/jpeg-320-scaled0-method6.webp"
+    },
+    {
+      "input": "benchmarks/photo-1920.jpg",
+      "width": 320,
+      "scaled": true,
+      "method": 0,
+      "inputBytes": 1063708,
+      "decodedDimensions": [
+        240,
+        360
+      ],
+      "decodedRgbaBytes": 345600,
+      "outputBytes": 11924,
+      "samples": [
+        {
+          "outerMs": 85.15794899999992,
+          "decodeMs": 78.27065800000037,
+          "decodedCopyMs": 0.0017599999996491533,
+          "resizeMs": 2.052375000000211,
+          "encodeMs": 4.643193999999767,
+          "encodedCopyMs": 0.0021200000001044828
+        },
+        {
+          "outerMs": 85.14922899999965,
+          "decodeMs": 78.43393900000001,
+          "decodedCopyMs": 0.0020799999997507257,
+          "resizeMs": 2.025575000000117,
+          "encodeMs": 4.507392999999865,
+          "encodedCopyMs": 0.0019200000001546869
+        },
+        {
+          "outerMs": 85.04390800000056,
+          "decodeMs": 78.27905800000008,
+          "decodedCopyMs": 0.0020000000004074536,
+          "resizeMs": 2.0342149999996764,
+          "encodeMs": 4.520153000000391,
+          "encodedCopyMs": 0.001999999999497959
+        },
+        {
+          "outerMs": 84.976267,
+          "decodeMs": 78.27529700000014,
+          "decodedCopyMs": 0.002080000000205473,
+          "resizeMs": 2.0132949999997436,
+          "encodeMs": 4.508074000000306,
+          "encodedCopyMs": 0.002359999999498541
+        },
+        {
+          "outerMs": 84.81542600000012,
+          "decodeMs": 78.09381600000052,
+          "decodedCopyMs": 0.0015999999995983671,
+          "resizeMs": 2.0356149999997797,
+          "encodeMs": 4.493594000000485,
+          "encodedCopyMs": 0.0019199999996999395
+        }
+      ],
+      "medians": {
+        "outerMs": 85.04390800000056,
+        "decodeMs": 78.27529700000014,
+        "decodedCopyMs": 0.0020000000004074536,
+        "resizeMs": 2.0342149999996764,
+        "encodeMs": 4.508074000000306,
+        "encodedCopyMs": 0.001999999999497959
+      },
+      "metrics": {
+        "width": 213,
+        "height": 320,
+        "rgbMse": 31.22312207,
+        "rgbPsnrDb": 33.18604,
+        "identicalRgb": false,
+        "maxChannelError": 52,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/jpeg-320-scaled1-method0.webp"
+    },
+    {
+      "input": "benchmarks/photo-1920.jpg",
+      "width": 320,
+      "scaled": true,
+      "method": 2,
+      "inputBytes": 1063708,
+      "decodedDimensions": [
+        240,
+        360
+      ],
+      "decodedRgbaBytes": 345600,
+      "outputBytes": 8722,
+      "samples": [
+        {
+          "outerMs": 88.734375,
+          "decodeMs": 78.40133900000001,
+          "decodedCopyMs": 0.0017600000001039007,
+          "resizeMs": 2.0261749999999665,
+          "encodeMs": 8.104859000000033,
+          "encodedCopyMs": 0.0024000000003070454
+        },
+        {
+          "outerMs": 91.17995299999984,
+          "decodeMs": 80.82795699999951,
+          "decodedCopyMs": 0.0017600000001039007,
+          "resizeMs": 2.0193749999998545,
+          "encodeMs": 8.103660000000673,
+          "encodedCopyMs": 0.020279999999729625
+        },
+        {
+          "outerMs": 88.53021399999943,
+          "decodeMs": 78.25889800000004,
+          "decodedCopyMs": 0.001999999999497959,
+          "resizeMs": 2.029815000000781,
+          "encodeMs": 8.039818999999625,
+          "encodedCopyMs": 0.018919999999525317
+        },
+        {
+          "outerMs": 88.23989100000017,
+          "decodeMs": 78.04133600000023,
+          "decodedCopyMs": 0.002480000000105065,
+          "resizeMs": 2.0101349999995364,
+          "encodeMs": 7.995738999999958,
+          "encodedCopyMs": 0.0019200000006094342
+        },
+        {
+          "outerMs": 88.5656939999999,
+          "decodeMs": 78.28513800000019,
+          "decodedCopyMs": 0.0020399999993969686,
+          "resizeMs": 2.0296950000001743,
+          "encodeMs": 8.02929899999981,
+          "encodedCopyMs": 0.0022400000007110066
+        }
+      ],
+      "medians": {
+        "outerMs": 88.5656939999999,
+        "decodeMs": 78.28513800000019,
+        "decodedCopyMs": 0.001999999999497959,
+        "resizeMs": 2.0261749999999665,
+        "encodeMs": 8.039818999999625,
+        "encodedCopyMs": 0.0024000000003070454
+      },
+      "metrics": {
+        "width": 213,
+        "height": 320,
+        "rgbMse": 32.59201878,
+        "rgbPsnrDb": 32.99969,
+        "identicalRgb": false,
+        "maxChannelError": 56,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/jpeg-320-scaled1-method2.webp"
+    },
+    {
+      "input": "benchmarks/photo-1920.jpg",
+      "width": 320,
+      "scaled": true,
+      "method": 4,
+      "inputBytes": 1063708,
+      "decodedDimensions": [
+        240,
+        360
+      ],
+      "decodedRgbaBytes": 345600,
+      "outputBytes": 8478,
+      "samples": [
+        {
+          "outerMs": 103.4470839999999,
+          "decodeMs": 78.52841999999987,
+          "decodedCopyMs": 0.0017600000001039007,
+          "resizeMs": 2.0362149999998564,
+          "encodeMs": 22.617126999999982,
+          "encodedCopyMs": 0.0026800000000548607
+        },
+        {
+          "outerMs": 103.07760099999996,
+          "decodeMs": 78.35797900000034,
+          "decodedCopyMs": 0.01904000000013184,
+          "resizeMs": 2.019694999999956,
+          "encodeMs": 22.50240599999961,
+          "encodedCopyMs": 0.002840000000105647
+        },
+        {
+          "outerMs": 102.87559899999997,
+          "decodeMs": 78.13373599999977,
+          "decodedCopyMs": 0.00183999999990192,
+          "resizeMs": 2.038695000000189,
+          "encodeMs": 22.518567000000075,
+          "encodedCopyMs": 0.0029999999997016857
+        },
+        {
+          "outerMs": 105.49793899999986,
+          "decodeMs": 78.87902200000008,
+          "decodedCopyMs": 0.0018000000000029104,
+          "resizeMs": 2.0002150000000256,
+          "encodeMs": 24.425140000000283,
+          "encodedCopyMs": 0.002440000000206055
+        },
+        {
+          "outerMs": 106.77418800000032,
+          "decodeMs": 81.30000000000018,
+          "decodedCopyMs": 0.0021600000000034925,
+          "resizeMs": 2.0213349999994534,
+          "encodeMs": 23.23989100000017,
+          "encodedCopyMs": 0.002840000000105647
+        }
+      ],
+      "medians": {
+        "outerMs": 103.4470839999999,
+        "decodeMs": 78.52841999999987,
+        "decodedCopyMs": 0.00183999999990192,
+        "resizeMs": 2.0213349999994534,
+        "encodeMs": 22.617126999999982,
+        "encodedCopyMs": 0.002840000000105647
+      },
+      "metrics": {
+        "width": 213,
+        "height": 320,
+        "rgbMse": 31.94225352,
+        "rgbPsnrDb": 33.08715,
+        "identicalRgb": false,
+        "maxChannelError": 57,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/jpeg-320-scaled1-method4.webp"
+    },
+    {
+      "input": "benchmarks/photo-1920.jpg",
+      "width": 320,
+      "scaled": true,
+      "method": 6,
+      "inputBytes": 1063708,
+      "decodedDimensions": [
+        240,
+        360
+      ],
+      "decodedRgbaBytes": 345600,
+      "outputBytes": 8006,
+      "samples": [
+        {
+          "outerMs": 109.07212499999991,
+          "decodeMs": 78.52322000000004,
+          "decodedCopyMs": 0.0018800000000283035,
+          "resizeMs": 2.0149750000000495,
+          "encodeMs": 28.273687999999993,
+          "encodedCopyMs": 0.0035199999999804277
+        },
+        {
+          "outerMs": 108.74376200000006,
+          "decodeMs": 78.2480570000007,
+          "decodedCopyMs": 0.002759999999398133,
+          "resizeMs": 2.0495750000000044,
+          "encodeMs": 28.246409000000313,
+          "encodedCopyMs": 0.002959999999802676
+        },
+        {
+          "outerMs": 108.75652300000002,
+          "decodeMs": 78.47601900000063,
+          "decodedCopyMs": 0.0016799999993963866,
+          "resizeMs": 2.0140950000004523,
+          "encodeMs": 28.069687000000158,
+          "encodedCopyMs": 0.0029199999999036663
+        },
+        {
+          "outerMs": 137.44069500000023,
+          "decodeMs": 78.28677799999969,
+          "decodedCopyMs": 0.002080000000205473,
+          "resizeMs": 2.0330149999999776,
+          "encodeMs": 56.924699999999575,
+          "encodedCopyMs": 0.0031600000002072193
+        },
+        {
+          "outerMs": 154.14445800000067,
+          "decodeMs": 123.82291400000031,
+          "decodedCopyMs": 0.0016000000005078618,
+          "resizeMs": 2.0248549999996612,
+          "encodeMs": 28.094286999999895,
+          "encodedCopyMs": 0.003319999999803258
+        }
+      ],
+      "medians": {
+        "outerMs": 109.07212499999991,
+        "decodeMs": 78.47601900000063,
+        "decodedCopyMs": 0.0018800000000283035,
+        "resizeMs": 2.0248549999996612,
+        "encodeMs": 28.246409000000313,
+        "encodedCopyMs": 0.0031600000002072193
+      },
+      "metrics": {
+        "width": 213,
+        "height": 320,
+        "rgbMse": 32.66740023,
+        "rgbPsnrDb": 32.98966,
+        "identicalRgb": false,
+        "maxChannelError": 56,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/jpeg-320-scaled1-method6.webp"
+    },
+    {
+      "input": "benchmarks/photo-1920.jpg",
+      "width": 800,
+      "scaled": false,
+      "method": 0,
+      "inputBytes": 1063708,
+      "decodedDimensions": [
+        1920,
+        2880
+      ],
+      "decodedRgbaBytes": 22118400,
+      "outputBytes": 77436,
+      "samples": [
+        {
+          "outerMs": 228.52260699999897,
+          "decodeMs": 140.0283929999987,
+          "decodedCopyMs": 0.0021600000000034925,
+          "resizeMs": 61.1752120000001,
+          "encodeMs": 27.100680000001375,
+          "encodedCopyMs": 0.005599999998594285
+        },
+        {
+          "outerMs": 229.91801699999996,
+          "decodeMs": 140.7740389999999,
+          "decodedCopyMs": 0.0016400000004068715,
+          "resizeMs": 61.55433400000038,
+          "encodeMs": 27.38748200000009,
+          "encodedCopyMs": 0.0051599999987956835
+        },
+        {
+          "outerMs": 228.67044800000076,
+          "decodeMs": 139.92675299999974,
+          "decodedCopyMs": 0.0018400000008114148,
+          "resizeMs": 61.45945399999982,
+          "encodeMs": 26.997878999998647,
+          "encodedCopyMs": 0.007040000000415603
+        },
+        {
+          "outerMs": 228.02348300000085,
+          "decodeMs": 139.56222999999954,
+          "decodedCopyMs": 0.001600000003236346,
+          "resizeMs": 60.99913000000015,
+          "encodeMs": 27.19916099999682,
+          "encodedCopyMs": 0.005960000002232846
+        },
+        {
+          "outerMs": 233.5016030000006,
+          "decodeMs": 142.4440910000012,
+          "decodedCopyMs": 0.0021199999973759986,
+          "resizeMs": 63.04234500000166,
+          "encodeMs": 27.78452599999946,
+          "encodedCopyMs": 0.0054000000018277206
+        }
+      ],
+      "medians": {
+        "outerMs": 228.67044800000076,
+        "decodeMs": 140.0283929999987,
+        "decodedCopyMs": 0.0018400000008114148,
+        "resizeMs": 61.45945399999982,
+        "encodeMs": 27.19916099999682,
+        "encodedCopyMs": 0.005599999998594285
+      },
+      "metrics": {
+        "width": 533,
+        "height": 800,
+        "rgbMse": 21.64665963,
+        "rgbPsnrDb": 34.77689,
+        "identicalRgb": false,
+        "maxChannelError": 53,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/jpeg-800-scaled0-method0.webp"
+    },
+    {
+      "input": "benchmarks/photo-1920.jpg",
+      "width": 800,
+      "scaled": false,
+      "method": 2,
+      "inputBytes": 1063708,
+      "decodedDimensions": [
+        1920,
+        2880
+      ],
+      "decodedRgbaBytes": 22118400,
+      "outputBytes": 58676,
+      "samples": [
+        {
+          "outerMs": 252.6338649999998,
+          "decodeMs": 140.54215699999986,
+          "decodedCopyMs": 0.001680000001215376,
+          "resizeMs": 61.97661699999844,
+          "encodeMs": 49.92012900000009,
+          "encodedCopyMs": 0.005000000001018634
+        },
+        {
+          "outerMs": 251.91317999999956,
+          "decodeMs": 140.08343400000012,
+          "decodedCopyMs": 0.002239999999801512,
+          "resizeMs": 60.96580999999969,
+          "encodeMs": 50.654293999999936,
+          "encodedCopyMs": 0.005720000001019798
+        },
+        {
+          "outerMs": 251.97125999999844,
+          "decodeMs": 140.343836,
+          "decodedCopyMs": 0.0014800000026298221,
+          "resizeMs": 61.44017299999905,
+          "encodeMs": 49.94636900000114,
+          "encodedCopyMs": 0.005279999997583218
+        },
+        {
+          "outerMs": 252.65698500000144,
+          "decodeMs": 140.19947500000126,
+          "decodedCopyMs": 0.0020799999983864836,
+          "resizeMs": 62.03609800000049,
+          "encodeMs": 50.19681100000162,
+          "encodedCopyMs": 0.005239999998593703
+        },
+        {
+          "outerMs": 255.75260799999887,
+          "decodeMs": 142.63885300000038,
+          "decodedCopyMs": 0.001680000001215376,
+          "resizeMs": 62.224818999999115,
+          "encodeMs": 50.647093999999925,
+          "encodedCopyMs": 0.004960000002029119
+        }
+      ],
+      "medians": {
+        "outerMs": 252.6338649999998,
+        "decodeMs": 140.343836,
+        "decodedCopyMs": 0.001680000001215376,
+        "resizeMs": 61.97661699999844,
+        "encodeMs": 50.19681100000162,
+        "encodedCopyMs": 0.005239999998593703
+      },
+      "metrics": {
+        "width": 533,
+        "height": 800,
+        "rgbMse": 23.10606316,
+        "rgbPsnrDb": 34.49354,
+        "identicalRgb": false,
+        "maxChannelError": 54,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/jpeg-800-scaled0-method2.webp"
+    },
+    {
+      "input": "benchmarks/photo-1920.jpg",
+      "width": 800,
+      "scaled": false,
+      "method": 4,
+      "inputBytes": 1063708,
+      "decodedDimensions": [
+        1920,
+        2880
+      ],
+      "decodedRgbaBytes": 22118400,
+      "outputBytes": 58142,
+      "samples": [
+        {
+          "outerMs": 345.83467200000086,
+          "decodeMs": 141.17020200000115,
+          "decodedCopyMs": 0.0016399999985878821,
+          "resizeMs": 61.057811000000584,
+          "encodeMs": 143.43385900000067,
+          "encodedCopyMs": 0.004439999998794519
+        },
+        {
+          "outerMs": 346.3249959999994,
+          "decodeMs": 140.48035700000037,
+          "decodedCopyMs": 0.001959999999598949,
+          "resizeMs": 62.1035780000002,
+          "encodeMs": 143.52089999999953,
+          "encodedCopyMs": 0.0042000000012194505
+        },
+        {
+          "outerMs": 346.8002000000015,
+          "decodeMs": 141.1100409999999,
+          "decodedCopyMs": 0.0015999999995983671,
+          "resizeMs": 62.53038200000083,
+          "encodeMs": 142.9305749999985,
+          "encodedCopyMs": 0.005040000000008149
+        },
+        {
+          "outerMs": 360.0680169999978,
+          "decodeMs": 140.50595799999792,
+          "decodedCopyMs": 0.0020800000020244624,
+          "resizeMs": 73.06757899999866,
+          "encodeMs": 146.262279999999,
+          "encodedCopyMs": 0.008960000002844026
+        },
+        {
+          "outerMs": 349.3163390000009,
+          "decodeMs": 142.3868509999993,
+          "decodedCopyMs": 0.0015999999995983671,
+          "resizeMs": 62.249940000001516,
+          "encodeMs": 144.4312659999996,
+          "encodedCopyMs": 0.005559999997785781
+        }
+      ],
+      "medians": {
+        "outerMs": 346.8002000000015,
+        "decodeMs": 141.1100409999999,
+        "decodedCopyMs": 0.0016399999985878821,
+        "resizeMs": 62.249940000001516,
+        "encodeMs": 143.52089999999953,
+        "encodedCopyMs": 0.005040000000008149
+      },
+      "metrics": {
+        "width": 533,
+        "height": 800,
+        "rgbMse": 22.16490228,
+        "rgbPsnrDb": 34.67415,
+        "identicalRgb": false,
+        "maxChannelError": 48,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/jpeg-800-scaled0-method4.webp"
+    },
+    {
+      "input": "benchmarks/photo-1920.jpg",
+      "width": 800,
+      "scaled": false,
+      "method": 6,
+      "inputBytes": 1063708,
+      "decodedDimensions": [
+        1920,
+        2880
+      ],
+      "decodedRgbaBytes": 22118400,
+      "outputBytes": 53656,
+      "samples": [
+        {
+          "outerMs": 391.72637099999884,
+          "decodeMs": 141.98704799999905,
+          "decodedCopyMs": 0.0015600000006088521,
+          "resizeMs": 61.78413600000022,
+          "encodeMs": 187.73550599999908,
+          "encodedCopyMs": 0.004839999999603606
+        },
+        {
+          "outerMs": 390.7097240000003,
+          "decodeMs": 140.25907600000028,
+          "decodedCopyMs": 0.0015199999998003477,
+          "resizeMs": 62.182378999999855,
+          "encodeMs": 188.0677880000003,
+          "encodedCopyMs": 0.004800000000614091
+        },
+        {
+          "outerMs": 409.1923400000014,
+          "decodeMs": 141.3005230000017,
+          "decodedCopyMs": 0.0015600000006088521,
+          "resizeMs": 63.09750499999791,
+          "encodeMs": 204.53231000000233,
+          "encodedCopyMs": 0.013839999999618158
+        },
+        {
+          "outerMs": 396.68872799999735,
+          "decodeMs": 142.94153500000175,
+          "decodedCopyMs": 0.0021999999989930075,
+          "resizeMs": 62.32854099999895,
+          "encodeMs": 191.1926910000002,
+          "encodedCopyMs": 0.004680000001826556
+        },
+        {
+          "outerMs": 393.59706500000175,
+          "decodeMs": 142.06860799999777,
+          "decodedCopyMs": 0.001640000002225861,
+          "resizeMs": 62.34918099999777,
+          "encodeMs": 188.9301540000015,
+          "encodedCopyMs": 0.007760000000416767
+        }
+      ],
+      "medians": {
+        "outerMs": 393.59706500000175,
+        "decodeMs": 141.98704799999905,
+        "decodedCopyMs": 0.0015600000006088521,
+        "resizeMs": 62.32854099999895,
+        "encodeMs": 188.9301540000015,
+        "encodedCopyMs": 0.004839999999603606
+      },
+      "metrics": {
+        "width": 533,
+        "height": 800,
+        "rgbMse": 22.94802924,
+        "rgbPsnrDb": 34.52335,
+        "identicalRgb": false,
+        "maxChannelError": 46,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/jpeg-800-scaled0-method6.webp"
+    },
+    {
+      "input": "benchmarks/photo-1920.jpg",
+      "width": 800,
+      "scaled": true,
+      "method": 0,
+      "inputBytes": 1063708,
+      "decodedDimensions": [
+        720,
+        1080
+      ],
+      "decodedRgbaBytes": 3110400,
+      "outputBytes": 76754,
+      "samples": [
+        {
+          "outerMs": 128.2937469999997,
+          "decodeMs": 87.72044700000151,
+          "decodedCopyMs": 0.0018000000000029104,
+          "resizeMs": 13.217537999998967,
+          "encodeMs": 27.163120000001072,
+          "encodedCopyMs": 0.005799999998998828
+        },
+        {
+          "outerMs": 129.71295699999973,
+          "decodeMs": 87.6112860000012,
+          "decodedCopyMs": 0.0818810000000667,
+          "resizeMs": 13.140376999999717,
+          "encodeMs": 28.66761199999928,
+          "encodedCopyMs": 0.005880000000615837
+        },
+        {
+          "outerMs": 128.68774900000062,
+          "decodeMs": 87.88416900000084,
+          "decodedCopyMs": 0.001759999999194406,
+          "resizeMs": 13.376458999999159,
+          "encodeMs": 27.201561000001675,
+          "encodedCopyMs": 0.006079999999201391
+        },
+        {
+          "outerMs": 129.78287799999816,
+          "decodeMs": 88.43253200000254,
+          "decodedCopyMs": 0.001999999996769475,
+          "resizeMs": 13.30757900000026,
+          "encodeMs": 27.81440500000099,
+          "encodedCopyMs": 0.011520000000018626
+        },
+        {
+          "outerMs": 129.5014360000023,
+          "decodeMs": 88.42993299999944,
+          "decodedCopyMs": 0.0017600000028323848,
+          "resizeMs": 13.428418999999849,
+          "encodeMs": 27.405361999997695,
+          "encodedCopyMs": 0.005721000001358334
+        }
+      ],
+      "medians": {
+        "outerMs": 129.5014360000023,
+        "decodeMs": 87.88416900000084,
+        "decodedCopyMs": 0.0018000000000029104,
+        "resizeMs": 13.30757900000026,
+        "encodeMs": 27.405361999997695,
+        "encodedCopyMs": 0.005880000000615837
+      },
+      "metrics": {
+        "width": 533,
+        "height": 800,
+        "rgbMse": 22.20325672,
+        "rgbPsnrDb": 34.66664,
+        "identicalRgb": false,
+        "maxChannelError": 48,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/jpeg-800-scaled1-method0.webp"
+    },
+    {
+      "input": "benchmarks/photo-1920.jpg",
+      "width": 800,
+      "scaled": true,
+      "method": 2,
+      "inputBytes": 1063708,
+      "decodedDimensions": [
+        720,
+        1080
+      ],
+      "decodedRgbaBytes": 3110400,
+      "outputBytes": 57786,
+      "samples": [
+        {
+          "outerMs": 152.00028199999906,
+          "decodeMs": 87.50852599999962,
+          "decodedCopyMs": 0.0013600000002043089,
+          "resizeMs": 13.330339000000095,
+          "encodeMs": 50.94337599999926,
+          "encodedCopyMs": 0.0054400000008172356
+        },
+        {
+          "outerMs": 150.512471,
+          "decodeMs": 87.46612599999935,
+          "decodedCopyMs": 0.0014799999989918433,
+          "resizeMs": 13.03709600000002,
+          "encodeMs": 49.76944700000058,
+          "encodedCopyMs": 0.005280999999740743
+        },
+        {
+          "outerMs": 151.33043700000053,
+          "decodeMs": 87.43216500000017,
+          "decodedCopyMs": 0.001480999999330379,
+          "resizeMs": 13.291377999999895,
+          "encodeMs": 50.38809200000105,
+          "encodedCopyMs": 0.005680000000211294
+        },
+        {
+          "outerMs": 153.15261100000134,
+          "decodeMs": 88.76557599999796,
+          "decodedCopyMs": 0.0020800000020244624,
+          "resizeMs": 13.228057000000263,
+          "encodeMs": 50.83597499999814,
+          "encodedCopyMs": 0.005280000001221197
+        },
+        {
+          "outerMs": 151.65111999999863,
+          "decodeMs": 87.70608699999866,
+          "decodedCopyMs": 0.0021600000000034925,
+          "resizeMs": 13.124217000000499,
+          "encodeMs": 50.60681400000249,
+          "encodedCopyMs": 0.004799999998795101
+        }
+      ],
+      "medians": {
+        "outerMs": 151.65111999999863,
+        "decodeMs": 87.50852599999962,
+        "decodedCopyMs": 0.001480999999330379,
+        "resizeMs": 13.228057000000263,
+        "encodeMs": 50.60681400000249,
+        "encodedCopyMs": 0.005280999999740743
+      },
+      "metrics": {
+        "width": 533,
+        "height": 800,
+        "rgbMse": 23.85718887,
+        "rgbPsnrDb": 34.35461,
+        "identicalRgb": false,
+        "maxChannelError": 51,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/jpeg-800-scaled1-method2.webp"
+    },
+    {
+      "input": "benchmarks/photo-1920.jpg",
+      "width": 800,
+      "scaled": true,
+      "method": 4,
+      "inputBytes": 1063708,
+      "decodedDimensions": [
+        720,
+        1080
+      ],
+      "decodedRgbaBytes": 3110400,
+      "outputBytes": 57186,
+      "samples": [
+        {
+          "outerMs": 241.63550300000134,
+          "decodeMs": 86.79991999999947,
+          "decodedCopyMs": 0.0014400000000023283,
+          "resizeMs": 13.034176000001025,
+          "encodeMs": 141.57556599999953,
+          "encodedCopyMs": 0.0059999999994033715
+        },
+        {
+          "outerMs": 242.34406800000033,
+          "decodeMs": 86.66364000000067,
+          "decodedCopyMs": 0.0016400000004068715,
+          "resizeMs": 13.052615999999034,
+          "encodeMs": 142.4252919999999,
+          "encodedCopyMs": 0.005520000000615255
+        },
+        {
+          "outerMs": 244.90100699999857,
+          "decodeMs": 87.44256499999938,
+          "decodedCopyMs": 0.0015999999995983671,
+          "resizeMs": 13.37601899999936,
+          "encodeMs": 143.7870610000009,
+          "encodedCopyMs": 0.005160000000614673
+        },
+        {
+          "outerMs": 247.57374699999855,
+          "decodeMs": 88.89385600000242,
+          "decodedCopyMs": 0.0016799999975773972,
+          "resizeMs": 13.241616999999678,
+          "encodeMs": 145.19015200000285,
+          "encodedCopyMs": 0.00495999999839114
+        },
+        {
+          "outerMs": 246.37941899999714,
+          "decodeMs": 88.929457000002,
+          "decodedCopyMs": 0.0015599999969708733,
+          "resizeMs": 13.445259000000078,
+          "encodeMs": 143.7732210000031,
+          "encodedCopyMs": 0.005279999997583218
+        }
+      ],
+      "medians": {
+        "outerMs": 244.90100699999857,
+        "decodeMs": 87.44256499999938,
+        "decodedCopyMs": 0.0015999999995983671,
+        "resizeMs": 13.241616999999678,
+        "encodeMs": 143.7732210000031,
+        "encodedCopyMs": 0.005279999997583218
+      },
+      "metrics": {
+        "width": 533,
+        "height": 800,
+        "rgbMse": 22.87879065,
+        "rgbPsnrDb": 34.53647,
+        "identicalRgb": false,
+        "maxChannelError": 54,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/jpeg-800-scaled1-method4.webp"
+    },
+    {
+      "input": "benchmarks/photo-1920.jpg",
+      "width": 800,
+      "scaled": true,
+      "method": 6,
+      "inputBytes": 1063708,
+      "decodedDimensions": [
+        720,
+        1080
+      ],
+      "decodedRgbaBytes": 3110400,
+      "outputBytes": 52888,
+      "samples": [
+        {
+          "outerMs": 285.77222900000015,
+          "decodeMs": 86.85192099999949,
+          "decodedCopyMs": 0.0016000000014173565,
+          "resizeMs": 13.122976999999082,
+          "encodeMs": 185.61464999999953,
+          "encodedCopyMs": 0.006240000000616419
+        },
+        {
+          "outerMs": 286.7009969999999,
+          "decodeMs": 87.46412600000076,
+          "decodedCopyMs": 0.0018799999998009298,
+          "resizeMs": 13.106297000000268,
+          "encodeMs": 185.91429199999948,
+          "encodedCopyMs": 0.0054400000008172356
+        },
+        {
+          "outerMs": 286.73871599999984,
+          "decodeMs": 86.81984000000011,
+          "decodedCopyMs": 0.001600999999936903,
+          "resizeMs": 13.138096000000587,
+          "encodeMs": 186.55293800000072,
+          "encodedCopyMs": 0.0054799999998067506
+        },
+        {
+          "outerMs": 297.8009579999998,
+          "decodeMs": 87.79920800000036,
+          "decodedCopyMs": 0.0018799999998009298,
+          "resizeMs": 13.152737000000343,
+          "encodeMs": 196.63205200000084,
+          "encodedCopyMs": 0.005160000000614673
+        },
+        {
+          "outerMs": 292.8469609999993,
+          "decodeMs": 88.76605600000039,
+          "decodedCopyMs": 0.001640000002225861,
+          "resizeMs": 13.868261999999959,
+          "encodeMs": 189.97760199999902,
+          "encodedCopyMs": 0.005799999998998828
+        }
+      ],
+      "medians": {
+        "outerMs": 286.73871599999984,
+        "decodeMs": 87.46412600000076,
+        "decodedCopyMs": 0.001640000002225861,
+        "resizeMs": 13.138096000000587,
+        "encodeMs": 186.55293800000072,
+        "encodedCopyMs": 0.0054799999998067506
+      },
+      "metrics": {
+        "width": 533,
+        "height": 800,
+        "rgbMse": 23.68771341,
+        "rgbPsnrDb": 34.38557,
+        "identicalRgb": false,
+        "maxChannelError": 51,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/jpeg-800-scaled1-method6.webp"
+    },
+    {
+      "input": "benchmarks/photo-1920.jpg",
+      "width": 1600,
+      "scaled": false,
+      "method": 0,
+      "inputBytes": 1063708,
+      "decodedDimensions": [
+        1920,
+        2880
+      ],
+      "decodedRgbaBytes": 22118400,
+      "outputBytes": 269734,
+      "samples": [
+        {
+          "outerMs": 327.605058000001,
+          "decodeMs": 142.57305199999973,
+          "decodedCopyMs": 0.0015999999959603883,
+          "resizeMs": 75.33135600000242,
+          "encodeMs": 109.3645269999979,
+          "encodedCopyMs": 0.014159999998810235
+        },
+        {
+          "outerMs": 329.1843099999969,
+          "decodeMs": 143.6728210000001,
+          "decodedCopyMs": 0.001759999999194406,
+          "resizeMs": 75.76255900000251,
+          "encodeMs": 109.38680699999531,
+          "encodedCopyMs": 0.02012000000104308
+        },
+        {
+          "outerMs": 323.5191480000067,
+          "decodeMs": 140.13743400000385,
+          "decodedCopyMs": 0.0020799999983864836,
+          "resizeMs": 74.3586690000011,
+          "encodeMs": 108.67108200000075,
+          "encodedCopyMs": 0.014920000001438893
+        },
+        {
+          "outerMs": 322.809702999999,
+          "decodeMs": 140.03683300000557,
+          "decodedCopyMs": 0.0021199999973759986,
+          "resizeMs": 74.04294700000173,
+          "encodeMs": 108.3973199999964,
+          "encodedCopyMs": 0.01471999999921536
+        },
+        {
+          "outerMs": 322.964383999999,
+          "decodeMs": 139.36282899999787,
+          "decodedCopyMs": 0.001879999996162951,
+          "resizeMs": 74.08814700000221,
+          "encodeMs": 109.16948599999887,
+          "encodedCopyMs": 0.015319999998610001
+        }
+      ],
+      "medians": {
+        "outerMs": 323.5191480000067,
+        "decodeMs": 140.13743400000385,
+        "decodedCopyMs": 0.001879999996162951,
+        "resizeMs": 74.3586690000011,
+        "encodeMs": 109.16948599999887,
+        "encodedCopyMs": 0.014920000001438893
+      },
+      "metrics": {
+        "width": 1067,
+        "height": 1600,
+        "rgbMse": 16.50123106,
+        "rgbPsnrDb": 35.95564,
+        "identicalRgb": false,
+        "maxChannelError": 44,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/jpeg-1600-scaled0-method0.webp"
+    },
+    {
+      "input": "benchmarks/photo-1920.jpg",
+      "width": 1600,
+      "scaled": false,
+      "method": 2,
+      "inputBytes": 1063708,
+      "decodedDimensions": [
+        1920,
+        2880
+      ],
+      "decodedRgbaBytes": 22118400,
+      "outputBytes": 228352,
+      "samples": [
+        {
+          "outerMs": 422.5163990000001,
+          "decodeMs": 143.35845800000243,
+          "decodedCopyMs": 0.001640000002225861,
+          "resizeMs": 75.55715799999598,
+          "encodeMs": 203.29314000000159,
+          "encodedCopyMs": 0.012640000000828877
+        },
+        {
+          "outerMs": 422.1614370000025,
+          "decodeMs": 142.41889100000117,
+          "decodedCopyMs": 0.001680000001215376,
+          "resizeMs": 75.21951599999738,
+          "encodeMs": 204.2059070000032,
+          "encodedCopyMs": 0.01292000000103144
+        },
+        {
+          "outerMs": 416.03987100000086,
+          "decodeMs": 139.73699200000556,
+          "decodedCopyMs": 0.0015599999969708733,
+          "resizeMs": 74.23150699999678,
+          "encodeMs": 201.72596900000644,
+          "encodedCopyMs": 0.012960999993083533
+        },
+        {
+          "outerMs": 416.7543560000049,
+          "decodeMs": 139.99263300000166,
+          "decodedCopyMs": 0.0015599999969708733,
+          "resizeMs": 74.11790699999983,
+          "encodeMs": 202.29505400000198,
+          "encodedCopyMs": 0.013400000003457535
+        },
+        {
+          "outerMs": 414.8397419999965,
+          "decodeMs": 139.87151299999823,
+          "decodedCopyMs": 0.0013599999947473407,
+          "resizeMs": 73.65274300000601,
+          "encodeMs": 200.97600399999646,
+          "encodedCopyMs": 0.011839999999210704
+        }
+      ],
+      "medians": {
+        "outerMs": 416.7543560000049,
+        "decodeMs": 139.99263300000166,
+        "decodedCopyMs": 0.0015599999969708733,
+        "resizeMs": 74.23150699999678,
+        "encodeMs": 202.29505400000198,
+        "encodedCopyMs": 0.01292000000103144
+      },
+      "metrics": {
+        "width": 1067,
+        "height": 1600,
+        "rgbMse": 17.39107017,
+        "rgbPsnrDb": 35.72754,
+        "identicalRgb": false,
+        "maxChannelError": 45,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/jpeg-1600-scaled0-method2.webp"
+    },
+    {
+      "input": "benchmarks/photo-1920.jpg",
+      "width": 1600,
+      "scaled": false,
+      "method": 4,
+      "inputBytes": 1063708,
+      "decodedDimensions": [
+        1920,
+        2880
+      ],
+      "decodedRgbaBytes": 22118400,
+      "outputBytes": 223614,
+      "samples": [
+        {
+          "outerMs": 794.225742999999,
+          "decodeMs": 142.25892999999633,
+          "decodedCopyMs": 0.001680000001215376,
+          "resizeMs": 75.97688100000232,
+          "encodeMs": 575.6493289999999,
+          "encodedCopyMs": 0.01292000000103144
+        },
+        {
+          "outerMs": 791.5292019999979,
+          "decodeMs": 142.40685200000007,
+          "decodedCopyMs": 0.001640000002225861,
+          "resizeMs": 74.95151299999998,
+          "encodeMs": 573.8619159999944,
+          "encodedCopyMs": 0.01284000000305241
+        },
+        {
+          "outerMs": 779.4189929999993,
+          "decodeMs": 140.19943400000193,
+          "decodedCopyMs": 0.0016810000015539117,
+          "resizeMs": 74.1547470000005,
+          "encodeMs": 564.7372879999966,
+          "encodedCopyMs": 0.012400999999954365
+        },
+        {
+          "outerMs": 779.3884330000001,
+          "decodeMs": 139.97595300000103,
+          "decodedCopyMs": 0.001640000002225861,
+          "resizeMs": 74.04462699999567,
+          "encodeMs": 565.039131000005,
+          "encodedCopyMs": 0.012199999997392297
+        },
+        {
+          "outerMs": 780.1586779999998,
+          "decodeMs": 139.62007100000483,
+          "decodedCopyMs": 0.0020399999993969686,
+          "resizeMs": 73.93786600000021,
+          "encodeMs": 566.2785000000003,
+          "encodedCopyMs": 0.012599999994563404
+        }
+      ],
+      "medians": {
+        "outerMs": 780.1586779999998,
+        "decodeMs": 140.19943400000193,
+        "decodedCopyMs": 0.001680000001215376,
+        "resizeMs": 74.1547470000005,
+        "encodeMs": 566.2785000000003,
+        "encodedCopyMs": 0.012599999994563404
+      },
+      "metrics": {
+        "width": 1067,
+        "height": 1600,
+        "rgbMse": 16.36630897,
+        "rgbPsnrDb": 35.9913,
+        "identicalRgb": false,
+        "maxChannelError": 45,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/jpeg-1600-scaled0-method4.webp"
+    },
+    {
+      "input": "benchmarks/photo-1920.jpg",
+      "width": 1600,
+      "scaled": false,
+      "method": 6,
+      "inputBytes": 1063708,
+      "decodedDimensions": [
+        1920,
+        2880
+      ],
+      "decodedRgbaBytes": 22118400,
+      "outputBytes": 208198,
+      "samples": [
+        {
+          "outerMs": 977.4535350000006,
+          "decodeMs": 141.07176099999924,
+          "decodedCopyMs": 0.001720000000204891,
+          "resizeMs": 74.41091000000233,
+          "encodeMs": 761.6281819999967,
+          "encodedCopyMs": 0.012520000000222353
+        },
+        {
+          "outerMs": 967.4708219999957,
+          "decodeMs": 141.66108600000007,
+          "decodedCopyMs": 0.0015999999959603883,
+          "resizeMs": 75.03067400000145,
+          "encodeMs": 750.4519389999987,
+          "encodedCopyMs": 0.011839999999210704
+        },
+        {
+          "outerMs": 950.6328569999969,
+          "decodeMs": 139.47450899999967,
+          "decodedCopyMs": 0.0020799999983864836,
+          "resizeMs": 74.13842699999805,
+          "encodeMs": 736.680518000001,
+          "encodedCopyMs": 0.011800000000221189
+        },
+        {
+          "outerMs": 954.6014070000019,
+          "decodeMs": 140.28667599999608,
+          "decodedCopyMs": 0.0026800000050570816,
+          "resizeMs": 74.75555199999508,
+          "encodeMs": 739.2479359999998,
+          "encodedCopyMs": 0.013279999999213032
+        },
+        {
+          "outerMs": 950.1724130000002,
+          "decodeMs": 139.6846710000027,
+          "decodedCopyMs": 0.0020399999993969686,
+          "resizeMs": 74.1527070000011,
+          "encodeMs": 736.0195929999973,
+          "encodedCopyMs": 0.012600000001839362
+        }
+      ],
+      "medians": {
+        "outerMs": 954.6014070000019,
+        "decodeMs": 140.28667599999608,
+        "decodedCopyMs": 0.0020399999993969686,
+        "resizeMs": 74.41091000000233,
+        "encodeMs": 739.2479359999998,
+        "encodedCopyMs": 0.012520000000222353
+      },
+      "metrics": {
+        "width": 1067,
+        "height": 1600,
+        "rgbMse": 17.12660399,
+        "rgbPsnrDb": 35.79409,
+        "identicalRgb": false,
+        "maxChannelError": 46,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/jpeg-1600-scaled0-method6.webp"
+    },
+    {
+      "input": "benchmarks/photo-1920.jpg",
+      "width": 1600,
+      "scaled": true,
+      "method": 0,
+      "inputBytes": 1063708,
+      "decodedDimensions": [
+        1200,
+        1800
+      ],
+      "decodedRgbaBytes": 8640000,
+      "outputBytes": 272048,
+      "samples": [
+        {
+          "outerMs": 257.7570229999983,
+          "decodeMs": 103.19984200000181,
+          "decodedCopyMs": 0.00247999999919557,
+          "resizeMs": 44.00360499999806,
+          "encodeMs": 110.2018530000023,
+          "encodedCopyMs": 0.016919999998208368
+        },
+        {
+          "outerMs": 257.4227800000008,
+          "decodeMs": 103.7848060000033,
+          "decodedCopyMs": 0.001680000001215376,
+          "resizeMs": 44.350446999997075,
+          "encodeMs": 108.96896399999969,
+          "encodedCopyMs": 0.01340100000379607
+        },
+        {
+          "outerMs": 254.26419599999645,
+          "decodeMs": 101.74831100000301,
+          "decodedCopyMs": 0.0020799999983864836,
+          "resizeMs": 43.62308199999825,
+          "encodeMs": 108.5342410000012,
+          "encodedCopyMs": 0.013319999998202547
+        },
+        {
+          "outerMs": 254.3375969999979,
+          "decodeMs": 101.8244709999999,
+          "decodedCopyMs": 0.0018800000034389086,
+          "resizeMs": 43.808843999999226,
+          "encodeMs": 108.36279900000227,
+          "encodedCopyMs": 0.014320999995106831
+        },
+        {
+          "outerMs": 253.83355400000437,
+          "decodeMs": 101.924712,
+          "decodedCopyMs": 0.0018400000044493936,
+          "resizeMs": 43.721042999997735,
+          "encodeMs": 107.81987600000139,
+          "encodedCopyMs": 0.016120000000228174
+        }
+      ],
+      "medians": {
+        "outerMs": 254.3375969999979,
+        "decodeMs": 101.924712,
+        "decodedCopyMs": 0.0018800000034389086,
+        "resizeMs": 43.808843999999226,
+        "encodeMs": 108.5342410000012,
+        "encodedCopyMs": 0.014320999995106831
+      },
+      "metrics": {
+        "width": 1067,
+        "height": 1600,
+        "rgbMse": 16.51426546,
+        "rgbPsnrDb": 35.95221,
+        "identicalRgb": false,
+        "maxChannelError": 43,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/jpeg-1600-scaled1-method0.webp"
+    },
+    {
+      "input": "benchmarks/photo-1920.jpg",
+      "width": 1600,
+      "scaled": true,
+      "method": 2,
+      "inputBytes": 1063708,
+      "decodedDimensions": [
+        1200,
+        1800
+      ],
+      "decodedRgbaBytes": 8640000,
+      "outputBytes": 229456,
+      "samples": [
+        {
+          "outerMs": 354.5932169999978,
+          "decodeMs": 103.60356500000125,
+          "decodedCopyMs": 0.0021600000000034925,
+          "resizeMs": 44.5416890000015,
+          "encodeMs": 206.14948199999708,
+          "encodedCopyMs": 0.012480000001232838
+        },
+        {
+          "outerMs": 354.9545399999988,
+          "decodeMs": 103.54028400000243,
+          "decodedCopyMs": 0.0023999999975785613,
+          "resizeMs": 44.55648900000233,
+          "encodeMs": 206.5321649999969,
+          "encodedCopyMs": 0.012960000000020955
+        },
+        {
+          "outerMs": 362.0445120000004,
+          "decodeMs": 102.14895400000387,
+          "decodedCopyMs": 0.001799999998183921,
+          "resizeMs": 44.909450999999535,
+          "encodeMs": 214.64338500000304,
+          "encodedCopyMs": 0.013919999997597188
+        },
+        {
+          "outerMs": 347.58568599999853,
+          "decodeMs": 101.58282999999938,
+          "decodedCopyMs": 0.0016799999939394183,
+          "resizeMs": 43.60980200000631,
+          "encodeMs": 202.0966119999939,
+          "encodedCopyMs": 0.014240000004065223
+        },
+        {
+          "outerMs": 348.1585300000006,
+          "decodeMs": 102.0011530000047,
+          "decodedCopyMs": 0.001839999997173436,
+          "resizeMs": 44.00648399999773,
+          "encodeMs": 201.84509000000253,
+          "encodedCopyMs": 0.014080000000831205
+        }
+      ],
+      "medians": {
+        "outerMs": 354.5932169999978,
+        "decodeMs": 102.14895400000387,
+        "decodedCopyMs": 0.001839999997173436,
+        "resizeMs": 44.5416890000015,
+        "encodeMs": 206.14948199999708,
+        "encodedCopyMs": 0.013919999997597188
+      },
+      "metrics": {
+        "width": 1067,
+        "height": 1600,
+        "rgbMse": 17.49698512,
+        "rgbPsnrDb": 35.70117,
+        "identicalRgb": false,
+        "maxChannelError": 44,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/jpeg-1600-scaled1-method2.webp"
+    },
+    {
+      "input": "benchmarks/photo-1920.jpg",
+      "width": 1600,
+      "scaled": true,
+      "method": 4,
+      "inputBytes": 1063708,
+      "decodedDimensions": [
+        1200,
+        1800
+      ],
+      "decodedRgbaBytes": 8640000,
+      "outputBytes": 224826,
+      "samples": [
+        {
+          "outerMs": 730.8445549999997,
+          "decodeMs": 106.46714600000269,
+          "decodedCopyMs": 0.001799999998183921,
+          "resizeMs": 45.088612999999896,
+          "encodeMs": 578.8921929999997,
+          "encodedCopyMs": 0.012000000002444722
+        },
+        {
+          "outerMs": 728.1195750000043,
+          "decodeMs": 104.56529199999932,
+          "decodedCopyMs": 0.0022000000026309863,
+          "resizeMs": 44.96913199999835,
+          "encodeMs": 578.2686680000043,
+          "encodedCopyMs": 0.018759999999019783
+        },
+        {
+          "outerMs": 711.6702129999976,
+          "decodeMs": 101.9754729999986,
+          "decodedCopyMs": 0.0015999999959603883,
+          "resizeMs": 43.583842000000004,
+          "encodeMs": 565.7911759999988,
+          "encodedCopyMs": 0.01396000000386266
+        },
+        {
+          "outerMs": 828.7849179999976,
+          "decodeMs": 102.1619539999956,
+          "decodedCopyMs": 0.0022000000026309863,
+          "resizeMs": 44.0306849999979,
+          "encodeMs": 682.2702760000029,
+          "encodedCopyMs": 0.01292000000103144
+        },
+        {
+          "outerMs": 710.4868849999984,
+          "decodeMs": 101.61243000000104,
+          "decodedCopyMs": 0.0016399999949499033,
+          "resizeMs": 43.66048299999966,
+          "encodeMs": 564.9048089999997,
+          "encodedCopyMs": 0.011640000004263129
+        }
+      ],
+      "medians": {
+        "outerMs": 728.1195750000043,
+        "decodeMs": 102.1619539999956,
+        "decodedCopyMs": 0.001799999998183921,
+        "resizeMs": 44.0306849999979,
+        "encodeMs": 578.2686680000043,
+        "encodedCopyMs": 0.01292000000103144
+      },
+      "metrics": {
+        "width": 1067,
+        "height": 1600,
+        "rgbMse": 16.45591788,
+        "rgbPsnrDb": 35.96758,
+        "identicalRgb": false,
+        "maxChannelError": 44,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/jpeg-1600-scaled1-method4.webp"
+    },
+    {
+      "input": "benchmarks/photo-1920.jpg",
+      "width": 1600,
+      "scaled": true,
+      "method": 6,
+      "inputBytes": 1063708,
+      "decodedDimensions": [
+        1200,
+        1800
+      ],
+      "decodedRgbaBytes": 8640000,
+      "outputBytes": 209020,
+      "samples": [
+        {
+          "outerMs": 903.3431079999973,
+          "decodeMs": 104.40553100000034,
+          "decodedCopyMs": 0.0020799999983864836,
+          "resizeMs": 44.733970000001136,
+          "encodeMs": 753.8570450000007,
+          "encodedCopyMs": 0.01591999999800464
+        },
+        {
+          "outerMs": 898.5507930000022,
+          "decodeMs": 104.53793199999927,
+          "decodedCopyMs": 0.0020399999993969686,
+          "resizeMs": 44.744729999998526,
+          "encodeMs": 748.9639680000037,
+          "encodedCopyMs": 0.013800000000628643
+        },
+        {
+          "outerMs": 894.1981210000013,
+          "decodeMs": 102.2166339999967,
+          "decodedCopyMs": 0.0015599999969708733,
+          "resizeMs": 44.26000700000441,
+          "encodeMs": 747.4144769999984,
+          "encodedCopyMs": 0.0130799999969895
+        },
+        {
+          "outerMs": 882.7441959999996,
+          "decodeMs": 101.46414899999945,
+          "decodedCopyMs": 0.0015599999969708733,
+          "resizeMs": 43.58308100000431,
+          "encodeMs": 737.4185629999993,
+          "encodedCopyMs": 0.011521000000357162
+        },
+        {
+          "outerMs": 882.8129159999953,
+          "decodeMs": 102.17215399999986,
+          "decodedCopyMs": 0.0015199999979813583,
+          "resizeMs": 43.7068419999996,
+          "encodeMs": 736.6290379999991,
+          "encodedCopyMs": 0.011559999999008141
+        }
+      ],
+      "medians": {
+        "outerMs": 894.1981210000013,
+        "decodeMs": 102.2166339999967,
+        "decodedCopyMs": 0.0015599999969708733,
+        "resizeMs": 44.26000700000441,
+        "encodeMs": 747.4144769999984,
+        "encodedCopyMs": 0.0130799999969895
+      },
+      "metrics": {
+        "width": 1067,
+        "height": 1600,
+        "rgbMse": 17.19657783,
+        "rgbPsnrDb": 35.77638,
+        "identicalRgb": false,
+        "maxChannelError": 44,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/jpeg-1600-scaled1-method6.webp"
+    },
+    {
+      "input": "benchmarks/gradient-1920.png",
+      "width": 320,
+      "scaled": false,
+      "method": 0,
+      "inputBytes": 5065643,
+      "decodedDimensions": [
+        1920,
+        1080
+      ],
+      "decodedRgbaBytes": 8294400,
+      "outputBytes": 8950,
+      "samples": [
+        {
+          "outerMs": 78.5011799999993,
+          "decodeMs": 49.916887999999744,
+          "decodedCopyMs": 0.001839999997173436,
+          "resizeMs": 23.899657000001753,
+          "encodeMs": 4.123670000000857,
+          "encodedCopyMs": 0.0014400000000023283
+        },
+        {
+          "outerMs": 78.56550000000425,
+          "decodeMs": 49.84280800000124,
+          "decodedCopyMs": 0.001520000005257316,
+          "resizeMs": 24.043697999994038,
+          "encodeMs": 4.119389999999839,
+          "encodedCopyMs": 0.0012000000060652383
+        },
+        {
+          "outerMs": 78.49473900000157,
+          "decodeMs": 50.123490000005404,
+          "decodedCopyMs": 0.0012799999967683107,
+          "resizeMs": 23.71437600000354,
+          "encodeMs": 4.1223099999988335,
+          "encodedCopyMs": 0.0011599999997997656
+        },
+        {
+          "outerMs": 78.41709799999808,
+          "decodeMs": 50.101009999998496,
+          "decodedCopyMs": 0.0014799999989918433,
+          "resizeMs": 23.66661500000191,
+          "encodeMs": 4.119910000001255,
+          "encodedCopyMs": 0.001640000002225861
+        },
+        {
+          "outerMs": 78.48417999999947,
+          "decodeMs": 49.98956899999757,
+          "decodedCopyMs": 0.0011999999987892807,
+          "resizeMs": 23.7960560000065,
+          "encodeMs": 4.126789999994799,
+          "encodedCopyMs": 0.0010800000018207356
+        }
+      ],
+      "medians": {
+        "outerMs": 78.49473900000157,
+        "decodeMs": 49.98956899999757,
+        "decodedCopyMs": 0.0014799999989918433,
+        "resizeMs": 23.7960560000065,
+        "encodeMs": 4.1223099999988335,
+        "encodedCopyMs": 0.0012000000060652383
+      },
+      "metrics": {
+        "width": 320,
+        "height": 180,
+        "rgbMse": 192.90029514,
+        "rgbPsnrDb": 25.27747,
+        "identicalRgb": false,
+        "maxChannelError": 125,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/png-320-scaled0-method0.webp"
+    },
+    {
+      "input": "benchmarks/gradient-1920.png",
+      "width": 320,
+      "scaled": false,
+      "method": 2,
+      "inputBytes": 5065643,
+      "decodedDimensions": [
+        1920,
+        1080
+      ],
+      "decodedRgbaBytes": 8294400,
+      "outputBytes": 8362,
+      "samples": [
+        {
+          "outerMs": 82.04052500000398,
+          "decodeMs": 49.871847999995225,
+          "decodedCopyMs": 0.0018000000054598786,
+          "resizeMs": 24.091497999994317,
+          "encodeMs": 7.542936000005284,
+          "encodedCopyMs": 0.001799999998183921
+        },
+        {
+          "outerMs": 82.42144800000096,
+          "decodeMs": 50.00796900000569,
+          "decodedCopyMs": 0.001799999998183921,
+          "resizeMs": 24.395219999998517,
+          "encodeMs": 7.512415999997756,
+          "encodedCopyMs": 0.0019200000024284236
+        },
+        {
+          "outerMs": 81.89656499999546,
+          "decodeMs": 49.9851290000006,
+          "decodedCopyMs": 0.001799999998183921,
+          "resizeMs": 23.86669599999732,
+          "encodeMs": 7.518735000005108,
+          "encodedCopyMs": 0.0014799999989918433
+        },
+        {
+          "outerMs": 81.72300299999915,
+          "decodeMs": 49.91788799999631,
+          "decodedCopyMs": 0.001720000000204891,
+          "resizeMs": 23.76841599999898,
+          "encodeMs": 7.501255000002857,
+          "encodedCopyMs": 0.0012399999977787957
+        },
+        {
+          "outerMs": 82.79573100000562,
+          "decodeMs": 50.18261099999654,
+          "decodedCopyMs": 0.001720000000204891,
+          "resizeMs": 24.521700999997847,
+          "encodeMs": 7.568536000006134,
+          "encodedCopyMs": 0.0017199999929289334
+        }
+      ],
+      "medians": {
+        "outerMs": 82.04052500000398,
+        "decodeMs": 49.9851290000006,
+        "decodedCopyMs": 0.001799999998183921,
+        "resizeMs": 24.091497999994317,
+        "encodeMs": 7.518735000005108,
+        "encodedCopyMs": 0.0017199999929289334
+      },
+      "metrics": {
+        "width": 320,
+        "height": 180,
+        "rgbMse": 193.69175347,
+        "rgbPsnrDb": 25.25969,
+        "identicalRgb": false,
+        "maxChannelError": 133,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/png-320-scaled0-method2.webp"
+    },
+    {
+      "input": "benchmarks/gradient-1920.png",
+      "width": 320,
+      "scaled": false,
+      "method": 4,
+      "inputBytes": 5065643,
+      "decodedDimensions": [
+        1920,
+        1080
+      ],
+      "decodedRgbaBytes": 8294400,
+      "outputBytes": 7630,
+      "samples": [
+        {
+          "outerMs": 93.84797199999593,
+          "decodeMs": 50.109049999999115,
+          "decodedCopyMs": 0.001879999996162951,
+          "resizeMs": 23.874376000007032,
+          "encodeMs": 19.359382999995432,
+          "encodedCopyMs": 0.0027600000030361116
+        },
+        {
+          "outerMs": 93.64805199999682,
+          "decodeMs": 49.97672899999452,
+          "decodedCopyMs": 0.0019600000014179386,
+          "resizeMs": 23.74457500000426,
+          "encodeMs": 19.410102999994706,
+          "encodedCopyMs": 0.002440000003844034
+        },
+        {
+          "outerMs": 94.15717500000028,
+          "decodeMs": 50.12044999999489,
+          "decodedCopyMs": 0.0018400000044493936,
+          "resizeMs": 24.069297000001825,
+          "encodeMs": 19.42746399999305,
+          "encodedCopyMs": 0.0028400000010151416
+        },
+        {
+          "outerMs": 93.56405099999392,
+          "decodeMs": 49.942689000003156,
+          "decodedCopyMs": 0.0013600000020232983,
+          "resizeMs": 23.725534999997762,
+          "encodeMs": 19.38470299999608,
+          "encodedCopyMs": 0.0026800000050570816
+        },
+        {
+          "outerMs": 93.94049400000222,
+          "decodeMs": 50.069649000004574,
+          "decodedCopyMs": 0.001799999998183921,
+          "resizeMs": 23.982617000001483,
+          "encodeMs": 19.368422999999893,
+          "encodedCopyMs": 0.0020399999993969686
+        }
+      ],
+      "medians": {
+        "outerMs": 93.84797199999593,
+        "decodeMs": 50.069649000004574,
+        "decodedCopyMs": 0.0018400000044493936,
+        "resizeMs": 23.874376000007032,
+        "encodeMs": 19.38470299999608,
+        "encodedCopyMs": 0.0026800000050570816
+      },
+      "metrics": {
+        "width": 320,
+        "height": 180,
+        "rgbMse": 193.05983218,
+        "rgbPsnrDb": 25.27388,
+        "identicalRgb": false,
+        "maxChannelError": 121,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/png-320-scaled0-method4.webp"
+    },
+    {
+      "input": "benchmarks/gradient-1920.png",
+      "width": 320,
+      "scaled": false,
+      "method": 6,
+      "inputBytes": 5065643,
+      "decodedDimensions": [
+        1920,
+        1080
+      ],
+      "decodedRgbaBytes": 8294400,
+      "outputBytes": 7702,
+      "samples": [
+        {
+          "outerMs": 97.80668100000184,
+          "decodeMs": 49.86948800000391,
+          "decodedCopyMs": 0.001879999996162951,
+          "resizeMs": 23.94605700000102,
+          "encodeMs": 23.398252999999386,
+          "encodedCopyMs": 0.0018000000054598786
+        },
+        {
+          "outerMs": 98.00476300000446,
+          "decodeMs": 49.947728999999526,
+          "decodedCopyMs": 0.0012799999967683107,
+          "resizeMs": 24.06945799999812,
+          "encodeMs": 23.461052999999083,
+          "encodedCopyMs": 0.0020400000066729262
+        },
+        {
+          "outerMs": 98.05316400000447,
+          "decodeMs": 49.938608000004024,
+          "decodedCopyMs": 0.0014400000000023283,
+          "resizeMs": 24.146779000002425,
+          "encodeMs": 23.437852999995812,
+          "encodedCopyMs": 0.0019200000024284236
+        },
+        {
+          "outerMs": 97.77684099999897,
+          "decodeMs": 49.98912900000141,
+          "decodedCopyMs": 0.0013599999947473407,
+          "resizeMs": 23.693575000004785,
+          "encodeMs": 23.544534000000567,
+          "encodedCopyMs": 0.005160000000614673
+        },
+        {
+          "outerMs": 98.31636500000604,
+          "decodeMs": 50.0934500000003,
+          "decodedCopyMs": 0.001759999999194406,
+          "resizeMs": 24.128497999998217,
+          "encodeMs": 23.440693000004103,
+          "encodedCopyMs": 0.0025599999935366213
+        }
+      ],
+      "medians": {
+        "outerMs": 98.00476300000446,
+        "decodeMs": 49.947728999999526,
+        "decodedCopyMs": 0.0014400000000023283,
+        "resizeMs": 24.06945799999812,
+        "encodeMs": 23.440693000004103,
+        "encodedCopyMs": 0.0020400000066729262
+      },
+      "metrics": {
+        "width": 320,
+        "height": 180,
+        "rgbMse": 193.5382581,
+        "rgbPsnrDb": 25.26314,
+        "identicalRgb": false,
+        "maxChannelError": 122,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/png-320-scaled0-method6.webp"
+    },
+    {
+      "input": "benchmarks/gradient-1920.png",
+      "width": 800,
+      "scaled": false,
+      "method": 0,
+      "inputBytes": 5065643,
+      "decodedDimensions": [
+        1920,
+        1080
+      ],
+      "decodedRgbaBytes": 8294400,
+      "outputBytes": 25582,
+      "samples": [
+        {
+          "outerMs": 93.75557200000185,
+          "decodeMs": 49.910648000004585,
+          "decodedCopyMs": 0.001039999995555263,
+          "resizeMs": 23.85317600000417,
+          "encodeMs": 19.425623999995878,
+          "encodedCopyMs": 0.0031200000012177043
+        },
+        {
+          "outerMs": 93.8569720000014,
+          "decodeMs": 49.98728900000424,
+          "decodedCopyMs": 0.0014000000010128133,
+          "resizeMs": 23.95345699999598,
+          "encodeMs": 19.358783000003314,
+          "encodedCopyMs": 0.0024799999955575913
+        },
+        {
+          "outerMs": 93.9237340000036,
+          "decodeMs": 49.96528799999942,
+          "decodedCopyMs": 0.0013600000020232983,
+          "resizeMs": 24.009217999999237,
+          "encodeMs": 19.41218300000037,
+          "encodedCopyMs": 0.0029599999979836866
+        },
+        {
+          "outerMs": 94.44877699999779,
+          "decodeMs": 50.14408999999432,
+          "decodedCopyMs": 0.0012400000050547533,
+          "resizeMs": 24.254338999999163,
+          "encodeMs": 19.461742999999842,
+          "encodedCopyMs": 0.0022800000006100163
+        },
+        {
+          "outerMs": 94.79497899999842,
+          "decodeMs": 50.36837099999684,
+          "decodedCopyMs": 0.0011999999987892807,
+          "resizeMs": 24.305460000003222,
+          "encodeMs": 19.482184000000416,
+          "encodedCopyMs": 0.0022800000006100163
+        }
+      ],
+      "medians": {
+        "outerMs": 93.9237340000036,
+        "decodeMs": 49.98728900000424,
+        "decodedCopyMs": 0.0012400000050547533,
+        "resizeMs": 24.009217999999237,
+        "encodeMs": 19.425623999995878,
+        "encodedCopyMs": 0.0024799999955575913
+      },
+      "metrics": {
+        "width": 800,
+        "height": 450,
+        "rgbMse": 79.03960926,
+        "rgbPsnrDb": 29.15236,
+        "identicalRgb": false,
+        "maxChannelError": 128,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/png-800-scaled0-method0.webp"
+    },
+    {
+      "input": "benchmarks/gradient-1920.png",
+      "width": 800,
+      "scaled": false,
+      "method": 2,
+      "inputBytes": 5065643,
+      "decodedDimensions": [
+        1920,
+        1080
+      ],
+      "decodedRgbaBytes": 8294400,
+      "outputBytes": 22962,
+      "samples": [
+        {
+          "outerMs": 112.29218899999978,
+          "decodeMs": 49.99912900000345,
+          "decodedCopyMs": 0.01623999999719672,
+          "resizeMs": 23.924016999997548,
+          "encodeMs": 37.793399000001955,
+          "encodedCopyMs": 0.002599999999802094
+        },
+        {
+          "outerMs": 111.88330600000336,
+          "decodeMs": 49.8788080000013,
+          "decodedCopyMs": 0.0014000000010128133,
+          "resizeMs": 23.84065600000031,
+          "encodeMs": 37.61399800000072,
+          "encodedCopyMs": 0.002759999995760154
+        },
+        {
+          "outerMs": 112.03450700000394,
+          "decodeMs": 49.9205279999951,
+          "decodedCopyMs": 0.0014400000000023283,
+          "resizeMs": 23.891777000004367,
+          "encodeMs": 37.63379700000223,
+          "encodedCopyMs": 0.0028800000000046566
+        },
+        {
+          "outerMs": 111.94194699999935,
+          "decodeMs": 49.939087999999174,
+          "decodedCopyMs": 0.0011200000008102506,
+          "resizeMs": 23.858976000003167,
+          "encodeMs": 37.58703799999785,
+          "encodedCopyMs": 0.0029199999989941716
+        },
+        {
+          "outerMs": 112.77659199999471,
+          "decodeMs": 50.05088999999862,
+          "decodedCopyMs": 0.0014000000010128133,
+          "resizeMs": 24.04269700000441,
+          "encodeMs": 38.13636199999746,
+          "encodedCopyMs": 0.0030800000022281893
+        }
+      ],
+      "medians": {
+        "outerMs": 112.03450700000394,
+        "decodeMs": 49.939087999999174,
+        "decodedCopyMs": 0.0014000000010128133,
+        "resizeMs": 23.891777000004367,
+        "encodeMs": 37.63379700000223,
+        "encodedCopyMs": 0.0028800000000046566
+      },
+      "metrics": {
+        "width": 800,
+        "height": 450,
+        "rgbMse": 80.87069259,
+        "rgbPsnrDb": 29.05289,
+        "identicalRgb": false,
+        "maxChannelError": 130,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/png-800-scaled0-method2.webp"
+    },
+    {
+      "input": "benchmarks/gradient-1920.png",
+      "width": 800,
+      "scaled": false,
+      "method": 4,
+      "inputBytes": 5065643,
+      "decodedDimensions": [
+        1920,
+        1080
+      ],
+      "decodedRgbaBytes": 8294400,
+      "outputBytes": 21044,
+      "samples": [
+        {
+          "outerMs": 176.65886400000454,
+          "decodeMs": 50.570573000004515,
+          "decodedCopyMs": 0.000999999996565748,
+          "resizeMs": 24.74502300000313,
+          "encodeMs": 100.76630399999704,
+          "encodedCopyMs": 0.002639999998791609
+        },
+        {
+          "outerMs": 174.94481200000155,
+          "decodeMs": 49.9326080000028,
+          "decodedCopyMs": 0.0012800000040442683,
+          "resizeMs": 23.895616999994672,
+          "encodeMs": 100.55854199999885,
+          "encodedCopyMs": 0.0030000000042491592
+        },
+        {
+          "outerMs": 175.23145400000067,
+          "decodeMs": 49.964969000000565,
+          "decodedCopyMs": 0.0012799999967683107,
+          "resizeMs": 23.97433599999931,
+          "encodeMs": 100.75286400000186,
+          "encodedCopyMs": 0.0029599999979836866
+        },
+        {
+          "outerMs": 175.3016140000036,
+          "decodeMs": 49.99228900000162,
+          "decodedCopyMs": 0.0014400000000023283,
+          "resizeMs": 23.969137000000046,
+          "encodeMs": 100.8017039999977,
+          "encodedCopyMs": 0.0029199999989941716
+        },
+        {
+          "outerMs": 175.4998160000032,
+          "decodeMs": 50.2135300000009,
+          "decodedCopyMs": 0.0011599999997997656,
+          "resizeMs": 23.987458000003244,
+          "encodeMs": 100.72814300000027,
+          "encodedCopyMs": 0.0024799999955575913
+        }
+      ],
+      "medians": {
+        "outerMs": 175.3016140000036,
+        "decodeMs": 49.99228900000162,
+        "decodedCopyMs": 0.0012799999967683107,
+        "resizeMs": 23.97433599999931,
+        "encodeMs": 100.75286400000186,
+        "encodedCopyMs": 0.0029199999989941716
+      },
+      "metrics": {
+        "width": 800,
+        "height": 450,
+        "rgbMse": 110.93084815,
+        "rgbPsnrDb": 27.68028,
+        "identicalRgb": false,
+        "maxChannelError": 130,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/png-800-scaled0-method4.webp"
+    },
+    {
+      "input": "benchmarks/gradient-1920.png",
+      "width": 800,
+      "scaled": false,
+      "method": 6,
+      "inputBytes": 5065643,
+      "decodedDimensions": [
+        1920,
+        1080
+      ],
+      "decodedRgbaBytes": 8294400,
+      "outputBytes": 20986,
+      "samples": [
+        {
+          "outerMs": 185.41436899999826,
+          "decodeMs": 50.035328999998455,
+          "decodedCopyMs": 0.0014400000000023283,
+          "resizeMs": 24.195018999998865,
+          "encodeMs": 110.54757600000448,
+          "encodedCopyMs": 0.002759999995760154
+        },
+        {
+          "outerMs": 185.0152459999954,
+          "decodeMs": 49.9816490000012,
+          "decodedCopyMs": 0.0014000000010128133,
+          "resizeMs": 24.027817999995023,
+          "encodeMs": 110.44129500000417,
+          "encodedCopyMs": 0.003479999999399297
+        },
+        {
+          "outerMs": 184.98728500000288,
+          "decodeMs": 50.03104999999778,
+          "decodedCopyMs": 0.0012399999977787957,
+          "resizeMs": 23.995577000001504,
+          "encodeMs": 110.38337499999761,
+          "encodedCopyMs": 0.0028000000020256266
+        },
+        {
+          "outerMs": 185.24716699999408,
+          "decodeMs": 49.994528999995964,
+          "decodedCopyMs": 0.0010800000018207356,
+          "resizeMs": 23.841816000000108,
+          "encodeMs": 110.83797799999593,
+          "encodedCopyMs": 0.0026800000050570816
+        },
+        {
+          "outerMs": 198.85882799999672,
+          "decodeMs": 49.9514479999998,
+          "decodedCopyMs": 0.0013600000020232983,
+          "resizeMs": 25.59914900000149,
+          "encodeMs": 122.76486699999805,
+          "encodedCopyMs": 0.0023999999975785613
+        }
+      ],
+      "medians": {
+        "outerMs": 185.24716699999408,
+        "decodeMs": 49.994528999995964,
+        "decodedCopyMs": 0.0013600000020232983,
+        "resizeMs": 24.027817999995023,
+        "encodeMs": 110.54757600000448,
+        "encodedCopyMs": 0.002759999995760154
+      },
+      "metrics": {
+        "width": 800,
+        "height": 450,
+        "rgbMse": 112.8976037,
+        "rgbPsnrDb": 27.60396,
+        "identicalRgb": false,
+        "maxChannelError": 130,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/png-800-scaled0-method6.webp"
+    },
+    {
+      "input": "benchmarks/gradient-1920.png",
+      "width": 1600,
+      "scaled": false,
+      "method": 0,
+      "inputBytes": 5065643,
+      "decodedDimensions": [
+        1920,
+        1080
+      ],
+      "decodedRgbaBytes": 8294400,
+      "outputBytes": 46534,
+      "samples": [
+        {
+          "outerMs": 157.4765619999962,
+          "decodeMs": 50.16577099999995,
+          "decodedCopyMs": 0.0011999999987892807,
+          "resizeMs": 39.40645100000256,
+          "encodeMs": 67.31793599999219,
+          "encodedCopyMs": 0.0043200000072829425
+        },
+        {
+          "outerMs": 157.51024300001154,
+          "decodeMs": 50.11345000000438,
+          "decodedCopyMs": 0.0011999999987892807,
+          "resizeMs": 39.47061099999701,
+          "encodeMs": 67.32573700000648,
+          "encodedCopyMs": 0.004159999996772967
+        },
+        {
+          "outerMs": 158.9974130000046,
+          "decodeMs": 49.98524900000484,
+          "decodedCopyMs": 0.0013599999947473407,
+          "resizeMs": 39.15708900000027,
+          "encodeMs": 69.24191100000462,
+          "encodedCopyMs": 0.003920000002835877
+        },
+        {
+          "outerMs": 157.48724299999594,
+          "decodeMs": 50.4434520000068,
+          "decodedCopyMs": 0.0013199999957578257,
+          "resizeMs": 39.32645000000775,
+          "encodeMs": 67.1590559999895,
+          "encodedCopyMs": 0.0038400000048568472
+        },
+        {
+          "outerMs": 157.47260199999437,
+          "decodeMs": 50.19048999999359,
+          "decodedCopyMs": 0.0012799999967683107,
+          "resizeMs": 39.30409000000509,
+          "encodeMs": 67.36209700000472,
+          "encodedCopyMs": 0.004439999989699572
+        }
+      ],
+      "medians": {
+        "outerMs": 157.48724299999594,
+        "decodeMs": 50.16577099999995,
+        "decodedCopyMs": 0.0012799999967683107,
+        "resizeMs": 39.32645000000775,
+        "encodeMs": 67.32573700000648,
+        "encodedCopyMs": 0.004159999996772967
+      },
+      "metrics": {
+        "width": 1600,
+        "height": 900,
+        "rgbMse": 44.66938935,
+        "rgbPsnrDb": 31.6307,
+        "identicalRgb": false,
+        "maxChannelError": 152,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/png-1600-scaled0-method0.webp"
+    },
+    {
+      "input": "benchmarks/gradient-1920.png",
+      "width": 1600,
+      "scaled": false,
+      "method": 2,
+      "inputBytes": 5065643,
+      "decodedDimensions": [
+        1920,
+        1080
+      ],
+      "decodedRgbaBytes": 8294400,
+      "outputBytes": 42764,
+      "samples": [
+        {
+          "outerMs": 205.6469980000038,
+          "decodeMs": 50.16556999999739,
+          "decodedCopyMs": 0.0011200000008102506,
+          "resizeMs": 39.42313099999592,
+          "encodeMs": 115.49309300000459,
+          "encodedCopyMs": 0.004399999997986015
+        },
+        {
+          "outerMs": 205.11071400000947,
+          "decodeMs": 50.14512999998988,
+          "decodedCopyMs": 0.0012000000133411959,
+          "resizeMs": 39.17740899999626,
+          "encodeMs": 115.18957099999534,
+          "encodedCopyMs": 0.0043200000072829425
+        },
+        {
+          "outerMs": 205.20123500000045,
+          "decodeMs": 50.0799299999926,
+          "decodedCopyMs": 0.001280000011320226,
+          "resizeMs": 39.19120899999689,
+          "encodeMs": 115.32169199999771,
+          "encodedCopyMs": 0.0043200000072829425
+        },
+        {
+          "outerMs": 205.6582780000026,
+          "decodeMs": 50.41377199999988,
+          "decodedCopyMs": 0.0009600000048521906,
+          "resizeMs": 39.23396899999352,
+          "encodeMs": 115.45141200000944,
+          "encodedCopyMs": 0.0042409999878145754
+        },
+        {
+          "outerMs": 205.79799900000216,
+          "decodeMs": 50.354051999995136,
+          "decodedCopyMs": 0.0011200000008102506,
+          "resizeMs": 39.40329099999508,
+          "encodeMs": 115.42753200000152,
+          "encodedCopyMs": 0.003680000008898787
+        }
+      ],
+      "medians": {
+        "outerMs": 205.6469980000038,
+        "decodeMs": 50.16556999999739,
+        "decodedCopyMs": 0.0011200000008102506,
+        "resizeMs": 39.23396899999352,
+        "encodeMs": 115.42753200000152,
+        "encodedCopyMs": 0.0043200000072829425
+      },
+      "metrics": {
+        "width": 1600,
+        "height": 900,
+        "rgbMse": 45.06613588,
+        "rgbPsnrDb": 31.5923,
+        "identicalRgb": false,
+        "maxChannelError": 145,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/png-1600-scaled0-method2.webp"
+    },
+    {
+      "input": "benchmarks/gradient-1920.png",
+      "width": 1600,
+      "scaled": false,
+      "method": 4,
+      "inputBytes": 5065643,
+      "decodedDimensions": [
+        1920,
+        1080
+      ],
+      "decodedRgbaBytes": 8294400,
+      "outputBytes": 41440,
+      "samples": [
+        {
+          "outerMs": 430.2400159999961,
+          "decodeMs": 50.074569000003976,
+          "decodedCopyMs": 0.0013600000020232983,
+          "resizeMs": 39.16612999999779,
+          "encodeMs": 340.437672,
+          "encodedCopyMs": 0.004079999998793937
+        },
+        {
+          "outerMs": 430.08585499999754,
+          "decodeMs": 50.06228899999405,
+          "decodedCopyMs": 0.018280000003869645,
+          "resizeMs": 39.21140999998897,
+          "encodeMs": 340.22415100000217,
+          "encodedCopyMs": 0.005120000001625158
+        },
+        {
+          "outerMs": 429.99937400000636,
+          "decodeMs": 50.11341000000539,
+          "decodedCopyMs": 0.001640000002225861,
+          "resizeMs": 39.25016999999934,
+          "encodeMs": 340.05546999999206,
+          "encodedCopyMs": 0.0038400000048568472
+        },
+        {
+          "outerMs": 436.9038650000002,
+          "decodeMs": 57.2943030000024,
+          "decodedCopyMs": 0.001560000004246831,
+          "resizeMs": 39.188088999988395,
+          "encodeMs": 339.8389490000118,
+          "encodedCopyMs": 0.004000000000814907
+        },
+        {
+          "outerMs": 431.45242499999586,
+          "decodeMs": 50.23553000000538,
+          "decodedCopyMs": 0.001600000003236346,
+          "resizeMs": 39.27133000000322,
+          "encodeMs": 341.35551999999734,
+          "encodedCopyMs": 0.004279999993741512
+        }
+      ],
+      "medians": {
+        "outerMs": 430.2400159999961,
+        "decodeMs": 50.11341000000539,
+        "decodedCopyMs": 0.001600000003236346,
+        "resizeMs": 39.21140999998897,
+        "encodeMs": 340.22415100000217,
+        "encodedCopyMs": 0.004079999998793937
+      },
+      "metrics": {
+        "width": 1600,
+        "height": 900,
+        "rgbMse": 47.21455532,
+        "rgbPsnrDb": 31.39004,
+        "identicalRgb": false,
+        "maxChannelError": 139,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/png-1600-scaled0-method4.webp"
+    },
+    {
+      "input": "benchmarks/gradient-1920.png",
+      "width": 1600,
+      "scaled": false,
+      "method": 6,
+      "inputBytes": 5065643,
+      "decodedDimensions": [
+        1920,
+        1080
+      ],
+      "decodedRgbaBytes": 8294400,
+      "outputBytes": 41308,
+      "samples": [
+        {
+          "outerMs": 441.9550220000019,
+          "decodeMs": 50.00404900000285,
+          "decodedCopyMs": 0.0012800000040442683,
+          "resizeMs": 39.26284999999916,
+          "encodeMs": 352.054237999997,
+          "encodedCopyMs": 0.004320000000006985
+        },
+        {
+          "outerMs": 442.3081050000037,
+          "decodeMs": 50.32501200000115,
+          "decodedCopyMs": 0.001360000009299256,
+          "resizeMs": 39.22764899999311,
+          "encodeMs": 352.0670790000004,
+          "encodedCopyMs": 0.003519999998388812
+        },
+        {
+          "outerMs": 442.105144000001,
+          "decodeMs": 50.07268900000781,
+          "decodedCopyMs": 0.0010400000028312206,
+          "resizeMs": 39.2787299999909,
+          "encodeMs": 352.16448000000673,
+          "encodedCopyMs": 0.004079999998793937
+        },
+        {
+          "outerMs": 442.4336250000051,
+          "decodeMs": 50.00360900000669,
+          "decodedCopyMs": 0.0014399999927263707,
+          "resizeMs": 39.14460900000995,
+          "encodeMs": 352.7113640000025,
+          "encodedCopyMs": 0.003799999991315417
+        },
+        {
+          "outerMs": 445.04376500000944,
+          "decodeMs": 50.06637000000046,
+          "decodedCopyMs": 0.001560000004246831,
+          "resizeMs": 40.11277599999448,
+          "encodeMs": 354.29173500000616,
+          "encodedCopyMs": 0.004799999995157123
+        }
+      ],
+      "medians": {
+        "outerMs": 442.3081050000037,
+        "decodeMs": 50.06637000000046,
+        "decodedCopyMs": 0.001360000009299256,
+        "resizeMs": 39.26284999999916,
+        "encodeMs": 352.16448000000673,
+        "encodedCopyMs": 0.004079999998793937
+      },
+      "metrics": {
+        "width": 1600,
+        "height": 900,
+        "rgbMse": 46.45866134,
+        "rgbPsnrDb": 31.46014,
+        "identicalRgb": false,
+        "maxChannelError": 138,
+        "alphaRmse": 0
+      },
+      "path": "benchmarks/experiments/png-1600-scaled0-method6.webp"
+    }
+  ],
+  "note": "Local Node ARM64 WASM host wall-clock durations, not deployed Worker per-stage CPU. Timed stages exclude JS/WASM boundary copies; outerMs includes result extraction. References are full-resolution decode + resize encoded losslessly. RGB PSNR is not a perceptual-quality guarantee; null PSNR with identicalRgb means zero RGB error."
+}

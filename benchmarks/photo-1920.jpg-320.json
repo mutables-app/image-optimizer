@@ -1,0 +1,118 @@
+{
+  "timestamp": "2026-10-29T11:32:05.000Z",
+  "url": "[maintainer test endpoint omitted]",
+  "input": "benchmarks/photo-1920.jpg",
+  "inputBytes": 1063708,
+  "firstRequest": {
+    "run": 0,
+    "status": 200,
+    "ok": true,
+    "roundTripMs": 350.508302,
+    "colo": "ARN",
+    "outputBytes": 9068,
+    "observedTransformMs": 0
+  },
+  "warmRuns": 10,
+  "warmSuccesses": 5,
+  "failures": 5,
+  "p50Ms": 211.91852100000006,
+  "p95Ms": 220.53474499999993,
+  "outputBytes": 9068,
+  "results": [
+    {
+      "run": 0,
+      "status": 200,
+      "ok": true,
+      "roundTripMs": 350.508302,
+      "colo": "ARN",
+      "outputBytes": 9068,
+      "observedTransformMs": 0
+    },
+    {
+      "run": 1,
+      "status": 503,
+      "ok": false,
+      "roundTripMs": 139.96747100000005,
+      "colo": null,
+      "error": "Cloudflare 1102: resource limits exceeded"
+    },
+    {
+      "run": 2,
+      "status": 200,
+      "ok": true,
+      "roundTripMs": 209.33466199999998,
+      "colo": "ARN",
+      "outputBytes": 9068,
+      "observedTransformMs": 0
+    },
+    {
+      "run": 3,
+      "status": 503,
+      "ok": false,
+      "roundTripMs": 67.08865400000002,
+      "colo": null,
+      "error": "Cloudflare 1102: resource limits exceeded"
+    },
+    {
+      "run": 4,
+      "status": 200,
+      "ok": true,
+      "roundTripMs": 211.91852100000006,
+      "colo": "ARN",
+      "outputBytes": 9068,
+      "observedTransformMs": 0
+    },
+    {
+      "run": 5,
+      "status": 503,
+      "ok": false,
+      "roundTripMs": 64.234913,
+      "colo": null,
+      "error": "Cloudflare 1102: resource limits exceeded"
+    },
+    {
+      "run": 6,
+      "status": 200,
+      "ok": true,
+      "roundTripMs": 220.53474499999993,
+      "colo": "ARN",
+      "outputBytes": 9068,
+      "observedTransformMs": 0
+    },
+    {
+      "run": 7,
+      "status": 503,
+      "ok": false,
+      "roundTripMs": 68.55646499999989,
+      "colo": null,
+      "error": "Cloudflare 1102: resource limits exceeded"
+    },
+    {
+      "run": 8,
+      "status": 200,
+      "ok": true,
+      "roundTripMs": 208.773459,
+      "colo": "ARN",
+      "outputBytes": 9068,
+      "observedTransformMs": 0
+    },
+    {
+      "run": 9,
+      "status": 400,
+      "ok": false,
+      "roundTripMs": 65.7553640000001,
+      "colo": null,
+      "error": "{\"error\":\"Cannot perform %TypedArray%.prototype.set on a detached or out-of-bounds ArrayBuffer\"}"
+    },
+    {
+      "run": 10,
+      "status": 200,
+      "ok": true,
+      "roundTripMs": 218.4882090000001,
+      "colo": "ARN",
+      "outputBytes": 9068,
+      "observedTransformMs": 0
+    }
+  ],
+  "note": "Sequential HTTP round trips include upload/download and network latency. First request is not proof of a cold start. Worker timers are not CPU measurements. Percentiles include successful warm requests only; compare failure counts too."
+}

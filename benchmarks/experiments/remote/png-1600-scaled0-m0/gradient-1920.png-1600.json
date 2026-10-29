@@ -1,0 +1,78 @@
+{
+  "timestamp": "2026-10-29T11:50:40.821Z",
+  "url": "[maintainer test endpoint omitted]",
+  "input": "benchmarks/gradient-1920.png",
+  "inputBytes": 5065643,
+  "firstRequest": {
+    "run": 0,
+    "status": 200,
+    "ok": true,
+    "roundTripMs": 900.836609,
+    "colo": "WAW",
+    "outputBytes": 46534,
+    "observedTransformMs": 0
+  },
+  "warmRuns": 5,
+  "warmSuccesses": 5,
+  "failures": 0,
+  "p50Ms": 554.317852,
+  "p95Ms": 651.6012499999997,
+  "outputBytes": 46534,
+  "results": [
+    {
+      "run": 0,
+      "status": 200,
+      "ok": true,
+      "roundTripMs": 900.836609,
+      "colo": "WAW",
+      "outputBytes": 46534,
+      "observedTransformMs": 0
+    },
+    {
+      "run": 1,
+      "status": 200,
+      "ok": true,
+      "roundTripMs": 554.317852,
+      "colo": "WAW",
+      "outputBytes": 46534,
+      "observedTransformMs": 0
+    },
+    {
+      "run": 2,
+      "status": 200,
+      "ok": true,
+      "roundTripMs": 639.3256389999999,
+      "colo": "WAW",
+      "outputBytes": 46534,
+      "observedTransformMs": 0
+    },
+    {
+      "run": 3,
+      "status": 200,
+      "ok": true,
+      "roundTripMs": 397.04817,
+      "colo": "WAW",
+      "outputBytes": 46534,
+      "observedTransformMs": 0
+    },
+    {
+      "run": 4,
+      "status": 200,
+      "ok": true,
+      "roundTripMs": 651.6012499999997,
+      "colo": "WAW",
+      "outputBytes": 46534,
+      "observedTransformMs": 0
+    },
+    {
+      "run": 5,
+      "status": 200,
+      "ok": true,
+      "roundTripMs": 424.5974150000002,
+      "colo": "WAW",
+      "outputBytes": 46534,
+      "observedTransformMs": 0
+    }
+  ],
+  "note": "Sequential HTTP round trips include upload/download and network latency. First request is not proof of a cold start. Worker timers are not CPU measurements. Percentiles include successful warm requests only; compare failure counts too."
+}

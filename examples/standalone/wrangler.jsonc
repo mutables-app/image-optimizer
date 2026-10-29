@@ -1,0 +1,7 @@
+{
+ "name": "standalone-image-optimizer",
+ "main": "index.js",
+ "compatibility_date": "2026-09-02",
+ "compatibility_flags": ["new_module_registry"],
+ "rules": [{"type":"CompiledWasm","globs":["**/*.wasm"],"fallthrough":true}]
+}

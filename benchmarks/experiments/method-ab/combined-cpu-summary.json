@@ -1,0 +1,82 @@
+{
+  "runs": [
+    "benchmarks/experiments/method-ab/cloudflare-cpu-events.json",
+    "benchmarks/experiments/method-ab-recheck/cloudflare-cpu-events.json"
+  ],
+  "percentiles": "median uses midpoint average; p95 uses nearest rank",
+  "note": "Wrangler tail events are a sampled subset of successful HTTP requests, especially at 800px.",
+  "results": [
+    {
+      "width": 800,
+      "method": 1,
+      "traceSamples": 15,
+      "medianCpuMs": 145,
+      "p95CpuMs": 235,
+      "minCpuMs": 128,
+      "maxCpuMs": 235
+    },
+    {
+      "width": 800,
+      "method": 2,
+      "traceSamples": 16,
+      "medianCpuMs": 157.0,
+      "p95CpuMs": 262,
+      "minCpuMs": 141,
+      "maxCpuMs": 262
+    },
+    {
+      "width": 800,
+      "method": 3,
+      "traceSamples": 19,
+      "medianCpuMs": 234,
+      "p95CpuMs": 369,
+      "minCpuMs": 208,
+      "maxCpuMs": 369
+    },
+    {
+      "width": 800,
+      "method": 4,
+      "traceSamples": 18,
+      "medianCpuMs": 233.5,
+      "p95CpuMs": 548,
+      "minCpuMs": 215,
+      "maxCpuMs": 548
+    },
+    {
+      "width": 1600,
+      "method": 1,
+      "traceSamples": 24,
+      "medianCpuMs": 276.0,
+      "p95CpuMs": 387,
+      "minCpuMs": 242,
+      "maxCpuMs": 422
+    },
+    {
+      "width": 1600,
+      "method": 2,
+      "traceSamples": 24,
+      "medianCpuMs": 313.5,
+      "p95CpuMs": 490,
+      "minCpuMs": 276,
+      "maxCpuMs": 528
+    },
+    {
+      "width": 1600,
+      "method": 3,
+      "traceSamples": 24,
+      "medianCpuMs": 638.5,
+      "p95CpuMs": 1071,
+      "minCpuMs": 579,
+      "maxCpuMs": 1137
+    },
+    {
+      "width": 1600,
+      "method": 4,
+      "traceSamples": 24,
+      "medianCpuMs": 654.0,
+      "p95CpuMs": 936,
+      "minCpuMs": 585,
+      "maxCpuMs": 1084
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "input": "gradient-1920.png",
+    "box": 1600,
+    "successes": 0,
+    "requests": 11,
+    "p50Ms": null,
+    "p95Ms": null,
+    "outputBytes": null,
+    "decodedDimensions": null
+  },
+  {
+    "input": "gradient-1920.png",
+    "box": 320,
+    "successes": 4,
+    "requests": 11,
+    "p50Ms": 247.4,
+    "p95Ms": 310.6,
+    "outputBytes": 7630,
+    "decodedDimensions": [
+      320,
+      180
+    ]
+  },
+  {
+    "input": "gradient-1920.png",
+    "box": 800,
+    "successes": 0,
+    "requests": 11,
+    "p50Ms": null,
+    "p95Ms": null,
+    "outputBytes": null,
+    "decodedDimensions": null
+  },
+  {
+    "input": "photo-1920.jpg",
+    "box": 1600,
+    "successes": 2,
+    "requests": 11,
+    "p50Ms": 691.7,
+    "p95Ms": 750.0,
+    "outputBytes": 223614,
+    "decodedDimensions": [
+      1067,
+      1600
+    ]
+  },
+  {
+    "input": "photo-1920.jpg",
+    "box": 320,
+    "successes": 6,
+    "requests": 11,
+    "p50Ms": 211.9,
+    "p95Ms": 220.5,
+    "outputBytes": 9068,
+    "decodedDimensions": [
+      213,
+      320
+    ]
+  },
+  {
+    "input": "photo-1920.jpg",
+    "box": 800,
+    "successes": 5,
+    "requests": 11,
+    "p50Ms": 307.2,
+    "p95Ms": 492.4,
+    "outputBytes": 58142,
+    "decodedDimensions": [
+      533,
+      800
+    ]
+  }
+]

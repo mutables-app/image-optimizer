@@ -1,0 +1,26 @@
+{
+  "name": "@mutables.app/image-optimizer",
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mutables-app/image-optimizer.git"
+  },
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "node": "./node.js",
+      "default": "./index.js"
+    }
+  },
+  "files": [
+    "*.js",
+    "*.d.ts",
+    "dist",
+    "licenses"
+  ],
+  "sideEffects": [
+    "./dist/*"
+  ]
+}

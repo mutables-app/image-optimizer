@@ -1,0 +1,9 @@
+.build/
+target/
+node_modules/
+.wrangler/
+*.log
+packages/optimizer/dist/
+/benchmarks/permanent/
+.dev.vars
+.dev.vars.*

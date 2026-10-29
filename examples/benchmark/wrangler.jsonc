@@ -1,0 +1,22 @@
+{
+  "name": "image-optimizer-benchmark",
+  "main": "index.js",
+  "compatibility_date": "2026-09-02",
+  "compatibility_flags": [
+    "new_module_registry"
+  ],
+  "workers_dev": true,
+  "rules": [
+    {
+      "type": "CompiledWasm",
+      "globs": [
+        "**/*.wasm"
+      ],
+      "fallthrough": true
+    }
+  ],
+  "account_id": "ffe18f97554741e99243ab47d4f6688f",
+  "limits": {
+    "cpu_ms": 1000
+  }
+}
