@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1 — 2026-10-29
+
+- Use libwebp's RGBX import path for JPEG input, which is always opaque, and avoid processing an unnecessary alpha channel during WebP encoding.
+
 ## 0.2.0 — 2026-10-29
 
 - Decode baseline JPEG and non-interlaced PNG sequentially and resize with a bounded Lanczos3 row window and SIMD128, for both default and fast speed settings.
