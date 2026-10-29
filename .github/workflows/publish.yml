@@ -74,12 +74,12 @@ jobs:
             echo 'published=false' >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Publish optimizer
+      - name: Stage optimizer package for approval
         working-directory: packages/optimizer
-        run: npm publish --access public
+        run: npm stage publish --access public
         if: (github.ref_type == 'tag' || (github.event_name == 'workflow_dispatch' && inputs.publish)) && steps.optimizer-version.outputs.published != 'true'
 
-      - name: Publish Computer adapter
+      - name: Stage Computer adapter for approval
         working-directory: packages/computer
-        run: npm publish --access public
+        run: npm stage publish --access public
         if: (github.ref_type == 'tag' || (github.event_name == 'workflow_dispatch' && inputs.publish)) && steps.computer-version.outputs.published != 'true'
