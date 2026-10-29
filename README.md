@@ -11,7 +11,7 @@ const webp = await image(inputBytes)
   .bytes();
 ```
 
-`speed: 'fast'` selects an internal encoder setting. Omit `speed` to keep the existing default. The fast path can produce larger files; the trade-off depends on the image. `.blob()` returns an `image/webp` Blob. Image work runs synchronously in the isolate, inside the returned promise.
+`speed: 'fast'` selects a faster internal WebP encoder setting and enables scaled JPEG decoding for resized images when the target permits it. That can avoid decoding every source pixel and reduce peak pixel-buffer memory for large JPEGs. This path accepts JPEG sources up to 16 megapixels when the scaled intermediate and output fit within `maxPixels` (8 million by default); PNG inputs and `lossless: true` requests retain full-resolution decoding. Omit `speed` to keep the existing defaults. The fast path can produce larger files; the trade-off depends on the image. `.blob()` returns an `image/webp` Blob. Image work runs synchronously in the isolate, inside the returned promise.
 
 ## Architecture
 

@@ -4,6 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {spawnSync} from 'node:child_process';
 const base = process.env.WORKER_URL ?? 'http://127.0.0.1:8787';
 const input = await readFile(new URL('./fixtures/rgba.png',import.meta.url));
+const input4k = await readFile(new URL('./fixtures/input-4k.jpg',import.meta.url));
 async function request(path, init) {
  const response = await fetch(base+path,init);
  if (!response.ok) throw new Error(`${response.status}: ${await response.text()}`);
@@ -14,6 +15,10 @@ assert.equal(direct.headers.get('content-type'),'image/webp');
 await direct.arrayBuffer();
 const fast = await request('/optimize?width=8&speed=fast',{method:'POST',body:input});
 const fastBytes = new Uint8Array(await fast.arrayBuffer());
+const largeFast = await request('/optimize?width=800&speed=fast',{method:'POST',body:input4k});
+const largeDecoded = spawnSync('python3',['test/decode-webp.py'],{input:new Uint8Array(await largeFast.arrayBuffer())});
+assert.equal(largeDecoded.status,0,largeDecoded.stderr.toString());
+assert.deepEqual([JSON.parse(largeDecoded.stdout).width,JSON.parse(largeDecoded.stdout).height],[800,450]);
 await request('/workspaces/integration/files/input.png',{method:'PUT',body:input});
 const result = await request('/workspaces/integration/optimize',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({input:'/input.png',output:'/output.webp',width:8,speed:'fast'})});
 assert.equal((await result.json()).path,'/output.webp');
@@ -26,4 +31,4 @@ const invalid = await fetch(base+'/optimize',{method:'POST',body:'invalid image'
 assert.equal(invalid.status,400);
 const invalidSpeed = await fetch(base+'/optimize?speed=slow',{method:'POST',body:input});
 assert.equal(invalidSpeed.status,400);
-console.log('PASS: default and fast-speed Worker conversion, Computer upload → optimize → download, independent WebP decode, invalid input/options');
+console.log('PASS: default and fast-speed Worker conversion including a 4K JPEG, Computer upload → optimize → download, independent WebP decode, invalid input/options');

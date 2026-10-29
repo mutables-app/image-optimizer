@@ -3,6 +3,7 @@ name: Publish npm packages
 on:
   push:
     branches: [main]
+    tags: ['v*']
   workflow_dispatch:
     inputs:
       publish:
@@ -30,6 +31,7 @@ jobs:
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org
+          package-manager-cache: false
 
       - uses: dtolnay/rust-toolchain@stable
         with:
@@ -53,9 +55,9 @@ jobs:
       - name: Publish optimizer
         working-directory: packages/optimizer
         run: npm publish --access public
-        if: github.event_name == 'workflow_dispatch' && inputs.publish
+        if: github.ref_type == 'tag' || (github.event_name == 'workflow_dispatch' && inputs.publish)
 
       - name: Publish Computer adapter
         working-directory: packages/computer
         run: npm publish --access public
-        if: github.event_name == 'workflow_dispatch' && inputs.publish
+        if: github.ref_type == 'tag' || (github.event_name == 'workflow_dispatch' && inputs.publish)

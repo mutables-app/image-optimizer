@@ -7,8 +7,8 @@ const jpeg=await readFile(new URL('../benchmarks/photo-1920.jpg',import.meta.url
 const args=(bytes,w=320,h=320)=>[bytes,w,h,true,true,80,false,8_000_000];
 test('experimental default and explicit method 4 preserve existing output',()=>{
  const parameters=args(png,16,16);
- assert.deepEqual(experiment(...parameters,false,-1,false).take_bytes(),optimize(...parameters,-1));
- assert.deepEqual(experiment(...parameters,false,4,false).take_bytes(),optimize(...parameters,-1));
+ assert.deepEqual(experiment(...parameters,false,-1,false).take_bytes(),optimize(...parameters,-1,false));
+ assert.deepEqual(experiment(...parameters,false,4,false).take_bytes(),optimize(...parameters,-1,false));
 });
 test('scaled JPEG keeps exact target geometry and reduces the decoded buffer',()=>{
  const result=experiment(...args(jpeg),true,4,true);
@@ -27,6 +27,6 @@ test('scaled JPEG handles width-only, stretch, and original pixel limits',()=>{
  assert.throws(()=>experiment(...args(png),false,7,false),/method/);
 });
 test('scaled flag does not change PNGs or full-size JPEG output',()=>{
- assert.deepEqual(experiment(...args(png,16,16),true,4,false).take_bytes(),optimize(...args(png,16,16),-1));
- assert.deepEqual(experiment(...args(jpeg,0,0),true,4,false).take_bytes(),optimize(...args(jpeg,0,0),-1));
+ assert.deepEqual(experiment(...args(png,16,16),true,4,false).take_bytes(),optimize(...args(png,16,16),-1,false));
+ assert.deepEqual(experiment(...args(jpeg,0,0),true,4,false).take_bytes(),optimize(...args(jpeg,0,0),-1,false));
 });

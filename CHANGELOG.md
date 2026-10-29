@@ -6,5 +6,5 @@
 - Add an optional Cloudflare Computer filesystem adapter that reads bounded streams and writes optimized output.
 - Support quality and lossless controls, resize modes, pixel and dimension limits, and the outcome-focused `speed: 'fast'` option. Encoder settings are selected internally; omitting `speed` preserves the previous encoder default.
 - Use a borrowed decoder buffer to avoid an extra full-frame RGBA allocation.
-- Keep scaled JPEG decoding experimental until representative visual-quality checks are complete.
+- Use TurboJPEG scaled decoding on the `speed: 'fast'` path for resized JPEGs when it can safely reduce the intermediate; cap scaled JPEG sources at 16 megapixels and preserve full-resolution decoding for PNG and lossless requests.
 - Document initial Worker CPU and encoder method experiments, including their sample sizes and limitations.

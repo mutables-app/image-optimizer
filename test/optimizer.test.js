@@ -6,6 +6,7 @@ import {image} from '@mutables.app/image-optimizer';
 import {optimizeWorkspaceImage} from '@mutables.app/image-computer';
 const png = await readFile(new URL('./fixtures/rgba.png', import.meta.url));
 const jpeg = await readFile(new URL('./fixtures/input.jpg', import.meta.url));
+const jpeg4k = await readFile(new URL('./fixtures/input-4k.jpg', import.meta.url));
 function decode(bytes) {
  const p = spawnSync('python3', ['test/decode-webp.py'], {input: bytes});
  assert.equal(p.status, 0, p.stderr.toString()); return JSON.parse(p.stdout);
@@ -28,6 +29,11 @@ test('fast speed selects the internal fast encoder while omission keeps the exis
  assert.ok(fast.width <= 40 && fast.height <= 40);
  assert.throws(()=>pipeline().webp({speed:'slow'}),/speed/);
  assert.throws(()=>pipeline().webp({method:1}),/method/);
+});
+test('fast speed resizes a 4K JPEG above the default source pixel cap', async () => {
+ await assert.rejects(image(jpeg4k).resize(800).webp().bytes(), /pixel or dimension limit/);
+ const out = decode(await image(jpeg4k).resize(800).webp({speed:'fast'}).bytes());
+ assert.deepEqual([out.width,out.height],[800,450]);
 });
 test('width-only, fill, and withoutEnlargement', async () => {
  let out = decode(await image(png).resize(8).bytes()); assert.deepEqual([out.width,out.height],[8,4]);

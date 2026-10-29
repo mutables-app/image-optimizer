@@ -53,8 +53,8 @@ impl ExperimentResult {
 #[wasm_bindgen]
 pub fn optimize(input: &[u8], width: u32, height: u32, inside: bool,
                 without_enlargement: bool, quality: f32, lossless: bool, max_pixels: u32,
-                method: i32) -> Result<Vec<u8>, JsValue> {
-    Ok(run(input, width, height, inside, without_enlargement, quality, lossless, max_pixels, false, method, false)?.bytes)
+                method: i32, scaled: bool) -> Result<Vec<u8>, JsValue> {
+    Ok(run(input, width, height, inside, without_enlargement, quality, lossless, max_pixels, scaled, method, false)?.bytes)
 }
 /// Experimental low-level API; production defaults remain unchanged.
 #[wasm_bindgen]
@@ -80,7 +80,7 @@ fn run(input: &[u8], width: u32, height: u32, inside: bool,
         (tw, th) = destination(original_w, original_h, width, height, inside, without_enlargement);
     }
     let (mut pixels, mut w, mut h) = (std::ptr::null_mut(), 0, 0);
-    let status = unsafe { decode_image(input.as_ptr(), input.len(), max_pixels, tw, th, scaled as i32, &mut pixels, &mut w, &mut h) };
+    let status = unsafe { decode_image(input.as_ptr(), input.len(), max_pixels, tw, th, (scaled && !lossless) as i32, &mut pixels, &mut w, &mut h) };
     if status != 0 { return Err(error(match status { 2 => "Image exceeds pixel or dimension limit", 3 => "Image allocation failed", 4 => "Expected JPEG or PNG input", _ => "Image decode failed" })); }
     let t1 = clock();
     // Keep the decoder allocation alive and let the resizer borrow it. This

@@ -10,7 +10,7 @@ const webp = await image(inputBytes)
   .bytes();
 ```
 
-Input: Blob, ArrayBuffer, or typed array. Output: Uint8Array, or `.blob()` for an image/webp Blob. `.webp({lossless:true})` enables lossless encoding. Set `speed: 'fast'` to request the measured fast encoding path; the codec setting is selected internally. Omit `speed` to keep the existing default. The fast path can produce larger files, and the trade-off depends on the image. See the workspace experiment report for measurements. Width-only resizing preserves aspect ratio. Two dimensions default to stretch; `inside` preserves aspect ratio.
+Input: Blob, ArrayBuffer, or typed array. Output: Uint8Array, or `.blob()` for an image/webp Blob. `.webp({lossless:true})` enables lossless encoding. Set `speed: 'fast'` to use the faster WebP encoder setting and, for resized JPEGs, TurboJPEG scaled decoding where it can reduce work. This can reduce memory and CPU on large JPEG inputs while keeping the requested output dimensions. Fast scaled decoding accepts JPEG sources up to 16 megapixels when the scaled intermediate and output fit within `maxPixels`; otherwise the existing pixel limits apply. PNG inputs and `lossless: true` requests use full-resolution decoding. The fast path can produce larger files, and the trade-off depends on the image. See the workspace experiment report for measurements. Width-only resizing preserves aspect ratio. Two dimensions default to stretch; `inside` preserves aspect ratio.
 
 Node uses a file-based WASM loader; Workers use a static `.wasm` import. Configure your bundler to treat that file as a WebAssembly module. Requires WebAssembly SIMD and modern WASM exception handling. Workers tested with compatibility date 2026-09-02 and `new_module_registry`.
 

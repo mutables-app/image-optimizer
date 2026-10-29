@@ -53,7 +53,7 @@ Artifacts: `method-ab/summary.json` and `method-ab/cloudflare-cpu-events.json` c
 - `api3/summary.json` and `api3/cloudflare-cpu-events.json`: JPEG scaled-decode and method comparisons.
 - `borrow/summary.json` and `borrow/cloudflare-cpu-events.json`: remote smoke/CPU run for the borrowed-buffer build.
 - `method-ab/` and `method-ab-recheck/`: interleaved WebP method A/B runs.
-- `../../src/main.rs`: implementation. The default `optimize` path still uses full JPEG decode and the library's default WebP method. Public `.webp({method})` now exposes encoder methods 0–6; scaled JPEG decoding remains experimental.
+- `../../src/main.rs`: implementation. The default path still uses full JPEG decode and the library's default WebP method. The public `.webp({speed: 'fast'})` path selects encoder method 1 and scaled JPEG decoding for eligible resized JPEGs. A local 3840×2160-to-800×450 functional test passes; this new large-image path has not received separate Cloudflare CPU benchmarking yet.
 
 No Bun or competing WASM implementation comparison was performed. No subjective image-quality review or direct peak-memory instrumentation was performed.
 

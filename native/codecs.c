@@ -5,6 +5,10 @@
 #include <spng.h>
 #include <webp/encode.h>
 
+// Scaled JPEG decoding may accept a larger source than the normal decoded
+// pixel limit, but only while producing a smaller bounded intermediate.
+#define MAX_SCALED_JPEG_SOURCE_PIXELS 16000000u
+
 // All allocated buffers cross the FFI with an explicit owner and release call.
 int decode_image(const uint8_t *data, size_t size, uint32_t max_pixels,
                  uint32_t target_w, uint32_t target_h, int scaled,
@@ -41,12 +45,13 @@ int decode_image(const uint8_t *data, size_t size, uint32_t max_pixels,
         int original_w = tj3Get(ctx, TJPARAM_JPEGWIDTH);
         int original_h = tj3Get(ctx, TJPARAM_JPEGHEIGHT);
         int lossless = tj3Get(ctx, TJPARAM_LOSSLESS);
-        if (original_w <= 0 || original_h <= 0 || original_w > 16383 ||
-            original_h > 16383 || (uint64_t)original_w * original_h > max_pixels) {
+        if (original_w <= 0 || original_h <= 0 || original_w > 16383 || original_h > 16383) {
             tj3Destroy(ctx); return 2;
         }
         int w = original_w, h = original_h;
-        if (scaled && !lossless && target_w && target_h) {
+        int can_scale = scaled && !lossless && target_w && target_h &&
+                        target_w < (uint32_t)original_w && target_h < (uint32_t)original_h;
+        if (can_scale) {
             int count = 0;
             tjscalingfactor *factors = tjGetScalingFactors(&count);
             tjscalingfactor best = TJUNSCALED;
@@ -62,6 +67,12 @@ int decode_image(const uint8_t *data, size_t size, uint32_t max_pixels,
                 }
             }
             if (tj3SetScalingFactor(ctx, best)) { tj3Destroy(ctx); return 1; }
+        }
+        uint64_t source_area = (uint64_t)original_w * original_h;
+        uint64_t decoded_area = (uint64_t)w * h;
+        if (source_area > max_pixels &&
+            (!can_scale || source_area > MAX_SCALED_JPEG_SOURCE_PIXELS || decoded_area > max_pixels)) {
+            tj3Destroy(ctx); return 2;
         }
         *pixels = malloc((size_t)w * h * 4);
         if (!*pixels) { tj3Destroy(ctx); return 3; }

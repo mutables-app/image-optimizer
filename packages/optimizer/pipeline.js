@@ -23,7 +23,7 @@ export function createImage(optimize) {
     else throw new TypeError('Expected Blob, ArrayBuffer, or typed array');
     if (snapshot.byteLength > MAX_INPUT) throw new RangeError('Input exceeds 20 MiB');
     let width = 0, height = 0, inside = false, withoutEnlargement = false;
-    let quality = 80, lossless = false, method = -1;
+    let quality = 80, lossless = false, method = -1, scaled = false;
     const pipeline = {
       resize(w, h, options = {}) {
         width = dimension(w); height = dimension(h);
@@ -38,12 +38,13 @@ export function createImage(optimize) {
         if (options.method !== undefined) throw new TypeError('method is internal; use speed: "fast"');
         if (options.speed !== undefined && options.speed !== 'fast') throw new RangeError('speed must be "fast"');
         method = options.speed === 'fast' ? 1 : -1;
+        scaled = options.speed === 'fast';
         if (!Number.isFinite(quality) || quality < 0 || quality > 100) throw new RangeError('quality must be 0–100');
         if (typeof lossless !== 'boolean') throw new TypeError('lossless must be boolean');
         return pipeline;
       },
       async bytes() {
-        const args = [width, height, inside, withoutEnlargement, quality, lossless, maxPixels, method];
+        const args = [width, height, inside, withoutEnlargement, quality, lossless, maxPixels, method, scaled];
         const bytes = snapshot instanceof Blob ? new Uint8Array(await snapshot.arrayBuffer()) : snapshot;
         try { return optimize(bytes, ...args); }
         catch (error) { throw error instanceof Error ? error : new Error(String(error)); }
