@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0 — unreleased
+## 0.1.0 — 2026-10-29
 
 - Add a standalone Rust/Emscripten JPEG and PNG to WebP optimizer for Node.js and Cloudflare Workers.
 - Add an optional Cloudflare Computer filesystem adapter that reads bounded streams and writes optimized output.
