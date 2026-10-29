@@ -44,13 +44,34 @@ test('unresized lossless PNG preserves visible pixels exactly',async()=>{
  const out=decode(await image(png).webp({lossless:true}).bytes());
  assert.deepEqual(out.pixels,Buffer.from(Array.from({length:97*65},(_,i)=>color(i%97,Math.floor(i/97))).flat()));
 });
-test('Adam7 remains supported and reports its complete-frame compatibility allocation',()=>{
+test('Adam7 downscales use callbacks while enlargements keep the fallback',()=>{
  const adam7=rgbaPng(97,65,color,true);
  for(const [w,h] of [[97,65],[29,23],[117,91]]) {
-  const result=scan(adam7,w,h);assert.equal(result.codec_buffered,true);
-  assert.deepEqual(decode(result.take_bytes()).pixels,decode(scan(png,w,h).take_bytes()).pixels);
+  const result=scan(adam7,w,h);assert.equal(result.codec_buffered,w>97||h>65);
+  const actual=decode(result.take_bytes()),reference=decode(scan(png,w,h).take_bytes());
+  assert.deepEqual([actual.width,actual.height],[w,h]);
+  let squared=0;for(let i=0;i<actual.pixels.length;i++) squared+=(actual.pixels[i]-reference.pixels[i])**2;
+  assert.ok(Math.sqrt(squared/actual.pixels.length)<1.5,`${w}x${h} Lanczos RMSE exceeds tolerance`);
  }
  assert.equal(scan(png,29,23).codec_buffered,false);
+});
+test('Adam7 Lanczos accumulation premultiplies transparent pixels',()=>{
+ const adam7=rgbaPng(97,65,x=>x<48?[0,0,255,255]:[255,0,0,0],true);
+ const output=decode(scan(adam7,29,23).take_bytes());let partial=0;
+ for(let i=0;i<output.pixels.length;i+=4) {
+  if(output.pixels[i+3]>8) {assert.equal(output.pixels[i],0);assert.equal(output.pixels[i+2],255);}
+  if(output.pixels[i+3]>0&&output.pixels[i+3]<255) partial++;
+ }
+ assert.ok(partial>0);
+});
+test('24MP Adam7 PNG resizes within a bounded WASM memory budget',async()=>{
+ const input=await fixture('adam7-24mp.png');
+ const result=scan(input,800,0,false,false);
+ assert.equal(result.codec_buffered,false);
+ assert.deepEqual([result.source_width,result.source_height],[6000,4000]);
+ assert.deepEqual([result.output_width,result.output_height],[800,533]);
+ const output=decode(result.take_bytes());assert.deepEqual([output.width,output.height],[800,533]);
+ assert.ok(linear_memory_bytes()<=32*1024*1024,`WASM linear memory ${linear_memory_bytes()} exceeds 32 MiB`);
 });
 test('baseline, progressive, grayscale and CMYK JPEGs decode consistently',async()=>{
  for(const name of ['rows-baseline.jpg','rows-progressive.jpg','rows-gray.jpg','rows-cmyk.jpg']) {

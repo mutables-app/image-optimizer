@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0 — 2026-10-29
+
+- Decode and resize eligible Adam7/interlaced PNGs through Pngle pass callbacks, scattering pixels into a bounded destination accumulator instead of retaining the full source image. Keep the 24-megapixel cap and fall back to libspng for enlarged outputs or accumulators over 32 MiB.
+- Bundle Pngle and miniz sources and license notices in the optimizer package.
+- Validate the Adam7 path with a 24-megapixel PNG fixture in Node.js and the local Worker integration test.
+
 ## 0.3.0 — 2026-10-29
 
 - Decode HEIF/HEIC and AVIF inputs with libheif, including HEVC/AV1 support; both WebP and JPEG outputs are supported.

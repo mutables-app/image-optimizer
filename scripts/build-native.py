@@ -90,3 +90,19 @@ if not lowzag.exists():
     next(unpack.iterdir()).rename(lowzag)
     shutil.rmtree(unpack); archive.unlink()
 shutil.copy2(lowzag / 'LICENSE', licenses / 'lowzag-LICENSE')
+
+# Pngle provides Adam7 callbacks without retaining a full source framebuffer.
+# Pin the tested v1.1.0 commit; its embedded miniz is public domain.
+pngle = cache / 'pngle'
+if not pngle.exists():
+    archive = cache / 'pngle.tar.gz'
+    urllib.request.urlretrieve(
+        'https://codeload.github.com/kikuchan/pngle/tar.gz/b1c68193f1d3f8642b3e0e095d457a828038e6fb',
+        archive,
+    )
+    unpack = cache / 'pngle-unpack'; unpack.mkdir(exist_ok=True)
+    with tarfile.open(archive) as f: f.extractall(unpack, filter='data')
+    next(unpack.iterdir()).rename(pngle)
+    shutil.rmtree(unpack); archive.unlink()
+shutil.copy2(pngle / 'LICENSE', licenses / 'pngle-LICENSE')
+(licenses / 'miniz-LICENSE').write_text('''This is free and unencumbered software released into the public domain.\n\nAnyone is free to copy, modify, publish, use, compile, sell, or distribute\nthis software, either in source code form or as a compiled binary, for any\npurpose, commercial or non-commercial, and by any means.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\n\nFor more information, see https://unlicense.org/\n''')

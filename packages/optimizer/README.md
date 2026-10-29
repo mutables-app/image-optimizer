@@ -16,7 +16,7 @@ Input: Blob, ArrayBuffer, or typed array. `.bytes()` returns a Uint8Array; `.blo
 
 **Scanline resizing applies with and without `speed: 'fast'`.** Baseline JPEG and non-interlaced PNG inputs are read row by row. Non-grid HEIF/HEIC and AVIF inputs are decoded by libheif into a complete RGBA source image before rows enter the resizer and remain capped at 8 million pixels. Grid/tiled HEIF inputs decode one tile row at a time and support up to 64 million pixels. WebP retains the complete resized image for encoding. JPEG encodes resized rows directly, uses baseline 4:2:0 output and composites transparency onto white. Input and encoded output bytes remain buffered: this API does not stream HTTP input/output.
 
-Supported progressive JPEGs use lowzag's reduced coefficient storage and decode to a power-of-two scale before row resizing. Unsupported progressive and multi-scan JPEGs fall back to libjpeg coefficient buffering; Adam7 PNG uses a bounded complete-image decode. These fallback formats have higher memory requirements. No fixed whole-Worker memory guarantee is made.
+Supported progressive JPEGs use lowzag's reduced coefficient storage and decode to a power-of-two scale before row resizing. Unsupported progressive and multi-scan JPEGs fall back to libjpeg coefficient buffering. Non-enlarging Adam7 PNG downscales whose float accumulator fits 32 MiB use Pngle's pass-order pixel callbacks and Lanczos accumulation into the resized destination; other output sizes fall back to libspng's complete-image decode. No fixed whole-Worker memory guarantee is made.
 
 For WebP, `speed: 'fast'` selects a faster internal encoder setting and enables scaled JPEG decoding where beneficial. The fast encoder can produce larger files. For JPEG output, `speed: 'fast'` enables scaled JPEG decoding; the JPEG encoder uses the same settings in both modes. Omit speed for full-resolution decoding and the default WebP encoder. `.webp({lossless: true})` uses lossless WebP encoding and disables scaled decoding; resizing still changes pixels.
 
@@ -28,7 +28,7 @@ For WebP, `speed: 'fast'` selects a faster internal encoder setting and enables 
 | Non-interlaced PNG | 32 MP | Sequential scanline decode. |
 | Lowzag-compatible progressive JPEG | 64 MP | Reduced coefficient decode when resizing; full-resolution fallback retains the 24 MP buffered limit. |
 | Other progressive or multi-scan JPEG | 24 MP | Buffered codec compatibility path. |
-| Adam7/interlaced PNG | 24 MP | Complete-image compatibility decode before resizing. |
+| Adam7/interlaced PNG | 24 MP | Pngle callbacks for non-enlarging downscales with a <=32 MiB accumulator; full-frame fallback otherwise. |
 | Non-grid HEIC/HEIF and AVIF | 8 MP | Full source image is decoded into memory. |
 | Tiled/grid HEIF/HEIC or AVIF | 64 MP | Decodes one tile row at a time. |
 
