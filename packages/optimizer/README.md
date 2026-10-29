@@ -6,11 +6,11 @@ Rust/Emscripten JPEG and PNG decoder, SIMD resizer, and WebP encoder. No Cloudfl
 import { image } from '@mutables.app/image-optimizer';
 const webp = await image(inputBytes)
   .resize(800, 600, {fit: 'inside', withoutEnlargement: true})
-  .webp({quality: 80, method: 1})
+  .webp({quality: 80, speed: 'fast'})
   .bytes();
 ```
 
-Input: Blob, ArrayBuffer, or typed array. Output: Uint8Array, or `.blob()` for an image/webp Blob. `.webp({lossless:true})` enables lossless encoding. The optional WebP `method` accepts 0–6; omitting it preserves the library default. Lower methods usually trade some output size for speed, but the trade-off depends on the image. Method 1 was fastest in our preliminary JPEG Worker benchmark; see the workspace experiment report before choosing it for your workload. Width-only resizing preserves aspect ratio. Two dimensions default to stretch; `inside` preserves aspect ratio.
+Input: Blob, ArrayBuffer, or typed array. Output: Uint8Array, or `.blob()` for an image/webp Blob. `.webp({lossless:true})` enables lossless encoding. Set `speed: 'fast'` to request the measured fast encoding path; the codec setting is selected internally. Omit `speed` to keep the existing default. The fast path can produce larger files, and the trade-off depends on the image. See the workspace experiment report for measurements. Width-only resizing preserves aspect ratio. Two dimensions default to stretch; `inside` preserves aspect ratio.
 
 Node uses a file-based WASM loader; Workers use a static `.wasm` import. Configure your bundler to treat that file as a WebAssembly module. Requires WebAssembly SIMD and modern WASM exception handling. Workers tested with compatibility date 2026-09-02 and `new_module_registry`.
 

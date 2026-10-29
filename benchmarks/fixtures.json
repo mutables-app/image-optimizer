@@ -1,0 +1,25 @@
+{
+  "license": "Unsplash License; sources accessed 2026-10-29",
+  "fixtures": [
+    {
+      "file": "photo-1920.jpg",
+      "description": "Existing photographic fixture",
+      "source": "Existing repository artifact",
+      "dimensions": "1920x2880"
+    },
+    {
+      "file": "landscape-2400.jpg",
+      "description": "Mountain lake and forest landscape",
+      "photographer": "Brittany Martin (@brittanyreanne)",
+      "source": "https://unsplash.com/photos/a-lake-surrounded-by-mountains-and-trees-cpXJYdJSNeM",
+      "dimensions": "2400x1600"
+    },
+    {
+      "file": "food-2400.jpg",
+      "description": "Close-up food / sushi photography",
+      "photographer": "Jesse Ballantyne (@jballantyne)",
+      "source": "https://unsplash.com/photos/closeup-photography-of-cooked-dish-Zz2MJJwREI8",
+      "dimensions": "2400x1600"
+    }
+  ]
+}

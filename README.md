@@ -8,11 +8,11 @@ A standalone Rust/Emscripten image optimizer with an optional Cloudflare Compute
 import { image } from '@mutables.app/image-optimizer';
 const bytes = await image(inputBytes)
   .resize(800, 600, { fit: 'inside', withoutEnlargement: true })
-  .webp({ quality: 80, method: 1 })
+  .webp({ quality: 80, speed: 'fast' })
   .bytes();
 ```
 
-Accepts Blob, ArrayBuffer and typed-array input. Input is sniffed as JPEG or PNG. Width-only resizing preserves aspect ratio; two dimensions default to `fill`. Output is always WebP, with optional lossless encoding and method 0–6. Omit `method` to retain the existing default; method 1 is a speed-oriented choice whose size and quality trade-offs depend on the image. `.blob()` returns an `image/webp` Blob. Terminals return promises, but CPU work runs synchronously in the isolate; it is not moved to a background thread.
+Accepts Blob, ArrayBuffer and typed-array input. Input is sniffed as JPEG or PNG. Width-only resizing preserves aspect ratio; two dimensions default to `fill`. Output is always WebP, with optional lossless encoding. Set `speed: 'fast'` to request the measured fast encoding path; the encoder choice is internal. Omit `speed` to retain the existing default. The fast path can produce larger files, with image-dependent trade-offs. `.blob()` returns an `image/webp` Blob. Terminals return promises, but CPU work runs synchronously in the isolate; it is not moved to a background thread.
 
 The optimizer has no Computer dependency. Node selects a separate loader automatically through package exports. Workers use a statically imported WebAssembly module. A standalone Worker is in `examples/standalone`; run `npx wrangler dev --config examples/standalone/wrangler.jsonc`.
 
@@ -21,7 +21,7 @@ The optimizer has no Computer dependency. Node selects a separate loader automat
 ```js
 import { optimizeWorkspaceImage } from '@mutables.app/image-computer';
 await optimizeWorkspaceImage(workspace, '/input.jpg', '/output.webp', {
-  width: 800, height: 600, fit: 'inside', quality: 80, method: 1,
+  width: 800, height: 600, fit: 'inside', quality: 80, speed: 'fast',
 });
 ```
 
@@ -62,7 +62,7 @@ Libraries: libjpeg-turbo 3.1.3, libspng 0.7.4, libwebp 1.6.0, and fast_image_res
 - Maximum input 20 MiB; default 8 million pixels, configurable up to 16 million. Source and output dimensions cannot exceed 16383. WASM linear memory is capped at 256 MiB; complex images may still exhaust memory before reaching those limits.
 - PNG alpha is preserved. EXIF orientation and ICC color management are not applied; metadata is not copied. JPEGs with decoder warnings are rejected.
 - SIMD resizer uses its default Lanczos3 filter with alpha handling. No alternate filter API yet. JPEG scaled decoding is experimental and is not exposed by the package API.
-- CPU time and peak memory must be measured on representative production images before choosing Worker limits. The public `.webp({method})` option accepts libwebp methods 0–6; omitting it preserves the prior default. Experiment data and limitations are in [`benchmarks/experiments/RESULTS.md`](benchmarks/experiments/RESULTS.md). This project has no Bun/native performance comparison.
+- CPU time and peak memory must be measured on representative production images before choosing Worker limits. The public `.webp({speed: 'fast'})` option selects an internal encoder setting; omitting it preserves the prior default. Experiment data and limitations are in [`benchmarks/experiments/RESULTS.md`](benchmarks/experiments/RESULTS.md). This project has no Bun/native performance comparison.
 
 Tests exercise real codecs, malformed input, limits, resize modes, alpha, and the adapter. The independent output validator needs Python 3 and native `libwebp.so.7` (available on this Linux host). The Worker integration test requires Wrangler/workerd.
 

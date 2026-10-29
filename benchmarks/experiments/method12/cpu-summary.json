@@ -1,0 +1,186 @@
+{
+  "note": "Filtered to this benchmark run; request URLs, IPs, headers, and account data omitted. Wrangler tail provides a sampled subset of requests.",
+  "events": 177,
+  "summary": [
+    {
+      "image": "food-2400",
+      "width": 320,
+      "method": 1,
+      "traceSamples": 7,
+      "cpuP50Ms": 114,
+      "cpuP95Ms": 161,
+      "cpuMinMs": 103,
+      "cpuMaxMs": 161
+    },
+    {
+      "image": "food-2400",
+      "width": 320,
+      "method": 2,
+      "traceSamples": 5,
+      "cpuP50Ms": 114,
+      "cpuP95Ms": 136,
+      "cpuMinMs": 99,
+      "cpuMaxMs": 136
+    },
+    {
+      "image": "food-2400",
+      "width": 800,
+      "method": 1,
+      "traceSamples": 12,
+      "cpuP50Ms": 143.5,
+      "cpuP95Ms": 213,
+      "cpuMinMs": 125,
+      "cpuMaxMs": 213
+    },
+    {
+      "image": "food-2400",
+      "width": 800,
+      "method": 2,
+      "traceSamples": 3,
+      "cpuP50Ms": 141,
+      "cpuP95Ms": 206,
+      "cpuMinMs": 140,
+      "cpuMaxMs": 206
+    },
+    {
+      "image": "food-2400",
+      "width": 1600,
+      "method": 1,
+      "traceSamples": 15,
+      "cpuP50Ms": 285,
+      "cpuP95Ms": 497,
+      "cpuMinMs": 263,
+      "cpuMaxMs": 497
+    },
+    {
+      "image": "food-2400",
+      "width": 1600,
+      "method": 2,
+      "traceSamples": 16,
+      "cpuP50Ms": 356.0,
+      "cpuP95Ms": 598,
+      "cpuMinMs": 316,
+      "cpuMaxMs": 598
+    },
+    {
+      "image": "landscape-2400",
+      "width": 320,
+      "method": 1,
+      "traceSamples": 6,
+      "cpuP50Ms": 84.5,
+      "cpuP95Ms": 99,
+      "cpuMinMs": 78,
+      "cpuMaxMs": 99
+    },
+    {
+      "image": "landscape-2400",
+      "width": 320,
+      "method": 2,
+      "traceSamples": 4,
+      "cpuP50Ms": 101.0,
+      "cpuP95Ms": 138,
+      "cpuMinMs": 90,
+      "cpuMaxMs": 138
+    },
+    {
+      "image": "landscape-2400",
+      "width": 800,
+      "method": 1,
+      "traceSamples": 8,
+      "cpuP50Ms": 125.5,
+      "cpuP95Ms": 157,
+      "cpuMinMs": 117,
+      "cpuMaxMs": 157
+    },
+    {
+      "image": "landscape-2400",
+      "width": 800,
+      "method": 2,
+      "traceSamples": 6,
+      "cpuP50Ms": 149.5,
+      "cpuP95Ms": 224,
+      "cpuMinMs": 136,
+      "cpuMaxMs": 224
+    },
+    {
+      "image": "landscape-2400",
+      "width": 1600,
+      "method": 1,
+      "traceSamples": 14,
+      "cpuP50Ms": 265.5,
+      "cpuP95Ms": 376,
+      "cpuMinMs": 256,
+      "cpuMaxMs": 376
+    },
+    {
+      "image": "landscape-2400",
+      "width": 1600,
+      "method": 2,
+      "traceSamples": 14,
+      "cpuP50Ms": 356.5,
+      "cpuP95Ms": 556,
+      "cpuMinMs": 295,
+      "cpuMaxMs": 556
+    },
+    {
+      "image": "photo-1920",
+      "width": 320,
+      "method": 1,
+      "traceSamples": 10,
+      "cpuP50Ms": 99.5,
+      "cpuP95Ms": 118,
+      "cpuMinMs": 85,
+      "cpuMaxMs": 118
+    },
+    {
+      "image": "photo-1920",
+      "width": 320,
+      "method": 2,
+      "traceSamples": 14,
+      "cpuP50Ms": 107.0,
+      "cpuP95Ms": 133,
+      "cpuMinMs": 86,
+      "cpuMaxMs": 133
+    },
+    {
+      "image": "photo-1920",
+      "width": 800,
+      "method": 1,
+      "traceSamples": 8,
+      "cpuP50Ms": 156.5,
+      "cpuP95Ms": 220,
+      "cpuMinMs": 136,
+      "cpuMaxMs": 220
+    },
+    {
+      "image": "photo-1920",
+      "width": 800,
+      "method": 2,
+      "traceSamples": 7,
+      "cpuP50Ms": 142,
+      "cpuP95Ms": 206,
+      "cpuMinMs": 138,
+      "cpuMaxMs": 206
+    },
+    {
+      "image": "photo-1920",
+      "width": 1600,
+      "method": 1,
+      "traceSamples": 15,
+      "cpuP50Ms": 268,
+      "cpuP95Ms": 450,
+      "cpuMinMs": 243,
+      "cpuMaxMs": 450
+    },
+    {
+      "image": "photo-1920",
+      "width": 1600,
+      "method": 2,
+      "traceSamples": 13,
+      "cpuP50Ms": 317,
+      "cpuP95Ms": 494,
+      "cpuMinMs": 292,
+      "cpuMaxMs": 494
+    }
+  ]
+}

@@ -22,7 +22,7 @@ export async function optimizeWorkspaceImage(workspace, inputPath, outputPath, o
   } else input = source;
   const pipeline = image(input, { maxPixels: options.maxPixels });
   if (options.width !== undefined || options.height !== undefined) pipeline.resize(options.width, options.height, {fit: options.fit ?? 'inside', withoutEnlargement: options.withoutEnlargement ?? true});
-  const output = await pipeline.webp({quality: options.quality, lossless: options.lossless, method: options.method}).bytes();
+  const output = await pipeline.webp({quality: options.quality, lossless: options.lossless, speed: options.speed}).bytes();
   await workspace.fs.writeFile(outputPath, output);
   return {path: outputPath, bytes: output.byteLength, contentType: 'image/webp'};
 }

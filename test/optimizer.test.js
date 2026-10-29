@@ -19,16 +19,15 @@ test('JPEG → fit inside → lossy WebP', async () => {
  const out = decode(await image(jpeg).resize(40,40,{fit:'inside'}).webp({quality:75}).bytes());
  assert.ok(out.width <= 40 && out.height <= 40); assert.ok(out.width === 40 || out.height === 40);
 });
-test('WebP method is configurable while omission keeps the existing default', async () => {
+test('fast speed selects the internal fast encoder while omission keeps the existing default', async () => {
  const pipeline = () => image(jpeg).resize(40,40,{fit:'inside'});
  const defaultBytes = await pipeline().webp({quality:75}).bytes();
- const method4Bytes = await pipeline().webp({quality:75,method:4}).bytes();
- assert.deepEqual(method4Bytes,defaultBytes);
- const fast = decode(await pipeline().webp({quality:75,method:1}).bytes());
+ const fastBytes = await pipeline().webp({quality:75,speed:'fast'}).bytes();
+ assert.notDeepEqual(fastBytes,defaultBytes);
+ const fast = decode(fastBytes);
  assert.ok(fast.width <= 40 && fast.height <= 40);
- assert.throws(()=>pipeline().webp({method:-1}),/method/);
- assert.throws(()=>pipeline().webp({method:7}),/method/);
- assert.throws(()=>pipeline().webp({method:1.5}),/method/);
+ assert.throws(()=>pipeline().webp({speed:'slow'}),/speed/);
+ assert.throws(()=>pipeline().webp({method:1}),/method/);
 });
 test('width-only, fill, and withoutEnlargement', async () => {
  let out = decode(await image(png).resize(8).bytes()); assert.deepEqual([out.width,out.height],[8,4]);
@@ -50,7 +49,7 @@ test('Blob output and snapshot input', async () => {
 test('workspace adapter reads a stream and writes optimized bytes', async () => {
  const files = new Map([['/input.png',png]]);
  const ws = {fs:{async readFile(path){return new Blob([files.get(path)]).stream();},async writeFile(path,bytes){files.set(path,bytes);}}};
- const result = await optimizeWorkspaceImage(ws,'/input.png','/output.webp',{width:8,method:1});
+ const result = await optimizeWorkspaceImage(ws,'/input.png','/output.webp',{width:8,speed:'fast'});
  assert.equal(result.bytes,files.get('/output.webp').length);
  assert.equal(decode(files.get('/output.webp')).width,8);
  await assert.rejects(optimizeWorkspaceImage(ws,'/input.png','/input.png'),/must differ/);

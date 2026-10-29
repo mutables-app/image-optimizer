@@ -25,7 +25,8 @@ export default {
         const width = number(url.searchParams.get('width'));
         const height = number(url.searchParams.get('height'));
         if (width !== undefined || height !== undefined) pipeline.resize(width, height, {fit: url.searchParams.get('fit') ?? 'inside', withoutEnlargement: true});
-        const result = await pipeline.webp({ quality: number(url.searchParams.get('quality')), method: number(url.searchParams.get('method')) }).bytes();
+        const speed = url.searchParams.get('speed') ?? undefined;
+        const result = await pipeline.webp({ quality: number(url.searchParams.get('quality')), speed }).bytes();
         return new Response(result, {headers: {'content-type': 'image/webp'}});
       }
       const match = url.pathname.match(/^\/workspaces\/([a-zA-Z0-9_-]+)\/(files\/.*|optimize)$/);

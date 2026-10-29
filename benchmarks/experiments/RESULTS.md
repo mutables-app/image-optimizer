@@ -56,3 +56,28 @@ Artifacts: `method-ab/summary.json` and `method-ab/cloudflare-cpu-events.json` c
 - `../../src/main.rs`: implementation. The default `optimize` path still uses full JPEG decode and the library's default WebP method. Public `.webp({method})` now exposes encoder methods 0–6; scaled JPEG decoding remains experimental.
 
 No Bun or competing WASM implementation comparison was performed. No subjective image-quality review or direct peak-memory instrumentation was performed.
+
+## Expanded method 1 vs 2 run (prepared)
+
+`../fixtures.json` documents the added landscape and food JPEG fixtures. The interleaved runner now defaults to three photos, target widths 320/800/1600, methods 1/2, and 16 measured rounds per image and size (288 measured requests total, plus warmups). Run `node scripts/interleave-webp-methods.mjs` with `EXPERIMENTS_WORKER_URL` and the local `.build/benchmark-secrets.json` configured; collect Worker CPU traces separately while it runs. The runner writes one output WebP per image, size, and method and produces per-case request/round-trip summaries. Round-trip figures are not Worker CPU. This expanded run has not been executed or measured yet.
+
+
+## Three-photo method 1 vs 2 Worker run
+
+On 2026-10-29, methods 1 and 2 were interleaved for 16 successful HTTP requests each for three JPEGs at 320/800/1600px (288/288 valid WebP outputs total). The run used the maintainer's experiment Worker; sampled CPU events were collected with Wrangler tail. Trace sample counts are uneven and lower than request counts, so CPU percentiles are indicative. The images are the existing portrait photo, an alpine landscape, and food/sushi; fixture sources and attribution are in `../fixtures.json`. Output bytes are median HTTP response sizes.
+
+| Fixture | Width | Trace n (m1/m2) | Method 1 CPU p50 / p95 | Method 2 CPU p50 / p95 | Output bytes (m1/m2) |
+|---|---:|---:|---:|---:|---:|
+| photo-1920 | 320 | 10 / 14 | 99.5 / 118 ms | 107.0 / 133 ms | 9,758 / 8,722 |
+| photo-1920 | 800 | 8 / 7 | 156.5 / 220 ms | 142.0 / 206 ms | 62,694 / 57,786 |
+| photo-1920 | 1600 | 15 / 13 | 268.0 / 450 ms | 317.0 / 494 ms | 233,374 / 229,456 |
+| landscape-2400 | 320 | 6 / 4 | 84.5 / 99 ms | 101.0 / 138 ms | 17,162 / 15,924 |
+| landscape-2400 | 800 | 8 / 6 | 125.5 / 157 ms | 149.5 / 224 ms | 90,726 / 83,960 |
+| landscape-2400 | 1600 | 14 / 14 | 265.5 / 376 ms | 356.5 / 556 ms | 315,634 / 297,370 |
+| food-2400 | 320 | 7 / 5 | 114.0 / 161 ms | 114.0 / 136 ms | 15,976 / 14,788 |
+| food-2400 | 800 | 12 / 3 | 143.5 / 213 ms | 141.0 / 206 ms | 77,868 / 71,096 |
+| food-2400 | 1600 | 15 / 16 | 285.0 / 497 ms | 356.0 / 598 ms | 330,840 / 318,300 |
+
+Method 1 had lower median CPU in six of nine cases, method 2 in two, and they tied at the displayed precision in one. Method 1 outputs were 1.7–11.9% larger in these cases. The clearest repeatable pattern is at 1600px: method 1 had lower median CPU on all three fixtures. At 320px results were mixed, while at 800px the gap was small or inconsistent. This still supports method 1 as a candidate speed option rather than a universal winner. This run has no lossless reference renders. I visually inspected the 800px landscape and food outputs for methods 1 and 2; they look very similar at normal display size, but this is a limited subjective check rather than a complete quality review.
+
+Sanitized trace evidence is in `method12/cloudflare-cpu-events.json` and `method12/cpu-summary.json`; request URLs, IPs, and headers were omitted. Per-request HTTP status, round-trip times, and output sizes are in `method12/summary.json`. The benchmark runner is `../../scripts/interleave-webp-methods.mjs`.

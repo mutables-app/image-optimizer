@@ -34,10 +34,12 @@ export function createImage(optimize) {
         return pipeline;
       },
       webp(options = {}) {
-        quality = options.quality ?? 80; lossless = options.lossless ?? false; method = options.method ?? -1;
+        quality = options.quality ?? 80; lossless = options.lossless ?? false;
+        if (options.method !== undefined) throw new TypeError('method is internal; use speed: "fast"');
+        if (options.speed !== undefined && options.speed !== 'fast') throw new RangeError('speed must be "fast"');
+        method = options.speed === 'fast' ? 1 : -1;
         if (!Number.isFinite(quality) || quality < 0 || quality > 100) throw new RangeError('quality must be 0–100');
         if (typeof lossless !== 'boolean') throw new TypeError('lossless must be boolean');
-        if (!Number.isInteger(method) || method < -1 || method > 6 || (options.method !== undefined && method < 0)) throw new RangeError('method must be an integer from 0 to 6');
         return pipeline;
       },
       async bytes() {
