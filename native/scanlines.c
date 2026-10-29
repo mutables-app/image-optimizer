@@ -7,8 +7,11 @@
 #include <setjmp.h>
 #include <jpeglib.h>
 #include <spng.h>
+#include <lowzag.h>
 
 #define MAX_BUFFERED_SOURCE_PIXELS 24000000u
+#define MAX_STREAMING_SOURCE_PIXELS 32000000u
+#define MAX_LOWZAG_ALLOC_BYTES (64u * 1024u * 1024u)
 
 typedef struct {
     struct jpeg_error_mgr base;
@@ -17,17 +20,28 @@ typedef struct {
 typedef struct {
     struct jpeg_decompress_struct jpeg;
     RowError error;
-    int jpeg_created, png, buffered, cmyk;
+    int jpeg_created, png, buffered, cmyk, lowzag_candidate, lowzag_ready;
+    const uint8_t *data;
+    size_t size;
     spng_ctx *spng;
+    void *heif;
     uint8_t *pixels, *cmyk_row;
     uint32_t w, h, y;
 } RowDecoder;
+int heif_rows_open(const uint8_t *, size_t, void **, uint32_t *, uint32_t *);
+int heif_rows_start(void *, uint32_t *, uint32_t *);
+int heif_rows_read(void *, uint8_t *);
+int heif_rows_finish(void *);
+int heif_rows_opaque(void *);
+int heif_rows_buffered(void *);
+void heif_rows_close(void *);
 static void row_error(j_common_ptr c) { longjmp(((RowError *)c->err)->jump, 1); }
 static void row_message(j_common_ptr c, int level) { if (level < 0) row_error(c); }
 void rows_close(RowDecoder *r) {
     if (!r) return;
     if (r->jpeg_created) jpeg_destroy_decompress(&r->jpeg);
     if (r->spng) spng_ctx_free(r->spng);
+    if (r->heif) heif_rows_close(r->heif);
     free(r->pixels); free(r->cmyk_row); free(r);
 }
 // 1 = decode error, 2 = limit, 3 = allocation, 4 = format.
@@ -36,6 +50,7 @@ int rows_open(const uint8_t *data, size_t size, uint32_t max_source,
     *out = NULL;
     RowDecoder *r = calloc(1, sizeof(*r));
     if (!r) return 3;
+    r->data = data; r->size = size;
     if (size >= 8 && !memcmp(data, "\x89PNG\r\n\x1a\n", 8)) {
         r->png = 1;
         r->spng = spng_ctx_new(0);
@@ -47,7 +62,8 @@ int rows_open(const uint8_t *data, size_t size, uint32_t max_source,
             rows_close(r); return 1;
         }
         r->w = header.width; r->h = header.height;
-        if ((uint64_t)r->w*r->h > max_source) { rows_close(r); return 2; }
+        if ((uint64_t)r->w*r->h > MAX_STREAMING_SOURCE_PIXELS ||
+            (uint64_t)r->w*r->h > max_source) { rows_close(r); return 2; }
         // Adam7 passes revisit rows. Preserve compatibility using a bounded
         // complete decode, rather than claiming these are sequential rows.
         r->buffered = !!header.interlace_method;
@@ -67,10 +83,31 @@ int rows_open(const uint8_t *data, size_t size, uint32_t max_source,
             rows_close(r); return 2;
         }
         r->buffered = r->jpeg.progressive_mode || jpeg_has_multiple_scans(&r->jpeg);
-        if (r->buffered && (uint64_t)r->w*r->h > MAX_BUFFERED_SOURCE_PIXELS) {
+        r->cmyk = r->jpeg.jpeg_color_space == JCS_CMYK || r->jpeg.jpeg_color_space == JCS_YCCK;
+        if (r->jpeg.progressive_mode && !r->jpeg.arith_code && !r->cmyk &&
+            r->jpeg.data_precision == 8 &&
+            (r->jpeg.num_components == 1 || r->jpeg.num_components == 3) &&
+            (r->jpeg.jpeg_color_space == JCS_GRAYSCALE || r->jpeg.jpeg_color_space == JCS_YCbCr)) {
+            int factors_ok = 1;
+            for (int i = 0; i < r->jpeg.num_components; ++i) {
+                if (r->jpeg.comp_info[i].h_samp_factor > 2 || r->jpeg.comp_info[i].v_samp_factor > 2)
+                    factors_ok = 0;
+            }
+            r->lowzag_candidate = factors_ok &&
+                lowzag_probe(data, size, NULL, NULL) == LOWZAG_OK;
+        }
+        if ((uint64_t)r->w*r->h > MAX_STREAMING_SOURCE_PIXELS && !r->lowzag_candidate) {
             rows_close(r); return 2;
         }
-        r->cmyk = r->jpeg.jpeg_color_space == JCS_CMYK || r->jpeg.jpeg_color_space == JCS_YCCK;
+        if (r->buffered && !r->lowzag_candidate && (uint64_t)r->w*r->h > MAX_BUFFERED_SOURCE_PIXELS) {
+            rows_close(r); return 2;
+        }
+    } else if (size >= 12 && !memcmp(data + 4, "ftyp", 4)) {
+        int status = heif_rows_open(data, size, &r->heif, &r->w, &r->h);
+        if (status) { rows_close(r); return status == 5 ? 4 : status; }
+        if (!r->w || !r->h || r->w > 16383 || r->h > 16383 ||
+            (uint64_t)r->w*r->h > max_source) { rows_close(r); return 2; }
+        r->buffered = heif_rows_buffered(r->heif);
     } else { rows_close(r); return 4; }
     *w = r->w; *h = r->h; *out = r;
     return 0;
@@ -85,7 +122,40 @@ int rows_start(RowDecoder *r, uint32_t target_w, uint32_t target_h, int scaled,
             if (!r->pixels) return 3;
             if (spng_decode_image(r->spng,r->pixels,bytes,SPNG_FMT_RGBA8,SPNG_DECODE_TRNS)) return 1;
         } else if (spng_decode_image(r->spng,NULL,0,SPNG_FMT_RGBA8,SPNG_DECODE_TRNS|SPNG_DECODE_PROGRESSIVE)) return 1;
+    } else if (r->heif) {
+        int status = heif_rows_start(r->heif, &r->w, &r->h);
+        if (status) return status;
     } else {
+        if (r->lowzag_candidate) {
+            lowzag_cfg_t cfg = { .struct_size = sizeof cfg,
+                                 .target_w = (int)target_w, .target_h = (int)target_h,
+                                 .mem_limit = MAX_LOWZAG_ALLOC_BYTES };
+            lowzag_estimate_t estimate = LOWZAG_ESTIMATE_INIT;
+            lowzag_err_t status = lowzag_estimate(&cfg, r->data, r->size, &estimate);
+            /* Keep the exact libjpeg path when no IDCT reduction is possible;
+             * lowzag's memory advantage matters only for a reduced decode. */
+            if (status == LOWZAG_OK && estimate.scale > 1 && estimate.out_w > 0 && estimate.out_h > 0 &&
+                (uint64_t)estimate.out_w * estimate.out_h <= UINT64_MAX / 3) {
+                size_t bytes = (size_t)estimate.out_w * estimate.out_h * 3;
+                r->pixels = malloc(bytes);
+                if (!r->pixels) return 3;
+                lowzag_info_t info = LOWZAG_INFO_INIT;
+                status = lowzag_decode_mem(&cfg, r->data, r->size, r->pixels, bytes, &info);
+                if (status == LOWZAG_OK && info.rows_delivered == estimate.out_h) {
+                    r->lowzag_ready = 1;
+                    r->w = (uint32_t)info.out_w; r->h = (uint32_t)info.out_h;
+                    jpeg_destroy_decompress(&r->jpeg); r->jpeg_created = 0;
+                    *w = r->w; *h = r->h;
+                    return 0;
+                }
+                free(r->pixels); r->pixels = NULL;
+            }
+            /* Keep the existing full-resolution fallback for supported-size
+             * inputs lowzag cannot handle. Larger coefficient-buffered JPEGs
+             * must fail before libjpeg allocates its full coefficient array. */
+            if ((uint64_t)r->jpeg.image_width * r->jpeg.image_height > MAX_BUFFERED_SOURCE_PIXELS)
+                return 2;
+        }
         if (setjmp(r->error.jump)) return 1;
         if (scaled && target_w < r->w && target_h < r->h) {
             // libjpeg-turbo supports IDCT scaling in increments of 1/8.
@@ -113,6 +183,14 @@ int rows_read(RowDecoder *r, uint8_t *out) {
             int e = spng_decode_row(r->spng,out,(size_t)r->w*4);
             if (e && !(e == SPNG_EOI && r->y+1 == r->h)) return 1;
         }
+    } else if (r->heif) {
+        if (heif_rows_read(r->heif, out)) return 1;
+    } else if (r->lowzag_ready) {
+        const uint8_t *src = r->pixels + (size_t)r->y * r->w * 3;
+        for (uint32_t x = 0; x < r->w; ++x) {
+            out[x*4] = src[x*3]; out[x*4+1] = src[x*3+1];
+            out[x*4+2] = src[x*3+2]; out[x*4+3] = 255;
+        }
     } else {
         if (setjmp(r->error.jump)) return 1;
         JSAMPROW row = r->cmyk ? r->cmyk_row : out;
@@ -128,6 +206,8 @@ int rows_read(RowDecoder *r, uint8_t *out) {
 }
 int rows_finish(RowDecoder *r) {
     if (r->y != r->h) return 1;
+    if (r->heif) return heif_rows_finish(r->heif);
+    if (r->lowzag_ready) return 0;
     if (r->png) return spng_decode_chunks(r->spng) ? 1 : 0;
     if (setjmp(r->error.jump)) return 1;
     return jpeg_finish_decompress(&r->jpeg) ? 0 : 1;
@@ -184,4 +264,4 @@ int rows_jpeg_finish(RowEncoder *e, uint8_t **bytes, size_t *size) {
 }
 // Flags describe codec-internal buffering, independently of the Rust row window.
 int rows_buffered(RowDecoder *r) { return r->buffered; }
-int rows_opaque(RowDecoder *r) { return !r->png; }
+int rows_opaque(RowDecoder *r) { return r->heif ? heif_rows_opaque(r->heif) : !r->png; }

@@ -1,0 +1,352 @@
+{
+  "sourceDimensions": [
+    8000,
+    8000
+  ],
+  "outputDimensions": [
+    800,
+    800
+  ],
+  "note": "Synthetic fixtures, one request per case; WASM memory reports capacity, not live/peak allocations. Experimental source and buffered caps raised to 64MP. Original tracked sources and staged packages unchanged. Cloudflare test Worker restored after testing. No production capacity claim.",
+  "localProgressive": [
+    {
+      "inputName": "progressive.jpg",
+      "format": "WEBP",
+      "speed": "default",
+      "ok": true,
+      "ms": 2936.524543,
+      "inputBytes": 8033161,
+      "outputBytes": 224380,
+      "wasmMiB": 231.3125,
+      "dimensions": [
+        800,
+        800
+      ]
+    },
+    {
+      "inputName": "progressive.jpg",
+      "format": "WEBP",
+      "speed": "fast",
+      "ok": true,
+      "ms": 1066.492817,
+      "inputBytes": 8033161,
+      "outputBytes": 194438,
+      "wasmMiB": 231,
+      "dimensions": [
+        800,
+        800
+      ]
+    },
+    {
+      "inputName": "progressive.jpg",
+      "format": "JPEG",
+      "speed": "default",
+      "ok": true,
+      "ms": 2387.592799,
+      "inputBytes": 8033161,
+      "outputBytes": 212091,
+      "wasmMiB": 231.3125,
+      "dimensions": [
+        800,
+        800
+      ]
+    },
+    {
+      "inputName": "progressive.jpg",
+      "format": "JPEG",
+      "speed": "fast",
+      "ok": true,
+      "ms": 1001.9230180000001,
+      "inputBytes": 8033161,
+      "outputBytes": 200371,
+      "wasmMiB": 231,
+      "dimensions": [
+        800,
+        800
+      ]
+    }
+  ],
+  "workerProgressive": [
+    {
+      "name": "progressive.jpg",
+      "format": "webp",
+      "speed": "default",
+      "status": 200,
+      "ms": 8189.69392,
+      "wasmMiB": 231.3125,
+      "outputBytes": 224380,
+      "width": 800,
+      "height": 800
+    },
+    {
+      "name": "progressive.jpg",
+      "format": "webp",
+      "speed": "fast",
+      "status": 200,
+      "ms": 7980.584811000001,
+      "wasmMiB": 231,
+      "outputBytes": 194438,
+      "width": 800,
+      "height": 800
+    },
+    {
+      "name": "progressive.jpg",
+      "format": "jpeg",
+      "speed": "default",
+      "status": 400,
+      "ms": 6601.426119999998,
+      "wasmMiB": 0,
+      "outputBytes": 39,
+      "error": "{\"error\":\"Invalid array buffer length\"}"
+    },
+    {
+      "name": "progressive.jpg",
+      "format": "jpeg",
+      "speed": "fast",
+      "status": 400,
+      "ms": 4968.483147999999,
+      "wasmMiB": 0,
+      "outputBytes": 39,
+      "error": "{\"error\":\"Invalid array buffer length\"}"
+    }
+  ],
+  "localStreaming": [
+    {
+      "inputName": "baseline.jpg",
+      "format": "WEBP",
+      "speed": "default",
+      "ok": true,
+      "ms": 2080.070962,
+      "inputBytes": 8852591,
+      "outputBytes": 224380,
+      "wasmMiB": 19.25,
+      "dimensions": [
+        800,
+        800
+      ]
+    },
+    {
+      "inputName": "baseline.jpg",
+      "format": "WEBP",
+      "speed": "fast",
+      "ok": true,
+      "ms": 432.87204499999996,
+      "inputBytes": 8852591,
+      "outputBytes": 194438,
+      "wasmMiB": 16,
+      "dimensions": [
+        800,
+        800
+      ]
+    },
+    {
+      "inputName": "baseline.jpg",
+      "format": "JPEG",
+      "speed": "default",
+      "ok": true,
+      "ms": 1776.964758,
+      "inputBytes": 8852591,
+      "outputBytes": 212091,
+      "wasmMiB": 16,
+      "dimensions": [
+        800,
+        800
+      ]
+    },
+    {
+      "inputName": "baseline.jpg",
+      "format": "JPEG",
+      "speed": "fast",
+      "ok": true,
+      "ms": 347.301292,
+      "inputBytes": 8852591,
+      "outputBytes": 200371,
+      "wasmMiB": 16,
+      "dimensions": [
+        800,
+        800
+      ]
+    },
+    {
+      "inputName": "streaming.png",
+      "format": "WEBP",
+      "speed": "default",
+      "ok": true,
+      "ms": 1625.9146389999999,
+      "inputBytes": 627376,
+      "outputBytes": 31156,
+      "wasmMiB": 16,
+      "dimensions": [
+        800,
+        800
+      ]
+    },
+    {
+      "inputName": "streaming.png",
+      "format": "WEBP",
+      "speed": "fast",
+      "ok": true,
+      "ms": 1534.160359,
+      "inputBytes": 627376,
+      "outputBytes": 39622,
+      "wasmMiB": 16,
+      "dimensions": [
+        800,
+        800
+      ]
+    },
+    {
+      "inputName": "streaming.png",
+      "format": "JPEG",
+      "speed": "default",
+      "ok": true,
+      "ms": 1443.7224099999999,
+      "inputBytes": 627376,
+      "outputBytes": 55428,
+      "wasmMiB": 16,
+      "dimensions": [
+        800,
+        800
+      ]
+    },
+    {
+      "inputName": "streaming.png",
+      "format": "JPEG",
+      "speed": "fast",
+      "ok": true,
+      "ms": 1435.510229,
+      "inputBytes": 627376,
+      "outputBytes": 55428,
+      "wasmMiB": 16,
+      "dimensions": [
+        800,
+        800
+      ]
+    }
+  ],
+  "workerStreaming": [
+    {
+      "name": "baseline.jpg",
+      "format": "webp",
+      "speed": "default",
+      "status": 200,
+      "ms": 3745.349412,
+      "wasmMiB": 19.25,
+      "outputBytes": 224380,
+      "width": 800,
+      "height": 800
+    },
+    {
+      "name": "baseline.jpg",
+      "format": "webp",
+      "speed": "fast",
+      "status": 200,
+      "ms": 1250.461179,
+      "wasmMiB": 19.25,
+      "outputBytes": 194438,
+      "width": 800,
+      "height": 800
+    },
+    {
+      "name": "baseline.jpg",
+      "format": "jpeg",
+      "speed": "default",
+      "status": 503,
+      "ms": 2575.44351,
+      "wasmMiB": 0,
+      "outputBytes": 4733,
+      "error": "<!DOCTYPE html>\n<!--[if lt IE 7]> <html class=\"no-js ie6 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if IE 7]>    <html class=\"no-js ie7 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if IE 8]>    <html class=\"no-"
+    },
+    {
+      "name": "baseline.jpg",
+      "format": "jpeg",
+      "speed": "fast",
+      "status": 200,
+      "ms": 1279.628674999999,
+      "wasmMiB": 23.125,
+      "outputBytes": 200371,
+      "width": 800,
+      "height": 800
+    },
+    {
+      "name": "streaming.png",
+      "format": "webp",
+      "speed": "default",
+      "status": 503,
+      "ms": 1449.1829699999998,
+      "wasmMiB": 0,
+      "outputBytes": 4733,
+      "error": "<!DOCTYPE html>\n<!--[if lt IE 7]> <html class=\"no-js ie6 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if IE 7]>    <html class=\"no-js ie7 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if IE 8]>    <html class=\"no-"
+    },
+    {
+      "name": "streaming.png",
+      "format": "webp",
+      "speed": "fast",
+      "status": 503,
+      "ms": 1168.5196919999998,
+      "wasmMiB": 0,
+      "outputBytes": 4733,
+      "error": "<!DOCTYPE html>\n<!--[if lt IE 7]> <html class=\"no-js ie6 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if IE 7]>    <html class=\"no-js ie7 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if IE 8]>    <html class=\"no-"
+    },
+    {
+      "name": "streaming.png",
+      "format": "jpeg",
+      "speed": "default",
+      "status": 503,
+      "ms": 1122.8030739999995,
+      "wasmMiB": 0,
+      "outputBytes": 4733,
+      "error": "<!DOCTYPE html>\n<!--[if lt IE 7]> <html class=\"no-js ie6 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if IE 7]>    <html class=\"no-js ie7 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if IE 8]>    <html class=\"no-"
+    },
+    {
+      "name": "streaming.png",
+      "format": "jpeg",
+      "speed": "fast",
+      "status": 503,
+      "ms": 1135.6423689999992,
+      "wasmMiB": 0,
+      "outputBytes": 4733,
+      "error": "<!DOCTYPE html>\n<!--[if lt IE 7]> <html class=\"no-js ie6 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if IE 7]>    <html class=\"no-js ie7 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if IE 8]>    <html class=\"no-"
+    },
+    {
+      "name": "progressive.jpg",
+      "format": "webp",
+      "speed": "default",
+      "status": 400,
+      "ms": 704.325175,
+      "wasmMiB": 0,
+      "outputBytes": 50,
+      "error": "{\"error\":\"Image exceeds pixel or dimension limit\"}"
+    },
+    {
+      "name": "progressive.jpg",
+      "format": "webp",
+      "speed": "fast",
+      "status": 400,
+      "ms": 560.1537879999996,
+      "wasmMiB": 0,
+      "outputBytes": 50,
+      "error": "{\"error\":\"Image exceeds pixel or dimension limit\"}"
+    },
+    {
+      "name": "progressive.jpg",
+      "format": "jpeg",
+      "speed": "default",
+      "status": 400,
+      "ms": 608.5493860000006,
+      "wasmMiB": 0,
+      "outputBytes": 50,
+      "error": "{\"error\":\"Image exceeds pixel or dimension limit\"}"
+    },
+    {
+      "name": "progressive.jpg",
+      "format": "jpeg",
+      "speed": "fast",
+      "status": 400,
+      "ms": 553.9463820000001,
+      "wasmMiB": 0,
+      "outputBytes": 50,
+      "error": "{\"error\":\"Image exceeds pixel or dimension limit\"}"
+    }
+  ]
+}

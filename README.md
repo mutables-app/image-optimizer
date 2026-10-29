@@ -3,9 +3,9 @@
 [![npm: image-optimizer](https://img.shields.io/npm/v/%40mutables.app%2Fimage-optimizer?label=%40mutables.app%2Fimage-optimizer)](https://www.npmjs.com/package/@mutables.app/image-optimizer)
 [![npm: image-computer](https://img.shields.io/npm/v/%40mutables.app%2Fimage-computer?label=%40mutables.app%2Fimage-computer)](https://www.npmjs.com/package/@mutables.app/image-computer)
 
-**New in v0.2.2:** Streaming JPEG/PNG source limit raised to 32 megapixels. Buffered progressive/multi-scan JPEG and Adam7 PNG inputs are capped at 24 megapixels after Worker memory tests; file-size, dimension and output-pixel limits are unchanged. v0.2.0 introduced scanline decoding/resizing in both speed modes and JPEG output.
+**New in v0.3.0:** HEIC/HEIF and AVIF input, including tiled HEIF grids up to 64 megapixels; lowzag-compatible progressive JPEG resizing up to 64 megapixels; and an 8-megapixel cap for non-grid HEIC/HEIF and AVIF images.
 
-An image-processing pipeline written in Rust and compiled to WebAssembly for Node.js and Cloudflare Workers. It links JPEG, PNG, and WebP codec libraries into the same Emscripten module as the Rust resize pipeline, so the image pixels stay inside WASM instead of crossing between JavaScript libraries at each stage.
+An image-processing pipeline written in Rust and compiled to WebAssembly for Node.js and Cloudflare Workers. It links JPEG, PNG, HEIF/HEIC, AVIF, and WebP codec libraries into the same Emscripten module as the Rust resize pipeline, so the image pixels stay inside WASM instead of crossing between JavaScript libraries at each stage.
 
 ```js
 import { image } from '@mutables.app/image-optimizer';
@@ -16,7 +16,7 @@ const webp = await image(inputBytes)
   .bytes();
 ```
 
-`speed: 'fast'` selects a faster internal WebP encoder setting and enables scaled JPEG decoding for resized images when the target permits it. That can avoid decoding every source pixel and reduce peak pixel-buffer memory for large JPEGs. Streaming JPEG/PNG inputs are capped at 32 megapixels; progressive or multi-scan JPEGs and Adam7 PNGs use buffered codec paths and are capped at 24 megapixels. `maxPixels` bounds the output (8 million by default). PNG inputs and `lossless: true` requests retain full-resolution row decoding. Omit `speed` to keep the existing WebP encoder setting; scanline processing applies in both modes. The fast path can produce larger files; the trade-off depends on the image. `.blob()` returns an `image/webp` Blob, or `image/jpeg` after `.jpeg()`. Image work runs synchronously in the isolate, inside the returned promise.
+`speed: 'fast'` selects a faster internal WebP encoder setting and enables scaled JPEG decoding for resized images when the target permits it. Lowzag-compatible progressive JPEGs can be resized up to 64 megapixels using scale-aware coefficient decoding. Other progressive/multi-scan JPEGs and Adam7 PNGs retain their buffered compatibility paths and are capped at 24 megapixels; baseline JPEG and non-interlaced PNG inputs support up to 32 megapixels. `maxPixels` bounds the output (8 million by default). PNG inputs and `lossless: true` requests retain full-resolution row decoding. Omit `speed` to keep the existing WebP encoder setting; scanline processing applies in both modes. The fast path can produce larger files; the trade-off depends on the image. `.blob()` returns an `image/webp` Blob, or `image/jpeg` after `.jpeg()`. Image work runs synchronously in the isolate, inside the returned promise.
 
 ## Architecture
 
@@ -28,26 +28,26 @@ flowchart LR
   BIND --> RUST[Rust pipeline<br/>decode · resize · encode]
   RUST --> RESIZE[Scanline Lanczos3 resizer<br/>WASM SIMD128 · bounded row window]
   RUST --> CABI[C ABI bridge]
-  CABI --> CODECS[libjpeg-turbo · libspng · libwebp]
+  CABI --> CODECS[libjpeg-turbo · libspng · libheif · libde265 · libaom · libwebp]
   RESIZE --> LINK[Emscripten link<br/>wasm32-unknown-emscripten]
   CODECS --> LINK
   LINK --> WASM[WebAssembly module + JS glue]
   WASM --> HOST[Cloudflare Workers or Node.js]
 ```
 
-JPEG and PNG decoding, resizing, and WebP/JPEG encoding execute in the compiled module. Baseline JPEG and non-interlaced PNG inputs are decoded sequentially. The Rust Lanczos3 resizer retains a bounded set of rows and uses premultiplied alpha through both passes, with SIMD128 for four-channel convolution. This happens for both the default and `speed: 'fast'` settings.
+JPEG, PNG, HEIF/HEIC and AVIF decoding, resizing, and WebP/JPEG encoding execute in the compiled module. Baseline JPEG and non-interlaced PNG inputs are decoded sequentially. Non-grid HEIF/HEIC and AVIF currently decode to a full RGBA source surface and remain capped at 8 megapixels. Tiled HEIF grids decode one tile row at a time and support up to 64 megapixels. The Rust Lanczos3 resizer retains a bounded set of rows and uses premultiplied alpha through both passes, with SIMD128 for four-channel convolution. This happens for both the default and `speed: 'fast'` settings.
 
 WebP encoding needs the complete **resized** RGBA image; the source image is not accumulated by the row resizer. JPEG output feeds each resized row directly into a baseline libjpeg-turbo encoder, with standard Huffman tables and 4:2:0 subsampling. Input and encoded output bytes are still buffered by `.bytes()`/`.blob()`; this is internal pixel processing, not a streaming HTTP API.
 
-Progressive/multi-scan JPEGs require codec coefficient storage. Adam7 PNGs use a bounded full-image decode for compatibility before entering the row resizer. These inputs retain more memory than baseline JPEG/non-interlaced PNG. The old `fast_image_resize` implementation remains only as a low-level benchmark reference, not the public processing path. The codec libraries are **compiled to WebAssembly**; they are not native host binaries running outside the Worker sandbox. Workers load the Wasm module statically. Node.js uses a separate file-based loader. The optional Computer adapter sits around the same optimizer and reads and writes files through `workspace.fs`.
+Supported progressive JPEGs use lowzag's reduced coefficient storage; unsupported progressive/multi-scan JPEGs still require full coefficient storage. Adam7 PNGs use a bounded full-image decode for compatibility before entering the row resizer. These fallback inputs retain more memory than baseline JPEG/non-interlaced PNG. The old `fast_image_resize` implementation remains only as a low-level benchmark reference, not the public processing path. The codec libraries are **compiled to WebAssembly**; they are not native host binaries running outside the Worker sandbox. Workers load the Wasm module statically. Node.js uses a separate file-based loader. The optional Computer adapter sits around the same optimizer and reads and writes files through `workspace.fs`.
 
-Cloudflare describes the Emscripten Rust target support as an experimental preview. This project demonstrates the image-processing use case; it does not imply native machine-code execution or guarantee a performance gain over other Workers image libraries.
+Cloudflare describes the Emscripten Rust target support as an experimental preview. This project demonstrates the image-processing use case; it does not imply native machine-code execution or guarantee a performance gain over other Workers image libraries. HEIF decoding adds LGPL-licensed libheif and libde265; libaom's license is also included with the codec notices.
 
 ## Packages
 
 ### [`@mutables.app/image-optimizer`](https://www.npmjs.com/package/@mutables.app/image-optimizer)
 
-Accepts a `Blob`, `ArrayBuffer`, or typed array. JPEG and PNG input are sniffed automatically. Width-only resizing preserves aspect ratio; two dimensions default to `fill`.
+Accepts a `Blob`, `ArrayBuffer`, or typed array. JPEG, PNG, HEIF/HEIC, and AVIF input are sniffed automatically. Non-grid HEIF/HEIC and AVIF input is capped at 8 megapixels because decoding requires a full source image in memory; tiled HEIF grids support up to 64 megapixels. Width-only resizing preserves aspect ratio; two dimensions default to `fill`.
 
 ```js
 import { image } from '@mutables.app/image-optimizer';
@@ -95,8 +95,8 @@ The published v0.1.0 Worker benchmark (before scanlines) compares two internal W
 
 ## Limits
 
-- JPEG and PNG input; WebP and JPEG output. No animation, HEIC, AVIF, rotation, or metadata API.
-- 20 MiB maximum input and 32 million source pixels for streaming paths. Buffered progressive/multi-scan JPEG and Adam7 PNG paths are capped at 24 million pixels based on deployed Worker memory measurements. The default output pixel limit (`maxPixels`) is 8 million and can be raised to 16 million. Source and output dimensions are limited to 16383. The WASM build allows up to 256 MiB of linear memory, while a Cloudflare Worker isolate is limited to 128 MiB total across JavaScript and WebAssembly.
+- JPEG, PNG, HEIC/HEIF, and AVIF input; WebP and JPEG output. No animation, rotation, or metadata API.
+- 20 MiB maximum input; lowzag-compatible progressive JPEGs support up to 64 million source pixels, baseline JPEG and non-interlaced PNG up to 32 million, and unsupported progressive/multi-scan JPEG and Adam7 PNG up to 24 million. Non-grid HEIF/HEIC and AVIF remain capped at 8 million; tiled HEIF grids support up to 64 million. The default output pixel limit (`maxPixels`) is 8 million and can be raised to 16 million. Source and output dimensions are limited to 16383. The WASM build allows up to 256 MiB of linear memory, while a Cloudflare Worker isolate is limited to 128 MiB total across JavaScript and WebAssembly.
 - PNG alpha is preserved in WebP; JPEG composites onto white. EXIF orientation and ICC color management are not applied; metadata is not copied. JPEGs with decoder warnings are rejected.
 - Resizing uses scanline Lanczos3 with premultiplied alpha. `speed: 'fast'` enables scaled JPEG decoding for eligible resized lossy requests; the 32-megapixel source ceiling applies in both modes.
 

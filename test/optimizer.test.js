@@ -7,6 +7,7 @@ import {optimizeWorkspaceImage} from '@mutables.app/image-computer';
 const png = await readFile(new URL('./fixtures/rgba.png', import.meta.url));
 const jpeg = await readFile(new URL('./fixtures/input.jpg', import.meta.url));
 const jpeg4k = await readFile(new URL('./fixtures/input-4k.jpg', import.meta.url));
+const heic = await readFile(new URL('./fixtures/iphone-sample.heic', import.meta.url));
 function decode(bytes) {
  const p = spawnSync('python3', ['test/decode-webp.py'], {input: bytes});
  assert.equal(p.status, 0, p.stderr.toString()); return JSON.parse(p.stdout);
@@ -19,6 +20,13 @@ test('PNG → lossless WebP preserves dimensions and alpha', async () => {
 test('JPEG → fit inside → lossy WebP', async () => {
  const out = decode(await image(jpeg).resize(40,40,{fit:'inside'}).webp({quality:75}).bytes());
  assert.ok(out.width <= 40 && out.height <= 40); assert.ok(out.width === 40 || out.height === 40);
+});
+test('HEIC/HEIF from a phone is accepted for WebP and JPEG output', async () => {
+ const webp = decode(await image(heic).resize(160).webp({speed:'fast'}).bytes());
+ assert.deepEqual([webp.width,webp.height],[160,120]);
+ const jpeg = await image(heic).resize(160).jpeg().bytes();
+ const result = JSON.parse(spawnSync('python3',['test/decode-image.py'],{input:jpeg}).stdout.toString());
+ assert.deepEqual([result.format,result.width,result.height],['JPEG',160,120]);
 });
 test('fast speed selects the internal fast encoder while omission keeps the existing default', async () => {
  const pipeline = () => image(jpeg).resize(40,40,{fit:'inside'});
@@ -43,7 +51,7 @@ test('width-only, fill, and withoutEnlargement', async () => {
  out = decode(await image(png).resize(100,100,{fit:'inside',withoutEnlargement:true}).bytes()); assert.deepEqual([out.width,out.height],[32,16]);
 });
 test('invalid and oversized images reject; subsequent conversion still works', async () => {
- await assert.rejects(image(new Uint8Array([1,2,3])).bytes(), /Expected JPEG or PNG/);
+ await assert.rejects(image(new Uint8Array([1,2,3])).bytes(), /Expected JPEG, PNG, HEIF or AVIF/);
  await assert.rejects(image(png.subarray(0,40)).bytes(), /decode failed/);
  await assert.rejects(image(png,{maxPixels:10}).bytes(), /limit/);
  assert.throws(()=>image(png).resize(0), /Dimensions/);

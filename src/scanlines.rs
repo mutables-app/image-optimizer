@@ -34,7 +34,7 @@ fn check(status: i32) -> Result<(), JsValue> {
         Err(error(match status {
             2 => "Image exceeds pixel or dimension limit",
             3 => "Image allocation failed",
-            4 => "Expected JPEG or PNG input",
+            4 => "Expected JPEG, PNG, HEIF or AVIF input",
             _ => "Image decode failed",
         }))
     }
@@ -167,13 +167,14 @@ pub fn resize(
     mut sink: impl FnMut(&[u8], u32, u32) -> Result<(), JsValue>,
 ) -> Result<Stats, JsValue> {
     let (mut ctx, mut sw, mut sh) = (std::ptr::null_mut(), 0, 0);
-    // Keep a separate source safety ceiling. maxPixels bounds output, and
-    // allows bounded progressive-JPEG / Adam7 compatibility allocations.
+    // Keep a separate source safety ceiling. Native code applies the 64MP
+    // allowance only to progressive JPEGs supported by lowzag; other formats
+    // retain their lower streaming or buffered limits.
     check(unsafe {
         rows_open(
             input.as_ptr(),
             input.len(),
-            32_000_000,
+            64_000_000,
             &mut ctx,
             &mut sw,
             &mut sh,

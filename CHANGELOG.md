@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0 — 2026-10-29
+
+- Decode HEIF/HEIC and AVIF inputs with libheif, including HEVC/AV1 support; both WebP and JPEG outputs are supported.
+- Bundle current libheif, libde265 and libaom sources during the Emscripten build, with their license notices included in the optimizer package.
+- Decode supported progressive JPEGs with lowzag's scale-aware coefficient storage, reducing WASM memory for resized images; retain libjpeg fallback for unsupported progressive variants.
+- Allow lowzag-compatible progressive JPEGs up to 64 megapixels when resized; retain source limits for baseline JPEG, PNG, and unsupported progressive JPEGs.
+- Decode tiled HEIF grids one tile row at a time and allow them up to 64 megapixels; cap non-grid HEIF/HEIC and AVIF at 8 megapixels because a 16-megapixel single-image decode exceeds 128 MiB of WASM linear memory.
+
 ## 0.2.2 — 2026-10-29
 
 - Raise the streaming source image limit from 16 to 32 megapixels while retaining the 20 MiB input, 16,383-pixel dimension and 16-megapixel output limits. Cap buffered progressive/multi-scan JPEG and Adam7 PNG input at 24 megapixels after deployed Worker memory measurements.

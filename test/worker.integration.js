@@ -5,6 +5,10 @@ import {spawnSync} from 'node:child_process';
 const base = process.env.WORKER_URL ?? 'http://127.0.0.1:8787';
 const input = await readFile(new URL('./fixtures/rgba.png',import.meta.url));
 const input4k = await readFile(new URL('./fixtures/input-4k.jpg',import.meta.url));
+const input8mpHeic = await readFile(new URL('./fixtures/input-8mp-single.heic',import.meta.url));
+const input16mpHeic = await readFile(new URL('./fixtures/input-16mp-single.heic',import.meta.url));
+const input24mpHeic = await readFile(new URL('./fixtures/input-24mp-single.heic',import.meta.url));
+const input64mpGridHeic = await readFile(new URL('./fixtures/input-64mp-grid.heic',import.meta.url));
 async function request(path, init) {
  const response = await fetch(base+path,init);
  if (!response.ok) throw new Error(`${response.status}: ${await response.text()}`);
@@ -26,6 +30,30 @@ const largeFast = await request('/optimize?width=800&speed=fast',{method:'POST',
 const largeDecoded = spawnSync('python3',['test/decode-webp.py'],{input:new Uint8Array(await largeFast.arrayBuffer())});
 assert.equal(largeDecoded.status,0,largeDecoded.stderr.toString());
 assert.deepEqual([JSON.parse(largeDecoded.stdout).width,JSON.parse(largeDecoded.stdout).height],[800,450]);
+const singleHeicWebp = await request('/optimize?width=800',{method:'POST',body:input8mpHeic});
+const singleHeicDecoded = spawnSync('python3',['test/decode-webp.py'],{input:new Uint8Array(await singleHeicWebp.arrayBuffer())});
+assert.equal(singleHeicDecoded.status,0,singleHeicDecoded.stderr.toString());
+assert.deepEqual([JSON.parse(singleHeicDecoded.stdout).width,JSON.parse(singleHeicDecoded.stdout).height],[800,400]);
+const singleHeicJpeg = await request('/optimize?width=800&format=jpeg',{method:'POST',body:input8mpHeic});
+const singleHeicJpegDecoded = spawnSync('python3',['test/decode-image.py'],{input:new Uint8Array(await singleHeicJpeg.arrayBuffer()),maxBuffer:64*1024*1024});
+assert.equal(singleHeicJpegDecoded.status,0,singleHeicJpegDecoded.stderr.toString());
+assert.deepEqual([JSON.parse(singleHeicJpegDecoded.stdout).width,JSON.parse(singleHeicJpegDecoded.stdout).height],[800,400]);
+for (const overLimitInput of [input16mpHeic,input24mpHeic]) {
+ const overLimitSingleHeic = await fetch(base+'/optimize?width=800',{method:'POST',body:overLimitInput});
+ assert.equal(overLimitSingleHeic.status,400);
+ assert.match((await overLimitSingleHeic.json()).error,/pixel or dimension limit/);
+}
+const largeNonGridHeic = await fetch(base+'/optimize?width=800',{method:'POST',body:input24mpHeic});
+assert.equal(largeNonGridHeic.status,400);
+assert.match((await largeNonGridHeic.json()).error,/pixel or dimension limit/);
+const tiledHeicWebp = await request('/optimize?width=800',{method:'POST',body:input64mpGridHeic});
+const tiledHeicDecoded = spawnSync('python3',['test/decode-webp.py'],{input:new Uint8Array(await tiledHeicWebp.arrayBuffer())});
+assert.equal(tiledHeicDecoded.status,0,tiledHeicDecoded.stderr.toString());
+assert.deepEqual([JSON.parse(tiledHeicDecoded.stdout).width,JSON.parse(tiledHeicDecoded.stdout).height],[800,800]);
+const tiledHeicJpeg = await request('/optimize?width=800&format=jpeg',{method:'POST',body:input64mpGridHeic});
+const tiledHeicJpegDecoded = spawnSync('python3',['test/decode-image.py'],{input:new Uint8Array(await tiledHeicJpeg.arrayBuffer()),maxBuffer:64*1024*1024});
+assert.equal(tiledHeicJpegDecoded.status,0,tiledHeicJpegDecoded.stderr.toString());
+assert.deepEqual([JSON.parse(tiledHeicJpegDecoded.stdout).width,JSON.parse(tiledHeicJpegDecoded.stdout).height],[800,800]);
 await request('/workspaces/integration/files/input.png',{method:'PUT',body:input});
 const result = await request('/workspaces/integration/optimize',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({input:'/input.png',output:'/output.webp',width:8,speed:'fast'})});
 assert.equal((await result.json()).path,'/output.webp');
@@ -42,4 +70,4 @@ const invalid = await fetch(base+'/optimize',{method:'POST',body:'invalid image'
 assert.equal(invalid.status,400);
 const invalidSpeed = await fetch(base+'/optimize?speed=slow',{method:'POST',body:input});
 assert.equal(invalidSpeed.status,400);
-console.log('PASS: default and fast-speed Worker conversion including a 4K JPEG, Computer upload → optimize → download, independent WebP decode, invalid input/options');
+console.log('PASS: Worker image conversion including JPEG, 8MP single-image and 64MP tiled HEIC to WebP/JPEG, 16MP/24MP HEIC rejection, Computer roundtrip, invalid input/options');

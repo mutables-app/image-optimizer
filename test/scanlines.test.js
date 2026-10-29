@@ -78,17 +78,47 @@ test('4K JPEG avoids full source pixels in both speed settings',async()=>{
   assert.equal(decode(result.take_bytes()).width,800);
  }
 });
-test('24MP progressive JPEG converts under the source limit and stays within the WASM memory cap',async()=>{
+test('tiled HEIC grid decodes incrementally within a small WASM memory budget',async()=>{
+ const input=await fixture('grid-12mp-512px-tiles.heic');
+ const result=scanline_experiment(input,800,600,false,false,80,false,16_000_000,false,-1,false);
+ assert.equal(result.codec_buffered,false);
+ assert.deepEqual([result.source_width,result.source_height],[4032,3024]);
+ assert.deepEqual([result.output_width,result.output_height],[800,600]);
+ const output=decode(result.take_bytes());assert.deepEqual([output.width,output.height],[800,600]);
+ assert.ok(linear_memory_bytes()<=32*1024*1024,`WASM linear memory ${linear_memory_bytes()} exceeds 32 MiB`);
+});
+test('24MP progressive JPEG converts through reduced coefficient decoding',async()=>{
  const input=await fixture('input-24mp-progressive.jpg');
  const webp=await image(input).resize(800).webp({speed:'fast'}).bytes();
  const jpeg=await image(input).resize(800).jpeg({speed:'fast'}).bytes();
- assert.ok(webp.byteLength>0); assert.ok(jpeg.byteLength>0);
+ const defaultSpeed=await image(input).resize(800).webp().bytes();
+ assert.ok(webp.byteLength>0); assert.ok(jpeg.byteLength>0); assert.ok(defaultSpeed.byteLength>0);
  const memory=linear_memory_bytes();
- assert.ok(memory<=256*1024*1024,`WASM linear memory ${memory} exceeds 256 MiB`);
+ assert.ok(memory<=48*1024*1024,`WASM linear memory ${memory} exceeds 48 MiB`);
 });
-test('32MP progressive JPEG is rejected before its buffered decode approaches the Worker isolate limit',async()=>{
+test('32MP progressive JPEG converts at reduced scale within a small WASM memory budget',async()=>{
  const input=await fixture('input-32mp-progressive.jpg');
- await assert.rejects(image(input).resize(800).webp({speed:'fast'}).bytes(),/limit/);
+ const result=scanline_experiment(input,800,0,false,false,80,false,8_000_000,true,-1,false);
+ assert.equal(result.codec_buffered,true);
+ assert.deepEqual([result.source_width,result.source_height],[8000,4000]);
+ assert.deepEqual([result.decoded_width,result.decoded_height],[1000,500]);
+ assert.deepEqual([result.output_width,result.output_height],[800,400]);
+ const output=decode(result.take_bytes());assert.deepEqual([output.width,output.height],[800,400]);
+ assert.ok(linear_memory_bytes()<=48*1024*1024,`WASM linear memory ${linear_memory_bytes()} exceeds 48 MiB`);
+});
+test('64MP lowzag-compatible progressive JPEG converts within a small WASM memory budget',async()=>{
+ const input=await fixture('input-64mp-progressive.jpg');
+ const result=scanline_experiment(input,800,800,false,false,80,false,8_000_000,true,-1,false);
+ assert.equal(result.codec_buffered,true);
+ assert.deepEqual([result.source_width,result.source_height],[8000,8000]);
+ assert.deepEqual([result.decoded_width,result.decoded_height],[1000,1000]);
+ assert.deepEqual([result.output_width,result.output_height],[800,800]);
+ const output=decode(result.take_bytes());assert.deepEqual([output.width,output.height],[800,800]);
+ for(const format of ['webp','jpeg']) {
+  const bytes=await image(input).resize(800)[format]({speed:'fast'}).bytes();
+  assert.deepEqual([decode(bytes).width,decode(bytes).height],[800,800]);
+ }
+ assert.ok(linear_memory_bytes()<=48*1024*1024,`WASM linear memory ${linear_memory_bytes()} exceeds 48 MiB`);
 });
 test('extreme aspect ratios keep the row window bounded',()=>{
  for(const [sw,sh,ow,oh] of [[1,16000,16000,1],[16000,1,1,16000],[31,127,127,1],[31,1,1,127]]) {

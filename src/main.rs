@@ -219,7 +219,7 @@ fn run(
         return Err(error(match status {
             2 => "Image exceeds pixel or dimension limit",
             3 => "Image allocation failed",
-            4 => "Expected JPEG or PNG input",
+            4 => "Expected JPEG, PNG, HEIF or AVIF input",
             _ => "Image decode failed",
         }));
     }
