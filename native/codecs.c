@@ -85,22 +85,24 @@ int decode_image(const uint8_t *data, size_t size, uint32_t max_pixels,
 }
 void release_pixels(uint8_t *pixels) { free(pixels); }
 size_t encode_webp(const uint8_t *rgba, uint32_t w, uint32_t h, float quality,
-                   int lossless, int method, uint8_t **output) {
-    if (method >= 0) {
+                   int lossless, int method, int opaque, uint8_t **output) {
+    if (method >= 0 || opaque) {
         WebPConfig config;
         WebPPicture picture;
         WebPMemoryWriter writer;
         *output = NULL;
         if (method > 6 || !WebPConfigPreset(&config, WEBP_PRESET_DEFAULT, lossless ? 70.0f : quality)) return 0;
         config.lossless = !!lossless;
-        config.method = method;
+        if (method >= 0) config.method = method;
         if (!WebPValidateConfig(&config) || !WebPPictureInit(&picture)) return 0;
         picture.use_argb = !!lossless;
         picture.width = w; picture.height = h;
         picture.writer = WebPMemoryWrite;
         picture.custom_ptr = &writer;
         WebPMemoryWriterInit(&writer);
-        int ok = WebPPictureImportRGBA(&picture, rgba, w * 4) && WebPEncode(&config, &picture);
+        int imported = opaque ? WebPPictureImportRGBX(&picture, rgba, w * 4)
+                              : WebPPictureImportRGBA(&picture, rgba, w * 4);
+        int ok = imported && WebPEncode(&config, &picture);
         WebPPictureFree(&picture);
         if (!ok) { WebPMemoryWriterClear(&writer); return 0; }
         *output = writer.mem;

@@ -19,6 +19,7 @@ unsafe extern "C" {
     fn rows_finish(ctx: *mut c_void) -> i32;
     fn rows_close(ctx: *mut c_void);
     fn rows_buffered(ctx: *mut c_void) -> i32;
+    fn rows_opaque(ctx: *mut c_void) -> i32;
 }
 struct Decoder(*mut c_void);
 impl Drop for Decoder {
@@ -151,6 +152,7 @@ pub struct Stats {
     pub output_height: u32,
     pub peak_row_bytes: usize,
     pub codec_buffered: bool,
+    pub opaque_input: bool,
 }
 // Input remains buffered by the public API. `sink` is called once per output
 // row, permitting a row encoder or a WebP destination buffer as the consumer.
@@ -193,6 +195,7 @@ pub fn resize(
         output_height: oh,
         peak_row_bytes: 0,
         codec_buffered: unsafe { rows_buffered(decoder.0) } != 0,
+        opaque_input: unsafe { rows_opaque(decoder.0) } != 0,
     };
     let mut row = vec![0u8; w as usize * 4];
     // Preserve hidden RGB as well as alpha when no resizing is requested.

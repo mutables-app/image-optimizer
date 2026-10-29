@@ -29,6 +29,7 @@ unsafe extern "C" {
         quality: f32,
         lossless: i32,
         method: i32,
+        opaque: i32,
         output: *mut *mut u8,
     ) -> usize;
     fn release_webp(output: *mut u8);
@@ -268,6 +269,7 @@ fn run(
                 quality,
                 lossless as i32,
                 method,
+                0,
                 &mut output,
             )
         };
@@ -386,6 +388,7 @@ fn run_scanlines(
             quality,
             lossless as i32,
             method,
+            stats.opaque_input as i32,
             &mut output,
         )
     };

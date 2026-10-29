@@ -175,3 +175,4 @@ int rows_jpeg_finish(RowEncoder *e, uint8_t **bytes, size_t *size) {
 }
 // Flags describe codec-internal buffering, independently of the Rust row window.
 int rows_buffered(RowDecoder *r) { return r->png ? r->buffered : r->jpeg.progressive_mode || jpeg_has_multiple_scans(&r->jpeg); }
+int rows_opaque(RowDecoder *r) { return !r->png; }
