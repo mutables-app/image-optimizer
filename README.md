@@ -97,7 +97,7 @@ The published v0.1.0 Worker benchmark (before scanlines) compares two internal W
 
 - JPEG, PNG, WebP, and HEIC/HEIF input; WebP and JPEG output. No animation, rotation, or metadata API.
 
-| Input type | Maximum source pixels | Decode path | WASM linear-memory capacity | Cloudflare isolate memory (max sampled) |
+| Input type | Maximum source pixels | Decode path | WASM capacity (WebP output) | Cloudflare isolate memory (max sampled, WebP output) |
 | --- | ---: | --- | ---: | ---: |
 | Baseline JPEG | 48 MP | Sequential scanline decode; eligible resized JPEGs can use scaled decode with `speed: 'fast'`. | 16 MiB | 36.14 MiB |
 | Non-interlaced PNG | 48 MP | Sequential scanline decode. | 16 MiB | 21.17 MiB |
@@ -106,11 +106,11 @@ The published v0.1.0 Worker benchmark (before scanlines) compares two internal W
 | WebP, `speed: 'fast'` resized decode | 12 MP | libwebp scaled output at up to 2× target size, then Lanczos resizing. | 19.25 MiB | 39.36 MiB (4 samples) |
 | Tiled/grid HEIC/HEIF | 48 MP | libde265 (HEVC); decodes one tile row at a time. | 49 MiB | 54.97 MiB |
 
-### Worker response time and CPU
+### Worker response time and CPU (WebP output)
 
 These end-to-end samples convert supported synthetic inputs to 800×600 WebP. Each fixture ran in its own temporary Worker with one warm-up request followed by three measured requests. Response time is client-observed p50 and includes network and transfer time; CPU is the median per-invocation `cpuTime` reported by Wrangler tail. Wrangler captured one to three CPU samples per fixture; the sample count appears beside each CPU median. The temporary Workers used a 30-second CPU limit.
 
-| Input path and source size | Result | Response p50 | Worker CPU median | WASM capacity after last request |
+| Input path and source size (WebP output) | Result | Response p50 | Worker CPU median | WASM capacity after last request |
 | --- | --- | ---: | ---: | ---: |
 | Baseline JPEG, 12 MP | Converted | 234 ms | 111 ms (1 sample) | 16 MiB |
 | Baseline JPEG, 24 MP | Converted | 367 ms | 198 ms (1 sample) | 16 MiB |
@@ -142,11 +142,11 @@ These synthetic baseline JPEG fixtures were resized to 800×600 and re-encoded a
 
 All 18 measured requests returned valid JPEGs. These are small synthetic-fixture samples, not guaranteed production timings. Cloudflare CPU events were incomplete for two cases. See the [raw JPEG-output Worker results](benchmarks/jpeg-output-worker.json); rerun with `node scripts/benchmark-jpeg-output-worker.mjs`.
 
-#### WebP input by source size
+#### WebP input to WebP output by source size
 
 These 2, 6, and 12 MP synthetic WebP fixtures were resized to fit within 800×600 and encoded as WebP. Each size/mode ran in a fresh Worker with one initial request and three warm requests. Response p50 uses the warm requests. CPU and isolate-memory sample counts show the invocations Cloudflare returned; isolate memory is `memoryUsageBytesP99`, not exact peak RSS.
 
-| WebP source | Decode mode | Response p50 | Worker CPU median | WASM capacity | Worker isolate memory, max sampled |
+| WebP input source | Decode mode | Response p50 | Worker CPU median | WASM capacity | Worker isolate memory, max sampled |
 | ---: | --- | ---: | ---: | ---: | ---: |
 | 2 MP | Default full decode | 552 ms | 488 ms (2 samples) | 16.00 MiB | 23.58 MiB (2 samples) |
 | 2 MP | `speed: 'fast'` scaled decode | 402 ms | 234 ms (2 samples) | 16.00 MiB | 26.96 MiB (3 samples) |
@@ -161,7 +161,7 @@ A separate WebP-input Worker comparison used an 8.24 MiB synthetic 12 MP WebP an
 
 All formats share a 20 MiB input limit and a 16,383-pixel dimension limit. The default output pixel limit (`maxPixels`) is 8 MP and can be raised to 16 MP. Adam7/interlaced PNG and non-grid HEIC/HEIF are unsupported. WASM capacity is not total Worker memory. Cloudflare's per-invocation isolate-memory metric includes shared JavaScript and WebAssembly memory, but is sampled at invocation time rather than measuring exact peak memory. Cloudflare Worker isolates have a 128 MiB total limit.
 
-Worker measurements use synthetic fixtures and 800×600 WebP output. Cloudflare `memoryUsageBytesP99` samples are correlated by request time and colo; they are observed isolate-memory measurements, not exact peaks. Unsupported progressive JPEG measurements remain in the report's `historicalUnsupportedResults`. See [the Worker measurements and fixture results](benchmarks/decoder-memory-worker.json); rerun with `node scripts/benchmark-decoder-memory-worker.mjs`.
+Decoder performance and memory measurements use synthetic fixtures and 800×600 WebP output; the separate JPEG-output table uses 800×600 JPEG. Cloudflare `memoryUsageBytesP99` samples are correlated by request time and colo; they are observed isolate-memory measurements, not exact peaks. Unsupported progressive JPEG measurements remain in the report's `historicalUnsupportedResults`. See [the Worker measurements and fixture results](benchmarks/decoder-memory-worker.json); rerun with `node scripts/benchmark-decoder-memory-worker.mjs`.
 
 - PNG alpha is preserved in WebP; JPEG composites onto white. EXIF orientation and ICC color management are not applied; metadata is not copied. JPEGs with decoder warnings are rejected.
 - Resizing uses scanline Lanczos3 with premultiplied alpha. `speed: 'fast'` enables scaled JPEG decoding for eligible resized lossy requests.
