@@ -18,6 +18,7 @@ const fixtures = [
 ];
 const modes = [{name:'default',scaled:false},{name:'fast',scaled:true}];
 const rounds = 3;
+const benchmarkStartedAt = new Date().toISOString();
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 const median = values => {
   const sorted = [...values].sort((a,b)=>a-b);
@@ -53,12 +54,13 @@ try {
     const send=async phase=>{
       const url=new URL(endpoint);
       for(const [key,value] of Object.entries({width:800,height:600,quality:80,scaled:mode.scaled,pipeline:'jpeg',variant:'jpeg-output-benchmark',phase,image:fixture.file})) url.searchParams.set(key,String(value));
+      const requestStartedAt=new Date().toISOString();
       const start=performance.now();
       const response=await fetch(url,{method:'POST',headers:{authorization:`Bearer ${BENCHMARK_TOKEN}`},body:input,signal:AbortSignal.timeout(90000)});
       const bytes=new Uint8Array(await response.arrayBuffer());
       const jpeg=bytes.length>=3&&bytes[0]===0xff&&bytes[1]===0xd8&&bytes[2]===0xff;
       const ok=response.ok&&jpeg;
-      samples.push({phase,status:response.status,ok,roundTripMs:performance.now()-start,
+      samples.push({phase,status:response.status,ok,requestStartedAt,roundTripMs:performance.now()-start,
         outputBytes:bytes.length,wasmMemoryBytes:response.headers.get('x-wasm-linear-memory-bytes'),
         error:response.ok?null:new TextDecoder().decode(bytes).slice(0,300)});
       if(!ok) throw new Error(`${fixture.mp} MP JPEG ${mode.name} returned ${response.status}: ${samples.at(-1).error??'invalid JPEG output'}`);
@@ -97,6 +99,9 @@ try {
       workerCpuMedianMs:cpu.length?Number(median(cpu).toFixed(2)):null,workerCpuSamples:cpu,
       wasmMemoryBytes:samples.at(-1)?.wasmMemoryBytes,
       outputBytesMedian:Math.round(median(measured.map(x=>x.outputBytes))),
+      isolateMemoryMaxBytes:null,isolateMemoryMaxMiB:null,isolateMemorySampleCount:0,
+      wranglerTailCpuSamples:cpu,
+      workerName,requestSamples:samples.map(({phase,requestStartedAt,roundTripMs,outputBytes,wasmMemoryBytes})=>({phase,requestStartedAt,roundTripMs:Number(roundTripMs.toFixed(2)),outputBytes,wasmMemoryBytes})),
       responseSamplesMs:measured.map(x=>Number(x.roundTripMs.toFixed(2)))};
     results.push(summary);console.log(JSON.stringify(summary));
     runWrangler(['delete','--config',configPath,'--name',workerName,'--force']);createdWorkers.pop();
@@ -113,4 +118,35 @@ const report={timestamp:new Date().toISOString(),rounds,output:'800x600 JPEG, qu
   responseTime:'Client-observed round trip, p50 of warm requests; includes network latency.',
   cpuTime:'Per-invocation CPU time from Wrangler tail; median of captured warm-request samples.',
   note:'Synthetic baseline JPEG fixtures. Each size and decode mode ran in a fresh Worker, with one warm-up and three measured requests. Wrangler tail may omit CPU events; null CPU means no matching samples were captured.',results};
+const wranglerAuth=await readFile(`${process.env.HOME}/.config/.wrangler/config/default.toml`,'utf8');
+const wranglerToken=wranglerAuth.match(/^oauth_token\s*=\s*"([^"]+)"/m)?.[1];
+if(!wranglerToken)throw new Error('Wrangler OAuth credentials are unavailable for isolate-memory analytics');
+const accountId=workerConfig.account_id;
+const analyticsQuery=`query($accountTag:string!,$start:Time!,$end:Time!){viewer{accounts(filter:{accountTag:$accountTag}){workersInvocationsAdaptive(limit:1000,filter:{datetime_geq:$start,datetime_leq:$end}){dimensions{datetime coloCode status}sum{requests errors}quantiles{cpuTimeP99 memoryUsageBytesP99}}}}}`;
+const analyticsStart=new Date(Date.parse(benchmarkStartedAt)-60000).toISOString();
+let analyticsRows=[],analyticsErrors=[];
+for(let attempt=1;attempt<=10;attempt++){
+  const response=await fetch('https://api.cloudflare.com/client/v4/graphql',{method:'POST',headers:{authorization:`Bearer ${wranglerToken}`,'content-type':'application/json'},body:JSON.stringify({query:analyticsQuery,variables:{accountTag:accountId,start:analyticsStart,end:new Date(Date.now()+30000).toISOString()}})});
+  const data=await response.json();analyticsRows=data.data?.viewer?.accounts?.[0]?.workersInvocationsAdaptive??[];analyticsErrors=data.errors??[];
+  const matched=analyticsRows.filter(row=>row.dimensions?.coloCode==='WAW'&&results.some(item=>item.requestSamples.some(sample=>Math.floor(Date.parse(sample.requestStartedAt)/1000)===Date.parse(row.dimensions.datetime)/1000)));
+  const covered=results.filter(item=>item.requestSamples.some(sample=>matched.some(row=>Math.floor(Date.parse(sample.requestStartedAt)/1000)===Date.parse(row.dimensions.datetime)/1000))).length;
+  if(covered===results.length||attempt===10)break;
+  await delay(10000);
+}
+const matchedAnalytics=analyticsRows.filter(row=>row.dimensions?.coloCode==='WAW'&&results.some(item=>item.requestSamples.some(sample=>Math.floor(Date.parse(sample.requestStartedAt)/1000)===Date.parse(row.dimensions.datetime)/1000)));
+for(const item of results){
+  const matched=matchedAnalytics.filter(row=>item.requestSamples.some(sample=>Math.floor(Date.parse(sample.requestStartedAt)/1000)===Date.parse(row.dimensions.datetime)/1000));
+  const warmSeconds=new Set(item.requestSamples.filter(sample=>sample.phase.startsWith('sample-')).map(sample=>Math.floor(Date.parse(sample.requestStartedAt)/1000)));
+  const measured=matched.filter(row=>warmSeconds.has(Date.parse(row.dimensions.datetime)/1000));
+  const cpu=measured.map(row=>row.quantiles?.cpuTimeP99/1000).filter(Number.isFinite);
+  const memory=matched.map(row=>row.quantiles?.memoryUsageBytesP99).filter(Number.isFinite);
+  item.workerCpuSamples=cpu.length?cpu:item.wranglerTailCpuSamples;
+  item.workerCpuMedianMs=item.workerCpuSamples.length?Number(median(item.workerCpuSamples).toFixed(2)):null;
+  item.workerCpuSampleCount=item.workerCpuSamples.length;
+  item.workerCpuSource=cpu.length?'Cloudflare invocation analytics':'Wrangler tail';
+  item.isolateMemoryMaxBytes=memory.length?Math.max(...memory):null;
+  item.isolateMemoryMaxMiB=item.isolateMemoryMaxBytes?Number((item.isolateMemoryMaxBytes/1048576).toFixed(2)):null;
+  item.isolateMemorySampleCount=memory.length;
+}
+report.analytics={dataset:'workersInvocationsAdaptive',colo:'WAW',note:'Temporary Worker names may appear as __unknown__; analytics rows are correlated to request timestamps. cpuTimeP99 and memoryUsageBytesP99 are sampled per invocation, not exact peaks.',rows:matchedAnalytics,errors:analyticsErrors};
 await writeFile(new URL('../benchmarks/jpeg-output-worker.json', import.meta.url),`${JSON.stringify(report,null,2)}\n`);

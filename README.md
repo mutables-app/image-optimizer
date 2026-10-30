@@ -105,73 +105,58 @@ The published v0.1.0 Worker benchmark (before scanlines) compares two internal W
 | WebP | 12 MP | Full decode by default; resized `speed: 'fast'` requests use libwebp scaled output. |
 | Tiled/grid HEIC/HEIF | 48 MP | libde265 (HEVC); decodes one tile row at a time. |
 
-### Worker response time and CPU (WebP output)
+### Worker benchmarks: input to WebP output
 
-These end-to-end samples convert supported synthetic inputs to 800×600 WebP. Each fixture ran in its own temporary Worker with one warm-up request followed by three measured requests. Response time is client-observed p50 and includes network and transfer time; CPU is the median per-invocation `cpuTime` reported by Wrangler tail. Wrangler captured one to three CPU samples per fixture; the sample count appears beside each CPU median. The temporary Workers used a 30-second CPU limit.
+Each row converts a synthetic input to 800×600 WebP at quality 80 in a fresh temporary Worker. Each case used one warm-up and three measured requests; input file size is the compressed fixture size. Response p50 includes network and transfer time. Worker CPU is the median of sampled Cloudflare invocation CPU values, with Wrangler tail as a fallback; isolate memory is the maximum sampled `memoryUsageBytesP99` across requests, not exact peak RSS. Sample counts are shown. WASM capacity is measured after the last request. Temporary Workers used a 30-second CPU limit.
 
-| Input path and source size (WebP output) | Result | Response p50 | Worker CPU median | WASM capacity after last request |
-| --- | --- | ---: | ---: | ---: |
-| Baseline JPEG, 12 MP | Converted | 234 ms | 111 ms (1 sample) | 16 MiB |
-| Baseline JPEG, 24 MP | Converted | 367 ms | 198 ms (1 sample) | 16 MiB |
-| Baseline JPEG, 48 MP | Converted | 630 ms | 346 ms (3 samples) | 16 MiB |
-| Non-interlaced PNG, 12 MP | Converted | 469 ms | 381 ms (3 samples) | 16 MiB |
-| Non-interlaced PNG, 24 MP | Converted | 547 ms | 426 ms (3 samples) | 16 MiB |
-| Non-interlaced PNG, 48 MP | Converted | 1,047 ms | 932 ms (3 samples) | 16 MiB |
-| Lowzag progressive JPEG, 12 MP | Converted | 671 ms | 438 ms (3 samples) | 16 MiB |
-| Lowzag progressive JPEG, 24 MP | Converted | 708 ms | 498 ms (3 samples) | 27.75 MiB |
-| Lowzag progressive JPEG, 48 MP | Converted | 1,359 ms | 1,032 ms (3 samples) | 27.75 MiB |
-| Tiled/grid HEIC/HEIF, 12 MP | Converted | 962 ms | 710 ms (3 samples) | 16 MiB |
-| Tiled/grid HEIC/HEIF, 24 MP | Converted | 885 ms | 734 ms (3 samples) | 36.88 MiB |
-| Tiled/grid HEIC/HEIF, 48 MP | Converted | 1,570 ms | 1,417 ms (3 samples) | 48.63 MiB |
+| Input type and source size | Input file size | Response p50 | Worker CPU median | WASM capacity | Worker isolate memory, max sampled | Output WebP size |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Baseline JPEG, 12 MP | 0.63 MiB | 379 ms | 213 ms (2 samples) | 16.00 MiB | 23.79 MiB (2 samples) | 61.6 KiB |
+| Baseline JPEG, 24 MP | 1.26 MiB | 389 ms | 256 ms (2 samples) | 16.00 MiB | 24.83 MiB (2 samples) | 72.6 KiB |
+| Baseline JPEG, 48 MP | 6.10 MiB | 547 ms | 282 ms (3 samples) | 16.00 MiB | 39.08 MiB (3 samples) | 144.9 KiB |
+| Non-interlaced PNG, 12 MP | 0.19 MiB | 570 ms | 457 ms (2 samples) | 16.00 MiB | 21.07 MiB (2 samples) | 61.0 KiB |
+| Non-interlaced PNG, 24 MP | 0.37 MiB | 871 ms | 622 ms (3 samples) | 16.00 MiB | 21.93 MiB (4 samples) | 71.6 KiB |
+| Non-interlaced PNG, 48 MP | 0.39 MiB | 909 ms | 770 ms (2 samples) | 16.00 MiB | 24.35 MiB (3 samples) | 24.1 KiB |
+| Lowzag progressive JPEG, 12 MP | 4.48 MiB | 864 ms | 479 ms (3 samples) | 16.00 MiB | 32.21 MiB (3 samples) | 261.8 KiB |
+| Lowzag progressive JPEG, 24 MP | 4.63 MiB | 1,011 ms | 727 ms (3 samples) | 27.75 MiB | 41.15 MiB (4 samples) | 95.1 KiB |
+| Lowzag progressive JPEG, 48 MP | 7.53 MiB | 1,407 ms | 1,001 ms (3 samples) | 27.75 MiB | 45.12 MiB (4 samples) | 104.0 KiB |
+| Tiled/grid HEIC/HEIF, 12 MP | 0.77 MiB | 641 ms | 464 ms (2 samples) | 16.00 MiB | 26.06 MiB (3 samples) | 34.1 KiB |
+| Tiled/grid HEIC/HEIF, 24 MP | 0.30 MiB | 861 ms | 742 ms (3 samples) | 36.94 MiB | 44.27 MiB (4 samples) | 8.2 KiB |
+| Tiled/grid HEIC/HEIF, 48 MP | 0.61 MiB | 2,842 ms | 2,539 ms (3 samples) | 48.62 MiB | 55.66 MiB (4 samples) | 15.3 KiB |
 
-See the [raw Worker performance results](benchmarks/decoder-performance-worker.json) and [memory measurements](benchmarks/decoder-memory-worker.json). Both reports keep measurements for unsupported Adam7 PNG, non-grid HEIC/HEIF, and non-Lowzag progressive JPEG paths in `historicalUnsupportedResults`; those results do not describe current support. These small synthetic-fixture samples show this test run, not guaranteed production latency.
-
-#### Worker memory benchmarks (800×600 WebP output)
-
-Each memory result below comes from synthetic input at the maximum supported source size for that path, resized to 800×600 and encoded as WebP. WASM capacity is linear-memory capacity after conversion. Cloudflare memory is sampled `memoryUsageBytesP99`, not exact peak RSS; sample counts are shown in parentheses. These figures describe the listed runs, not guaranteed peaks for every image.
-
-| Synthetic input | Decode path used in test | WASM capacity | Cloudflare isolate memory, max sampled |
-| --- | --- | ---: | ---: |
-| Baseline JPEG, 48 MP | Scaled JPEG decode to 1000×750, then resized to 800×600. | 16 MiB | 36.14 MiB (1 sample) |
-| Non-interlaced PNG, 48 MP | Sequential full-resolution decode with row-wise resizing. | 16 MiB | 21.17 MiB (1 sample) |
-| Lowzag progressive JPEG, 48 MP | Reduced coefficient decode to 1000×750, then resized to 800×600. | 27.75 MiB | 43.23 MiB (1 sample) |
-| WebP, 12 MP, default | Full RGBA decode before resizing. | 66.56 MiB | 98.08 MiB (4 samples) |
-| WebP, 12 MP, `speed: 'fast'` | Scaled output at up to 2× target size, then Lanczos resizing. | 19.25 MiB | 39.36 MiB (4 samples) |
-| Tiled/grid HEIC/HEIF, 48 MP | libde265 decodes one tile row at a time, then resizes to 800×600. | 49 MiB | 54.97 MiB (1 sample) |
-
-See the [raw Worker memory measurements](benchmarks/decoder-memory-worker.json).
+See the [raw Worker results](benchmarks/decoder-performance-worker.json) and [decoder memory measurements](benchmarks/decoder-memory-worker.json). Unsupported inputs retained in the raw reports are historical and do not describe current support. These synthetic-fixture samples show the tested run, not guaranteed production performance.
 
 #### Baseline JPEG to optimized JPEG
 
-These synthetic baseline JPEG fixtures were resized to 800×600 and re-encoded as JPEG at quality 80. Each source size and decode mode ran in a fresh Worker with one warm-up and three measured requests. Response p50 includes network and transfer time; Wrangler sometimes captured fewer CPU events than requests. Output size is the median of the three responses. `speed: 'fast'` uses scaled JPEG decoding; JPEG encoding settings are the same in both modes.
+These synthetic baseline JPEG fixtures were resized to 800×600 and re-encoded as JPEG at quality 80. Each source size and decode mode ran in a fresh Worker with one warm-up and three measured requests. Input file size is the compressed JPEG fixture size. `speed: 'fast'` uses scaled JPEG decoding; JPEG encoding settings are the same in both modes. Response p50 and output size use the three warm requests. Worker CPU is the median of sampled Cloudflare invocation CPU values; isolate memory is the maximum sampled `memoryUsageBytesP99` across requests, not exact peak RSS. Sample counts are shown; WASM capacity is after the last request.
 
-| JPEG source | Decode mode | Response p50 | Worker CPU median | WASM capacity | Output JPEG size |
-| ---: | --- | ---: | ---: | ---: | ---: |
-| 12 MP | Default full decode | 520 ms | 309 ms (2 samples) | 16 MiB | 99.9 kB |
-| 12 MP | `speed: 'fast'` scaled decode | 316 ms | 81 ms (1 sample) | 16 MiB | 99.2 kB |
-| 24 MP | Default full decode | 650 ms | 487 ms (3 samples) | 16 MiB | 114.1 kB |
-| 24 MP | `speed: 'fast'` scaled decode | 280 ms | 161 ms (3 samples) | 16 MiB | 114.6 kB |
-| 48 MP | Default full decode | 1,796 ms | 1,154 ms (3 samples) | 16 MiB | 159.0 kB |
-| 48 MP | `speed: 'fast'` scaled decode | 789 ms | 459 ms (3 samples) | 16 MiB | 150.2 kB |
+| Input type and source size | Input file size | Response p50 | Worker CPU median | WASM capacity | Worker isolate memory, max sampled | Output JPEG size |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Baseline JPEG, 12 MP, default decode | 0.63 MiB | 377 ms | 297 ms (2 samples) | 16.00 MiB | 23.86 MiB (3 samples) | 97.6 KiB |
+| Baseline JPEG, 12 MP, `speed: 'fast'` | 0.63 MiB | 176 ms | 121 ms (2 samples) | 16.00 MiB | 23.86 MiB (2 samples) | 96.9 KiB |
+| Baseline JPEG, 24 MP, default decode | 1.26 MiB | 641 ms | 515 ms (2 samples) | 16.00 MiB | 24.86 MiB (3 samples) | 111.4 KiB |
+| Baseline JPEG, 24 MP, `speed: 'fast'` | 1.26 MiB | 242 ms | 144 ms (2 samples) | 16.00 MiB | 28.24 MiB (3 samples) | 111.9 KiB |
+| Baseline JPEG, 48 MP, default decode | 6.10 MiB | 1,596 ms | 1,177 ms (3 samples) | 16.00 MiB | 38.24 MiB (4 samples) | 155.3 KiB |
+| Baseline JPEG, 48 MP, `speed: 'fast'` | 6.10 MiB | 639 ms | 292 ms (1 sample) | 16.00 MiB | 35.95 MiB (1 sample) | 146.7 KiB |
 
-All 18 measured requests returned valid JPEGs. These are small synthetic-fixture samples, not guaranteed production timings. Cloudflare CPU events were incomplete for two cases. See the [raw JPEG-output Worker results](benchmarks/jpeg-output-worker.json); rerun with `node scripts/benchmark-jpeg-output-worker.mjs`.
+All 18 measured requests returned valid JPEGs. These synthetic-fixture samples show the tested run, not guaranteed production timings. See the [raw JPEG-output Worker results](benchmarks/jpeg-output-worker.json); rerun with `node scripts/benchmark-jpeg-output-worker.mjs`.
 
-#### WebP input to WebP output by source size
+#### Worker benchmarks: WebP input to WebP output
 
-These 2, 6, and 12 MP synthetic WebP fixtures were resized to fit within 800×600 and encoded as WebP. Each size/mode ran in a fresh Worker with one initial request and three warm requests. Response p50 uses the warm requests. CPU and isolate-memory sample counts show the invocations Cloudflare returned; isolate memory is `memoryUsageBytesP99`, not exact peak RSS.
+Synthetic WebP inputs at 2, 6, and 12 MP were resized to fit within 800×600 and encoded as WebP quality 80. Each size and decode mode ran in a fresh Worker with one initial request and three warm requests. Input file size is the compressed WebP fixture size; response p50 and output size use the warm requests. Cloudflare CPU and isolate-memory values are sampled; isolate memory is not exact peak RSS. Sample counts are shown; WASM capacity is after the last request.
 
-| WebP input source | Decode mode | Response p50 | Worker CPU median | WASM capacity | Worker isolate memory, max sampled |
-| ---: | --- | ---: | ---: | ---: | ---: |
-| 2 MP | Default full decode | 552 ms | 488 ms (2 samples) | 16.00 MiB | 23.58 MiB (2 samples) |
-| 2 MP | `speed: 'fast'` scaled decode | 402 ms | 234 ms (2 samples) | 16.00 MiB | 26.96 MiB (3 samples) |
-| 6 MP | Default full decode | 1117 ms | 905 ms (2 samples) | 33.50 MiB | 57.63 MiB (2 samples) |
-| 6 MP | `speed: 'fast'` scaled decode | 836 ms | 597 ms (3 samples) | 16.00 MiB | 33.12 MiB (3 samples) |
-| 12 MP | Default full decode | 1617 ms | 1120 ms (1 sample) | 66.56 MiB | 86.83 MiB (1 sample) |
-| 12 MP | `speed: 'fast'` scaled decode | 1190 ms | 881 ms (2 samples) | 19.25 MiB | 55.59 MiB (3 samples) |
+| Input type and source size | Input file size | Response p50 | Worker CPU median | WASM capacity | Worker isolate memory, max sampled | Output WebP size |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| WebP, 2 MP, default decode | 0.82 MiB | 552 ms | 488 ms (2 samples) | 16.00 MiB | 23.58 MiB (2 samples) | 62.7 KiB |
+| WebP, 2 MP, `speed: 'fast'` | 0.82 MiB | 402 ms | 234 ms (2 samples) | 16.00 MiB | 26.96 MiB (3 samples) | 56.7 KiB |
+| WebP, 6 MP, default decode | 3.19 MiB | 1,117 ms | 905 ms (2 samples) | 33.50 MiB | 57.63 MiB (2 samples) | 100.9 KiB |
+| WebP, 6 MP, `speed: 'fast'` | 3.19 MiB | 836 ms | 597 ms (3 samples) | 16.00 MiB | 33.12 MiB (3 samples) | 90.2 KiB |
+| WebP, 12 MP, default decode | 7.86 MiB | 1,617 ms | 1,120 ms (1 sample) | 66.56 MiB | 86.83 MiB (1 sample) | 124.0 KiB |
+| WebP, 12 MP, `speed: 'fast'` | 7.86 MiB | 1,190 ms | 881 ms (2 samples) | 19.25 MiB | 55.59 MiB (3 samples) | 112.2 KiB |
 
-The 2 MP fixture is 2000×1000, the 6 MP fixture is 3000×2000, and the 12 MP fixture is 4000×3000. Cloudflare isolate-memory samples varied between runs and sometimes arrived for only part of the requests; use them as observed samples, not guaranteed peaks. See the [raw WebP input Worker results](benchmarks/webp-input-worker.json).
+The fixtures were 2000×1000, 3000×2000, and 4000×3000. See the [raw WebP input Worker results](benchmarks/webp-input-worker.json).
 
-A separate WebP-input Worker comparison used an 8.24 MiB synthetic 12 MP WebP and 800×600 JPEG output, with one initial request and three warm requests per fresh Worker. Median client round trip was 1,454 ms for full decoding and 1,318 ms for `speed: 'fast'`. WASM capacity was 66.56 MiB and 19.25 MiB; Cloudflare reported a maximum sampled isolate memory of 98.08 MiB and 39.36 MiB across four successful invocations per mode. These are sampled `memoryUsageBytesP99` values, not exact peak RSS. A photo-derived 12 MP fixture produced 39.28 dB PSNR between the fast scaled-decode output and the full-decode output; results vary by image. Raw samples are in [the Worker memory report](benchmarks/decoder-memory-worker.json).
+A separate historical WebP-input comparison used an 8.24 MiB synthetic 12 MP WebP and 800×600 JPEG output. It produced a 39.28 dB PSNR between fast scaled-decode output and full-decode output; results vary by image. See [the raw Worker memory report](benchmarks/decoder-memory-worker.json).
 
 All formats share a 20 MiB input limit and a 16,383-pixel dimension limit. The default output pixel limit (`maxPixels`) is 8 MP and can be raised to 16 MP. Adam7/interlaced PNG and non-grid HEIC/HEIF are unsupported. WASM capacity is not total Worker memory. Cloudflare's per-invocation isolate-memory metric includes shared JavaScript and WebAssembly memory, but is sampled at invocation time rather than measuring exact peak memory. Cloudflare Worker isolates have a 128 MiB total limit.
 

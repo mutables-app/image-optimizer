@@ -265,7 +265,19 @@
         "2026-10-30T14:31:42.110Z",
         "2026-10-30T14:31:44.237Z",
         "2026-10-30T14:31:45.958Z"
-      ]
+      ],
+      "inputBytes": 860000,
+      "outputBytesMedian": 64156,
+      "outputBytesSamples": [
+        64156,
+        64156,
+        64156
+      ],
+      "workerCpuSampleCount": 2,
+      "isolateMemoryMaxBytes": 24721544,
+      "isolateMemoryMaxMiB": 23.58,
+      "isolateMemorySampleCount": 2,
+      "wasmMemoryBytes": 16777216
     },
     {
       "sourceSize": "2 MP",
@@ -303,7 +315,19 @@
         "2026-10-30T14:32:07.555Z",
         "2026-10-30T14:32:09.167Z",
         "2026-10-30T14:32:10.769Z"
-      ]
+      ],
+      "inputBytes": 860000,
+      "outputBytesMedian": 58012,
+      "outputBytesSamples": [
+        58012,
+        58012,
+        58012
+      ],
+      "workerCpuSampleCount": 2,
+      "isolateMemoryMaxBytes": 28265280,
+      "isolateMemoryMaxMiB": 26.96,
+      "isolateMemorySampleCount": 3,
+      "wasmMemoryBytes": 16777216
     },
     {
       "sourceSize": "6 MP",
@@ -340,7 +364,19 @@
         "2026-10-30T14:32:38.675Z",
         "2026-10-30T14:32:40.993Z",
         "2026-10-30T14:32:43.295Z"
-      ]
+      ],
+      "inputBytes": 3348532,
+      "outputBytesMedian": 103352,
+      "outputBytesSamples": [
+        103352,
+        103352,
+        103352
+      ],
+      "workerCpuSampleCount": 2,
+      "isolateMemoryMaxBytes": 60428850,
+      "isolateMemoryMaxMiB": 57.63,
+      "isolateMemorySampleCount": 2,
+      "wasmMemoryBytes": 35127296
     },
     {
       "sourceSize": "6 MP",
@@ -379,7 +415,19 @@
         "2026-10-30T14:33:08.313Z",
         "2026-10-30T14:33:10.454Z",
         "2026-10-30T14:33:12.412Z"
-      ]
+      ],
+      "inputBytes": 3348532,
+      "outputBytesMedian": 92314,
+      "outputBytesSamples": [
+        92314,
+        92314,
+        92314
+      ],
+      "workerCpuSampleCount": 3,
+      "isolateMemoryMaxBytes": 34731988,
+      "isolateMemoryMaxMiB": 33.12,
+      "isolateMemorySampleCount": 3,
+      "wasmMemoryBytes": 16777216
     },
     {
       "sourceSize": "12 MP",
@@ -414,7 +462,19 @@
         "2026-10-30T14:33:35.934Z",
         "2026-10-30T14:33:38.851Z",
         "2026-10-30T14:33:41.668Z"
-      ]
+      ],
+      "inputBytes": 8244104,
+      "outputBytesMedian": 126948,
+      "outputBytesSamples": [
+        126948,
+        126948,
+        126948
+      ],
+      "workerCpuSampleCount": 1,
+      "isolateMemoryMaxBytes": 91049150,
+      "isolateMemoryMaxMiB": 86.83,
+      "isolateMemorySampleCount": 1,
+      "wasmMemoryBytes": 69795840
     },
     {
       "sourceSize": "12 MP",
@@ -452,7 +512,19 @@
         "2026-10-30T14:34:05.066Z",
         "2026-10-30T14:34:07.479Z",
         "2026-10-30T14:34:09.871Z"
-      ]
+      ],
+      "inputBytes": 8244104,
+      "outputBytesMedian": 114864,
+      "outputBytesSamples": [
+        114864,
+        114864,
+        114864
+      ],
+      "workerCpuSampleCount": 2,
+      "isolateMemoryMaxBytes": 58291536,
+      "isolateMemoryMaxMiB": 55.59,
+      "isolateMemorySampleCount": 3,
+      "wasmMemoryBytes": 20185088
     }
   ]
 }

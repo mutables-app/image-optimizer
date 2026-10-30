@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-10-30T14:50:21.916Z",
+  "timestamp": "2026-10-30T15:10:04.651Z",
   "rounds": 3,
   "output": "800x600 JPEG, quality 80",
   "responseTime": "Client-observed round trip, p50 of warm requests; includes network latency.",
   "cpuTime": "Per-invocation CPU time from Wrangler tail; median of captured warm-request samples.",
-  "note": "Synthetic baseline JPEG fixtures. Each size and decode mode ran in a fresh Worker, with one warm-up and three measured requests. Wrangler tail may omit CPU events; null CPU means no matching samples were captured.",
+  "note": "Synthetic baseline JPEG fixtures. Each size and decode mode ran in a fresh Worker with one warm-up and three measured requests. Cloudflare analytics may omit invocation samples; Wrangler tail is the CPU fallback. Null CPU means neither source captured a sample.",
   "results": [
     {
       "source": "Baseline JPEG, 12 MP",
@@ -13,19 +13,60 @@
       "mode": "default",
       "output": "800x600 JPEG, quality 80",
       "successes": 3,
-      "responseP50Ms": 520,
-      "workerCpuMedianMs": 309,
+      "responseP50Ms": 377,
+      "workerCpuMedianMs": 297.38,
       "workerCpuSamples": [
-        353,
-        265
+        336.382,
+        258.379
       ],
       "wasmMemoryBytes": "16777216",
       "outputBytesMedian": 99896,
+      "isolateMemoryMaxBytes": 25021126,
+      "isolateMemoryMaxMiB": 23.86,
+      "isolateMemorySampleCount": 3,
+      "wranglerTailCpuSamples": [
+        336,
+        227,
+        258
+      ],
+      "workerName": "image-opt-jpeg-out-12-default-c09b6f65",
+      "requestSamples": [
+        {
+          "phase": "warmup",
+          "requestStartedAt": "2026-10-30T15:07:42.477Z",
+          "roundTripMs": 629.32,
+          "outputBytes": 99896,
+          "wasmMemoryBytes": "16777216"
+        },
+        {
+          "phase": "sample-1",
+          "requestStartedAt": "2026-10-30T15:07:43.110Z",
+          "roundTripMs": 555.54,
+          "outputBytes": 99896,
+          "wasmMemoryBytes": "16777216"
+        },
+        {
+          "phase": "sample-2",
+          "requestStartedAt": "2026-10-30T15:07:43.666Z",
+          "roundTripMs": 358.38,
+          "outputBytes": 99896,
+          "wasmMemoryBytes": "16777216"
+        },
+        {
+          "phase": "sample-3",
+          "requestStartedAt": "2026-10-30T15:07:44.024Z",
+          "roundTripMs": 376.61,
+          "outputBytes": 99896,
+          "wasmMemoryBytes": "16777216"
+        }
+      ],
       "responseSamplesMs": [
-        647.43,
-        519.5,
-        397.21
-      ]
+        555.54,
+        358.38,
+        376.61
+      ],
+      "workerCpuSource": "Cloudflare invocation analytics",
+      "workerCpuSampleCount": 2
     },
     {
       "source": "Baseline JPEG, 12 MP",
@@ -34,18 +75,56 @@
       "mode": "fast",
       "output": "800x600 JPEG, quality 80",
       "successes": 3,
-      "responseP50Ms": 316,
-      "workerCpuMedianMs": 81,
+      "responseP50Ms": 176,
+      "workerCpuMedianMs": 120.739,
       "workerCpuSamples": [
-        81
+        164.998,
+        76.48
       ],
       "wasmMemoryBytes": "16777216",
       "outputBytesMedian": 99232,
+      "isolateMemoryMaxBytes": 25019798,
+      "isolateMemoryMaxMiB": 23.86,
+      "isolateMemorySampleCount": 2,
+      "wranglerTailCpuSamples": [],
+      "workerName": "image-opt-jpeg-out-12-fast-83a9c5f8",
+      "requestSamples": [
+        {
+          "phase": "warmup",
+          "requestStartedAt": "2026-10-30T15:08:07.232Z",
+          "roundTripMs": 356.7,
+          "outputBytes": 99232,
+          "wasmMemoryBytes": "16777216"
+        },
+        {
+          "phase": "sample-1",
+          "requestStartedAt": "2026-10-30T15:08:07.589Z",
+          "roundTripMs": 400.99,
+          "outputBytes": 99232,
+          "wasmMemoryBytes": "16777216"
+        },
+        {
+          "phase": "sample-2",
+          "requestStartedAt": "2026-10-30T15:08:07.990Z",
+          "roundTripMs": 176.39,
+          "outputBytes": 99232,
+          "wasmMemoryBytes": "16777216"
+        },
+        {
+          "phase": "sample-3",
+          "requestStartedAt": "2026-10-30T15:08:08.167Z",
+          "roundTripMs": 138.98,
+          "outputBytes": 99232,
+          "wasmMemoryBytes": "16777216"
+        }
+      ],
       "responseSamplesMs": [
-        572.16,
-        195.73,
-        315.7
-      ]
+        400.99,
+        176.39,
+        138.98
+      ],
+      "workerCpuSource": "Cloudflare invocation analytics",
+      "workerCpuSampleCount": 2
     },
     {
       "source": "Baseline JPEG, 24 MP",
@@ -54,20 +133,60 @@
       "mode": "default",
       "output": "800x600 JPEG, quality 80",
       "successes": 3,
-      "responseP50Ms": 650,
-      "workerCpuMedianMs": 487,
+      "responseP50Ms": 641,
+      "workerCpuMedianMs": 515.012,
       "workerCpuSamples": [
-        565,
-        457,
-        487
+        464.634,
+        565.389
       ],
       "wasmMemoryBytes": "16777216",
       "outputBytesMedian": 114110,
+      "isolateMemoryMaxBytes": 26066458,
+      "isolateMemoryMaxMiB": 24.86,
+      "isolateMemorySampleCount": 3,
+      "wranglerTailCpuSamples": [
+        565,
+        464,
+        489
+      ],
+      "workerName": "image-opt-jpeg-out-24-default-a6625552",
+      "requestSamples": [
+        {
+          "phase": "warmup",
+          "requestStartedAt": "2026-10-30T15:08:32.696Z",
+          "roundTripMs": 793.7,
+          "outputBytes": 114110,
+          "wasmMemoryBytes": "16777216"
+        },
+        {
+          "phase": "sample-1",
+          "requestStartedAt": "2026-10-30T15:08:33.490Z",
+          "roundTripMs": 811.8,
+          "outputBytes": 114110,
+          "wasmMemoryBytes": "16777216"
+        },
+        {
+          "phase": "sample-2",
+          "requestStartedAt": "2026-10-30T15:08:34.302Z",
+          "roundTripMs": 632.78,
+          "outputBytes": 114110,
+          "wasmMemoryBytes": "16777216"
+        },
+        {
+          "phase": "sample-3",
+          "requestStartedAt": "2026-10-30T15:08:34.935Z",
+          "roundTripMs": 640.67,
+          "outputBytes": 114110,
+          "wasmMemoryBytes": "16777216"
+        }
+      ],
       "responseSamplesMs": [
-        856.28,
-        624.61,
-        649.52
-      ]
+        811.8,
+        632.78,
+        640.67
+      ],
+      "workerCpuSource": "Cloudflare invocation analytics",
+      "workerCpuSampleCount": 2
     },
     {
       "source": "Baseline JPEG, 24 MP",
@@ -76,20 +195,60 @@
       "mode": "fast",
       "output": "800x600 JPEG, quality 80",
       "successes": 3,
-      "responseP50Ms": 280,
-      "workerCpuMedianMs": 161,
+      "responseP50Ms": 242,
+      "workerCpuMedianMs": 144.133,
       "workerCpuSamples": [
-        166,
-        161,
-        125
+        119.901,
+        168.366
       ],
       "wasmMemoryBytes": "16777216",
       "outputBytesMedian": 114600,
+      "isolateMemoryMaxBytes": 29609384,
+      "isolateMemoryMaxMiB": 28.24,
+      "isolateMemorySampleCount": 3,
+      "wranglerTailCpuSamples": [
+        168,
+        123,
+        119
+      ],
+      "workerName": "image-opt-jpeg-out-24-fast-e46a40a9",
+      "requestSamples": [
+        {
+          "phase": "warmup",
+          "requestStartedAt": "2026-10-30T15:08:58.791Z",
+          "roundTripMs": 544.41,
+          "outputBytes": 114600,
+          "wasmMemoryBytes": "16777216"
+        },
+        {
+          "phase": "sample-1",
+          "requestStartedAt": "2026-10-30T15:08:59.336Z",
+          "roundTripMs": 483.91,
+          "outputBytes": 114600,
+          "wasmMemoryBytes": "16777216"
+        },
+        {
+          "phase": "sample-2",
+          "requestStartedAt": "2026-10-30T15:08:59.820Z",
+          "roundTripMs": 241.91,
+          "outputBytes": 114600,
+          "wasmMemoryBytes": "16777216"
+        },
+        {
+          "phase": "sample-3",
+          "requestStartedAt": "2026-10-30T15:09:00.062Z",
+          "roundTripMs": 232.43,
+          "outputBytes": 114600,
+          "wasmMemoryBytes": "16777216"
+        }
+      ],
       "responseSamplesMs": [
-        430.85,
-        280.29,
-        243.96
-      ]
+        483.91,
+        241.91,
+        232.43
+      ],
+      "workerCpuSource": "Cloudflare invocation analytics",
+      "workerCpuSampleCount": 2
     },
     {
       "source": "Baseline JPEG, 48 MP",
@@ -98,20 +257,61 @@
       "mode": "default",
       "output": "800x600 JPEG, quality 80",
       "successes": 3,
-      "responseP50Ms": 1796,
-      "workerCpuMedianMs": 1154,
+      "responseP50Ms": 1596,
+      "workerCpuMedianMs": 1176.843,
       "workerCpuSamples": [
-        1154,
-        1574,
-        961
+        1129.546,
+        2130.16,
+        1176.843
       ],
       "wasmMemoryBytes": "16777216",
       "outputBytesMedian": 159023,
+      "isolateMemoryMaxBytes": 40095950,
+      "isolateMemoryMaxMiB": 38.24,
+      "isolateMemorySampleCount": 4,
+      "wranglerTailCpuSamples": [
+        1176,
+        2130,
+        1129
+      ],
+      "workerName": "image-opt-jpeg-out-48-default-c6e3e23e",
+      "requestSamples": [
+        {
+          "phase": "warmup",
+          "requestStartedAt": "2026-10-30T15:09:23.353Z",
+          "roundTripMs": 2648.45,
+          "outputBytes": 159023,
+          "wasmMemoryBytes": "16777216"
+        },
+        {
+          "phase": "sample-1",
+          "requestStartedAt": "2026-10-30T15:09:26.002Z",
+          "roundTripMs": 1595.81,
+          "outputBytes": 159023,
+          "wasmMemoryBytes": "16777216"
+        },
+        {
+          "phase": "sample-2",
+          "requestStartedAt": "2026-10-30T15:09:27.598Z",
+          "roundTripMs": 2609.41,
+          "outputBytes": 159023,
+          "wasmMemoryBytes": "16777216"
+        },
+        {
+          "phase": "sample-3",
+          "requestStartedAt": "2026-10-30T15:09:30.207Z",
+          "roundTripMs": 1490.6,
+          "outputBytes": 159023,
+          "wasmMemoryBytes": "16777216"
+        }
+      ],
       "responseSamplesMs": [
-        1795.85,
-        1919.72,
-        1347.19
-      ]
+        1595.81,
+        2609.41,
+        1490.6
+      ],
+      "workerCpuSource": "Cloudflare invocation analytics",
+      "workerCpuSampleCount": 3
     },
     {
       "source": "Baseline JPEG, 48 MP",
@@ -120,20 +320,307 @@
       "mode": "fast",
       "output": "800x600 JPEG, quality 80",
       "successes": 3,
-      "responseP50Ms": 789,
-      "workerCpuMedianMs": 459,
+      "responseP50Ms": 639,
+      "workerCpuMedianMs": 292.432,
       "workerCpuSamples": [
-        493,
-        247,
-        459
+        292.432
       ],
       "wasmMemoryBytes": "16777216",
       "outputBytesMedian": 150178,
+      "isolateMemoryMaxBytes": 37695040,
+      "isolateMemoryMaxMiB": 35.95,
+      "isolateMemorySampleCount": 1,
+      "wranglerTailCpuSamples": [
+        292,
+        258,
+        326
+      ],
+      "workerName": "image-opt-jpeg-out-48-fast-3ee89b23",
+      "requestSamples": [
+        {
+          "phase": "warmup",
+          "requestStartedAt": "2026-10-30T15:09:55.070Z",
+          "roundTripMs": 857.95,
+          "outputBytes": 150178,
+          "wasmMemoryBytes": "16777216"
+        },
+        {
+          "phase": "sample-1",
+          "requestStartedAt": "2026-10-30T15:09:55.928Z",
+          "roundTripMs": 711.65,
+          "outputBytes": 150178,
+          "wasmMemoryBytes": "16777216"
+        },
+        {
+          "phase": "sample-2",
+          "requestStartedAt": "2026-10-30T15:09:56.640Z",
+          "roundTripMs": 537.75,
+          "outputBytes": 150178,
+          "wasmMemoryBytes": "16777216"
+        },
+        {
+          "phase": "sample-3",
+          "requestStartedAt": "2026-10-30T15:09:57.178Z",
+          "roundTripMs": 639.01,
+          "outputBytes": 150178,
+          "wasmMemoryBytes": "16777216"
+        }
+      ],
       "responseSamplesMs": [
-        1010.63,
-        633.44,
-        788.89
-      ]
+        711.65,
+        537.75,
+        639.01
+      ],
+      "workerCpuSource": "Cloudflare invocation analytics",
+      "workerCpuSampleCount": 1
     }
-  ]
+  ],
+  "analytics": {
+    "dataset": "workersInvocationsAdaptive",
+    "colo": "WAW",
+    "note": "Temporary Worker names may appear as __unknown__; analytics rows are correlated to request timestamps. cpuTimeP99 and memoryUsageBytesP99 are sampled per invocation, not exact peaks. Cloudflare analytics were refreshed after the benchmark run to include delayed samples where available.",
+    "rows": [
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-30T15:08:32Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 537623,
+          "memoryUsageBytesP99": 24915482
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-30T15:09:23Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 1904550,
+          "memoryUsageBytesP99": 37703890
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-30T15:08:34Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 464634,
+          "memoryUsageBytesP99": 26066458
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-30T15:09:30Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 1129546,
+          "memoryUsageBytesP99": 40095950
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-30T15:08:58Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 281978,
+          "memoryUsageBytesP99": 24915972
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-30T15:09:27Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 2130160,
+          "memoryUsageBytesP99": 37707984
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-30T15:09:00Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 119901,
+          "memoryUsageBytesP99": 29609384
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-30T15:07:43Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 336382,
+          "memoryUsageBytesP99": 25017030
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 2
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-30T15:07:44Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 258379,
+          "memoryUsageBytesP99": 25021126
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-30T15:07:42Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 329944,
+          "memoryUsageBytesP99": 23064212
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-30T15:08:07Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 164998,
+          "memoryUsageBytesP99": 23063548
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 2
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-30T15:08:59Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 168366,
+          "memoryUsageBytesP99": 26062852
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 2
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-30T15:08:08Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 76480,
+          "memoryUsageBytesP99": 25019798
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 2
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-30T15:08:33Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 565389,
+          "memoryUsageBytesP99": 24915482
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-30T15:09:26Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 1176843,
+          "memoryUsageBytesP99": 37703890
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-30T15:09:56Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 292432,
+          "memoryUsageBytesP99": 37695040
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      }
+    ],
+    "errors": []
+  }
 }
