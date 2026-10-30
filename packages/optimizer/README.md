@@ -1,6 +1,6 @@
 # Standalone image optimizer
 
-Rust/Emscripten JPEG, PNG, HEIF/HEIC and AVIF decoding, scanline Lanczos3 resizing with WASM SIMD128, and WebP/JPEG output. No Cloudflare Computer dependency.
+Rust/Emscripten JPEG, PNG, HEIF/HEIC and AVIF decoding, scanline Lanczos3 resizing with WASM SIMD128, and WebP/JPEG output. AVIF decoding uses dav1d through libheif; HEIC/HEIF decoding uses libde265. No Cloudflare Computer dependency.
 
 ```js
 import { image } from '@mutables.app/image-optimizer';

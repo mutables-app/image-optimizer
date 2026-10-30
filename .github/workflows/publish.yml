@@ -40,7 +40,7 @@ jobs:
 
       - run: cargo install wasm-bindgen-cli --version 0.2.129 --locked
 
-      - run: sudo apt-get update && sudo apt-get install -y cmake ninja-build python3 python3-pil
+      - run: sudo apt-get update && sudo apt-get install -y cmake meson ninja-build python3 python3-pil
 
       - run: npm ci
 
@@ -51,6 +51,12 @@ jobs:
 
       - run: npm test
       - run: npm run check:worker
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: optimizer-wasm-dist
+          path: packages/optimizer/dist/
+          if-no-files-found: error
 
       - name: Check whether the optimizer version is already published
         id: optimizer-version

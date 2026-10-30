@@ -28,7 +28,7 @@ flowchart LR
   BIND --> RUST[Rust pipeline<br/>decode · resize · encode]
   RUST --> RESIZE[Scanline Lanczos3 resizer<br/>WASM SIMD128 · bounded row window]
   RUST --> CABI[C ABI bridge]
-  CABI --> CODECS[libjpeg-turbo · libspng · Pngle · libheif · libde265 · libaom · libwebp]
+  CABI --> CODECS[libjpeg-turbo · libspng · Pngle · libheif · dav1d · libde265 · libwebp]
   RESIZE --> LINK[Emscripten link<br/>wasm32-unknown-emscripten]
   CODECS --> LINK
   LINK --> WASM[WebAssembly module + JS glue]
@@ -41,7 +41,7 @@ WebP encoding needs the complete **resized** RGBA image; the source image is not
 
 Supported progressive JPEGs use lowzag's reduced coefficient storage; unsupported progressive/multi-scan JPEGs still require full coefficient storage. Adam7 PNGs use Pngle's scanline-sized decoder state for eligible downscales, with a full-frame fallback for other output sizes. The old `fast_image_resize` implementation remains only as a low-level benchmark reference, not the public processing path. The codec libraries are **compiled to WebAssembly**; they are not native host binaries running outside the Worker sandbox. Workers load the Wasm module statically. Node.js uses a separate file-based loader. The optional Computer adapter sits around the same optimizer and reads and writes files through `workspace.fs`.
 
-Cloudflare describes the Emscripten Rust target support as an experimental preview. This project demonstrates the image-processing use case; it does not imply native machine-code execution or guarantee a performance gain over other Workers image libraries. HEIF decoding adds LGPL-licensed libheif and libde265; libaom's license is also included with the codec notices.
+Cloudflare describes the Emscripten Rust target support as an experimental preview. This project demonstrates the image-processing use case; it does not imply native machine-code execution or guarantee a performance gain over other Workers image libraries. HEIF decoding adds LGPL-licensed libheif and libde265, plus BSD-licensed dav1d for AVIF decoding; their license notices are included in the optimizer package.
 
 ## Packages
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Replace libaom with dav1d as libheif's AV1 decoder; retain libde265 for HEIC/HEIF and bundle dav1d's license notice.
+- Build dav1d 1.5.4 as an 8-bit static Emscripten library for the optimizer WASM module.
+
 ## 0.4.0 — 2026-10-29
 
 - Decode and resize eligible Adam7/interlaced PNGs through Pngle pass callbacks, scattering pixels into a bounded destination accumulator instead of retaining the full source image. Keep the 24-megapixel cap and fall back to libspng for enlarged outputs or accumulators over 32 MiB.
