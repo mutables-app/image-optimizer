@@ -342,5 +342,67 @@
       "requestCompletedAt": "2026-10-30T01:35:15.963Z",
       "historical": true
     }
-  ]
+  ],
+  "webpInputMeasurements": {
+    "fixture": "Synthetic 4000x3000 RGB noise encoded as 8.24 MiB lossy WebP.",
+    "output": "800x600 JPEG at quality 80.",
+    "requestsPerMode": "One initial request plus three warm requests in a fresh temporary Worker per decode mode.",
+    "cloudflareMetric": "Maximum memoryUsageBytesP99 sample across four successful invocations; sampled isolate memory, not exact peak RSS. Temporary Worker names were reported as __unknown__ and rows were correlated by request time and WAW colo.",
+    "results": [
+      {
+        "mode": "default full decode",
+        "scaled": false,
+        "wasmLinearMemoryCapacityBytes": 69795840,
+        "wasmLinearMemoryCapacityMiB": 66.56,
+        "cloudflareIsolateMemoryBytesMaxSample": 102816520,
+        "cloudflareIsolateMemoryMiBMaxSample": 98.08,
+        "cloudflareSampleCount": 4,
+        "analyticsSamples": [
+          {
+            "timestamp": "2026-10-30T06:12:43Z",
+            "memoryUsageBytesP99": 83335280
+          },
+          {
+            "timestamp": "2026-10-30T06:12:45Z",
+            "memoryUsageBytesP99": 83073140
+          },
+          {
+            "timestamp": "2026-10-30T06:12:46Z",
+            "memoryUsageBytesP99": 102816520
+          },
+          {
+            "timestamp": "2026-10-30T06:12:48Z",
+            "memoryUsageBytesP99": 102816520
+          }
+        ]
+      },
+      {
+        "mode": "speed fast scaled decode",
+        "scaled": true,
+        "wasmLinearMemoryCapacityBytes": 20185088,
+        "wasmLinearMemoryCapacityMiB": 19.25,
+        "cloudflareIsolateMemoryBytesMaxSample": 41267780,
+        "cloudflareIsolateMemoryMiBMaxSample": 39.36,
+        "cloudflareSampleCount": 4,
+        "analyticsSamples": [
+          {
+            "timestamp": "2026-10-30T06:13:06Z",
+            "memoryUsageBytesP99": 40559172
+          },
+          {
+            "timestamp": "2026-10-30T06:13:08Z",
+            "memoryUsageBytesP99": 40559172
+          },
+          {
+            "timestamp": "2026-10-30T06:13:09Z",
+            "memoryUsageBytesP99": 41267780
+          },
+          {
+            "timestamp": "2026-10-30T06:13:11Z",
+            "memoryUsageBytesP99": 41267780
+          }
+        ]
+      }
+    ]
+  }
 }
