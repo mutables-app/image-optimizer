@@ -5,6 +5,8 @@ SHA-256:
 - `adam7-12mp.png`: `65a16c524194eb94cf75b2b5a1e0c1cd2f3ca4ece05709d1753aff0bd2410969`
 - `adam7-48mp.png`: `582769ceda26ba6f92c08c61e821eca03053ce962d8e3d28458d00fbedb457a0`
 - `input-48mp-baseline.jpg`: `d78a623fb4d4218d897e051b9e88fe9182f732385b6b1d490f0797b5d00407f6`
+- `input-12mp-baseline.jpg`: `7288e7341703bde43015e2d04f8c07ef1fc17b9107f10c180d03053227882a62`
+- `input-24mp-baseline.jpg`: `265ea6071a0131f57e7ad58529897403d39dc51241e4ce15838f1e6bd99e6fc4`
 - `input-48mp-cmyk-progressive.jpg`: `0e2ae78f013bf2084069eae4aa0db3f8b9a5291025e4816f4f2fbb49665b47c0`
 - `input-12mp-cmyk-progressive.jpg`: `f66598d0a40539788118a4cc8cda051a2821002c4e095fc4461b733b43c026ad`
 - `input-12mp-ycck-progressive.jpg`: `2a00d1cffb6961c735b26d1124fbc2bb4d97cd19fa32f8fb6541f23377e5e9ad`

@@ -115,6 +115,8 @@ These end-to-end samples convert synthetic inputs to 800×600 WebP. Each fixture
 
 | Input path and source size | Result | Response p50 | Worker CPU median | WASM capacity after last request |
 | --- | --- | ---: | ---: | ---: |
+| Baseline JPEG, 12 MP | Converted | 234 ms | 137 ms (3 samples) | 16 MiB |
+| Baseline JPEG, 24 MP | Converted | 230 ms | 122 ms (3 samples) | 16 MiB |
 | Baseline JPEG, 48 MP | Converted | 570 ms | 308 ms (3 samples) | 16 MiB |
 | Non-interlaced PNG, 48 MP | Converted | 1,083 ms | 933 ms (3 samples) | 16 MiB |
 | Lowzag progressive JPEG, 24 MP | Converted | 952 ms | 686 ms (3 samples) | 27.75 MiB |

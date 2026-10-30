@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-30T04:33:52.214Z",
+  "timestamp": "2026-10-30T04:39:44.356Z",
   "rounds": 3,
   "output": "800x600 WebP",
   "responseTime": "Client-observed round trip, p50 of warm requests; includes network latency.",
@@ -313,6 +313,50 @@
         1366.39,
         1307.59,
         1339.38
+      ]
+    },
+    {
+      "label": "Baseline JPEG",
+      "mp": 12,
+      "file": "input-12mp-baseline.jpg",
+      "inputBytes": 660107,
+      "expected": "success",
+      "successes": 3,
+      "responseP50Ms": 234,
+      "workerCpuMedianMs": 137,
+      "workerCpuSamples": [
+        137,
+        144,
+        105
+      ],
+      "wasmMemoryBytes": "16777216",
+      "decoded": "1000x750",
+      "responseSamplesMs": [
+        389.58,
+        233.62,
+        208.21
+      ]
+    },
+    {
+      "label": "Baseline JPEG",
+      "mp": 24,
+      "file": "input-24mp-baseline.jpg",
+      "inputBytes": 1317516,
+      "expected": "success",
+      "successes": 3,
+      "responseP50Ms": 230,
+      "workerCpuMedianMs": 122,
+      "workerCpuSamples": [
+        235,
+        122,
+        118
+      ],
+      "wasmMemoryBytes": "16777216",
+      "decoded": "1500x1000",
+      "responseSamplesMs": [
+        543.38,
+        229.63,
+        225.8
       ]
     }
   ]

@@ -13,6 +13,8 @@ workerConfig.limits = {...workerConfig.limits, cpu_ms: 30000};
 await writeFile(configPath, `${JSON.stringify(workerConfig, null, 2)}\n`);
 const {BENCHMARK_TOKEN} = JSON.parse(await readFile('.build/benchmark-secrets.json', 'utf8'));
 const fixtures = [
+  {label:'Baseline JPEG',mp:12,file:'input-12mp-baseline.jpg'},
+  {label:'Baseline JPEG',mp:24,file:'input-24mp-baseline.jpg'},
   {label:'Baseline JPEG',mp:48,file:'input-48mp-baseline.jpg'},
   {label:'Non-interlaced PNG',mp:48,file:'input-48mp-streaming.png'},
   {label:'Lowzag progressive JPEG',mp:24,file:'input-24mp-progressive.jpg'},
@@ -28,6 +30,9 @@ const fixtures = [
   {label:'Tiled/grid HEIC/HEIF',mp:12,file:'grid-12mp-512px-tiles.heic'},
   {label:'Tiled/grid HEIC/HEIF',mp:48,file:'input-48mp-grid.heic'},
 ];
+const only = process.env.DECODER_BENCHMARK_ONLY?.split(',').map(value=>value.trim()).filter(Boolean);
+const selectedFixtures = only ? fixtures.filter(item=>only.includes(item.file)) : fixtures;
+if (only && selectedFixtures.length !== only.length) throw new Error(`Unknown benchmark fixture(s): ${only.filter(file=>!fixtures.some(item=>item.file===file)).join(', ')}`);
 const rounds = Number(process.env.DECODER_BENCHMARK_ROUNDS ?? 3);
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 const median = values => {
@@ -42,7 +47,7 @@ const runWrangler = (args, options={}) => execFileSync(node,[wrangler,...args],{
 });
 
 try {
-  for (const [index,item] of fixtures.entries()) {
+  for (const [index,item] of selectedFixtures.entries()) {
     const input = await readFile(new URL(`../test/fixtures/${item.file}`,import.meta.url));
     const workerName = `image-opt-perf-${index}-${randomUUID().slice(0,8)}`;
     const endpoint = `https://${workerName}.ted3.workers.dev/`;
@@ -128,4 +133,9 @@ const report={timestamp:new Date().toISOString(),rounds,output:'800x600 WebP',
   cpuTime:'Per-invocation CPU time from Wrangler tail; median of warm requests.',
   note:'Synthetic fixtures. Adam7 >12 MP and non-grid HEIC/HEIF >12 MP are expected to be rejected. Cloudflare tail may omit events; null CPU means no matching tail samples were captured.',results};
 const path=process.env.DECODER_PERFORMANCE_OUTPUT??'benchmarks/decoder-performance-worker.json';
+if (only) {
+  const previous=JSON.parse(await readFile(path,'utf8'));
+  const replaced=new Set(results.map(item=>item.file));
+  report.results=[...previous.results.filter(item=>!replaced.has(item.file)),...results];
+}
 await writeFile(path,`${JSON.stringify(report,null,2)}\n`);
