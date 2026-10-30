@@ -1,4 +1,4 @@
-// Small deterministic fixtures, including Adam7 and transparent RGB edges.
+// Small deterministic fixtures, including an Adam7 PNG used to verify rejection.
 import {deflateSync, crc32} from 'node:zlib';
 function chunk(name,data) {
  const type=Buffer.from(name), size=Buffer.alloc(4), crc=Buffer.alloc(4);

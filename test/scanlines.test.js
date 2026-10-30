@@ -44,35 +44,12 @@ test('unresized lossless PNG preserves visible pixels exactly',async()=>{
  const out=decode(await image(png).webp({lossless:true}).bytes());
  assert.deepEqual(out.pixels,Buffer.from(Array.from({length:97*65},(_,i)=>color(i%97,Math.floor(i/97))).flat()));
 });
-test('Adam7 downscales use callbacks while enlargements keep the fallback',()=>{
+test('interlaced PNG is explicitly unsupported while non-interlaced PNG remains supported',async()=>{
  const adam7=rgbaPng(97,65,color,true);
- for(const [w,h] of [[97,65],[29,23],[117,91]]) {
-  const result=scan(adam7,w,h);assert.equal(result.codec_buffered,w>97||h>65);
-  const actual=decode(result.take_bytes()),reference=decode(scan(png,w,h).take_bytes());
-  assert.deepEqual([actual.width,actual.height],[w,h]);
-  let squared=0;for(let i=0;i<actual.pixels.length;i++) squared+=(actual.pixels[i]-reference.pixels[i])**2;
-  assert.ok(Math.sqrt(squared/actual.pixels.length)<1.5,`${w}x${h} Lanczos RMSE exceeds tolerance`);
- }
- assert.equal(scan(png,29,23).codec_buffered,false);
-});
-test('Adam7 Lanczos accumulation premultiplies transparent pixels',()=>{
- const adam7=rgbaPng(97,65,x=>x<48?[0,0,255,255]:[255,0,0,0],true);
- const output=decode(scan(adam7,29,23).take_bytes());let partial=0;
- for(let i=0;i<output.pixels.length;i+=4) {
-  if(output.pixels[i+3]>8) {assert.equal(output.pixels[i],0);assert.equal(output.pixels[i+2],255);}
-  if(output.pixels[i+3]>0&&output.pixels[i+3]<255) partial++;
- }
- assert.ok(partial>0);
-});
-test('Adam7 PNGs above 12MP are rejected while 12MP remains supported',async()=>{
- const input=await fixture('adam7-12mp.png');
- const result=scan(input,800,0,false,false);
- assert.deepEqual([result.source_width,result.source_height],[4000,3000]);
- assert.deepEqual([result.output_width,result.output_height],[800,600]);
- assert.ok(result.take_bytes().length>0);
- const larger=await fixture('adam7-24mp.png');
- assert.throws(()=>scan(larger,800,0,false,false),/limit/i);
- assert.ok(linear_memory_bytes()<=32*1024*1024,`WASM linear memory ${linear_memory_bytes()} exceeds 32 MiB`);
+ assert.throws(()=>scan(adam7,29,23),/Interlaced PNG input is not supported/);
+ await assert.rejects(image(adam7).resize(29,23).webp().bytes(),/Interlaced PNG input is not supported/);
+ const plain=rgbaPng(97,65,color,false);
+ assert.ok(scan(plain,29,23).take_bytes().length>0);
 });
 test('baseline, progressive, grayscale and CMYK JPEGs decode consistently',async()=>{
  for(const name of ['rows-baseline.jpg','rows-progressive.jpg','rows-gray.jpg','rows-cmyk.jpg']) {
@@ -128,20 +105,12 @@ test('32MP progressive JPEG converts at reduced scale within a small WASM memory
  const output=decode(result.take_bytes());assert.deepEqual([output.width,output.height],[800,400]);
  assert.ok(linear_memory_bytes()<=48*1024*1024,`WASM linear memory ${linear_memory_bytes()} exceeds 48 MiB`);
 });
-test('12MP arithmetic-coded progressive JPEG uses the buffered compatibility path',async()=>{
- const input=await fixture('input-12mp-arithmetic-progressive.jpg');
- const bytes=Buffer.from(input);
- assert.ok(bytes.includes(Buffer.from([0xff,0xca])),'fixture must use progressive SOF2');
- assert.ok(bytes.includes(Buffer.from([0xff,0xcc])),'fixture must use arithmetic coding');
- const result=scanline_experiment(input,800,600,false,false,80,false,8_000_000,true,-1,false);
- assert.equal(result.codec_buffered,true);
- assert.deepEqual([result.source_width,result.source_height],[4000,3000]);
- assert.deepEqual([result.decoded_width,result.decoded_height],[1000,750]);
- assert.deepEqual([result.output_width,result.output_height],[800,600]);
- const output=Buffer.from(result.take_bytes());
- assert.equal(output.toString('ascii',0,4),'RIFF');
- assert.equal(output.toString('ascii',8,12),'WEBP');
- assert.ok(linear_memory_bytes()<=64*1024*1024,`WASM linear memory ${linear_memory_bytes()} exceeds 64 MiB`);
+test('non-Lowzag progressive JPEG variants are rejected',async()=>{
+ for(const name of ['input-12mp-arithmetic-progressive.jpg','input-12mp-cmyk-progressive.jpg','input-12mp-ycck-progressive.jpg']) {
+  const input=await fixture(name);
+  assert.throws(()=>scanline_experiment(input,800,600,false,false,80,false,8_000_000,true,-1,false),/Only Lowzag-compatible progressive JPEG is supported/,name);
+  await assert.rejects(image(input).resize(800,600).webp().bytes(),/Only Lowzag-compatible progressive JPEG is supported/,name);
+ }
 });
 test('extreme aspect ratios keep the row window bounded',()=>{
  for(const [sw,sh,ow,oh] of [[1,16000,16000,1],[16000,1,1,16000],[31,127,127,1],[31,1,1,127]]) {

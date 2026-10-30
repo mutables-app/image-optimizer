@@ -5,7 +5,6 @@
 #include <cstdlib>
 #include <new>
 
-#define MAX_HEIF_SINGLE_IMAGE_PIXELS 12000000u
 #define MAX_HEIF_GRID_PIXELS 48000000u
 
 struct HeifRows {
@@ -72,8 +71,10 @@ extern "C" int heif_rows_open(const uint8_t* data, size_t size, void** out,
             heif_image_handle_release(r->handle); heif_context_free(r->context); delete r; return 1;
         }
     }
-    const uint64_t pixel_limit = r->tiled ? MAX_HEIF_GRID_PIXELS : MAX_HEIF_SINGLE_IMAGE_PIXELS;
-    if (static_cast<uint64_t>(r->width) * r->height > pixel_limit) {
+    if (!r->tiled) {
+        heif_image_handle_release(r->handle); heif_context_free(r->context); delete r; return 6;
+    }
+    if (static_cast<uint64_t>(r->width) * r->height > MAX_HEIF_GRID_PIXELS) {
         heif_image_handle_release(r->handle); heif_context_free(r->context); delete r; return 2;
     }
     *width = r->width; *height = r->height; *out = r;

@@ -4,7 +4,7 @@
   "output": "800x600 WebP",
   "responseTime": "Client-observed round trip, p50 of warm requests; includes network latency.",
   "cpuTime": "Per-invocation CPU time from Wrangler tail; median of warm requests.",
-  "note": "Synthetic fixtures. Adam7 >12 MP and non-grid HEIC/HEIF >12 MP are expected to be rejected. Cloudflare tail may omit events; null CPU means no matching tail samples were captured.",
+  "note": "Synthetic fixtures. Adam7 >12 MP and non-grid HEIC/HEIF >12 MP are expected to be rejected. Cloudflare tail may omit events; null CPU means no matching tail samples were captured. Prior Adam7 PNG and non-grid HEIC/HEIF cases are retained separately as historical, unsupported paths.",
   "results": [
     {
       "label": "Baseline JPEG",
@@ -95,183 +95,6 @@
       ]
     },
     {
-      "label": "Other progressive JPEG",
-      "mp": 12,
-      "file": "input-12mp-arithmetic-progressive.jpg",
-      "inputBytes": 188265,
-      "expected": "success",
-      "successes": 3,
-      "responseP50Ms": 251,
-      "workerCpuMedianMs": 144,
-      "workerCpuSamples": [
-        226,
-        144,
-        144
-      ],
-      "wasmMemoryBytes": "45875200",
-      "decoded": "1000x750",
-      "responseSamplesMs": [
-        399.06,
-        250.7,
-        221.37
-      ]
-    },
-    {
-      "label": "CMYK progressive JPEG",
-      "mp": 12,
-      "file": "input-12mp-cmyk-progressive.jpg",
-      "inputBytes": 188440,
-      "expected": "success",
-      "successes": 3,
-      "responseP50Ms": 407,
-      "workerCpuMedianMs": 278,
-      "workerCpuSamples": [
-        278
-      ],
-      "wasmMemoryBytes": "20185088",
-      "decoded": "1000x750",
-      "responseSamplesMs": [
-        578.38,
-        406.84,
-        370.28
-      ]
-    },
-    {
-      "label": "YCCK progressive JPEG",
-      "mp": 12,
-      "file": "input-12mp-ycck-progressive.jpg",
-      "inputBytes": 130201,
-      "expected": "success",
-      "successes": 3,
-      "responseP50Ms": 287,
-      "workerCpuMedianMs": 177,
-      "workerCpuSamples": [
-        173,
-        212,
-        177
-      ],
-      "wasmMemoryBytes": "74645504",
-      "decoded": "1000x750",
-      "responseSamplesMs": [
-        305.37,
-        286.84,
-        250.8
-      ]
-    },
-    {
-      "label": "Adam7 PNG",
-      "mp": 12,
-      "file": "adam7-12mp.png",
-      "inputBytes": 2173320,
-      "expected": "success",
-      "successes": 3,
-      "responseP50Ms": 1829,
-      "workerCpuMedianMs": 1590,
-      "workerCpuSamples": [
-        1684,
-        1590,
-        1510
-      ],
-      "wasmMemoryBytes": "16777216",
-      "decoded": "800x600",
-      "responseSamplesMs": [
-        1926.82,
-        1829.28,
-        1718.85
-      ]
-    },
-    {
-      "label": "Adam7 PNG (over limit)",
-      "mp": 24,
-      "file": "adam7-24mp.png",
-      "expectReject": true,
-      "inputBytes": 2394045,
-      "expected": "rejection",
-      "successes": 3,
-      "responseP50Ms": 155,
-      "workerCpuMedianMs": 30,
-      "workerCpuSamples": [
-        30,
-        30,
-        23
-      ],
-      "wasmMemoryBytes": null,
-      "decoded": null,
-      "responseSamplesMs": [
-        242.89,
-        155.46,
-        114.69
-      ]
-    },
-    {
-      "label": "Adam7 PNG (over limit)",
-      "mp": 48,
-      "file": "adam7-48mp.png",
-      "expectReject": true,
-      "inputBytes": 10176949,
-      "expected": "rejection",
-      "successes": 3,
-      "responseP50Ms": 454,
-      "workerCpuMedianMs": 127,
-      "workerCpuSamples": [
-        119,
-        184,
-        127
-      ],
-      "wasmMemoryBytes": null,
-      "decoded": null,
-      "responseSamplesMs": [
-        532.12,
-        454.03,
-        369.44
-      ]
-    },
-    {
-      "label": "Non-grid HEIC/HEIF",
-      "mp": 12,
-      "file": "input-12mp-single.heic",
-      "inputBytes": 151755,
-      "expected": "success",
-      "successes": 3,
-      "responseP50Ms": 400,
-      "workerCpuMedianMs": 308,
-      "workerCpuSamples": [
-        308,
-        297,
-        316
-      ],
-      "wasmMemoryBytes": "122880000",
-      "decoded": "4000x3000",
-      "responseSamplesMs": [
-        442.97,
-        390.54,
-        400.38
-      ]
-    },
-    {
-      "label": "Non-grid HEIC/HEIF (over limit)",
-      "mp": 24,
-      "file": "input-24mp-single.heic",
-      "expectReject": true,
-      "inputBytes": 300427,
-      "expected": "rejection",
-      "successes": 3,
-      "responseP50Ms": 78,
-      "workerCpuMedianMs": 7,
-      "workerCpuSamples": [
-        7,
-        11,
-        6
-      ],
-      "wasmMemoryBytes": null,
-      "decoded": null,
-      "responseSamplesMs": [
-        166.09,
-        77.74,
-        61.21
-      ]
-    },
-    {
       "label": "Tiled/grid HEIC/HEIF",
       "mp": 12,
       "file": "grid-12mp-512px-tiles.heic",
@@ -358,6 +181,201 @@
         229.63,
         225.8
       ]
+    }
+  ],
+  "historicalUnsupportedResults": [
+    {
+      "label": "Adam7 PNG",
+      "mp": 12,
+      "file": "adam7-12mp.png",
+      "inputBytes": 2173320,
+      "expected": "success",
+      "successes": 3,
+      "responseP50Ms": 1829,
+      "workerCpuMedianMs": 1590,
+      "workerCpuSamples": [
+        1684,
+        1590,
+        1510
+      ],
+      "wasmMemoryBytes": "16777216",
+      "decoded": "800x600",
+      "responseSamplesMs": [
+        1926.82,
+        1829.28,
+        1718.85
+      ],
+      "historical": true,
+      "note": "Historical measurement only; this input path is no longer supported."
+    },
+    {
+      "label": "Adam7 PNG (over limit)",
+      "mp": 24,
+      "file": "adam7-24mp.png",
+      "expectReject": true,
+      "inputBytes": 2394045,
+      "expected": "rejection",
+      "successes": 3,
+      "responseP50Ms": 155,
+      "workerCpuMedianMs": 30,
+      "workerCpuSamples": [
+        30,
+        30,
+        23
+      ],
+      "wasmMemoryBytes": null,
+      "decoded": null,
+      "responseSamplesMs": [
+        242.89,
+        155.46,
+        114.69
+      ],
+      "historical": true,
+      "note": "Historical measurement only; this input path is no longer supported."
+    },
+    {
+      "label": "Adam7 PNG (over limit)",
+      "mp": 48,
+      "file": "adam7-48mp.png",
+      "expectReject": true,
+      "inputBytes": 10176949,
+      "expected": "rejection",
+      "successes": 3,
+      "responseP50Ms": 454,
+      "workerCpuMedianMs": 127,
+      "workerCpuSamples": [
+        119,
+        184,
+        127
+      ],
+      "wasmMemoryBytes": null,
+      "decoded": null,
+      "responseSamplesMs": [
+        532.12,
+        454.03,
+        369.44
+      ],
+      "historical": true,
+      "note": "Historical measurement only; this input path is no longer supported."
+    },
+    {
+      "label": "Non-grid HEIC/HEIF",
+      "mp": 12,
+      "file": "input-12mp-single.heic",
+      "inputBytes": 151755,
+      "expected": "success",
+      "successes": 3,
+      "responseP50Ms": 400,
+      "workerCpuMedianMs": 308,
+      "workerCpuSamples": [
+        308,
+        297,
+        316
+      ],
+      "wasmMemoryBytes": "122880000",
+      "decoded": "4000x3000",
+      "responseSamplesMs": [
+        442.97,
+        390.54,
+        400.38
+      ],
+      "historical": true,
+      "note": "Historical measurement only; this input path is no longer supported."
+    },
+    {
+      "label": "Non-grid HEIC/HEIF (over limit)",
+      "mp": 24,
+      "file": "input-24mp-single.heic",
+      "expectReject": true,
+      "inputBytes": 300427,
+      "expected": "rejection",
+      "successes": 3,
+      "responseP50Ms": 78,
+      "workerCpuMedianMs": 7,
+      "workerCpuSamples": [
+        7,
+        11,
+        6
+      ],
+      "wasmMemoryBytes": null,
+      "decoded": null,
+      "responseSamplesMs": [
+        166.09,
+        77.74,
+        61.21
+      ],
+      "historical": true,
+      "note": "Historical measurement only; this input path is no longer supported."
+    },
+    {
+      "label": "Other progressive JPEG",
+      "mp": 12,
+      "file": "input-12mp-arithmetic-progressive.jpg",
+      "inputBytes": 188265,
+      "expected": "success",
+      "successes": 3,
+      "responseP50Ms": 251,
+      "workerCpuMedianMs": 144,
+      "workerCpuSamples": [
+        226,
+        144,
+        144
+      ],
+      "wasmMemoryBytes": "45875200",
+      "decoded": "1000x750",
+      "responseSamplesMs": [
+        399.06,
+        250.7,
+        221.37
+      ],
+      "historical": true,
+      "note": "Historical measurement only; this progressive JPEG variant is no longer supported."
+    },
+    {
+      "label": "CMYK progressive JPEG",
+      "mp": 12,
+      "file": "input-12mp-cmyk-progressive.jpg",
+      "inputBytes": 188440,
+      "expected": "success",
+      "successes": 3,
+      "responseP50Ms": 407,
+      "workerCpuMedianMs": 278,
+      "workerCpuSamples": [
+        278
+      ],
+      "wasmMemoryBytes": "20185088",
+      "decoded": "1000x750",
+      "responseSamplesMs": [
+        578.38,
+        406.84,
+        370.28
+      ],
+      "historical": true,
+      "note": "Historical measurement only; this progressive JPEG variant is no longer supported."
+    },
+    {
+      "label": "YCCK progressive JPEG",
+      "mp": 12,
+      "file": "input-12mp-ycck-progressive.jpg",
+      "inputBytes": 130201,
+      "expected": "success",
+      "successes": 3,
+      "responseP50Ms": 287,
+      "workerCpuMedianMs": 177,
+      "workerCpuSamples": [
+        173,
+        212,
+        177
+      ],
+      "wasmMemoryBytes": "74645504",
+      "decoded": "1000x750",
+      "responseSamplesMs": [
+        305.37,
+        286.84,
+        250.8
+      ],
+      "historical": true,
+      "note": "Historical measurement only; this progressive JPEG variant is no longer supported."
     }
   ]
 }

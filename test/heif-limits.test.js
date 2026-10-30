@@ -1,32 +1,17 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {spawnSync} from 'node:child_process';
 import {image} from '@mutables.app/image-optimizer';
-import {scanline_experiment,linear_memory_bytes} from '../packages/optimizer/dist/optimizer.node.js';
+import {scanline_experiment} from '../packages/optimizer/dist/optimizer.node.js';
 const fixture=async name=>readFile(new URL(`./fixtures/${name}`,import.meta.url));
-function decode(bytes) {
- const p=spawnSync('python3',['test/decode-image.py'],{input:bytes,maxBuffer:64*1024*1024});
- assert.equal(p.status,0,p.stderr.toString());return JSON.parse(p.stdout);
-}
-test('12MP non-grid HEIC decodes and resizes as a full source image',async()=>{
+test('single-image HEIC/HEIF is rejected while tiled HEIC/HEIF remains supported',async()=>{
  const input=await fixture('input-12mp-single.heic');
- const result=scanline_experiment(input,800,0,false,false,80,false,8_000_000,false,-1,false);
- assert.equal(result.codec_buffered,true);
- assert.deepEqual([result.source_width,result.source_height],[4000,3000]);
- assert.deepEqual([result.output_width,result.output_height],[800,600]);
- const webp=decode(result.take_bytes());assert.deepEqual([webp.format,webp.width,webp.height],['WEBP',800,600]);
- const jpeg=decode(await image(input).resize(800).jpeg({speed:'fast'}).bytes());
- assert.deepEqual([jpeg.format,jpeg.width,jpeg.height],['JPEG',800,600]);
- assert.ok(linear_memory_bytes()<=128*1024*1024,`WASM linear memory ${linear_memory_bytes()} exceeds 128 MiB`);
+ assert.throws(()=>scanline_experiment(input,800,600,false,false,80,false,8_000_000,false,-1,false),/Non-grid HEIC\/HEIF input is not supported/);
+ await assert.rejects(image(input).resize(800).webp().bytes(),/Non-grid HEIC\/HEIF input is not supported/);
+ const tiled=await fixture('grid-12mp-512px-tiles.heic');
+ assert.ok(scanline_experiment(tiled,800,600,false,false,80,false,8_000_000,false,-1,false).take_bytes().length>0);
 });
-test('AVIF input is rejected while HEIC/HEIF remains supported',async()=>{
+test('AVIF input is rejected',async()=>{
  const input=await fixture('input-12mp-single.avif');
  await assert.rejects(image(input).resize(800).webp().bytes(),/Expected JPEG, PNG or HEIC\/HEIF/);
-});
-test('24MP non-grid HEIC remains above the single-image source limit',async()=>{
- for(const name of ['input-24mp-single.heic']) {
-  const input=await fixture(name);
-  await assert.rejects(image(input).resize(800).webp().bytes(),/pixel or dimension limit/);
- }
 });

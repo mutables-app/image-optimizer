@@ -3,7 +3,7 @@
 ## Unreleased
 
 - Remove AVIF input support and its dav1d dependency; retain HEIC/HEIF decoding through libheif and libde265.
-- Cap Adam7/interlaced PNG inputs at 12 megapixels; retain callback downscaling for eligible requests within that source limit.
+- Reject Adam7/interlaced PNG, non-grid HEIC/HEIF, and progressive/multi-scan JPEGs that are not Lowzag-compatible (including CMYK and YCCK); retain non-interlaced PNG, tiled/grid HEIC/HEIF, and Lowzag-compatible progressive JPEG support.
 
 ## 0.4.0 — 2026-10-29
 

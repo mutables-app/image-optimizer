@@ -4,6 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {spawnSync} from 'node:child_process';
 import {image} from '@mutables.app/image-optimizer';
 import {scanline_experiment,linear_memory_bytes} from '../packages/optimizer/dist/optimizer.node.js';
+import {rgbaPng} from './helpers/png.js';
 
 const fixture=async name=>readFile(new URL(`./fixtures/${name}`,import.meta.url));
 function decode(bytes) {
@@ -39,20 +40,7 @@ test('48MP lowzag-compatible progressive JPEG converts at the 8MP output ceiling
  assert.throws(()=>scanline_experiment(overLimit,800,800,false,false,80,false,8_000_000,true,-1,false),/limit/i);
 });
 
-test('Adam7 source limit rejects images above 12MP before decoding',async()=>{
- for(const name of ['adam7-24mp.png','adam7-48mp.png']) {
-  const input=await fixture(name);
-  assert.throws(()=>scanline_experiment(input,800,800,false,false,80,false,640_000,false,-1,false),/limit/i,name);
- }
-});
-
-test('Adam7 fallback stays below 100 MiB and rejects larger full-frame decodes early',async()=>{
- const input=await fixture('adam7-12mp.png');
- const result=scanline_experiment(input,2828,2828,false,false,80,false,8_000_000,false,-1,false);
- assert.equal(result.codec_buffered,true);
- assert.deepEqual([result.source_width,result.source_height],[4000,3000]);
- assert.ok(result.take_bytes().length>0);
- assert.ok(linear_memory_bytes()<=128*1024*1024,`WASM linear memory ${linear_memory_bytes()} exceeds 128 MiB`);
- const larger=await fixture('adam7-24mp.png');
- assert.throws(()=>scanline_experiment(larger,2828,2828,false,false,80,false,8_000_000,false,-1,false),/limit/i);
+test('Adam7 PNG is rejected explicitly before decode',async()=>{
+ const input=rgbaPng(97,65,(x,y)=>[x%256,y%256,128,255],true);
+ assert.throws(()=>scanline_experiment(input,800,600,false,false,80,false,8_000_000,false,-1,false),/Interlaced PNG input is not supported/);
 });

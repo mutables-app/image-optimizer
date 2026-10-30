@@ -19,14 +19,6 @@ const fixtures = [
   {label:'Non-interlaced PNG',mp:48,file:'input-48mp-streaming.png'},
   {label:'Lowzag progressive JPEG',mp:24,file:'input-24mp-progressive.jpg'},
   {label:'Lowzag progressive JPEG',mp:48,file:'input-48mp-progressive.jpg'},
-  {label:'Other progressive JPEG',mp:12,file:'input-12mp-arithmetic-progressive.jpg'},
-  {label:'CMYK progressive JPEG',mp:12,file:'input-12mp-cmyk-progressive.jpg'},
-  {label:'YCCK progressive JPEG',mp:12,file:'input-12mp-ycck-progressive.jpg'},
-  {label:'Adam7 PNG',mp:12,file:'adam7-12mp.png'},
-  {label:'Adam7 PNG (over limit)',mp:24,file:'adam7-24mp.png',expectReject:true},
-  {label:'Adam7 PNG (over limit)',mp:48,file:'adam7-48mp.png',expectReject:true},
-  {label:'Non-grid HEIC/HEIF',mp:12,file:'input-12mp-single.heic'},
-  {label:'Non-grid HEIC/HEIF (over limit)',mp:24,file:'input-24mp-single.heic',expectReject:true},
   {label:'Tiled/grid HEIC/HEIF',mp:12,file:'grid-12mp-512px-tiles.heic'},
   {label:'Tiled/grid HEIC/HEIF',mp:48,file:'input-48mp-grid.heic'},
 ];
@@ -131,11 +123,14 @@ try {
 const report={timestamp:new Date().toISOString(),rounds,output:'800x600 WebP',
   responseTime:'Client-observed round trip, p50 of warm requests; includes network latency.',
   cpuTime:'Per-invocation CPU time from Wrangler tail; median of warm requests.',
-  note:'Synthetic fixtures. Adam7 >12 MP and non-grid HEIC/HEIF >12 MP are expected to be rejected. Cloudflare tail may omit events; null CPU means no matching tail samples were captured.',results};
+  note:'Synthetic fixtures for currently supported paths. Adam7 PNG and non-grid HEIC/HEIF are unsupported. Cloudflare tail may omit events; null CPU means no matching tail samples were captured.',results};
 const path=process.env.DECODER_PERFORMANCE_OUTPUT??'benchmarks/decoder-performance-worker.json';
-if (only) {
-  const previous=JSON.parse(await readFile(path,'utf8'));
+let previous;
+try { previous=JSON.parse(await readFile(path,'utf8')); } catch {}
+const unsupported=previous?.results.filter(item=>/^Adam7 PNG|^Non-grid HEIC\/HEIF|^Other progressive JPEG|^CMYK progressive JPEG|^YCCK progressive JPEG/.test(item.label))??[];
+report.historicalUnsupportedResults=[...(previous?.historicalUnsupportedResults??[]),...unsupported.map(item=>({...item,historical:true,note:'Historical measurement only; this input path is no longer supported.'}))];
+if (only && previous) {
   const replaced=new Set(results.map(item=>item.file));
-  report.results=[...previous.results.filter(item=>!replaced.has(item.file)),...results];
+  report.results=[...previous.results.filter(item=>!replaced.has(item.file)&&!unsupported.includes(item)),...results];
 }
 await writeFile(path,`${JSON.stringify(report,null,2)}\n`);

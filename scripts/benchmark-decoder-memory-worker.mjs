@@ -14,13 +14,7 @@ const allCases = [
   { label: 'Baseline JPEG', file: 'input-48mp-baseline.jpg' },
   { label: 'Non-interlaced PNG', file: 'input-48mp-streaming.png' },
   { label: 'Lowzag progressive JPEG', file: 'input-48mp-progressive.jpg' },
-  { label: 'CMYK progressive JPEG', file: 'input-12mp-cmyk-progressive.jpg' },
-  { label: 'YCCK progressive JPEG', file: 'input-12mp-ycck-progressive.jpg' },
-  { label: 'CMYK progressive JPEG over limit', file: 'input-48mp-cmyk-progressive.jpg' },
-  { label: 'Adam7 PNG (12 MP)', file: 'adam7-12mp.png' },
-  { label: 'Single-image HEIC', file: 'input-12mp-single.heic' },
   { label: 'Tiled HEIC', file: 'input-48mp-grid.heic' },
-  { label: 'Other progressive/multi-scan JPEG (arithmetic-coded)', file: 'input-12mp-arithmetic-progressive.jpg' },
   { label: '64MP HEIC grid over limit', file: 'input-64mp-grid.heic' },
   { label: '64MP progressive JPEG over limit', file: 'input-64mp-progressive.jpg' },
 ];
@@ -95,4 +89,12 @@ const report = {
   results,
 };
 const reportPath = process.env.BENCHMARK_OUTPUT ?? 'benchmarks/decoder-memory-worker.json';
+try {
+  const previous = JSON.parse(await readFile(reportPath, 'utf8'));
+  const unsupported = previous.results.filter(item => /^Adam7 PNG|^Single-image HEIC|^CMYK progressive JPEG|^YCCK progressive JPEG|^Other progressive\/multi-scan JPEG/.test(item.label));
+  report.historicalUnsupportedResults = [
+    ...(previous.historicalUnsupportedResults ?? []),
+    ...unsupported.map(item => ({ ...item, historical: true, note: 'Historical measurement only; this input path is no longer supported.' })),
+  ];
+} catch {}
 await writeFile(reportPath, `${JSON.stringify(report, null, 2)}\n`);

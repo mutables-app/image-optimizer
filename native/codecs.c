@@ -22,6 +22,7 @@ int decode_image(const uint8_t *data, size_t size, uint32_t max_pixels,
         if (!err) err = spng_set_chunk_limits(ctx, 1024 * 1024, 4 * 1024 * 1024);
         if (!err) err = spng_set_png_buffer(ctx, data, size);
         if (!err) err = spng_get_ihdr(ctx, &header);
+        if (!err && header.interlace_method) { spng_ctx_free(ctx); return 5; }
         if (!err && (uint64_t)header.width * header.height > MAX_BUFFERED_SOURCE_PIXELS) {
             spng_ctx_free(ctx); return 2;
         }
