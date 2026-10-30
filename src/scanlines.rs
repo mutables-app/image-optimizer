@@ -34,7 +34,7 @@ fn check(status: i32) -> Result<(), JsValue> {
         Err(error(match status {
             2 => "Image exceeds pixel or dimension limit",
             3 => "Image allocation failed",
-            4 => "Expected JPEG, PNG or HEIC/HEIF input",
+            4 => "Expected JPEG, PNG, WebP or HEIC/HEIF input",
             5 => "Interlaced PNG input is not supported",
             6 => "Non-grid HEIC/HEIF input is not supported",
             7 => "Only Lowzag-compatible progressive JPEG is supported",

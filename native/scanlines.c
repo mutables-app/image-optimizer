@@ -7,6 +7,7 @@
 #include <setjmp.h>
 #include <jpeglib.h>
 #include <spng.h>
+#include <webp/decode.h>
 #include <lowzag.h>
 
 #define MAX_STREAMING_SOURCE_PIXELS 48000000u
@@ -14,6 +15,7 @@
 #define MAX_LOWZAG_ALLOC_BYTES (64u * 1024u * 1024u)
 #define MAX_LOWZAG_SOURCE_PIXELS 48000000u
 #define MAX_PROGRESSIVE_COEFFICIENT_BYTES (64u * 1024u * 1024u)
+#define MAX_WEBP_SOURCE_PIXELS 12000000u
 
 typedef struct {
     struct jpeg_error_mgr base;
@@ -22,7 +24,7 @@ typedef struct {
 typedef struct {
     struct jpeg_decompress_struct jpeg;
     RowError error;
-    int jpeg_created, png, buffered, cmyk, adobe_cmyk, lowzag_candidate, lowzag_ready;
+    int jpeg_created, png, webp, opaque, buffered, cmyk, adobe_cmyk, lowzag_candidate, lowzag_ready;
     const uint8_t *data;
     size_t size;
     spng_ctx *spng;
@@ -121,6 +123,17 @@ int rows_open(const uint8_t *data, size_t size, uint32_t max_source,
         if (r->lowzag_candidate && (uint64_t)r->w * r->h > MAX_LOWZAG_SOURCE_PIXELS) {
             rows_close(r); return 2;
         }
+    } else if (size >= 12 && !memcmp(data, "RIFF", 4) && !memcmp(data + 8, "WEBP", 4)) {
+        WebPBitstreamFeatures features;
+        VP8StatusCode status = WebPGetFeatures(data, size, &features);
+        if (status != VP8_STATUS_OK) { rows_close(r); return 1; }
+        int width = features.width, height = features.height;
+        if (width <= 0 || height <= 0 || width > 16383 || height > 16383 ||
+            (uint64_t)width * height > MAX_WEBP_SOURCE_PIXELS ||
+            (uint64_t)width * height > max_source) { rows_close(r); return 2; }
+        r->webp = 1;
+        r->opaque = !features.has_alpha;
+        r->w = (uint32_t)width; r->h = (uint32_t)height;
     } else if (size >= 12 && !memcmp(data + 4, "ftyp", 4)) {
         int status = heif_rows_open(data, size, &r->heif, &r->w, &r->h);
         if (status) { rows_close(r); return status == 5 ? 4 : status; }
@@ -138,6 +151,32 @@ int rows_start(RowDecoder *r, uint32_t target_w, uint32_t target_h, int scaled,
     } else if (r->heif) {
         int status = heif_rows_start(r->heif, &r->w, &r->h);
         if (status) return status;
+    } else if (r->webp) {
+        if (scaled && target_w < r->w && target_h < r->h) {
+            uint32_t decode_w = target_w <= r->w / 2 ? target_w * 2 : r->w;
+            uint32_t decode_h = target_h <= r->h / 2 ? target_h * 2 : r->h;
+            WebPDecoderConfig config;
+            if (!WebPInitDecoderConfig(&config)) return 1;
+            config.options.use_scaling = 1;
+            config.options.scaled_width = (int)decode_w;
+            config.options.scaled_height = (int)decode_h;
+            config.output.colorspace = MODE_RGBA;
+            config.output.is_external_memory = 1;
+            config.output.u.RGBA.stride = (int)(decode_w * 4);
+            config.output.u.RGBA.size = (size_t)decode_w * decode_h * 4;
+            r->pixels = malloc(config.output.u.RGBA.size);
+            if (!r->pixels) return 3;
+            config.output.u.RGBA.rgba = r->pixels;
+            VP8StatusCode status = WebPDecode(r->data, r->size, &config);
+            if (status != VP8_STATUS_OK) return 1;
+            r->w = config.output.width;
+            r->h = config.output.height;
+        } else {
+            size_t bytes = (size_t)r->w * r->h * 4;
+            r->pixels = malloc(bytes);
+            if (!r->pixels) return 3;
+            if (!WebPDecodeRGBAInto(r->data, r->size, r->pixels, bytes, (int)(r->w * 4))) return 1;
+        }
     } else {
         if (r->lowzag_candidate) {
             lowzag_cfg_t cfg = { .struct_size = sizeof cfg,
@@ -196,6 +235,8 @@ int rows_read(RowDecoder *r, uint8_t *out) {
         if (e && !(e == SPNG_EOI && r->y+1 == r->h)) return 1;
     } else if (r->heif) {
         if (heif_rows_read(r->heif, out)) return 1;
+    } else if (r->webp) {
+        memcpy(out, r->pixels + (size_t)r->y * r->w * 4, (size_t)r->w * 4);
     } else if (r->lowzag_ready) {
         const uint8_t *src = r->pixels + (size_t)r->y * r->w * (r->cmyk ? 4 : 3);
         for (uint32_t x = 0; x < r->w; ++x) {
@@ -227,6 +268,7 @@ int rows_read(RowDecoder *r, uint8_t *out) {
 int rows_finish(RowDecoder *r) {
     if (r->y != r->h) return 1;
     if (r->heif) return heif_rows_finish(r->heif);
+    if (r->webp) return 0;
     if (r->lowzag_ready) return 0;
     if (r->png) return spng_decode_chunks(r->spng) ? 1 : 0;
     if (setjmp(r->error.jump)) return 1;
@@ -284,4 +326,6 @@ int rows_jpeg_finish(RowEncoder *e, uint8_t **bytes, size_t *size) {
 }
 // Flags describe codec-internal buffering, independently of the Rust row window.
 int rows_buffered(RowDecoder *r) { return r->buffered; }
-int rows_opaque(RowDecoder *r) { return r->heif ? heif_rows_opaque(r->heif) : !r->png; }
+int rows_opaque(RowDecoder *r) {
+    return r->heif ? heif_rows_opaque(r->heif) : r->webp ? r->opaque : !r->png;
+}

@@ -47,7 +47,7 @@ test('width-only, fill, and withoutEnlargement', async () => {
  out = decode(await image(png).resize(100,100,{fit:'inside',withoutEnlargement:true}).bytes()); assert.deepEqual([out.width,out.height],[32,16]);
 });
 test('invalid and oversized images reject; subsequent conversion still works', async () => {
- await assert.rejects(image(new Uint8Array([1,2,3])).bytes(), /Expected JPEG, PNG or HEIC\/HEIF/);
+ await assert.rejects(image(new Uint8Array([1,2,3])).bytes(), /Expected JPEG, PNG, WebP or HEIC\/HEIF/);
  await assert.rejects(image(png.subarray(0,40)).bytes(), /decode failed/);
  await assert.rejects(image(png,{maxPixels:10}).bytes(), /limit/);
  assert.throws(()=>image(png).resize(0), /Dimensions/);

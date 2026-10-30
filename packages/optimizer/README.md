@@ -1,6 +1,6 @@
 # Standalone image optimizer
 
-Rust/Emscripten JPEG, non-interlaced PNG, and tiled/grid HEIC/HEIF decoding, scanline Lanczos3 resizing with WASM SIMD128, and WebP/JPEG output. Adam7/interlaced PNG, non-grid HEIC/HEIF, and AVIF input are rejected. HEIC/HEIF grid decoding uses libde265. No Cloudflare Computer dependency.
+Rust/Emscripten JPEG, non-interlaced PNG, WebP, and tiled/grid HEIC/HEIF decoding, scanline Lanczos3 resizing with WASM SIMD128, and WebP/JPEG output. WebP input is limited to 12 MP; resized `speed: 'fast'` requests use reduced-output decoding. Adam7/interlaced PNG, non-grid HEIC/HEIF, and AVIF input are rejected. HEIC/HEIF grid decoding uses libde265. No Cloudflare Computer dependency.
 
 ```js
 import { image } from '@mutables.app/image-optimizer';
@@ -14,7 +14,7 @@ const jpeg = await image(inputBytes).resize(800).jpeg({quality: 80}).bytes();
 
 Input: Blob, ArrayBuffer, or typed array. `.bytes()` returns a Uint8Array; `.blob()` returns an image/webp or image/jpeg Blob. Width-only resizing preserves aspect ratio. Two dimensions default to stretch; `fit: 'inside'` preserves aspect ratio.
 
-**Scanline resizing applies with and without `speed: 'fast'`.** Baseline JPEG and non-interlaced PNG inputs are read row by row. Tiled/grid HEIF/HEIC inputs decode one tile row at a time and support up to 48 million pixels. Adam7/interlaced PNG and non-grid HEIF/HEIC inputs are rejected; AVIF input is also unsupported. WebP retains the complete resized image for encoding. JPEG encodes resized rows directly, uses baseline 4:2:0 output and composites transparency onto white. Input and encoded output bytes remain buffered: this API does not stream HTTP input/output.
+**Scanline resizing applies with and without `speed: 'fast'`.** Baseline JPEG and non-interlaced PNG inputs are read row by row. WebP input is limited to 12 MP and fully decoded by default; resized fast requests use libwebp scaled output at up to 2× target dimensions, then Lanczos resizing. Tiled/grid HEIF/HEIC inputs decode one tile row at a time and support up to 48 million pixels. Adam7/interlaced PNG and non-grid HEIF/HEIC inputs are rejected; AVIF input is also unsupported. WebP output retains the complete resized image for encoding. JPEG encodes resized rows directly, uses baseline 4:2:0 output and composites transparency onto white. Input and encoded output bytes remain buffered: this API does not stream HTTP input/output.
 
 Only Lowzag-compatible progressive JPEGs use reduced coefficient storage and decode to a power-of-two scale before row resizing. Other progressive/multi-scan variants, including CMYK and YCCK, are rejected before coefficient buffering. No fixed whole-Worker memory guarantee is made.
 

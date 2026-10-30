@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## 0.4.2 — 2026-10-30
+
+- Add WebP input support up to 12 megapixels, including JPEG output for saved WebP images.
+- Add opt-in reduced-output WebP decoding for resized `speed: 'fast'` requests, followed by the Lanczos row resizer. In 12 MP Worker tests this reduced WASM capacity from 66.56 MiB to 19.25 MiB and improved median response time from 1,454 ms to 1,318 ms; total isolate memory was not measured.
+- Document WebP input limits and benchmark results.
+
 ## 0.4.1 — 2026-10-30
 
 - Remove AVIF input support and its dav1d dependency.

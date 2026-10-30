@@ -35,7 +35,7 @@ assert.equal(unsupportedAdam7.status,400);
 assert.match((await unsupportedAdam7.json()).error,/Interlaced PNG input is not supported/);
 const unsupportedAvif = await fetch(base+'/optimize?width=800',{method:'POST',body:avif});
 assert.equal(unsupportedAvif.status,400);
-assert.match((await unsupportedAvif.json()).error,/Expected JPEG, PNG or HEIC\/HEIF/);
+assert.match((await unsupportedAvif.json()).error,/Expected JPEG, PNG, WebP or HEIC\/HEIF/);
 const unsupportedProgressiveResponse = await fetch(base+'/optimize?width=800',{method:'POST',body:unsupportedProgressive});
 assert.equal(unsupportedProgressiveResponse.status,400);
 assert.match((await unsupportedProgressiveResponse.json()).error,/Only Lowzag-compatible progressive JPEG is supported/);

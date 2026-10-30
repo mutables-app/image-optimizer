@@ -13,5 +13,5 @@ test('single-image HEIC/HEIF is rejected while tiled HEIC/HEIF remains supported
 });
 test('AVIF input is rejected',async()=>{
  const input=await fixture('input-12mp-single.avif');
- await assert.rejects(image(input).resize(800).webp().bytes(),/Expected JPEG, PNG or HEIC\/HEIF/);
+ await assert.rejects(image(input).resize(800).webp().bytes(),/Expected JPEG, PNG, WebP or HEIC\/HEIF/);
 });

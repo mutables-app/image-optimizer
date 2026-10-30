@@ -3,7 +3,7 @@
 [![npm: image-optimizer](https://img.shields.io/npm/v/%40mutables.app%2Fimage-optimizer?label=%40mutables.app%2Fimage-optimizer)](https://www.npmjs.com/package/@mutables.app/image-optimizer)
 [![npm: image-computer](https://img.shields.io/npm/v/%40mutables.app%2Fimage-computer?label=%40mutables.app%2Fimage-computer)](https://www.npmjs.com/package/@mutables.app/image-computer)
 
-**Current input support:** baseline JPEG, Lowzag-compatible progressive JPEG, non-interlaced PNG, and tiled/grid HEIC/HEIF. Other progressive/multi-scan JPEGs (including CMYK and YCCK), Adam7/interlaced PNG, non-grid HEIC/HEIF, and AVIF are rejected.
+**Current input support:** baseline JPEG, Lowzag-compatible progressive JPEG, non-interlaced PNG, WebP, and tiled/grid HEIC/HEIF. WebP is limited to 12 MP; resized WebP inputs use a reduced-output decode with `speed: 'fast'`. Other progressive/multi-scan JPEGs (including CMYK and YCCK), Adam7/interlaced PNG, non-grid HEIC/HEIF, and AVIF are rejected.
 
 An image-processing pipeline written in Rust and compiled to WebAssembly for Node.js and Cloudflare Workers. It links JPEG, PNG, HEIF/HEIC, and WebP codec libraries into the same Emscripten module as the Rust resize pipeline, so the image pixels stay inside WASM instead of crossing between JavaScript libraries at each stage.
 
@@ -16,7 +16,7 @@ const webp = await image(inputBytes)
   .bytes();
 ```
 
-`speed: 'fast'` selects a faster internal WebP encoder setting and enables scaled JPEG decoding for resized images when the target permits it. Lowzag-compatible progressive JPEGs can be resized up to 48 megapixels using scale-aware coefficient decoding. Other progressive/multi-scan JPEGs, including CMYK and YCCK, are rejected. Baseline JPEG and non-interlaced PNG inputs support up to 48 megapixels; tiled/grid HEIC/HEIF supports up to 48 megapixels. Adam7/interlaced PNG and non-grid HEIC/HEIF inputs are rejected. `maxPixels` bounds the output (8 million by default). PNG inputs and `lossless: true` requests retain full-resolution source decoding. Omit `speed` to keep the existing WebP encoder setting; scanline processing applies in both modes. The fast path can produce larger files; the trade-off depends on the image. `.blob()` returns an `image/webp` Blob, or `image/jpeg` after `.jpeg()`. Image work runs synchronously in the isolate, inside the returned promise.
+`speed: 'fast'` selects a faster internal WebP encoder setting, enables scaled JPEG decoding, and for resized WebP inputs decodes to an intermediate surface at up to 2× the requested output dimensions before Lanczos resizing. Lowzag-compatible progressive JPEGs can be resized up to 48 megapixels using scale-aware coefficient decoding. Other progressive/multi-scan JPEGs, including CMYK and YCCK, are rejected. Baseline JPEG and non-interlaced PNG inputs support up to 48 megapixels; tiled/grid HEIC/HEIF supports up to 48 megapixels. WebP input supports up to 12 megapixels. Adam7/interlaced PNG and non-grid HEIC/HEIF inputs are rejected. `maxPixels` bounds the output (8 million by default). PNG inputs and `lossless: true` requests retain full-resolution source decoding. Omit `speed` to keep the default WebP encoder setting and full-resolution WebP input decoding. The fast path can produce different output pixels and file sizes; the trade-off depends on the image. `.blob()` returns an `image/webp` Blob, or `image/jpeg` after `.jpeg()`. Image work runs synchronously in the isolate, inside the returned promise.
 
 ## Architecture
 
@@ -35,7 +35,7 @@ flowchart LR
   WASM --> HOST[Cloudflare Workers or Node.js]
 ```
 
-JPEG, non-interlaced PNG, and tiled/grid HEIC/HEIF decoding, resizing, and WebP/JPEG encoding execute in the compiled module. Baseline JPEG and non-interlaced PNG inputs are decoded sequentially. Tiled HEIF grids decode one tile row at a time and support up to 48 megapixels. Adam7/interlaced PNG and non-grid HEIC/HEIF inputs are rejected; AVIF input is also unsupported. Row-based decoders use the Rust Lanczos3 resizer, which retains a bounded set of rows and uses premultiplied alpha through both passes, with SIMD128 for four-channel convolution. Both resizers run for the default and `speed: 'fast'` settings.
+JPEG, non-interlaced PNG, WebP, and tiled/grid HEIC/HEIF decoding, resizing, and WebP/JPEG encoding execute in the compiled module. Baseline JPEG and non-interlaced PNG inputs are decoded sequentially. WebP input is capped at 12 MP; default decoding retains a full RGBA surface, while resized `speed: 'fast'` requests use libwebp's scaled-output decoder at up to 2× target size before the Rust Lanczos3 row resizer. Tiled HEIF grids decode one tile row at a time and support up to 48 megapixels. Adam7/interlaced PNG and non-grid HEIC/HEIF inputs are rejected; AVIF input is also unsupported. The Rust Lanczos3 resizer retains a bounded set of rows and uses premultiplied alpha through both passes, with SIMD128 for four-channel convolution.
 
 WebP encoding needs the complete **resized** RGBA image; the source image is not accumulated by the row resizer. JPEG output feeds each resized row directly into a baseline libjpeg-turbo encoder, with standard Huffman tables and 4:2:0 subsampling. Input and encoded output bytes are still buffered by `.bytes()`/`.blob()`; this is internal pixel processing, not a streaming HTTP API.
 
@@ -47,7 +47,7 @@ Cloudflare describes the Emscripten Rust target support as an experimental previ
 
 ### [`@mutables.app/image-optimizer`](https://www.npmjs.com/package/@mutables.app/image-optimizer)
 
-Accepts a `Blob`, `ArrayBuffer`, or typed array. Baseline JPEG, Lowzag-compatible progressive JPEG, non-interlaced PNG, and tiled/grid HEIF/HEIC input are sniffed automatically. Adam7/interlaced PNG, non-grid HEIF/HEIC, and AVIF are rejected. Tiled HEIF grids support up to 48 megapixels. Width-only resizing preserves aspect ratio; two dimensions default to `fill`.
+Accepts a `Blob`, `ArrayBuffer`, or typed array. Baseline JPEG, Lowzag-compatible progressive JPEG, non-interlaced PNG, WebP (up to 12 MP), and tiled/grid HEIF/HEIC input are sniffed automatically. Adam7/interlaced PNG, non-grid HEIF/HEIC, and AVIF are rejected. Tiled HEIF grids support up to 48 megapixels. Width-only resizing preserves aspect ratio; two dimensions default to `fill`.
 
 ```js
 import { image } from '@mutables.app/image-optimizer';
@@ -95,13 +95,15 @@ The published v0.1.0 Worker benchmark (before scanlines) compares two internal W
 
 ## Limits
 
-- JPEG, PNG, and HEIC/HEIF input; WebP and JPEG output. No animation, rotation, or metadata API.
+- JPEG, PNG, WebP, and HEIC/HEIF input; WebP and JPEG output. No animation, rotation, or metadata API.
 
 | Input type | Maximum source pixels | Decode path | WASM linear-memory capacity | Cloudflare isolate memory (max sampled) |
 | --- | ---: | --- | ---: | ---: |
 | Baseline JPEG | 48 MP | Sequential scanline decode; eligible resized JPEGs can use scaled decode with `speed: 'fast'`. | 16 MiB | 36.14 MiB |
 | Non-interlaced PNG | 48 MP | Sequential scanline decode. | 16 MiB | 21.17 MiB |
 | Lowzag-compatible progressive JPEG | 48 MP | Reduced coefficient decode when resizing; coefficient planes are checked before full-resolution fallback. | 27.75 MiB | 43.23 MiB |
+| WebP, default decode | 12 MP | Full RGBA decode before resizing. | 66.56 MiB | Not measured |
+| WebP, `speed: 'fast'` resized decode | 12 MP | libwebp scaled output at up to 2× target size, then Lanczos resizing. | 19.25 MiB | Not measured |
 | Tiled/grid HEIC/HEIF | 48 MP | libde265 (HEVC); decodes one tile row at a time. | 49 MiB | 54.97 MiB |
 
 ### Worker response time and CPU
@@ -124,6 +126,8 @@ These end-to-end samples convert supported synthetic inputs to 800×600 WebP. Ea
 | Tiled/grid HEIC/HEIF, 48 MP | Converted | 1,570 ms | 1,417 ms (3 samples) | 48.63 MiB |
 
 See the [raw Worker performance results](benchmarks/decoder-performance-worker.json) and [memory measurements](benchmarks/decoder-memory-worker.json). Both reports keep measurements for unsupported Adam7 PNG, non-grid HEIC/HEIF, and non-Lowzag progressive JPEG paths in `historicalUnsupportedResults`; those results do not describe current support. These small synthetic-fixture samples show this test run, not guaranteed production latency.
+
+A separate WebP-input Worker comparison used an 8.24 MiB synthetic 12 MP WebP and 800×600 JPEG output, with one warm-up and three measured requests per fresh Worker. Median client round trip was 1,454 ms for full decoding and 1,318 ms for `speed: 'fast'`; WASM capacity was 66.56 MiB and 19.25 MiB respectively. Cloudflare isolate-memory analytics were unavailable for this run, so these are WASM-capacity measurements only. A photo-derived 12 MP fixture produced 39.28 dB PSNR between the fast scaled-decode output and the full-decode output; results vary by image.
 
 All formats share a 20 MiB input limit and a 16,383-pixel dimension limit. The default output pixel limit (`maxPixels`) is 8 MP and can be raised to 16 MP. Adam7/interlaced PNG and non-grid HEIC/HEIF are unsupported. WASM capacity is not total Worker memory. Cloudflare's per-invocation isolate-memory metric includes shared JavaScript and WebAssembly memory, but is sampled at invocation time rather than measuring exact peak memory. Cloudflare Worker isolates have a 128 MiB total limit.
 

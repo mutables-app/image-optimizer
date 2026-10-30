@@ -44,6 +44,21 @@ test('unresized lossless PNG preserves visible pixels exactly',async()=>{
  const out=decode(await image(png).webp({lossless:true}).bytes());
  assert.deepEqual(out.pixels,Buffer.from(Array.from({length:97*65},(_,i)=>color(i%97,Math.floor(i/97))).flat()));
 });
+test('saved WebP images can be resized and encoded as JPEG or WebP',async()=>{
+ const source=rgbaPng(32,24,x=>x<16?[0,0,255,255]:[255,0,0,0]);
+ const saved=await image(source).webp({lossless:true}).bytes();
+ const webp=decode(await image(saved).webp({lossless:true}).bytes());
+ assert.deepEqual([webp.width,webp.height],[32,24]);
+ assert.equal(webp.pixels[3],255);assert.equal(webp.pixels[31*4+3],0);
+ const jpeg=decode(await image(saved).resize(32,24).jpeg({quality:100}).bytes());
+ assert.deepEqual([jpeg.width,jpeg.height,jpeg.format,jpeg.progressive],[32,24,'JPEG',false]);
+ const transparentPixel=(23*32+31)*4;
+ assert.ok(jpeg.pixels[transparentPixel]>245&&jpeg.pixels[transparentPixel+1]>245&&jpeg.pixels[transparentPixel+2]>245);
+ const fastJpeg=decode(await image(saved).resize(8,6).jpeg({speed:'fast'}).bytes());
+ assert.deepEqual([fastJpeg.width,fastJpeg.height,fastJpeg.format],[8,6,'JPEG']);
+ const fastWebp=decode(await image(saved).resize(8,6).webp({speed:'fast'}).bytes());
+ assert.deepEqual([fastWebp.width,fastWebp.height],[8,6]);
+});
 test('interlaced PNG is explicitly unsupported while non-interlaced PNG remains supported',async()=>{
  const adam7=rgbaPng(97,65,color,true);
  assert.throws(()=>scan(adam7,29,23),/Interlaced PNG input is not supported/);
@@ -138,6 +153,9 @@ test('workspace adapter supports JPEG output and reports its content type',async
  const ws={fs:{async readFile(p){return files.get(p)},async writeFile(p,b){files.set(p,b)}}};
  const result=await optimizeWorkspaceImage(ws,'/input.png','/output.jpg',{width:31,format:'jpeg'});
  assert.equal(result.contentType,'image/jpeg');assert.equal(decode(files.get('/output.jpg')).width,31);
+ files.set('/input.webp',await image(png).webp({lossless:true}).bytes());
+ const webpResult=await optimizeWorkspaceImage(ws,'/input.webp','/webp-output.jpg',{width:31,format:'jpeg'});
+ assert.equal(webpResult.contentType,'image/jpeg');assert.equal(decode(files.get('/webp-output.jpg')).width,31);
  await assert.rejects(optimizeWorkspaceImage(ws,'/input.png','/output.avif',{format:'avif'}),/format/);
 });
 test('truncated JPEGs and PNGs fail cleanly, including after rows have already been processed',async()=>{
