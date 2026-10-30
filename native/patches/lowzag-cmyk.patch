@@ -1,0 +1,159 @@
+--- a/src/lowzag.c
++++ b/src/lowzag.c
+@@ -81,7 +81,7 @@
+ #  define LZ_NOINLINE
+ #endif
+ 
+-#define MAX_COMPS   3
++#define MAX_COMPS   4
+ #define BUF_SZ      4096
+ #define DCTSZ       8
+ #define LOWZAG_MAX_SCANS 100
+@@ -462,7 +462,7 @@
+     size_t   allocated, peak;
+     /* output strips */
+     uint8_t *strip[MAX_COMPS];       /* per comp: pad_bw*bs x (v*bs)     */
+-    uint8_t *rowbuf;                 /* out_w * 3                        */
++    uint8_t *rowbuf;                 /* out_w * 3, or 4 for private CMYK */
+     /* Per-component source column for each output column.  Sampling
+      * ratios are fixed for the frame, so this is a table lookup rather
+      * than a divide in the pixel loop. */
+@@ -803,7 +803,7 @@
+     }
+     /* Validate BEFORE storing: cleanup iterates p->ncomp, so a bogus
+      * count here would walk past the component array and free garbage. */
+-    if (ncomp != 1 && ncomp != 3) {
++    if (ncomp != 1 && ncomp != 3 && ncomp != 4) {
+         return LOWZAG_ERR_UNSUPPORTED;
+     }
+     p->ncomp = ncomp;
+@@ -1006,7 +1006,7 @@
+  * cfg.alloc, and info.peak_alloc excludes it. */
+ static size_t geom_bytes(const geom_t *g)
+ {
+-    size_t need = (size_t)g->out_w * 3;                        /* rowbuf */
++    size_t need = (size_t)g->out_w * (g->ncomp == 4 ? 4 : 3); /* rowbuf */
+     need += (size_t)g->out_w * sizeof(uint16_t) * (size_t)g->ncomp;
+     for (int i = 0; i < g->ncomp; i++) {
+         const gcomp_t *c = &g->comp[i];
+@@ -2205,17 +2205,28 @@
+                     }
+                     rp[i] = p->strip[i] + sy * sw;
+                 }
+-                const uint16_t *cmy = p->colmap[0];
+-                const uint16_t *cmb = p->colmap[1];
+-                const uint16_t *cmr = p->colmap[2];
+-                for (int x = 0; x < p->out_w; x++) {
+-                    int Y  = rp[0][cmy[x]];
+-                    int cb = rp[1][cmb[x]];
+-                    int cr = rp[2][cmr[x]];
+-                    out[3 * x]     = clamp8(Y + p->cr_r[cr]);
+-                    out[3 * x + 1] = clamp8(Y + (int)((p->cb_g[cb]
+-                                                     + p->cr_g[cr]) >> 16));
+-                    out[3 * x + 2] = clamp8(Y + p->cb_b[cb]);
++                if (p->ncomp == 4) {
++                    /* Private CMYK mode for the image-optimizer adapter:
++                     * preserve all four planes so the caller applies the
++                     * JPEG Adobe-marker convention when producing RGB. */
++                    for (int x = 0; x < p->out_w; x++) {
++                        for (int c = 0; c < 4; c++) {
++                            out[4 * x + c] = rp[c][p->colmap[c][x]];
++                        }
++                    }
++                } else {
++                    const uint16_t *cmy = p->colmap[0];
++                    const uint16_t *cmb = p->colmap[1];
++                    const uint16_t *cmr = p->colmap[2];
++                    for (int x = 0; x < p->out_w; x++) {
++                        int Y  = rp[0][cmy[x]];
++                        int cb = rp[1][cmb[x]];
++                        int cr = rp[2][cmr[x]];
++                        out[3 * x]     = clamp8(Y + p->cr_r[cr]);
++                        out[3 * x + 1] = clamp8(Y + (int)((p->cb_g[cb]
++                                                         + p->cr_g[cr]) >> 16));
++                        out[3 * x + 2] = clamp8(Y + p->cb_b[cb]);
++                    }
+                 }
+             }
+             p->cfg->row(p->cfg->row_ctx, y - p->oy0, p->out_w, out);
+@@ -2624,7 +2635,7 @@
+             goto out;
+         }
+     }
+-    p->rowbuf = lz_alloc(p, (size_t)p->out_w * 3);
++    p->rowbuf = lz_alloc(p, (size_t)p->out_w * (p->ncomp == 4 ? 4 : 3));
+     if (!p->rowbuf) {
+         ret = LOWZAG_ERR_NOMEM;
+         goto out;
+@@ -2839,7 +2850,7 @@
+     if (prec != 8) {
+         return LOWZAG_ERR_UNSUPPORTED;
+     }
+-    if (ncomp != 1 && ncomp != 3) {
++    if (ncomp != 1 && ncomp != 3 && ncomp != 4) {
+         return LOWZAG_ERR_UNSUPPORTED;
+     }
+     /* Not a policy choice — a memory-safety boundary.  See LOWZAG_MAX_DIM. */
+--- a/src/lowzag_mem.c
++++ b/src/lowzag_mem.c
+@@ -67,9 +67,10 @@
+     uint8_t *out;
+     int      w, h;
+     int      refused;                    /* a row did not fit the buffer */
++    int      pixel_bytes;
+ } mem_dst_t;
+ 
+-static void mem_row(void *ctx, int y, int w, const uint8_t *rgb)
++static void mem_row(void *ctx, int y, int w, const uint8_t *pixels)
+ {
+     mem_dst_t *d = (mem_dst_t *)ctx;
+ 
+@@ -84,7 +85,8 @@
+         d->refused = 1;
+         return;
+     }
+-    memcpy(d->out + (size_t)y * (size_t)d->w * 3, rgb, (size_t)w * 3);
++    memcpy(d->out + (size_t)y * (size_t)d->w * (size_t)d->pixel_bytes,
++           pixels, (size_t)w * (size_t)d->pixel_bytes);
+ }
+ 
+ static void *mem_alloc(void *ctx, size_t size)
+@@ -195,7 +197,9 @@
+     /* Cannot overflow: both dimensions are capped well below the point
+      * where a size_t of any width would wrap (see LOWZAG_MAX_DIM in
+      * src/lowzag.c, which lowzag_estimate() has already enforced). */
+-    if (!out || out_size < (size_t)est.out_w * (size_t)est.out_h * 3) {
++    int pixel_bytes = est.components == 4 ? 4 : 3;
++    if (!out || out_size < (size_t)est.out_w * (size_t)est.out_h *
++                             (size_t)pixel_bytes) {
+         return LOWZAG_ERR_BUFFER_TOO_SMALL;
+     }
+ 
+@@ -206,6 +210,7 @@
+     dst.w       = est.out_w;
+     dst.h       = est.out_h;
+     dst.refused = 0;
++    dst.pixel_bytes = pixel_bytes;
+ 
+     cfg.read      = mem_read;
+     cfg.read_ctx  = &src;
+--- a/include/lowzag.h
++++ b/include/lowzag.h
+@@ -687,7 +687,7 @@
+     int crop_x, crop_y;        /* source rectangle actually delivered,  */
+     int crop_w, crop_h;        /*   = 0,0,src_w,src_h with no crop      */
+     int scale;                 /* denominator actually used             */
+-    int components;            /* 1 or 3                                */
++    int components;            /* 1, 3, or 4                             */
+     int chroma_steps;          /* chroma tiers given up to mem_limit,
+                                   0 when nothing was sacrificed         */
+     int rows_delivered;        /* rows handed to cfg.row before the
+@@ -746,7 +746,7 @@
+     int crop_x, crop_y;        /* source rectangle it would deliver     */
+     int crop_w, crop_h;
+     int scale;                 /* denominator that would be chosen      */
+-    int components;            /* 1 or 3                                */
++    int components;            /* 1, 3, or 4                             */
+     int chroma_steps;          /* chroma tiers that would be given up   */
+     size_t working_bytes;      /* == lowzag_state_size()                */
+     size_t alloc_bytes;        /* bytes decode would ask alloc() for    */

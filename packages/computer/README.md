@@ -19,7 +19,7 @@ Reads from `workspace.fs.readFile`, optimizes with the standalone WASM package, 
 | Non-interlaced PNG | 48 MP | Sequential scanline decode. |
 | Lowzag-compatible progressive JPEG | 48 MP | Reduced coefficient decode when resizing; coefficient planes are checked before full-resolution fallback. |
 | Other progressive or multi-scan JPEG | 48 MP | Buffered codec compatibility path; coefficient planes above 64 MiB are rejected before allocation; 12 MP arithmetic-coded sample used 44.13 MiB of WASM capacity. |
-| CMYK/YCCK progressive JPEG | 12 MP | Lowzag does not support CMYK; this path buffers coefficient planes. |
+| CMYK/YCCK progressive JPEG | 12 MP | CMYK uses Lowzag reduced coefficient planes; YCCK keeps the full-coefficient compatibility path. |
 | Adam7/interlaced PNG | 48 MP | Pngle callback downscaling with a <=48 MiB accumulator; full-frame fallback is limited to 12 MP. |
 | Non-grid HEIC/HEIF and AVIF | 12 MP | Full source image is decoded into memory. |
 | Tiled/grid HEIF/HEIC | 48 MP | Decodes one tile row at a time. |

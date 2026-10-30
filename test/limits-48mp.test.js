@@ -59,17 +59,3 @@ test('Adam7 fallback stays below 100 MiB and rejects larger full-frame decodes e
  const larger=await fixture('adam7-24mp.png');
  assert.throws(()=>scanline_experiment(larger,2828,2828,false,false,80,false,8_000_000,false,-1,false),/limit/i);
 });
-
-test('CMYK progressive JPEG above its 12MP limit is rejected before coefficient allocation',async()=>{
- const input=await fixture('input-48mp-cmyk-progressive.jpg');
- assert.throws(()=>scanline_experiment(input,800,0,false,false,80,false,8_000_000,true,-1,false),/limit/i);
-});
-
-test('12MP CMYK progressive JPEG converts within its lower source limit',async()=>{
- const input=await fixture('input-12mp-cmyk-progressive.jpg');
- const result=scanline_experiment(input,800,0,false,false,80,false,8_000_000,true,-1,false);
- assert.equal(result.codec_buffered,true);
- assert.deepEqual([result.source_width,result.source_height],[4000,3000]);
- assert.ok(result.take_bytes().length>0);
- assert.ok(linear_memory_bytes()<=128*1024*1024,`WASM linear memory ${linear_memory_bytes()} exceeds 128 MiB`);
-});

@@ -77,7 +77,7 @@ typedef struct {
 typedef struct {
     struct jpeg_decompress_struct jpeg;
     RowError error;
-    int jpeg_created, png, buffered, cmyk, lowzag_candidate, lowzag_ready;
+    int jpeg_created, png, buffered, cmyk, adobe_cmyk, lowzag_candidate, lowzag_ready;
     int pngle_ready, pngle_done, pngle_alloc_failed;
     const uint8_t *data;
     size_t size;
@@ -217,9 +217,10 @@ int rows_open(const uint8_t *data, size_t size, uint32_t max_source,
         }
         r->buffered = r->jpeg.progressive_mode || jpeg_has_multiple_scans(&r->jpeg);
         r->cmyk = r->jpeg.jpeg_color_space == JCS_CMYK || r->jpeg.jpeg_color_space == JCS_YCCK;
-        // Lowzag does not support CMYK/YCCK. Keep those progressive JPEGs
-        // below the 48 MP RGB lowzag ceiling because libjpeg must buffer
-        // their full coefficient planes.
+        r->adobe_cmyk = r->jpeg.saw_Adobe_marker;
+        // Keep both CMYK variants at 12 MP. CMYK can use the private Lowzag
+        // four-plane path when reduced output is possible; YCCK remains on
+        // libjpeg's full coefficient-buffer compatibility path.
         if (r->jpeg.progressive_mode && r->cmyk &&
             (uint64_t)r->w * r->h > MAX_CMYK_PROGRESSIVE_SOURCE_PIXELS) {
             rows_close(r); return 2;
@@ -227,10 +228,11 @@ int rows_open(const uint8_t *data, size_t size, uint32_t max_source,
         if ((uint64_t)r->w * r->h > max_source) {
             rows_close(r); return 2;
         }
-        if (r->jpeg.progressive_mode && !r->jpeg.arith_code && !r->cmyk &&
+        if (r->jpeg.progressive_mode && !r->jpeg.arith_code &&
             r->jpeg.data_precision == 8 &&
-            (r->jpeg.num_components == 1 || r->jpeg.num_components == 3) &&
-            (r->jpeg.jpeg_color_space == JCS_GRAYSCALE || r->jpeg.jpeg_color_space == JCS_YCbCr)) {
+            (((r->jpeg.num_components == 1 || r->jpeg.num_components == 3) && !r->cmyk &&
+              (r->jpeg.jpeg_color_space == JCS_GRAYSCALE || r->jpeg.jpeg_color_space == JCS_YCbCr)) ||
+             (r->jpeg.num_components == 4 && r->jpeg.jpeg_color_space == JCS_CMYK))) {
             int factors_ok = 1;
             for (int i = 0; i < r->jpeg.num_components; ++i) {
                 if (r->jpeg.comp_info[i].h_samp_factor > 2 || r->jpeg.comp_info[i].v_samp_factor > 2)
@@ -334,8 +336,9 @@ int rows_start(RowDecoder *r, uint32_t target_w, uint32_t target_h, int scaled,
             /* Keep the exact libjpeg path when no IDCT reduction is possible;
              * lowzag's memory advantage matters only for a reduced decode. */
             if (status == LOWZAG_OK && estimate.scale > 1 && estimate.out_w > 0 && estimate.out_h > 0 &&
-                (uint64_t)estimate.out_w * estimate.out_h <= UINT64_MAX / 3) {
-                size_t bytes = (size_t)estimate.out_w * estimate.out_h * 3;
+                (uint64_t)estimate.out_w * estimate.out_h <= UINT64_MAX / (r->cmyk ? 4 : 3)) {
+                size_t pixel_bytes = r->cmyk ? 4 : 3;
+                size_t bytes = (size_t)estimate.out_w * estimate.out_h * pixel_bytes;
                 r->pixels = malloc(bytes);
                 if (!r->pixels) return 3;
                 lowzag_info_t info = LOWZAG_INFO_INIT;
@@ -388,10 +391,19 @@ int rows_read(RowDecoder *r, uint8_t *out) {
     } else if (r->heif) {
         if (heif_rows_read(r->heif, out)) return 1;
     } else if (r->lowzag_ready) {
-        const uint8_t *src = r->pixels + (size_t)r->y * r->w * 3;
+        const uint8_t *src = r->pixels + (size_t)r->y * r->w * (r->cmyk ? 4 : 3);
         for (uint32_t x = 0; x < r->w; ++x) {
-            out[x*4] = src[x*3]; out[x*4+1] = src[x*3+1];
-            out[x*4+2] = src[x*3+2]; out[x*4+3] = 255;
+            if (r->cmyk) {
+                const uint8_t *p = src + x * 4;
+                uint8_t *q = out + x * 4;
+                for (int c = 0; c < 3; c++) q[c] = r->adobe_cmyk
+                    ? (p[c] * p[3] + 127) / 255
+                    : ((255 - p[c]) * (255 - p[3]) + 127) / 255;
+                q[3] = 255;
+            } else {
+                out[x*4] = src[x*3]; out[x*4+1] = src[x*3+1];
+                out[x*4+2] = src[x*3+2]; out[x*4+3] = 255;
+            }
         }
     } else {
         if (setjmp(r->error.jump)) return 1;

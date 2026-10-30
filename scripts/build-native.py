@@ -121,6 +121,11 @@ if not lowzag.exists():
     with tarfile.open(archive) as f: f.extractall(unpack, filter='data')
     next(unpack.iterdir()).rename(lowzag)
     shutil.rmtree(unpack); archive.unlink()
+# Lowzag's upstream API emits RGB only. The adapter's private four-plane
+# mode lets progressive CMYK use reduced coefficient storage before the
+# existing Adobe-aware CMYK-to-RGBA conversion.
+if '#define MAX_COMPS   4' not in (lowzag / 'src' / 'lowzag.c').read_text():
+    run('patch', '-p1', '-i', root / 'native' / 'patches' / 'lowzag-cmyk.patch', cwd=lowzag)
 shutil.copy2(lowzag / 'LICENSE', licenses / 'lowzag-LICENSE')
 
 # Pngle provides Adam7 callbacks without retaining a full source framebuffer.
