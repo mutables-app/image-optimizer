@@ -2,8 +2,11 @@
 
 ## Unreleased
 
-- Remove AVIF input support and its dav1d dependency; retain HEIC/HEIF decoding through libheif and libde265.
-- Reject Adam7/interlaced PNG, non-grid HEIC/HEIF, and progressive/multi-scan JPEGs that are not Lowzag-compatible (including CMYK and YCCK); retain non-interlaced PNG, tiled/grid HEIC/HEIF, and Lowzag-compatible progressive JPEG support.
+## 0.4.1 — 2026-10-30
+
+- Remove AVIF input support and its dav1d dependency.
+- Reject Adam7/interlaced PNG, non-grid HEIC/HEIF, and progressive/multi-scan JPEGs that are not Lowzag-compatible (including CMYK and YCCK). Retain baseline JPEG, non-interlaced PNG, tiled/grid HEIC/HEIF, and Lowzag-compatible progressive JPEG support.
+- Add Worker performance benchmarks at 12, 24, and 48 MP for each supported input path.
 
 ## 0.4.0 — 2026-10-29
 
