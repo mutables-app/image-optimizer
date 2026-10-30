@@ -15,6 +15,7 @@ const allCases = [
   { label: 'Non-interlaced PNG', file: 'input-48mp-streaming.png' },
   { label: 'Lowzag progressive JPEG', file: 'input-48mp-progressive.jpg' },
   { label: 'CMYK progressive JPEG', file: 'input-12mp-cmyk-progressive.jpg' },
+  { label: 'YCCK progressive JPEG', file: 'input-12mp-ycck-progressive.jpg' },
   { label: 'CMYK progressive JPEG over limit', file: 'input-48mp-cmyk-progressive.jpg' },
   { label: 'Adam7 PNG', file: 'adam7-48mp.png' },
   { label: 'Single-image HEIC', file: 'input-12mp-single.heic' },
