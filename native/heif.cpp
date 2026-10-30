@@ -7,7 +7,7 @@
 
 #define MAX_HEIF_SINGLE_IMAGE_PIXELS 12000000u
 #define MAX_HEIF_GRID_PIXELS 48000000u
-#define MAX_AVIF_GRID_PIXELS 64000000u
+#define MAX_AVIF_GRID_PIXELS 48000000u
 
 struct HeifRows {
     heif_context* context = nullptr;

@@ -35,7 +35,7 @@ flowchart LR
   WASM --> HOST[Cloudflare Workers or Node.js]
 ```
 
-JPEG, PNG, HEIF/HEIC and AVIF decoding, resizing, and WebP/JPEG encoding execute in the compiled module. Baseline JPEG and non-interlaced PNG inputs are decoded sequentially. Non-enlarging Adam7 PNG downscales whose float accumulator fits 48 MiB use Pngle's callbacks and scatter pixels through Lanczos weights into the resized destination; other Adam7 outputs use libspng's full-frame compatibility path. Non-grid HEIF/HEIC and AVIF currently decode to a full RGBA source surface and remain capped at 12 megapixels. Tiled HEIF grids decode one tile row at a time and support up to 48 megapixels; tiled AVIF remains capped at 64 megapixels. Row-based decoders use the Rust Lanczos3 resizer, which retains a bounded set of rows and uses premultiplied alpha through both passes, with SIMD128 for four-channel convolution. Both resizers run for the default and `speed: 'fast'` settings.
+JPEG, PNG, HEIF/HEIC and AVIF decoding, resizing, and WebP/JPEG encoding execute in the compiled module. Baseline JPEG and non-interlaced PNG inputs are decoded sequentially. Non-enlarging Adam7 PNG downscales whose float accumulator fits 48 MiB use Pngle's callbacks and scatter pixels through Lanczos weights into the resized destination; other Adam7 outputs use libspng's full-frame compatibility path. Non-grid HEIF/HEIC and AVIF currently decode to a full RGBA source surface and remain capped at 12 megapixels. Tiled HEIF grids decode one tile row at a time and support up to 48 megapixels; tiled AVIF remains capped at 48 megapixels. Row-based decoders use the Rust Lanczos3 resizer, which retains a bounded set of rows and uses premultiplied alpha through both passes, with SIMD128 for four-channel convolution. Both resizers run for the default and `speed: 'fast'` settings.
 
 WebP encoding needs the complete **resized** RGBA image; the source image is not accumulated by the row resizer. JPEG output feeds each resized row directly into a baseline libjpeg-turbo encoder, with standard Huffman tables and 4:2:0 subsampling. Input and encoded output bytes are still buffered by `.bytes()`/`.blob()`; this is internal pixel processing, not a streaming HTTP API.
 
@@ -47,7 +47,7 @@ Cloudflare describes the Emscripten Rust target support as an experimental previ
 
 ### [`@mutables.app/image-optimizer`](https://www.npmjs.com/package/@mutables.app/image-optimizer)
 
-Accepts a `Blob`, `ArrayBuffer`, or typed array. JPEG, PNG, HEIF/HEIC, and AVIF input are sniffed automatically. Non-grid HEIF/HEIC and AVIF input is capped at 12 megapixels because decoding requires a full source image in memory; tiled HEIF grids support up to 48 megapixels and tiled AVIF grids up to 64 megapixels. Width-only resizing preserves aspect ratio; two dimensions default to `fill`.
+Accepts a `Blob`, `ArrayBuffer`, or typed array. JPEG, PNG, HEIF/HEIC, and AVIF input are sniffed automatically. Non-grid HEIF/HEIC and AVIF input is capped at 12 megapixels because decoding requires a full source image in memory; tiled HEIF grids support up to 48 megapixels and tiled AVIF grids up to 48 megapixels. Width-only resizing preserves aspect ratio; two dimensions default to `fill`.
 
 ```js
 import { image } from '@mutables.app/image-optimizer';
@@ -107,7 +107,7 @@ The published v0.1.0 Worker benchmark (before scanlines) compares two internal W
 | Adam7/interlaced PNG | 48 MP | Pngle callback downscaling with a <=48 MiB accumulator; full-frame fallback is limited to 12 MP. |
 | Non-grid HEIC/HEIF and AVIF | 12 MP | Full source image is decoded into memory. |
 | Tiled/grid HEIC/HEIF | 48 MP | Decodes one tile row at a time. |
-| Tiled/grid AVIF | 64 MP | Decodes one tile row at a time. |
+| Tiled/grid AVIF | 48 MP | Decodes one tile row at a time. |
 
 All formats share a 20 MiB input limit and a 16,383-pixel dimension limit. The default output pixel limit (`maxPixels`) is 8 MP and can be raised to 16 MP. Decoder limits depend on path and output size; Adam7 inputs above 12 MP require callback downscaling within the 48 MiB accumulator limit. Peak-memory tests measure WASM linear-memory capacity, while Cloudflare Worker isolates have a 128 MiB total limit across JavaScript and WebAssembly.
 

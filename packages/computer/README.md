@@ -23,6 +23,6 @@ Reads from `workspace.fs.readFile`, optimizes with the standalone WASM package, 
 | Adam7/interlaced PNG | 48 MP | Pngle callback downscaling with a <=48 MiB accumulator; full-frame fallback is limited to 12 MP. |
 | Non-grid HEIC/HEIF and AVIF | 12 MP | Full source image is decoded into memory. |
 | Tiled/grid HEIF/HEIC | 48 MP | Decodes one tile row at a time. |
-| Tiled/grid AVIF | 64 MP | Decodes one tile row at a time. |
+| Tiled/grid AVIF | 48 MP | Decodes one tile row at a time. |
 
 All formats share a 20 MiB input limit and a 16,383-pixel dimension limit. The output pixel limit is 8 MP by default and can be raised to 16 MP. Decoder limits depend on path and output size; Adam7 inputs above 12 MP require callback downscaling within the 48 MiB accumulator limit. Cloudflare Worker isolates have a 128 MiB total memory limit across JavaScript and WebAssembly.

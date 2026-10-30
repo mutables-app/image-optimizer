@@ -14,7 +14,7 @@ const jpeg = await image(inputBytes).resize(800).jpeg({quality: 80}).bytes();
 
 Input: Blob, ArrayBuffer, or typed array. `.bytes()` returns a Uint8Array; `.blob()` returns an image/webp or image/jpeg Blob. Width-only resizing preserves aspect ratio. Two dimensions default to stretch; `fit: 'inside'` preserves aspect ratio.
 
-**Scanline resizing applies with and without `speed: 'fast'`.** Baseline JPEG and non-interlaced PNG inputs are read row by row. Non-grid HEIF/HEIC and AVIF inputs are decoded by libheif into a complete RGBA source image before rows enter the resizer and remain capped at 12 million pixels. Grid/tiled HEIF inputs decode one tile row at a time and support up to 48 million pixels; tiled AVIF inputs support up to 64 million pixels. WebP retains the complete resized image for encoding. JPEG encodes resized rows directly, uses baseline 4:2:0 output and composites transparency onto white. Input and encoded output bytes remain buffered: this API does not stream HTTP input/output.
+**Scanline resizing applies with and without `speed: 'fast'`.** Baseline JPEG and non-interlaced PNG inputs are read row by row. Non-grid HEIF/HEIC and AVIF inputs are decoded by libheif into a complete RGBA source image before rows enter the resizer and remain capped at 12 million pixels. Grid/tiled HEIF inputs decode one tile row at a time and support up to 48 million pixels; tiled AVIF inputs support up to 48 million pixels. WebP retains the complete resized image for encoding. JPEG encodes resized rows directly, uses baseline 4:2:0 output and composites transparency onto white. Input and encoded output bytes remain buffered: this API does not stream HTTP input/output.
 
 Supported progressive JPEGs use lowzag's reduced coefficient storage and decode to a power-of-two scale before row resizing. Unsupported progressive and multi-scan JPEGs fall back to libjpeg coefficient buffering. Non-enlarging Adam7 PNG downscales whose float accumulator fits 48 MiB use Pngle's pass-order pixel callbacks and Lanczos accumulation into the resized destination; other output sizes fall back to libspng's complete-image decode. No fixed whole-Worker memory guarantee is made.
 
@@ -32,7 +32,7 @@ For WebP, `speed: 'fast'` selects a faster internal encoder setting and enables 
 | Adam7/interlaced PNG | 48 MP | Pngle callback downscaling with a <=48 MiB accumulator; full-frame fallback is limited to 12 MP. |
 | Non-grid HEIC/HEIF and AVIF | 12 MP | Full source image is decoded into memory. |
 | Tiled/grid HEIC/HEIF | 48 MP | Decodes one tile row at a time. |
-| Tiled/grid AVIF | 64 MP | Decodes one tile row at a time. |
+| Tiled/grid AVIF | 48 MP | Decodes one tile row at a time. |
 
 All formats share a 20 MiB input limit and a 16,383-pixel dimension limit. `image(input,{maxPixels: ...})` bounds output pixels: 8 MP by default, maximum 16 MP. Decoder limits depend on the selected path and requested output size; Adam7 inputs above 12 MP require the callback downscaler and an output no larger than the 48 MiB accumulator permits. Other progressive JPEGs are also subject to a coefficient-plane memory check. CMYK/YCCK progressive JPEGs have a separate 12 MP source limit because Lowzag cannot reduce their coefficient storage. Peak-memory checks use WASM linear-memory capacity; Cloudflare Worker isolates have a 128 MiB total limit across JavaScript and WebAssembly, so leave headroom for the runtime and input/output buffers. Image processing runs synchronously inside the terminal method's promise.
 
