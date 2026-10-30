@@ -97,22 +97,22 @@ The published v0.1.0 Worker benchmark (before scanlines) compares two internal W
 
 - JPEG, PNG, HEIC/HEIF, and AVIF input; WebP and JPEG output. No animation, rotation, or metadata API.
 
-| Input type | Maximum source pixels | Decode path | WASM memory evidence |
-| --- | ---: | --- | ---: |
-| Baseline JPEG | 48 MP | Sequential scanline decode; eligible resized JPEGs can use scaled decode with `speed: 'fast'`. | 16 MiB |
-| Non-interlaced PNG | 48 MP | Sequential scanline decode. | 16 MiB |
-| Lowzag-compatible progressive JPEG | 48 MP | Reduced coefficient decode when resizing; coefficient planes are checked before full-resolution fallback. | 27.75 MiB |
-| Other progressive or multi-scan JPEG | 48 MP | Buffered codec compatibility path; coefficient planes above 64 MiB are rejected before allocation. | 44.13 MiB (12 MP arithmetic-coded sample) |
-| CMYK/YCCK progressive JPEG | 12 MP | CMYK uses Lowzag reduced coefficient planes; YCCK keeps the full-coefficient compatibility path. | 19.25 MiB Worker measurement for CMYK; YCCK not measured separately |
-| Adam7/interlaced PNG | 48 MP | Pngle callback downscaling with a <=48 MiB accumulator; full-frame fallback is limited to 12 MP. | 25.25 MiB |
-| Non-grid HEIC/HEIF | 12 MP | Full source image is decoded into memory. | 97.94 MiB |
-| Non-grid AVIF | 12 MP | Full source image is decoded into memory. | 90.25 MiB |
-| Tiled/grid HEIC/HEIF | 48 MP | Decodes one tile row at a time. | 49 MiB |
-| Tiled/grid AVIF | 48 MP | Decodes one tile row at a time. | No fixture available |
+| Input type | Maximum source pixels | Decode path | WASM linear-memory capacity | Cloudflare isolate memory (max sampled) |
+| --- | ---: | --- | ---: | ---: |
+| Baseline JPEG | 48 MP | Sequential scanline decode; eligible resized JPEGs can use scaled decode with `speed: 'fast'`. | 16 MiB | Not measured |
+| Non-interlaced PNG | 48 MP | Sequential scanline decode. | 16 MiB | Not measured |
+| Lowzag-compatible progressive JPEG | 48 MP | Reduced coefficient decode when resizing; coefficient planes are checked before full-resolution fallback. | 27.75 MiB | Not measured |
+| Other progressive or multi-scan JPEG | 48 MP | Buffered codec compatibility path; coefficient planes above 64 MiB are rejected before allocation. | 44.13 MiB (12 MP arithmetic-coded sample) | Not measured |
+| CMYK/YCCK progressive JPEG | 12 MP | CMYK uses Lowzag reduced coefficient planes; YCCK keeps the full-coefficient compatibility path. | 19.25 MiB for CMYK | 24.34 MiB for CMYK (4 requests); old build 117.72 MiB (1 request); YCCK not measured |
+| Adam7/interlaced PNG | 48 MP | Pngle callback downscaling with a <=48 MiB accumulator; full-frame fallback is limited to 12 MP. | 25.25 MiB | Not measured |
+| Non-grid HEIC/HEIF | 12 MP | Full source image is decoded into memory. | 97.94 MiB | Not measured |
+| Non-grid AVIF | 12 MP | Full source image is decoded into memory. | 90.25 MiB | Not measured |
+| Tiled/grid HEIC/HEIF | 48 MP | Decodes one tile row at a time. | 49 MiB | Not measured |
+| Tiled/grid AVIF | 48 MP | Decodes one tile row at a time. | No fixture available | Not measured |
 
-All formats share a 20 MiB input limit and a 16,383-pixel dimension limit. The default output pixel limit (`maxPixels`) is 8 MP and can be raised to 16 MP. Decoder limits depend on path and output size; Adam7 inputs above 12 MP require callback downscaling within the 48 MiB accumulator limit. Peak-memory tests measure WASM linear-memory capacity, while Cloudflare Worker isolates have a 128 MiB total limit across JavaScript and WebAssembly.
+All formats share a 20 MiB input limit and a 16,383-pixel dimension limit. The default output pixel limit (`maxPixels`) is 8 MP and can be raised to 16 MP. Decoder limits depend on path and output size; Adam7 inputs above 12 MP require callback downscaling within the 48 MiB accumulator limit. WASM capacity is not total Worker memory. Cloudflare's per-invocation isolate-memory metric includes shared JavaScript and WebAssembly memory, but is sampled at invocation time rather than measuring exact peak memory; total-isolate figures are available only for the CMYK path so far. Cloudflare Worker isolates have a 128 MiB total limit.
 
-Worker measurements in the table use one successful 800×600 WebP conversion per synthetic fixture, each in a fresh Cloudflare Worker isolate. The benchmark Workers used a 30,000 ms CPU ceiling so large images could finish; the normal experiment Worker is configured for 1,000 ms and can hit that CPU limit before reaching the memory-tested result. These figures report WASM linear-memory capacity, not total isolate RSS. The 12 MP CMYK Worker result fell from 112.69 MiB to 19.25 MiB of WASM linear-memory capacity with Lowzag reduced coefficient decoding. The regression test also caps the path at 64 MiB. The other progressive/multi-scan measurement uses an arithmetic-coded 12 MP fixture, which bypasses Lowzag; tiled AVIF still lacks a matching fixture. See [the Worker measurements and fixture results](benchmarks/decoder-memory-worker.json); rerun with `node scripts/benchmark-decoder-memory-worker.mjs`.
+Worker measurements in the table use synthetic fixtures and 800×600 WebP output. The benchmark Workers used a 30,000 ms CPU ceiling; the normal experiment Worker uses 1,000 ms and may hit that CPU limit on large inputs. For CMYK, WASM linear-memory capacity was 19.25 MiB and the maximum Cloudflare isolate-memory sample across four successful requests was 24.34 MiB. The old build measured 112.69 MiB of WASM capacity and 117.72 MiB of isolate memory in one request. Cloudflare's metric samples isolate memory at invocation time, so these are observed maxima, not guaranteed peaks. The benchmark Worker name was reported as `__unknown__` in analytics; samples were correlated by time, colo, and successful probe requests. Other formats do not yet have total-isolate measurements. The regression test caps the CMYK path at 64 MiB. The other progressive/multi-scan measurement uses an arithmetic-coded 12 MP fixture, which bypasses Lowzag; tiled AVIF still lacks a matching fixture. See [the Worker measurements and fixture results](benchmarks/decoder-memory-worker.json); rerun with `node scripts/benchmark-decoder-memory-worker.mjs`.
 
 - PNG alpha is preserved in WebP; JPEG composites onto white. EXIF orientation and ICC color management are not applied; metadata is not copied. JPEGs with decoder warnings are rejected.
 - Resizing uses scanline Lanczos3 with premultiplied alpha. `speed: 'fast'` enables scaled JPEG decoding for eligible resized lossy requests.
