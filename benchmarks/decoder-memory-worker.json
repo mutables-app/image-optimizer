@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-10-30T01:44:06Z",
-  "worker": "A fresh temporary Worker per fixture, deleted after Cloudflare analytics collection; one additional YCCK Worker was used for its generated fixture and deleted after measurement.",
-  "measurement": "wasmMemoryBytes is WASM linear-memory capacity. cloudflareIsolateMemoryBytes is Cloudflare workersInvocationsAdaptive memoryUsageBytesP99: shared isolate memory sampled at invocation time, not exact peak memory. Measurements used synthetic fixtures, WAW colo, one request per fresh Worker except CMYK (five current-build requests) and its old-build baseline (one request). Temporary Worker names appeared as __unknown__ in analytics and were correlated by timestamp and colo. Tile AVIF has no fixture.",
+  "timestamp": "2026-10-30T02:07:02Z",
+  "worker": "A fresh temporary Worker per fixture, deleted after Cloudflare analytics collection; one additional YCCK Worker and one tiled-AVIF Worker were used for their generated fixtures and deleted after measurement.",
+  "measurement": "wasmMemoryBytes is WASM linear-memory capacity. cloudflareIsolateMemoryBytes is Cloudflare workersInvocationsAdaptive memoryUsageBytesP99: shared isolate memory sampled at invocation time, not exact peak memory. Measurements used synthetic fixtures, WAW colo, one request per fresh Worker except CMYK (five current-build requests) and its old-build baseline (one request). Temporary Worker names appeared as __unknown__ in analytics and were correlated by timestamp and colo. Tiled AVIF uses a synthetic 48 MP 8x6 AV1 grid fixture.",
   "results": [
     {
       "label": "Baseline JPEG",
@@ -232,7 +232,29 @@
     },
     {
       "label": "Tiled/grid AVIF",
-      "skipped": "No tiled AVIF fixture is included."
+      "file": "input-48mp-grid.avif",
+      "inputBytes": 2661853,
+      "status": 200,
+      "ok": true,
+      "roundTripMs": 4012,
+      "outputBytes": 188912,
+      "wasmMemoryBytes": "54263808",
+      "decoded": "8000x6000",
+      "output": "800x600",
+      "codecBuffered": "false",
+      "colo": "WAW",
+      "error": null,
+      "fixtureSourcePixels": 48000000,
+      "grid": "8x6 AV1 tiles, 1024x1024 each; 8000x6000 visible image",
+      "cloudflareIsolateMemoryBytes": 62986530,
+      "cloudflareIsolateSampleCount": 1,
+      "cloudflareIsolateMetric": "memoryUsageBytesP99 sampled for successful Worker invocation",
+      "cloudflareIsolateTimestamp": "2026-10-30T02:06:58Z",
+      "cloudflareScriptVersion": "6f43fcf9-3aa6-4a08-a43d-16796879ba87",
+      "requestStartedAt": "2026-10-30T02:06:58.556Z",
+      "requestCompletedAt": "2026-10-30T02:07:02.569Z",
+      "workerCpuTimeP99Microseconds": 3561819,
+      "note": "Synthetic AV1 grid fixture generated with scripts/make-tiled-avif-fixture.cpp; one successful request in WAW."
     },
     {
       "label": "Other progressive/multi-scan JPEG (arithmetic-coded)",

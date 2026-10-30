@@ -21,7 +21,7 @@ const allCases = [
   { label: 'Single-image HEIC', file: 'input-12mp-single.heic' },
   { label: 'Single-image AVIF', file: 'input-12mp-single.avif' },
   { label: 'Tiled HEIC', file: 'input-48mp-grid.heic' },
-  { label: 'Tiled/grid AVIF', file: null, skipped: 'No tiled AVIF fixture is included.' },
+  { label: 'Tiled/grid AVIF', file: 'input-48mp-grid.avif' },
   { label: 'Other progressive/multi-scan JPEG (arithmetic-coded)', file: 'input-12mp-arithmetic-progressive.jpg' },
   { label: '64MP HEIC grid over limit', file: 'input-64mp-grid.heic' },
   { label: '64MP progressive JPEG over limit', file: 'input-64mp-progressive.jpg' },
