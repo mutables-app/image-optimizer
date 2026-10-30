@@ -127,6 +127,21 @@ These end-to-end samples convert supported synthetic inputs to 800×600 WebP. Ea
 
 See the [raw Worker performance results](benchmarks/decoder-performance-worker.json) and [memory measurements](benchmarks/decoder-memory-worker.json). Both reports keep measurements for unsupported Adam7 PNG, non-grid HEIC/HEIF, and non-Lowzag progressive JPEG paths in `historicalUnsupportedResults`; those results do not describe current support. These small synthetic-fixture samples show this test run, not guaranteed production latency.
 
+#### WebP input by source size
+
+These 2, 6, and 12 MP synthetic WebP fixtures were resized to fit within 800×600 and encoded as WebP. Each size/mode ran in a fresh Worker with one initial request and three warm requests. Response p50 uses the warm requests. CPU and isolate-memory sample counts show the invocations Cloudflare returned; isolate memory is `memoryUsageBytesP99`, not exact peak RSS.
+
+| WebP source | Decode mode | Response p50 | Worker CPU median | WASM capacity | Worker isolate memory, max sampled |
+| ---: | --- | ---: | ---: | ---: | ---: |
+| 2 MP | Default full decode | 552 ms | 488 ms (2 samples) | 16.00 MiB | 23.58 MiB (2 samples) |
+| 2 MP | `speed: 'fast'` scaled decode | 402 ms | 234 ms (2 samples) | 16.00 MiB | 26.96 MiB (3 samples) |
+| 6 MP | Default full decode | 1117 ms | 905 ms (2 samples) | 33.50 MiB | 57.63 MiB (2 samples) |
+| 6 MP | `speed: 'fast'` scaled decode | 836 ms | 597 ms (3 samples) | 16.00 MiB | 33.12 MiB (3 samples) |
+| 12 MP | Default full decode | 1617 ms | 1120 ms (1 sample) | 66.56 MiB | 86.83 MiB (1 sample) |
+| 12 MP | `speed: 'fast'` scaled decode | 1190 ms | 881 ms (2 samples) | 19.25 MiB | 55.59 MiB (3 samples) |
+
+The 2 MP fixture is 2000×1000, the 6 MP fixture is 3000×2000, and the 12 MP fixture is 4000×3000. Cloudflare isolate-memory samples varied between runs and sometimes arrived for only part of the requests; use them as observed samples, not guaranteed peaks. See the [raw WebP input Worker results](benchmarks/webp-input-worker.json).
+
 A separate WebP-input Worker comparison used an 8.24 MiB synthetic 12 MP WebP and 800×600 JPEG output, with one initial request and three warm requests per fresh Worker. Median client round trip was 1,454 ms for full decoding and 1,318 ms for `speed: 'fast'`. WASM capacity was 66.56 MiB and 19.25 MiB; Cloudflare reported a maximum sampled isolate memory of 98.08 MiB and 39.36 MiB across four successful invocations per mode. These are sampled `memoryUsageBytesP99` values, not exact peak RSS. A photo-derived 12 MP fixture produced 39.28 dB PSNR between the fast scaled-decode output and the full-decode output; results vary by image. Raw samples are in [the Worker memory report](benchmarks/decoder-memory-worker.json).
 
 All formats share a 20 MiB input limit and a 16,383-pixel dimension limit. The default output pixel limit (`maxPixels`) is 8 MP and can be raised to 16 MP. Adam7/interlaced PNG and non-grid HEIC/HEIF are unsupported. WASM capacity is not total Worker memory. Cloudflare's per-invocation isolate-memory metric includes shared JavaScript and WebAssembly memory, but is sampled at invocation time rather than measuring exact peak memory. Cloudflare Worker isolates have a 128 MiB total limit.

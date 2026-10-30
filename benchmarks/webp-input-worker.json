@@ -1,0 +1,458 @@
+{
+  "timestamp": "2026-10-30T14:34:14.045Z",
+  "fixture": "Synthetic RGB noise encoded as lossy WebP at 2000\u00d71000 (2 MP), 3000\u00d72000 (6 MP), and 4000\u00d73000 (12 MP; 8.24 MiB).",
+  "output": "WebP quality 80, resized to fit within 800\u00d7600 without enlargement.",
+  "method": "For each source size and mode, a fresh temporary Worker used a 30,000 ms CPU limit and processed one initial request plus three warm requests. Client round-trip p50 uses the three warm requests. Worker CPU is the median of available Cloudflare workersInvocationsAdaptive cpuTimeP99 samples for warm calls; Cloudflare may omit invocations. Isolate memory is the maximum available memoryUsageBytesP99 sample across successful calls; it is sampled isolate memory, not exact peak RSS. Temporary Worker script names may appear as __unknown__ and were correlated by timestamps and WAW colo.",
+  "analyticsRows": [
+    {
+      "dimensions": {
+        "coloCode": "WAW",
+        "datetime": "2026-10-30T14:33:41Z",
+        "scriptName": "__unknown__",
+        "status": "success"
+      },
+      "quantiles": {
+        "cpuTimeP99": 1120237,
+        "memoryUsageBytesP99": 91049150
+      },
+      "sum": {
+        "errors": 0,
+        "requests": 1
+      }
+    },
+    {
+      "dimensions": {
+        "coloCode": "WAW",
+        "datetime": "2026-10-30T14:33:10Z",
+        "scriptName": "__unknown__",
+        "status": "success"
+      },
+      "quantiles": {
+        "cpuTimeP99": 547813,
+        "memoryUsageBytesP99": 27418322
+      },
+      "sum": {
+        "errors": 0,
+        "requests": 1
+      }
+    },
+    {
+      "dimensions": {
+        "coloCode": "WAW",
+        "datetime": "2026-10-30T14:32:43Z",
+        "scriptName": "__unknown__",
+        "status": "success"
+      },
+      "quantiles": {
+        "cpuTimeP99": 922120,
+        "memoryUsageBytesP99": 60428850
+      },
+      "sum": {
+        "errors": 0,
+        "requests": 1
+      }
+    },
+    {
+      "dimensions": {
+        "coloCode": "WAW",
+        "datetime": "2026-10-30T14:31:42Z",
+        "scriptName": "__unknown__",
+        "status": "success"
+      },
+      "quantiles": {
+        "cpuTimeP99": 638307,
+        "memoryUsageBytesP99": 22937388
+      },
+      "sum": {
+        "errors": 0,
+        "requests": 1
+      }
+    },
+    {
+      "dimensions": {
+        "coloCode": "WAW",
+        "datetime": "2026-10-30T14:32:07Z",
+        "scriptName": "__unknown__",
+        "status": "success"
+      },
+      "quantiles": {
+        "cpuTimeP99": 244099,
+        "memoryUsageBytesP99": 24709256
+      },
+      "sum": {
+        "errors": 0,
+        "requests": 1
+      }
+    },
+    {
+      "dimensions": {
+        "coloCode": "WAW",
+        "datetime": "2026-10-30T14:31:44Z",
+        "scriptName": "__unknown__",
+        "status": "success"
+      },
+      "quantiles": {
+        "cpuTimeP99": 337998,
+        "memoryUsageBytesP99": 24721544
+      },
+      "sum": {
+        "errors": 0,
+        "requests": 1
+      }
+    },
+    {
+      "dimensions": {
+        "coloCode": "WAW",
+        "datetime": "2026-10-30T14:32:05Z",
+        "scriptName": "__unknown__",
+        "status": "success"
+      },
+      "quantiles": {
+        "cpuTimeP99": 365894,
+        "memoryUsageBytesP99": 22931244
+      },
+      "sum": {
+        "errors": 0,
+        "requests": 1
+      }
+    },
+    {
+      "dimensions": {
+        "coloCode": "WAW",
+        "datetime": "2026-10-30T14:33:08Z",
+        "scriptName": "__unknown__",
+        "status": "success"
+      },
+      "quantiles": {
+        "cpuTimeP99": 725950,
+        "memoryUsageBytesP99": 34731988
+      },
+      "sum": {
+        "errors": 0,
+        "requests": 1
+      }
+    },
+    {
+      "dimensions": {
+        "coloCode": "WAW",
+        "datetime": "2026-10-30T14:34:07Z",
+        "scriptName": "__unknown__",
+        "status": "success"
+      },
+      "quantiles": {
+        "cpuTimeP99": 902432,
+        "memoryUsageBytesP99": 41426320
+      },
+      "sum": {
+        "errors": 0,
+        "requests": 1
+      }
+    },
+    {
+      "dimensions": {
+        "coloCode": "WAW",
+        "datetime": "2026-10-30T14:34:05Z",
+        "scriptName": "__unknown__",
+        "status": "success"
+      },
+      "quantiles": {
+        "cpuTimeP99": 858653,
+        "memoryUsageBytesP99": 58291536
+      },
+      "sum": {
+        "errors": 0,
+        "requests": 1
+      }
+    },
+    {
+      "dimensions": {
+        "coloCode": "WAW",
+        "datetime": "2026-10-30T14:32:10Z",
+        "scriptName": "__unknown__",
+        "status": "success"
+      },
+      "quantiles": {
+        "cpuTimeP99": 223444,
+        "memoryUsageBytesP99": 28265280
+      },
+      "sum": {
+        "errors": 0,
+        "requests": 1
+      }
+    },
+    {
+      "dimensions": {
+        "coloCode": "WAW",
+        "datetime": "2026-10-30T14:32:38Z",
+        "scriptName": "__unknown__",
+        "status": "success"
+      },
+      "quantiles": {
+        "cpuTimeP99": 888242,
+        "memoryUsageBytesP99": 46828016
+      },
+      "sum": {
+        "errors": 0,
+        "requests": 1
+      }
+    },
+    {
+      "dimensions": {
+        "coloCode": "WAW",
+        "datetime": "2026-10-30T14:34:02Z",
+        "scriptName": "__unknown__",
+        "status": "success"
+      },
+      "quantiles": {
+        "cpuTimeP99": 963753,
+        "memoryUsageBytesP99": 41688464
+      },
+      "sum": {
+        "errors": 0,
+        "requests": 1
+      }
+    },
+    {
+      "dimensions": {
+        "coloCode": "WAW",
+        "datetime": "2026-10-30T14:33:12Z",
+        "scriptName": "__unknown__",
+        "status": "success"
+      },
+      "quantiles": {
+        "cpuTimeP99": 596864,
+        "memoryUsageBytesP99": 34207700
+      },
+      "sum": {
+        "errors": 0,
+        "requests": 1
+      }
+    }
+  ],
+  "results": [
+    {
+      "sourceSize": "2 MP",
+      "sourceWidth": 2000,
+      "sourceHeight": 1000,
+      "mode": "default",
+      "successfulRequests": 4,
+      "warmResponseSamplesMs": [
+        520,
+        552,
+        925
+      ],
+      "responseP50Ms": 552,
+      "workerCpuSamplesMs": [
+        638.307,
+        337.998
+      ],
+      "workerCpuMedianMs": 488.15250000000003,
+      "wasmMemoryCapacityBytes": 16777216,
+      "wasmMemoryCapacityMiB": 16.0,
+      "cloudflareMemoryUsageBytesP99Samples": [
+        22937388,
+        24721544
+      ],
+      "maxSampledIsolateMemoryBytes": 24721544,
+      "maxSampledIsolateMemoryMiB": 23.58,
+      "cpuAnalyticsSampleCount": 2,
+      "memoryAnalyticsSampleCount": 2,
+      "workerNames": [
+        "image-opt-webp-2mp-default-504050e4"
+      ],
+      "requestTimestamps": [
+        "2026-10-30T14:31:39.825Z",
+        "2026-10-30T14:31:42.110Z",
+        "2026-10-30T14:31:44.237Z",
+        "2026-10-30T14:31:45.958Z"
+      ]
+    },
+    {
+      "sourceSize": "2 MP",
+      "sourceWidth": 2000,
+      "sourceHeight": 1000,
+      "mode": "fast",
+      "successfulRequests": 4,
+      "warmResponseSamplesMs": [
+        396,
+        402,
+        412
+      ],
+      "responseP50Ms": 402,
+      "workerCpuSamplesMs": [
+        244.099,
+        223.444
+      ],
+      "workerCpuMedianMs": 233.7715,
+      "wasmMemoryCapacityBytes": 16777216,
+      "wasmMemoryCapacityMiB": 16.0,
+      "cloudflareMemoryUsageBytesP99Samples": [
+        24709256,
+        22931244,
+        28265280
+      ],
+      "maxSampledIsolateMemoryBytes": 28265280,
+      "maxSampledIsolateMemoryMiB": 26.96,
+      "cpuAnalyticsSampleCount": 2,
+      "memoryAnalyticsSampleCount": 3,
+      "workerNames": [
+        "image-opt-webp-2mp-fast-76c89c67"
+      ],
+      "requestTimestamps": [
+        "2026-10-30T14:32:05.735Z",
+        "2026-10-30T14:32:07.555Z",
+        "2026-10-30T14:32:09.167Z",
+        "2026-10-30T14:32:10.769Z"
+      ]
+    },
+    {
+      "sourceSize": "6 MP",
+      "sourceWidth": 3000,
+      "sourceHeight": 2000,
+      "mode": "default",
+      "successfulRequests": 4,
+      "warmResponseSamplesMs": [
+        1102,
+        1117,
+        1143
+      ],
+      "responseP50Ms": 1117,
+      "workerCpuSamplesMs": [
+        922.12,
+        888.242
+      ],
+      "workerCpuMedianMs": 905.181,
+      "wasmMemoryCapacityBytes": 35127296,
+      "wasmMemoryCapacityMiB": 33.5,
+      "cloudflareMemoryUsageBytesP99Samples": [
+        60428850,
+        46828016
+      ],
+      "maxSampledIsolateMemoryBytes": 60428850,
+      "maxSampledIsolateMemoryMiB": 57.63,
+      "cpuAnalyticsSampleCount": 2,
+      "memoryAnalyticsSampleCount": 2,
+      "workerNames": [
+        "image-opt-webp-6mp-default-5fae82c9"
+      ],
+      "requestTimestamps": [
+        "2026-10-30T14:32:35.810Z",
+        "2026-10-30T14:32:38.675Z",
+        "2026-10-30T14:32:40.993Z",
+        "2026-10-30T14:32:43.295Z"
+      ]
+    },
+    {
+      "sourceSize": "6 MP",
+      "sourceWidth": 3000,
+      "sourceHeight": 2000,
+      "mode": "fast",
+      "successfulRequests": 4,
+      "warmResponseSamplesMs": [
+        758,
+        836,
+        940
+      ],
+      "responseP50Ms": 836,
+      "workerCpuSamplesMs": [
+        547.813,
+        725.95,
+        596.864
+      ],
+      "workerCpuMedianMs": 596.864,
+      "wasmMemoryCapacityBytes": 16777216,
+      "wasmMemoryCapacityMiB": 16.0,
+      "cloudflareMemoryUsageBytesP99Samples": [
+        27418322,
+        34731988,
+        34207700
+      ],
+      "maxSampledIsolateMemoryBytes": 34731988,
+      "maxSampledIsolateMemoryMiB": 33.12,
+      "cpuAnalyticsSampleCount": 3,
+      "memoryAnalyticsSampleCount": 3,
+      "workerNames": [
+        "image-opt-webp-6mp-fast-224ac271"
+      ],
+      "requestTimestamps": [
+        "2026-10-30T14:33:05.835Z",
+        "2026-10-30T14:33:08.313Z",
+        "2026-10-30T14:33:10.454Z",
+        "2026-10-30T14:33:12.412Z"
+      ]
+    },
+    {
+      "sourceSize": "12 MP",
+      "sourceWidth": 4000,
+      "sourceHeight": 3000,
+      "mode": "default",
+      "successfulRequests": 4,
+      "warmResponseSamplesMs": [
+        1418,
+        1617,
+        1716
+      ],
+      "responseP50Ms": 1617,
+      "workerCpuSamplesMs": [
+        1120.237
+      ],
+      "workerCpuMedianMs": 1120.237,
+      "wasmMemoryCapacityBytes": 69795840,
+      "wasmMemoryCapacityMiB": 66.56,
+      "cloudflareMemoryUsageBytesP99Samples": [
+        91049150
+      ],
+      "maxSampledIsolateMemoryBytes": 91049150,
+      "maxSampledIsolateMemoryMiB": 86.83,
+      "cpuAnalyticsSampleCount": 1,
+      "memoryAnalyticsSampleCount": 1,
+      "workerNames": [
+        "image-opt-webp-12mp-default-89b2d8fa"
+      ],
+      "requestTimestamps": [
+        "2026-10-30T14:33:32.887Z",
+        "2026-10-30T14:33:35.934Z",
+        "2026-10-30T14:33:38.851Z",
+        "2026-10-30T14:33:41.668Z"
+      ]
+    },
+    {
+      "sourceSize": "12 MP",
+      "sourceWidth": 4000,
+      "sourceHeight": 3000,
+      "mode": "fast",
+      "successfulRequests": 4,
+      "warmResponseSamplesMs": [
+        1168,
+        1190,
+        1212
+      ],
+      "responseP50Ms": 1190,
+      "workerCpuSamplesMs": [
+        902.432,
+        858.653
+      ],
+      "workerCpuMedianMs": 880.5425,
+      "wasmMemoryCapacityBytes": 20185088,
+      "wasmMemoryCapacityMiB": 19.25,
+      "cloudflareMemoryUsageBytesP99Samples": [
+        41426320,
+        58291536,
+        41688464
+      ],
+      "maxSampledIsolateMemoryBytes": 58291536,
+      "maxSampledIsolateMemoryMiB": 55.59,
+      "cpuAnalyticsSampleCount": 2,
+      "memoryAnalyticsSampleCount": 3,
+      "workerNames": [
+        "image-opt-webp-12mp-fast-9f6b2fa5"
+      ],
+      "requestTimestamps": [
+        "2026-10-30T14:34:02.480Z",
+        "2026-10-30T14:34:05.066Z",
+        "2026-10-30T14:34:07.479Z",
+        "2026-10-30T14:34:09.871Z"
+      ]
+    }
+  ]
+}
