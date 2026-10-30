@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-10-30T00:49:03.658Z",
+  "timestamp": "2026-10-30T01:16:24.868Z",
   "worker": "Temporary per-case Workers, deleted after each measurement.",
-  "measurement": "x-wasm-linear-memory-bytes reports Wasm linear-memory capacity, not Worker isolate RSS; one request in a fresh isolate per case, 800x600 WebP output; fixtures are synthetic. The CMYK result is the pre-Lowzag baseline and is superseded by the reduced-coefficient path. Temporary benchmark Workers used a 30,000 ms CPU ceiling; this measures memory capacity and does not imply the default 1,000 ms experiment Worker can complete every case.",
+  "measurement": "Wasm linear-memory capacity, not Worker isolate RSS; one request in a fresh isolate per case, 800x600 WebP output; fixtures are synthetic. The CMYK row was repeated after Lowzag gained reduced-coefficient decoding and includes its previous full-coefficient baseline.",
   "results": [
     {
       "label": "Baseline JPEG",
@@ -54,14 +54,15 @@
       "inputBytes": 188440,
       "status": 200,
       "ok": true,
-      "roundTripMs": 516,
+      "roundTripMs": 862,
       "outputBytes": 1020,
-      "wasmMemoryBytes": "118161408",
+      "wasmMemoryBytes": "20185088",
       "decoded": "1000x750",
       "output": "800x600",
       "codecBuffered": "true",
       "colo": "WAW",
-      "error": null
+      "error": null,
+      "previousWasmMemoryBytes": "118161408"
     },
     {
       "label": "CMYK progressive JPEG over limit",
