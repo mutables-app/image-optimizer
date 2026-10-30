@@ -1,7 +1,7 @@
 {
   "timestamp": "2026-10-30T02:07:02Z",
-  "worker": "A fresh temporary Worker per fixture, deleted after Cloudflare analytics collection; one additional YCCK Worker and one tiled-AVIF Worker were used for their generated fixtures and deleted after measurement.",
-  "measurement": "wasmMemoryBytes is WASM linear-memory capacity. cloudflareIsolateMemoryBytes is Cloudflare workersInvocationsAdaptive memoryUsageBytesP99: shared isolate memory sampled at invocation time, not exact peak memory. Measurements used synthetic fixtures, WAW colo, one request per fresh Worker except CMYK (five current-build requests) and its old-build baseline (one request). Temporary Worker names appeared as __unknown__ in analytics and were correlated by timestamp and colo. Tiled AVIF uses a synthetic 48 MP 8x6 AV1 grid fixture.",
+  "worker": "A fresh temporary Worker per fixture, deleted after Cloudflare analytics collection; one additional YCCK Worker and one tiled-AVIF Worker were used for their generated fixtures and deleted after measurement. AVIF rows are historical measurements; current builds reject AVIF input.",
+  "measurement": "wasmMemoryBytes is WASM linear-memory capacity. cloudflareIsolateMemoryBytes is Cloudflare workersInvocationsAdaptive memoryUsageBytesP99: shared isolate memory sampled at invocation time, not exact peak memory. Measurements used synthetic fixtures, WAW colo, one request per fresh Worker except CMYK (five current-build requests) and its old-build baseline (one request). Temporary Worker names appeared as __unknown__ in analytics and were correlated by timestamp and colo. Tiled AVIF uses a synthetic 48 MP 8x6 AV1 grid fixture. AVIF measurements are historical and do not describe a supported input path.",
   "results": [
     {
       "label": "Baseline JPEG",

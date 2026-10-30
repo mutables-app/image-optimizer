@@ -7,7 +7,6 @@
 
 #define MAX_HEIF_SINGLE_IMAGE_PIXELS 12000000u
 #define MAX_HEIF_GRID_PIXELS 48000000u
-#define MAX_AVIF_GRID_PIXELS 48000000u
 
 struct HeifRows {
     heif_context* context = nullptr;
@@ -22,12 +21,22 @@ struct HeifRows {
     uint8_t* tile_row = nullptr;
     uint32_t tile_row_first_y = 0, tile_row_height = 0, tile_row_index = 0;
     bool tiled = false;
-    bool avif = false;
 };
+
+static bool has_brand(const uint8_t* data, size_t size, const char* brand) {
+    if (size < 12 || std::memcmp(data + 4, "ftyp", 4)) return false;
+    if (!std::memcmp(data + 8, brand, 4)) return true;
+    for (size_t i = 16; i + 4 <= size && i < 128; i += 4)
+        if (!std::memcmp(data + i, brand, 4)) return true;
+    return false;
+}
 
 static bool is_heif_brand(const uint8_t* data, size_t size) {
     if (size < 12 || std::memcmp(data + 4, "ftyp", 4)) return false;
-    static const char* brands[] = {"heic", "heix", "hevc", "hevx", "heim", "heis", "hevm", "hevs", "mif1", "msf1", "avif", "avis"};
+    // Reject AVIF explicitly, including files that list mif1 as a compatible
+    // brand. This build only bundles the HEVC decoder for HEIC/HEIF input.
+    if (has_brand(data, size, "avif") || has_brand(data, size, "avis")) return false;
+    static const char* brands[] = {"heic", "heix", "hevc", "hevx", "heim", "heis", "hevm", "hevs", "mif1", "msf1"};
     for (const char* brand : brands) if (!std::memcmp(data + 8, brand, 4)) return true;
     for (size_t i = 16; i + 4 <= size && i < 128; i += 4)
         for (const char* brand : brands) if (!std::memcmp(data + i, brand, 4)) return true;
@@ -55,12 +64,6 @@ extern "C" int heif_rows_open(const uint8_t* data, size_t size, void** out,
         heif_image_handle_release(r->handle); heif_context_free(r->context); delete r; return 1;
     }
     r->width = static_cast<uint32_t>(w); r->height = static_cast<uint32_t>(h);
-    for (size_t i = 8; i + 4 <= size && i < 128; i += 4) {
-        if (!std::memcmp(data + i, "avif", 4) || !std::memcmp(data + i, "avis", 4)) {
-            r->avif = true;
-            break;
-        }
-    }
     if (heif_image_handle_get_image_tiling(r->handle, 1, &r->tiling).code == heif_error_Ok) {
         r->tiled = r->tiling.num_columns > 1 || r->tiling.num_rows > 1;
         if (r->tiled && (r->tiling.image_width != r->width || r->tiling.image_height != r->height ||
@@ -69,9 +72,7 @@ extern "C" int heif_rows_open(const uint8_t* data, size_t size, void** out,
             heif_image_handle_release(r->handle); heif_context_free(r->context); delete r; return 1;
         }
     }
-    const uint64_t pixel_limit = r->tiled
-        ? (r->avif ? MAX_AVIF_GRID_PIXELS : MAX_HEIF_GRID_PIXELS)
-        : MAX_HEIF_SINGLE_IMAGE_PIXELS;
+    const uint64_t pixel_limit = r->tiled ? MAX_HEIF_GRID_PIXELS : MAX_HEIF_SINGLE_IMAGE_PIXELS;
     if (static_cast<uint64_t>(r->width) * r->height > pixel_limit) {
         heif_image_handle_release(r->handle); heif_context_free(r->context); delete r; return 2;
     }

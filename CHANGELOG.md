@@ -2,8 +2,8 @@
 
 ## Unreleased
 
-- Replace libaom with dav1d as libheif's AV1 decoder; retain libde265 for HEIC/HEIF and bundle dav1d's license notice.
-- Build dav1d 1.5.4 as an 8-bit static Emscripten library for the optimizer WASM module.
+- Remove AVIF input support and its dav1d dependency; retain HEIC/HEIF decoding through libheif and libde265.
+- Cap Adam7/interlaced PNG inputs at 12 megapixels; retain callback downscaling for eligible requests within that source limit.
 
 ## 0.4.0 — 2026-10-29
 

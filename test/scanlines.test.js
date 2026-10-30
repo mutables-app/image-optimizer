@@ -64,13 +64,14 @@ test('Adam7 Lanczos accumulation premultiplies transparent pixels',()=>{
  }
  assert.ok(partial>0);
 });
-test('24MP Adam7 PNG resizes within a bounded WASM memory budget',async()=>{
- const input=await fixture('adam7-24mp.png');
+test('Adam7 PNGs above 12MP are rejected while 12MP remains supported',async()=>{
+ const input=await fixture('adam7-12mp.png');
  const result=scan(input,800,0,false,false);
- assert.equal(result.codec_buffered,false);
- assert.deepEqual([result.source_width,result.source_height],[6000,4000]);
- assert.deepEqual([result.output_width,result.output_height],[800,533]);
- const output=decode(result.take_bytes());assert.deepEqual([output.width,output.height],[800,533]);
+ assert.deepEqual([result.source_width,result.source_height],[4000,3000]);
+ assert.deepEqual([result.output_width,result.output_height],[800,600]);
+ assert.ok(result.take_bytes().length>0);
+ const larger=await fixture('adam7-24mp.png');
+ assert.throws(()=>scan(larger,800,0,false,false),/limit/i);
  assert.ok(linear_memory_bytes()<=32*1024*1024,`WASM linear memory ${linear_memory_bytes()} exceeds 32 MiB`);
 });
 test('baseline, progressive, grayscale and CMYK JPEGs decode consistently',async()=>{

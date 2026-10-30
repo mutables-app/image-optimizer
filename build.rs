@@ -20,7 +20,6 @@ fn main() {
         println!("cargo:rustc-link-lib=static={lib}");
     }
     println!("cargo:rustc-link-lib=static=heif");
-    println!("cargo:rustc-link-lib=static=dav1d");
     println!("cargo:rustc-link-lib=static=de265");
     println!("cargo:rustc-link-lib=c++");
     println!("cargo:rustc-link-lib=c++abi");

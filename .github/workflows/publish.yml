@@ -104,10 +104,14 @@ jobs:
             echo 'published=false' >> "$GITHUB_OUTPUT"
           fi
 
+      # Both npm packages need their own GitHub Actions trusted publisher entry
+      # for mutables-app/image-optimizer, workflow filename publish.yml, with
+      # permission to stage publishes. Staged versions still need npm approval.
       - name: Stage optimizer package for approval
         working-directory: packages/optimizer
         run: npm stage publish --access public
         env:
+          # Keep this empty so npm uses GitHub OIDC instead of a stale registry token.
           NODE_AUTH_TOKEN: ''
         if: (github.ref_type == 'tag' || (github.event_name == 'workflow_dispatch' && inputs.publish)) && steps.optimizer-version.outputs.published != 'true'
 
@@ -115,5 +119,6 @@ jobs:
         working-directory: packages/computer
         run: npm stage publish --access public
         env:
+          # Keep this empty so npm uses GitHub OIDC instead of a stale registry token.
           NODE_AUTH_TOKEN: ''
         if: (github.ref_type == 'tag' || (github.event_name == 'workflow_dispatch' && inputs.publish)) && steps.computer-version.outputs.published != 'true'

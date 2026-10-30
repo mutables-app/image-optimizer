@@ -39,15 +39,11 @@ test('48MP lowzag-compatible progressive JPEG converts at the 8MP output ceiling
  assert.throws(()=>scanline_experiment(overLimit,800,800,false,false,80,false,8_000_000,true,-1,false),/limit/i);
 });
 
-test('48MP Adam7 callback resizing stays within the 100 MiB target',async()=>{
- const input=await fixture('adam7-48mp.png');
- const result=scanline_experiment(input,1732,1732,false,false,80,false,3_000_000,false,-1,false);
- assert.equal(result.codec_buffered,false);
- assert.deepEqual([result.source_width,result.source_height],[8000,6000]);
- assert.deepEqual([result.output_width,result.output_height],[1732,1732]);
- const output=decode(result.take_bytes());
- assert.deepEqual([output.width,output.height],[1732,1732]);
- assert.ok(linear_memory_bytes()<=128*1024*1024,`WASM linear memory ${linear_memory_bytes()} exceeds 128 MiB`);
+test('Adam7 source limit rejects images above 12MP before decoding',async()=>{
+ for(const name of ['adam7-24mp.png','adam7-48mp.png']) {
+  const input=await fixture(name);
+  assert.throws(()=>scanline_experiment(input,800,800,false,false,80,false,640_000,false,-1,false),/limit/i,name);
+ }
 });
 
 test('Adam7 fallback stays below 100 MiB and rejects larger full-frame decodes early',async()=>{
@@ -55,6 +51,7 @@ test('Adam7 fallback stays below 100 MiB and rejects larger full-frame decodes e
  const result=scanline_experiment(input,2828,2828,false,false,80,false,8_000_000,false,-1,false);
  assert.equal(result.codec_buffered,true);
  assert.deepEqual([result.source_width,result.source_height],[4000,3000]);
+ assert.ok(result.take_bytes().length>0);
  assert.ok(linear_memory_bytes()<=128*1024*1024,`WASM linear memory ${linear_memory_bytes()} exceeds 128 MiB`);
  const larger=await fixture('adam7-24mp.png');
  assert.throws(()=>scanline_experiment(larger,2828,2828,false,false,80,false,8_000_000,false,-1,false),/limit/i);

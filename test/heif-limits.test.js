@@ -20,15 +20,9 @@ test('12MP non-grid HEIC decodes and resizes as a full source image',async()=>{
  assert.deepEqual([jpeg.format,jpeg.width,jpeg.height],['JPEG',800,600]);
  assert.ok(linear_memory_bytes()<=128*1024*1024,`WASM linear memory ${linear_memory_bytes()} exceeds 128 MiB`);
 });
-test('12MP non-grid AVIF decodes through dav1d within the WASM memory target',async()=>{
+test('AVIF input is rejected while HEIC/HEIF remains supported',async()=>{
  const input=await fixture('input-12mp-single.avif');
- const result=scanline_experiment(input,800,0,false,false,80,false,8_000_000,false,-1,false);
- assert.equal(result.codec_buffered,true);
- assert.deepEqual([result.source_width,result.source_height],[4000,3000]);
- assert.deepEqual([result.output_width,result.output_height],[800,600]);
- const webp=decode(result.take_bytes());
- assert.deepEqual([webp.format,webp.width,webp.height],['WEBP',800,600]);
- assert.ok(linear_memory_bytes()<=128*1024*1024,`WASM linear memory ${linear_memory_bytes()} exceeds 128 MiB`);
+ await assert.rejects(image(input).resize(800).webp().bytes(),/Expected JPEG, PNG or HEIC\/HEIF/);
 });
 test('24MP non-grid HEIC remains above the single-image source limit',async()=>{
  for(const name of ['input-24mp-single.heic']) {

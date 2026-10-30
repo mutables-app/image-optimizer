@@ -1,0 +1,319 @@
+{
+  "timestamp": "2026-10-30T04:33:52.214Z",
+  "rounds": 3,
+  "output": "800x600 WebP",
+  "responseTime": "Client-observed round trip, p50 of warm requests; includes network latency.",
+  "cpuTime": "Per-invocation CPU time from Wrangler tail; median of warm requests.",
+  "note": "Synthetic fixtures. Adam7 >12 MP and non-grid HEIC/HEIF >12 MP are expected to be rejected. Cloudflare tail may omit events; null CPU means no matching tail samples were captured.",
+  "results": [
+    {
+      "label": "Baseline JPEG",
+      "mp": 48,
+      "file": "input-48mp-baseline.jpg",
+      "inputBytes": 6393295,
+      "expected": "success",
+      "successes": 3,
+      "responseP50Ms": 570,
+      "workerCpuMedianMs": 308,
+      "workerCpuSamples": [
+        373,
+        303,
+        308
+      ],
+      "wasmMemoryBytes": "16777216",
+      "decoded": "1000x750",
+      "responseSamplesMs": [
+        785.65,
+        570,
+        550.32
+      ]
+    },
+    {
+      "label": "Non-interlaced PNG",
+      "mp": 48,
+      "file": "input-48mp-streaming.png",
+      "inputBytes": 413464,
+      "expected": "success",
+      "successes": 3,
+      "responseP50Ms": 1083,
+      "workerCpuMedianMs": 933,
+      "workerCpuSamples": [
+        933,
+        864,
+        953
+      ],
+      "wasmMemoryBytes": "16777216",
+      "decoded": "8000x6000",
+      "responseSamplesMs": [
+        1120.85,
+        993.53,
+        1083.04
+      ]
+    },
+    {
+      "label": "Lowzag progressive JPEG",
+      "mp": 24,
+      "file": "input-24mp-progressive.jpg",
+      "inputBytes": 4856016,
+      "expected": "success",
+      "successes": 3,
+      "responseP50Ms": 952,
+      "workerCpuMedianMs": 686,
+      "workerCpuSamples": [
+        995,
+        495,
+        686
+      ],
+      "wasmMemoryBytes": "29097984",
+      "decoded": "1500x1000",
+      "responseSamplesMs": [
+        1389.6,
+        746.46,
+        952.35
+      ]
+    },
+    {
+      "label": "Lowzag progressive JPEG",
+      "mp": 48,
+      "file": "input-48mp-progressive.jpg",
+      "inputBytes": 7899512,
+      "expected": "success",
+      "successes": 3,
+      "responseP50Ms": 1025,
+      "workerCpuMedianMs": 726,
+      "workerCpuSamples": [
+        714,
+        726,
+        744
+      ],
+      "wasmMemoryBytes": "29097984",
+      "decoded": "1000x750",
+      "responseSamplesMs": [
+        1090.5,
+        1017.37,
+        1025.14
+      ]
+    },
+    {
+      "label": "Other progressive JPEG",
+      "mp": 12,
+      "file": "input-12mp-arithmetic-progressive.jpg",
+      "inputBytes": 188265,
+      "expected": "success",
+      "successes": 3,
+      "responseP50Ms": 251,
+      "workerCpuMedianMs": 144,
+      "workerCpuSamples": [
+        226,
+        144,
+        144
+      ],
+      "wasmMemoryBytes": "45875200",
+      "decoded": "1000x750",
+      "responseSamplesMs": [
+        399.06,
+        250.7,
+        221.37
+      ]
+    },
+    {
+      "label": "CMYK progressive JPEG",
+      "mp": 12,
+      "file": "input-12mp-cmyk-progressive.jpg",
+      "inputBytes": 188440,
+      "expected": "success",
+      "successes": 3,
+      "responseP50Ms": 407,
+      "workerCpuMedianMs": 278,
+      "workerCpuSamples": [
+        278
+      ],
+      "wasmMemoryBytes": "20185088",
+      "decoded": "1000x750",
+      "responseSamplesMs": [
+        578.38,
+        406.84,
+        370.28
+      ]
+    },
+    {
+      "label": "YCCK progressive JPEG",
+      "mp": 12,
+      "file": "input-12mp-ycck-progressive.jpg",
+      "inputBytes": 130201,
+      "expected": "success",
+      "successes": 3,
+      "responseP50Ms": 287,
+      "workerCpuMedianMs": 177,
+      "workerCpuSamples": [
+        173,
+        212,
+        177
+      ],
+      "wasmMemoryBytes": "74645504",
+      "decoded": "1000x750",
+      "responseSamplesMs": [
+        305.37,
+        286.84,
+        250.8
+      ]
+    },
+    {
+      "label": "Adam7 PNG",
+      "mp": 12,
+      "file": "adam7-12mp.png",
+      "inputBytes": 2173320,
+      "expected": "success",
+      "successes": 3,
+      "responseP50Ms": 1829,
+      "workerCpuMedianMs": 1590,
+      "workerCpuSamples": [
+        1684,
+        1590,
+        1510
+      ],
+      "wasmMemoryBytes": "16777216",
+      "decoded": "800x600",
+      "responseSamplesMs": [
+        1926.82,
+        1829.28,
+        1718.85
+      ]
+    },
+    {
+      "label": "Adam7 PNG (over limit)",
+      "mp": 24,
+      "file": "adam7-24mp.png",
+      "expectReject": true,
+      "inputBytes": 2394045,
+      "expected": "rejection",
+      "successes": 3,
+      "responseP50Ms": 155,
+      "workerCpuMedianMs": 30,
+      "workerCpuSamples": [
+        30,
+        30,
+        23
+      ],
+      "wasmMemoryBytes": null,
+      "decoded": null,
+      "responseSamplesMs": [
+        242.89,
+        155.46,
+        114.69
+      ]
+    },
+    {
+      "label": "Adam7 PNG (over limit)",
+      "mp": 48,
+      "file": "adam7-48mp.png",
+      "expectReject": true,
+      "inputBytes": 10176949,
+      "expected": "rejection",
+      "successes": 3,
+      "responseP50Ms": 454,
+      "workerCpuMedianMs": 127,
+      "workerCpuSamples": [
+        119,
+        184,
+        127
+      ],
+      "wasmMemoryBytes": null,
+      "decoded": null,
+      "responseSamplesMs": [
+        532.12,
+        454.03,
+        369.44
+      ]
+    },
+    {
+      "label": "Non-grid HEIC/HEIF",
+      "mp": 12,
+      "file": "input-12mp-single.heic",
+      "inputBytes": 151755,
+      "expected": "success",
+      "successes": 3,
+      "responseP50Ms": 400,
+      "workerCpuMedianMs": 308,
+      "workerCpuSamples": [
+        308,
+        297,
+        316
+      ],
+      "wasmMemoryBytes": "122880000",
+      "decoded": "4000x3000",
+      "responseSamplesMs": [
+        442.97,
+        390.54,
+        400.38
+      ]
+    },
+    {
+      "label": "Non-grid HEIC/HEIF (over limit)",
+      "mp": 24,
+      "file": "input-24mp-single.heic",
+      "expectReject": true,
+      "inputBytes": 300427,
+      "expected": "rejection",
+      "successes": 3,
+      "responseP50Ms": 78,
+      "workerCpuMedianMs": 7,
+      "workerCpuSamples": [
+        7,
+        11,
+        6
+      ],
+      "wasmMemoryBytes": null,
+      "decoded": null,
+      "responseSamplesMs": [
+        166.09,
+        77.74,
+        61.21
+      ]
+    },
+    {
+      "label": "Tiled/grid HEIC/HEIF",
+      "mp": 12,
+      "file": "grid-12mp-512px-tiles.heic",
+      "inputBytes": 802404,
+      "expected": "success",
+      "successes": 3,
+      "responseP50Ms": 560,
+      "workerCpuMedianMs": 422,
+      "workerCpuSamples": [
+        422,
+        423,
+        410
+      ],
+      "wasmMemoryBytes": "16777216",
+      "decoded": "4032x3024",
+      "responseSamplesMs": [
+        602.36,
+        559.55,
+        531.83
+      ]
+    },
+    {
+      "label": "Tiled/grid HEIC/HEIF",
+      "mp": 48,
+      "file": "input-48mp-grid.heic",
+      "inputBytes": 636741,
+      "expected": "success",
+      "successes": 3,
+      "responseP50Ms": 1339,
+      "workerCpuMedianMs": 1171,
+      "workerCpuSamples": [
+        1171,
+        1166,
+        1188
+      ],
+      "wasmMemoryBytes": "50987008",
+      "decoded": "8000x6000",
+      "responseSamplesMs": [
+        1366.39,
+        1307.59,
+        1339.38
+      ]
+    }
+  ]
+}

@@ -34,7 +34,7 @@ fn check(status: i32) -> Result<(), JsValue> {
         Err(error(match status {
             2 => "Image exceeds pixel or dimension limit",
             3 => "Image allocation failed",
-            4 => "Expected JPEG, PNG, HEIF or AVIF input",
+            4 => "Expected JPEG, PNG or HEIC/HEIF input",
             _ => "Image decode failed",
         }))
     }

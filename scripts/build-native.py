@@ -6,7 +6,6 @@ cache = root / '.build'
 prefix = cache / 'install'
 cache.mkdir(exist_ok=True)
 cmake = os.environ.get('CMAKE', 'cmake')
-meson = os.environ.get('MESON', 'meson')
 em = pathlib.Path(os.environ['EMSDK']) / 'upstream/emscripten'
 def run(*args, cwd=None, env=None): subprocess.run([str(a) for a in args], check=True, cwd=cwd, env=env)
 for name, tag, repo, extra in [
@@ -32,52 +31,8 @@ for name, tag, repo, extra in [
         run(cmake, '--build', cache / (name + '-build'), '-j2')
         run(cmake, '--install', cache / (name + '-build'))
 
-# dav1d uses less memory than libaom in the 12 MP AVIF Worker benchmark.
-# Build its 8-bit scalar C path as a static Emscripten library.
-dav1d = cache / 'dav1d-source' / 'dav1d-1.5.4'
-if not dav1d.exists():
-    source_root = cache / 'dav1d-source'; source_root.mkdir(exist_ok=True)
-    archive = cache / 'dav1d-1.5.4.tar.gz'
-    if not archive.exists():
-        urllib.request.urlretrieve('https://github.com/videolan/dav1d/archive/refs/tags/1.5.4.tar.gz', archive)
-    with tarfile.open(archive) as f: f.extractall(source_root, filter='data')
-dav1d_crossfile = cache / 'dav1d-emscripten.meson'
-dav1d_crossfile.write_text('''[binaries]
-c = 'emcc'
-cpp = 'em++'
-ar = 'emar'
-nm = 'emnm'
-ranlib = 'emranlib'
-strip = 'emstrip'
-pkg-config = 'pkg-config'
-exe_wrapper = 'node'
-
-[built-in options]
-c_args = ['-msimd128']
-c_link_args = ['-msimd128']
-default_library = 'static'
-
-[properties]
-needs_exe_wrapper = true
-skip_sanity_check = true
-
-[host_machine]
-system = 'emscripten'
-cpu_family = 'wasm32'
-cpu = 'wasm32'
-endian = 'little'
-''')
-dav1d_build = cache / 'dav1d-build'
-run(meson, 'setup', '--cross-file', dav1d_crossfile, '--prefix', prefix, '--libdir', 'lib', '--buildtype', 'release',
-    '-Dbitdepths=8', '-Denable_asm=false', '-Dlogging=false',
-    '-Denable_tools=false', '-Denable_tests=false', '-Denable_examples=false',
-    '-Denable_docs=false', '-Dtrim_dsp=true', '-Dc_args=-msimd128',
-    dav1d_build, dav1d)
-run(meson, 'compile', '-C', dav1d_build, '-j2')
-run(meson, 'install', '-C', dav1d_build)
-
-# libheif provides HEIF/AVIF container parsing and color conversion. Its
-# decoders are built in, without runtime plugins, for the Worker WASM module.
+# libheif provides HEIF container parsing and color conversion. Only the HEVC
+# decoder is enabled; AVIF/AV1 input is intentionally unsupported.
 
 de265 = cache / 'libde265'
 if not (prefix / 'lib' / 'libde265.a').exists():
@@ -98,7 +53,7 @@ if not heif.exists():
     with tarfile.open(archive) as f: f.extractall(unpack, filter='data')
     next(unpack.iterdir()).rename(heif)
     shutil.rmtree(unpack); archive.unlink()
-run(cmake, '-S', heif, '-B', cache / 'libheif-build', f'-DCMAKE_TOOLCHAIN_FILE={em}/cmake/Modules/Platform/Emscripten.cmake', f'-DCMAKE_INSTALL_PREFIX={prefix}', '-DCMAKE_BUILD_TYPE=Release', '-DCMAKE_C_FLAGS=-D__EMSCRIPTEN_STANDALONE_WASM__=1', '-DCMAKE_CXX_FLAGS=-D__EMSCRIPTEN_STANDALONE_WASM__=1', '-DBUILD_SHARED_LIBS=OFF', '-DBUILD_TESTING=OFF', '-DWITH_EXAMPLES=OFF', '-DENABLE_PLUGIN_LOADING=OFF', '-DENABLE_MULTITHREADING_SUPPORT=OFF', '-DWITH_DAV1D=ON', '-DWITH_DAV1D_PLUGIN=OFF', '-DWITH_AOM_DECODER=OFF', '-DWITH_AOM_DECODER_PLUGIN=OFF', '-DWITH_AOM_ENCODER=OFF', '-DWITH_AOM_ENCODER_PLUGIN=OFF', '-DWITH_LIBDE265=ON', '-DWITH_LIBDE265_PLUGIN=OFF', f'-DDAV1D_INCLUDE_DIR={prefix}/include', f'-DDAV1D_LIBRARY={prefix}/lib/libdav1d.a', f'-DLIBDE265_INCLUDE_DIR={prefix}/include', f'-DLIBDE265_LIBRARY={prefix}/lib/libde265.a')
+run(cmake, '-S', heif, '-B', cache / 'libheif-build', f'-DCMAKE_TOOLCHAIN_FILE={em}/cmake/Modules/Platform/Emscripten.cmake', f'-DCMAKE_INSTALL_PREFIX={prefix}', '-DCMAKE_BUILD_TYPE=Release', '-DCMAKE_C_FLAGS=-D__EMSCRIPTEN_STANDALONE_WASM__=1', '-DCMAKE_CXX_FLAGS=-D__EMSCRIPTEN_STANDALONE_WASM__=1', '-DBUILD_SHARED_LIBS=OFF', '-DBUILD_TESTING=OFF', '-DWITH_EXAMPLES=OFF', '-DENABLE_PLUGIN_LOADING=OFF', '-DENABLE_MULTITHREADING_SUPPORT=OFF', '-DWITH_DAV1D=OFF', '-DWITH_DAV1D_PLUGIN=OFF', '-DWITH_AOM_DECODER=OFF', '-DWITH_AOM_DECODER_PLUGIN=OFF', '-DWITH_AOM_ENCODER=OFF', '-DWITH_AOM_ENCODER_PLUGIN=OFF', '-DWITH_LIBDE265=ON', '-DWITH_LIBDE265_PLUGIN=OFF', f'-DLIBDE265_INCLUDE_DIR={prefix}/include', f'-DLIBDE265_LIBRARY={prefix}/lib/libde265.a')
 run(cmake, '--build', cache / 'libheif-build', '-j2')
 run(cmake, '--install', cache / 'libheif-build')
 
@@ -106,7 +61,6 @@ licenses = root / 'packages' / 'optimizer' / 'licenses'
 licenses.mkdir(exist_ok=True)
 shutil.copy2(heif / 'COPYING', licenses / 'libheif-LICENSE')
 shutil.copy2(cache / 'libde265-1.1.3' / 'COPYING', licenses / 'libde265-LICENSE')
-shutil.copy2(dav1d / 'COPYING', licenses / 'dav1d-LICENSE')
 
 # lowzag keeps only coefficients needed for reduced-scale progressive JPEG
 # output. Pin the mirrored v2.3.0 commit rather than tracking its main branch.
