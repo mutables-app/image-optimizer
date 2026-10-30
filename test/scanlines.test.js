@@ -127,6 +127,21 @@ test('32MP progressive JPEG converts at reduced scale within a small WASM memory
  const output=decode(result.take_bytes());assert.deepEqual([output.width,output.height],[800,400]);
  assert.ok(linear_memory_bytes()<=48*1024*1024,`WASM linear memory ${linear_memory_bytes()} exceeds 48 MiB`);
 });
+test('12MP arithmetic-coded progressive JPEG uses the buffered compatibility path',async()=>{
+ const input=await fixture('input-12mp-arithmetic-progressive.jpg');
+ const bytes=Buffer.from(input);
+ assert.ok(bytes.includes(Buffer.from([0xff,0xca])),'fixture must use progressive SOF2');
+ assert.ok(bytes.includes(Buffer.from([0xff,0xcc])),'fixture must use arithmetic coding');
+ const result=scanline_experiment(input,800,600,false,false,80,false,8_000_000,true,-1,false);
+ assert.equal(result.codec_buffered,true);
+ assert.deepEqual([result.source_width,result.source_height],[4000,3000]);
+ assert.deepEqual([result.decoded_width,result.decoded_height],[1000,750]);
+ assert.deepEqual([result.output_width,result.output_height],[800,600]);
+ const output=Buffer.from(result.take_bytes());
+ assert.equal(output.toString('ascii',0,4),'RIFF');
+ assert.equal(output.toString('ascii',8,12),'WEBP');
+ assert.ok(linear_memory_bytes()<=64*1024*1024,`WASM linear memory ${linear_memory_bytes()} exceeds 64 MiB`);
+});
 test('extreme aspect ratios keep the row window bounded',()=>{
  for(const [sw,sh,ow,oh] of [[1,16000,16000,1],[16000,1,1,16000],[31,127,127,1],[31,1,1,127]]) {
   const result=scan(rgbaPng(sw,sh,color),ow,oh);

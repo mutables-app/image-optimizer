@@ -143,8 +143,21 @@
       "skipped": "No tiled AVIF fixture is included."
     },
     {
-      "label": "Other progressive/multi-scan JPEG",
-      "skipped": "No fixture distinct from the Lowzag-compatible progressive JPEG is included."
+      "label": "Other progressive/multi-scan JPEG (arithmetic-coded)",
+      "file": "input-12mp-arithmetic-progressive.jpg",
+      "inputBytes": 188265,
+      "status": 200,
+      "ok": true,
+      "roundTripMs": 489,
+      "outputBytes": 123114,
+      "wasmMemoryBytes": "46268416",
+      "decoded": "1000x750",
+      "output": "800x600",
+      "codecBuffered": "true",
+      "colo": "WAW",
+      "error": null,
+      "fixtureSourcePixels": 12000000,
+      "note": "Synthetic arithmetic-coded progressive JPEG; the arithmetic-coded SOF2 stream bypasses Lowzag and uses the buffered libjpeg compatibility path."
     },
     {
       "label": "64MP HEIC grid over limit",

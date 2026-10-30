@@ -21,7 +21,7 @@ const allCases = [
   { label: 'Single-image AVIF', file: 'input-12mp-single.avif' },
   { label: 'Tiled HEIC', file: 'input-48mp-grid.heic' },
   { label: 'Tiled/grid AVIF', file: null, skipped: 'No tiled AVIF fixture is included.' },
-  { label: 'Other progressive/multi-scan JPEG', file: null, skipped: 'No fixture distinct from the Lowzag-compatible progressive JPEG is included.' },
+  { label: 'Other progressive/multi-scan JPEG (arithmetic-coded)', file: 'input-12mp-arithmetic-progressive.jpg' },
   { label: '64MP HEIC grid over limit', file: 'input-64mp-grid.heic' },
   { label: '64MP progressive JPEG over limit', file: 'input-64mp-progressive.jpg' },
 ];
@@ -95,4 +95,5 @@ const report = {
   measurement: 'x-wasm-linear-memory-bytes reports Wasm linear-memory capacity, not Worker isolate RSS; one request in a fresh isolate per case, 800x600 WebP output; fixtures are synthetic. Temporary benchmark Workers used a 30,000 ms CPU ceiling; this measures memory capacity and does not imply the default 1,000 ms experiment Worker can complete every case.',
   results,
 };
-await writeFile('benchmarks/decoder-memory-worker.json', `${JSON.stringify(report, null, 2)}\n`);
+const reportPath = process.env.BENCHMARK_OUTPUT ?? 'benchmarks/decoder-memory-worker.json';
+await writeFile(reportPath, `${JSON.stringify(report, null, 2)}\n`);
