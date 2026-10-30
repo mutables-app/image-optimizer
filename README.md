@@ -97,16 +97,13 @@ The published v0.1.0 Worker benchmark (before scanlines) compares two internal W
 
 - JPEG, PNG, WebP, and HEIC/HEIF input; WebP and JPEG output. No animation, rotation, or metadata API.
 
-The memory figures below come from synthetic fixtures at the listed maximum source size, resized to **800×600 and encoded as WebP**. WASM capacity is linear-memory capacity after conversion. Cloudflare memory is sampled `memoryUsageBytesP99` for successful Worker requests; sample counts are shown where available. These measurements describe the listed test cases, not guaranteed peaks for every image. See the [raw Worker measurements](benchmarks/decoder-memory-worker.json).
-
-| Input type | Maximum source pixels tested | Decode path in test | WASM capacity | Cloudflare isolate memory, max sampled |
-| --- | ---: | --- | ---: | ---: |
-| Baseline JPEG | 48 MP | Sequential decode, scaled to 1000×750, then resized to 800×600. | 16 MiB | 36.14 MiB (1 sample) |
-| Non-interlaced PNG | 48 MP | Sequential full-resolution decode with row-wise resizing to 800×600. | 16 MiB | 21.17 MiB (1 sample) |
-| Lowzag-compatible progressive JPEG | 48 MP | Reduced coefficient decode to 1000×750, then resized to 800×600. | 27.75 MiB | 43.23 MiB (1 sample) |
-| WebP, default decode | 12 MP | Full RGBA decode before resizing. | 66.56 MiB | 98.08 MiB (4 samples) |
-| WebP, `speed: 'fast'` resized decode | 12 MP | libwebp scaled output at up to 2× target size, then Lanczos resizing. | 19.25 MiB | 39.36 MiB (4 samples) |
-| Tiled/grid HEIC/HEIF | 48 MP | libde265 (HEVC); decodes one tile row at a time, then resizes to 800×600. | 49 MiB | 54.97 MiB (1 sample) |
+| Input type | Maximum source pixels | Decode path |
+| --- | ---: | --- |
+| Baseline JPEG | 48 MP | Sequential scanline decode; eligible resized JPEGs can use scaled decode with `speed: 'fast'`. |
+| Non-interlaced PNG | 48 MP | Sequential scanline decode. |
+| Lowzag-compatible progressive JPEG | 48 MP | Reduced coefficient decode when resizing; coefficient planes are checked before full-resolution fallback. |
+| WebP | 12 MP | Full decode by default; resized `speed: 'fast'` requests use libwebp scaled output. |
+| Tiled/grid HEIC/HEIF | 48 MP | libde265 (HEVC); decodes one tile row at a time. |
 
 ### Worker response time and CPU (WebP output)
 
@@ -128,6 +125,21 @@ These end-to-end samples convert supported synthetic inputs to 800×600 WebP. Ea
 | Tiled/grid HEIC/HEIF, 48 MP | Converted | 1,570 ms | 1,417 ms (3 samples) | 48.63 MiB |
 
 See the [raw Worker performance results](benchmarks/decoder-performance-worker.json) and [memory measurements](benchmarks/decoder-memory-worker.json). Both reports keep measurements for unsupported Adam7 PNG, non-grid HEIC/HEIF, and non-Lowzag progressive JPEG paths in `historicalUnsupportedResults`; those results do not describe current support. These small synthetic-fixture samples show this test run, not guaranteed production latency.
+
+#### Worker memory benchmarks (800×600 WebP output)
+
+Each memory result below comes from synthetic input at the maximum supported source size for that path, resized to 800×600 and encoded as WebP. WASM capacity is linear-memory capacity after conversion. Cloudflare memory is sampled `memoryUsageBytesP99`, not exact peak RSS; sample counts are shown in parentheses. These figures describe the listed runs, not guaranteed peaks for every image.
+
+| Synthetic input | Decode path used in test | WASM capacity | Cloudflare isolate memory, max sampled |
+| --- | --- | ---: | ---: |
+| Baseline JPEG, 48 MP | Scaled JPEG decode to 1000×750, then resized to 800×600. | 16 MiB | 36.14 MiB (1 sample) |
+| Non-interlaced PNG, 48 MP | Sequential full-resolution decode with row-wise resizing. | 16 MiB | 21.17 MiB (1 sample) |
+| Lowzag progressive JPEG, 48 MP | Reduced coefficient decode to 1000×750, then resized to 800×600. | 27.75 MiB | 43.23 MiB (1 sample) |
+| WebP, 12 MP, default | Full RGBA decode before resizing. | 66.56 MiB | 98.08 MiB (4 samples) |
+| WebP, 12 MP, `speed: 'fast'` | Scaled output at up to 2× target size, then Lanczos resizing. | 19.25 MiB | 39.36 MiB (4 samples) |
+| Tiled/grid HEIC/HEIF, 48 MP | libde265 decodes one tile row at a time, then resizes to 800×600. | 49 MiB | 54.97 MiB (1 sample) |
+
+See the [raw Worker memory measurements](benchmarks/decoder-memory-worker.json).
 
 #### Baseline JPEG to optimized JPEG
 
