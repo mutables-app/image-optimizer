@@ -11,10 +11,15 @@
 #include <pngle.h>
 #include <lowzag.h>
 
-#define MAX_BUFFERED_SOURCE_PIXELS 24000000u
-#define MAX_STREAMING_SOURCE_PIXELS 32000000u
+#define MAX_BUFFERED_SOURCE_PIXELS 48000000u
+#define MAX_STREAMING_SOURCE_PIXELS 48000000u
 #define MAX_LOWZAG_ALLOC_BYTES (64u * 1024u * 1024u)
-#define MAX_ADAM7_ACCUM_BYTES (32u * 1024u * 1024u)
+#define MAX_LOWZAG_SOURCE_PIXELS 48000000u
+#define MAX_CMYK_PROGRESSIVE_SOURCE_PIXELS 12000000u
+#define MAX_ADAM7_SOURCE_PIXELS 48000000u
+#define MAX_ADAM7_FALLBACK_SOURCE_PIXELS 12000000u
+#define MAX_PROGRESSIVE_COEFFICIENT_BYTES (64u * 1024u * 1024u)
+#define MAX_ADAM7_ACCUM_BYTES (48u * 1024u * 1024u)
 
 // Adam7 callbacks arrive in pass order, so a conventional row resizer cannot
 // consume them directly. Scatter each decoded sample through precomputed
@@ -95,6 +100,21 @@ int heif_rows_buffered(void *);
 void heif_rows_close(void *);
 static void row_error(j_common_ptr c) { longjmp(((RowError *)c->err)->jump, 1); }
 static void row_message(j_common_ptr c, int level) { if (level < 0) row_error(c); }
+static int jpeg_coefficients_fit(struct jpeg_decompress_struct *jpeg) {
+    uint64_t blocks = 0;
+    for (int i = 0; i < jpeg->num_components; ++i) {
+        const jpeg_component_info *c = &jpeg->comp_info[i];
+        uint64_t block_w = ((uint64_t)jpeg->image_width * c->h_samp_factor +
+                            jpeg->max_h_samp_factor * DCTSIZE - 1) /
+                           (jpeg->max_h_samp_factor * DCTSIZE);
+        uint64_t block_h = ((uint64_t)jpeg->image_height * c->v_samp_factor +
+                            jpeg->max_v_samp_factor * DCTSIZE - 1) /
+                           (jpeg->max_v_samp_factor * DCTSIZE);
+        if (block_w && block_h > (UINT64_MAX - blocks) / block_w) return 0;
+        blocks += block_w * block_h;
+    }
+    return blocks <= MAX_PROGRESSIVE_COEFFICIENT_BYTES / sizeof(JBLOCK);
+}
 void rows_close(RowDecoder *r) {
     if (!r) return;
     if (r->jpeg_created) jpeg_destroy_decompress(&r->jpeg);
@@ -180,7 +200,7 @@ int rows_open(const uint8_t *data, size_t size, uint32_t max_source,
         // Adam7 passes revisit rows. rows_start may route small downscales
         // through Pngle; otherwise the complete-image fallback is required.
         r->buffered = !!header.interlace_method;
-        if (r->buffered && (uint64_t)r->w*r->h > MAX_BUFFERED_SOURCE_PIXELS) {
+        if (r->buffered && (uint64_t)r->w*r->h > MAX_ADAM7_SOURCE_PIXELS) {
             rows_close(r); return 2;
         }
     } else if (size >= 2 && data[0] == 0xff && data[1] == 0xd8) {
@@ -192,11 +212,21 @@ int rows_open(const uint8_t *data, size_t size, uint32_t max_source,
         jpeg_mem_src(&r->jpeg, data, size);
         jpeg_read_header(&r->jpeg, TRUE);
         r->w = r->jpeg.image_width; r->h = r->jpeg.image_height;
-        if (!r->w || !r->h || r->w > 16383 || r->h > 16383 || (uint64_t)r->w*r->h > max_source) {
+        if (!r->w || !r->h || r->w > 16383 || r->h > 16383) {
             rows_close(r); return 2;
         }
         r->buffered = r->jpeg.progressive_mode || jpeg_has_multiple_scans(&r->jpeg);
         r->cmyk = r->jpeg.jpeg_color_space == JCS_CMYK || r->jpeg.jpeg_color_space == JCS_YCCK;
+        // Lowzag does not support CMYK/YCCK. Keep those progressive JPEGs
+        // below the 48 MP RGB lowzag ceiling because libjpeg must buffer
+        // their full coefficient planes.
+        if (r->jpeg.progressive_mode && r->cmyk &&
+            (uint64_t)r->w * r->h > MAX_CMYK_PROGRESSIVE_SOURCE_PIXELS) {
+            rows_close(r); return 2;
+        }
+        if ((uint64_t)r->w * r->h > max_source) {
+            rows_close(r); return 2;
+        }
         if (r->jpeg.progressive_mode && !r->jpeg.arith_code && !r->cmyk &&
             r->jpeg.data_precision == 8 &&
             (r->jpeg.num_components == 1 || r->jpeg.num_components == 3) &&
@@ -209,11 +239,21 @@ int rows_open(const uint8_t *data, size_t size, uint32_t max_source,
             r->lowzag_candidate = factors_ok &&
                 lowzag_probe(data, size, NULL, NULL) == LOWZAG_OK;
         }
+        if (r->lowzag_candidate &&
+            (uint64_t)r->w*r->h > MAX_LOWZAG_SOURCE_PIXELS) {
+            rows_close(r); return 2;
+        }
         if ((uint64_t)r->w*r->h > MAX_STREAMING_SOURCE_PIXELS && !r->lowzag_candidate) {
             rows_close(r); return 2;
         }
         if (r->buffered && !r->lowzag_candidate && (uint64_t)r->w*r->h > MAX_BUFFERED_SOURCE_PIXELS) {
             rows_close(r); return 2;
+        }
+        if (r->buffered && !r->lowzag_candidate) {
+            // CMYK progressive files commonly need more coefficient storage
+            // per pixel than RGB. Their separate source cap bounds this
+            // measured full-coefficient path; other JPEGs use the 64 MiB guard.
+            if (!r->cmyk && !jpeg_coefficients_fit(&r->jpeg)) { rows_close(r); return 2; }
         }
     } else if (size >= 12 && !memcmp(data + 4, "ftyp", 4)) {
         int status = heif_rows_open(data, size, &r->heif, &r->w, &r->h);
@@ -271,6 +311,10 @@ int rows_start(RowDecoder *r, uint32_t target_w, uint32_t target_h, int scaled,
             r->adam7_samples = 0; r->pngle_done = 0; r->pngle_alloc_failed = 0;
         }
         if (r->buffered) {
+            // Adam7's callback downscaler is bounded by the requested output.
+            // The full-frame fallback is limited separately to keep it below
+            // the Worker memory budget when the callback path cannot be used.
+            if ((uint64_t)r->w*r->h > MAX_ADAM7_FALLBACK_SOURCE_PIXELS) return 2;
             // Called only after Rust validates the requested output geometry.
             size_t bytes = (size_t)r->w*r->h*4;
             r->pixels = malloc(bytes);
@@ -310,6 +354,7 @@ int rows_start(RowDecoder *r, uint32_t target_w, uint32_t target_h, int scaled,
              * must fail before libjpeg allocates its full coefficient array. */
             if ((uint64_t)r->jpeg.image_width * r->jpeg.image_height > MAX_BUFFERED_SOURCE_PIXELS)
                 return 2;
+            if (!r->cmyk && !jpeg_coefficients_fit(&r->jpeg)) return 2;
         }
         if (setjmp(r->error.jump)) return 1;
         if (scaled && target_w < r->w && target_h < r->h) {

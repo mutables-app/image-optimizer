@@ -8,12 +8,14 @@ function decode(bytes) {
  const p=spawnSync('python3',['test/decode-image.py'],{input:bytes,maxBuffer:64*1024*1024});
  assert.equal(p.status,0,p.stderr.toString());return JSON.parse(p.stdout);
 }
-test('64MP tiled HEIC decodes tile rows within a bounded WASM memory budget',async()=>{
- const input=await fixture('input-64mp-grid.heic');
- const result=scanline_experiment(input,800,0,false,false,80,false,8_000_000,false,-1,false);
+test('48MP tiled HEIC decodes tile rows within the 100 MiB memory target',async()=>{
+ const input=await fixture('input-48mp-grid.heic');
+ const result=scanline_experiment(input,2828,2828,false,false,80,false,8_000_000,false,-1,false);
  assert.equal(result.codec_buffered,false);
- assert.deepEqual([result.source_width,result.source_height],[8000,8000]);
- assert.deepEqual([result.output_width,result.output_height],[800,800]);
- const output=decode(result.take_bytes());assert.deepEqual([output.width,output.height],[800,800]);
- assert.ok(linear_memory_bytes()<=96*1024*1024,`WASM linear memory ${linear_memory_bytes()} exceeds 96 MiB`);
+ assert.deepEqual([result.source_width,result.source_height],[8000,6000]);
+ assert.deepEqual([result.output_width,result.output_height],[2828,2828]);
+ const output=decode(result.take_bytes());assert.deepEqual([output.width,output.height],[2828,2828]);
+ assert.ok(linear_memory_bytes()<=100*1024*1024,`WASM linear memory ${linear_memory_bytes()} exceeds 100 MiB`);
+ const overLimit=await fixture('input-64mp-grid.heic');
+ assert.throws(()=>scanline_experiment(overLimit,800,0,false,false,80,false,8_000_000,false,-1,false),/limit/i);
 });

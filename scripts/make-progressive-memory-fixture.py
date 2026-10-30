@@ -10,8 +10,8 @@ parser.add_argument('--output', type=Path)
 args = parser.parse_args()
 root = Path(__file__).resolve().parents[1] / "test/fixtures"
 size = (args.width, args.height)
-if size[0] < 1 or size[1] < 1 or size[0] * size[1] > 32_000_000:
-    raise SystemExit('Dimensions must describe 1–32 megapixels')
+if size[0] < 1 or size[1] < 1 or size[0] * size[1] > 48_000_000:
+    raise SystemExit('Dimensions must describe 1–48 megapixels')
 output = args.output or root / ('input-24mp-progressive.jpg' if size == (6000, 4000) else f'input-{size[0]}x{size[1]}-progressive.jpg')
 
 # Multiscale synthetic texture exercises progressive coefficient storage without

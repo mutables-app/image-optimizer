@@ -15,12 +15,14 @@ Reads from `workspace.fs.readFile`, optimizes with the standalone WASM package, 
 
 | Input type | Maximum source pixels | Decode path |
 | --- | ---: | --- |
-| Baseline JPEG | 32 MP | Sequential scanline decode; eligible resized JPEGs can use scaled decode with `speed: 'fast'`. |
-| Non-interlaced PNG | 32 MP | Sequential scanline decode. |
-| Lowzag-compatible progressive JPEG | 64 MP | Reduced coefficient decode when resizing; full-resolution fallback retains the 24 MP buffered limit. |
-| Other progressive or multi-scan JPEG | 24 MP | Buffered codec compatibility path. |
-| Adam7/interlaced PNG | 24 MP | Complete-image compatibility decode before resizing. |
-| Non-grid HEIC/HEIF and AVIF | 8 MP | Full source image is decoded into memory. |
-| Tiled/grid HEIF/HEIC or AVIF | 64 MP | Decodes one tile row at a time. |
+| Baseline JPEG | 48 MP | Sequential scanline decode; eligible resized JPEGs can use scaled decode with `speed: 'fast'`. |
+| Non-interlaced PNG | 48 MP | Sequential scanline decode. |
+| Lowzag-compatible progressive JPEG | 48 MP | Reduced coefficient decode when resizing; coefficient planes are checked before full-resolution fallback. |
+| Other progressive or multi-scan JPEG | 48 MP | Buffered codec compatibility path; coefficient planes above 64 MiB are rejected before allocation. |
+| CMYK/YCCK progressive JPEG | 12 MP | Lowzag does not support CMYK; this path buffers coefficient planes. |
+| Adam7/interlaced PNG | 48 MP | Pngle callback downscaling with a <=48 MiB accumulator; full-frame fallback is limited to 12 MP. |
+| Non-grid HEIC/HEIF and AVIF | 12 MP | Full source image is decoded into memory. |
+| Tiled/grid HEIF/HEIC | 48 MP | Decodes one tile row at a time. |
+| Tiled/grid AVIF | 64 MP | Decodes one tile row at a time. |
 
-All formats share a 20 MiB input limit and a 16,383-pixel dimension limit. The output pixel limit is 8 MP by default and can be raised to 16 MP. Cloudflare Worker isolates have a 128 MiB total memory limit across JavaScript and WebAssembly. Progressive JPEG and Adam7 PNG compatibility paths retain additional codec memory.
+All formats share a 20 MiB input limit and a 16,383-pixel dimension limit. The output pixel limit is 8 MP by default and can be raised to 16 MP. Decoder limits depend on path and output size; Adam7 inputs above 12 MP require callback downscaling within the 48 MiB accumulator limit. Cloudflare Worker isolates have a 128 MiB total memory limit across JavaScript and WebAssembly.

@@ -1,0 +1,11 @@
+These 12 MP and 48 MP PNG/JPEG charts are synthetic local test data; no third-party image content is used. The RGB 48 MP progressive JPEG is produced by `scripts/make-progressive-memory-fixture.py`. The CMYK progressive JPEG is a solid chart used to test coefficient-allocation limits. The other charts use deterministic gradients and repeating color bands.
+
+SHA-256:
+
+- `adam7-12mp.png`: `65a16c524194eb94cf75b2b5a1e0c1cd2f3ca4ece05709d1753aff0bd2410969`
+- `adam7-48mp.png`: `582769ceda26ba6f92c08c61e821eca03053ce962d8e3d28458d00fbedb457a0`
+- `input-48mp-baseline.jpg`: `d78a623fb4d4218d897e051b9e88fe9182f732385b6b1d490f0797b5d00407f6`
+- `input-48mp-cmyk-progressive.jpg`: `0e2ae78f013bf2084069eae4aa0db3f8b9a5291025e4816f4f2fbb49665b47c0`
+- `input-12mp-cmyk-progressive.jpg`: `f66598d0a40539788118a4cc8cda051a2821002c4e095fc4461b733b43c026ad`
+- `input-48mp-progressive.jpg`: `ac441bf929be1cda09e052d4f98ac0d46fc57aa7755351fd730b97c3ac69963e`
+- `input-48mp-streaming.png`: `a4f6e7bc9df353d33bed14c49f3d7740037501836e4ff085b4a1769cc432c685`
