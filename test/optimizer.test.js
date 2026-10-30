@@ -21,12 +21,8 @@ test('JPEG → fit inside → lossy WebP', async () => {
  const out = decode(await image(jpeg).resize(40,40,{fit:'inside'}).webp({quality:75}).bytes());
  assert.ok(out.width <= 40 && out.height <= 40); assert.ok(out.width === 40 || out.height === 40);
 });
-test('HEIC/HEIF from a phone is accepted for WebP and JPEG output', async () => {
- const webp = decode(await image(heic).resize(160).webp({speed:'fast'}).bytes());
- assert.deepEqual([webp.width,webp.height],[160,120]);
- const jpeg = await image(heic).resize(160).jpeg().bytes();
- const result = JSON.parse(spawnSync('python3',['test/decode-image.py'],{input:jpeg}).stdout.toString());
- assert.deepEqual([result.format,result.width,result.height],['JPEG',160,120]);
+test('single-image phone HEIC is explicitly rejected', async () => {
+ await assert.rejects(image(heic).resize(160).webp({speed:'fast'}).bytes(),/Non-grid HEIC\/HEIF input is not supported/);
 });
 test('fast speed selects the internal fast encoder while omission keeps the existing default', async () => {
  const pipeline = () => image(jpeg).resize(40,40,{fit:'inside'});
