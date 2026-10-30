@@ -82,14 +82,14 @@ jobs:
 
       - name: Publish optimizer package
         working-directory: packages/optimizer
-        run: npm publish --access public
+        run: npm publish --access public --provenance
         env:
           NODE_AUTH_TOKEN: ''
         if: (github.ref_type == 'tag' || (github.event_name == 'workflow_dispatch' && inputs.publish)) && steps.optimizer-version.outputs.published != 'true'
 
       - name: Publish Computer adapter
         working-directory: packages/computer
-        run: npm publish --access public
+        run: npm publish --access public --provenance
         env:
           NODE_AUTH_TOKEN: ''
         if: (github.ref_type == 'tag' || (github.event_name == 'workflow_dispatch' && inputs.publish)) && steps.computer-version.outputs.published != 'true'
