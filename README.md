@@ -106,18 +106,22 @@ The published v0.1.0 Worker benchmark (before scanlines) compares two internal W
 
 ### Worker response time and CPU
 
-These end-to-end samples convert supported synthetic inputs to 800×600 WebP. Each fixture ran in its own temporary Worker with one warm-up request followed by three measured requests. Response time is client-observed p50 and includes network and transfer time; CPU is the median per-invocation `cpuTime` reported by Wrangler tail. Wrangler captured between one and three CPU samples per fixture, as shown below. The temporary Workers used a 30-second CPU limit.
+These end-to-end samples convert supported synthetic inputs to 800×600 WebP. Each fixture ran in its own temporary Worker with one warm-up request followed by three measured requests. Response time is client-observed p50 and includes network and transfer time; CPU is the median per-invocation `cpuTime` reported by Wrangler tail. Wrangler captured one to three CPU samples per fixture; the sample count appears beside each CPU median. The temporary Workers used a 30-second CPU limit.
 
 | Input path and source size | Result | Response p50 | Worker CPU median | WASM capacity after last request |
 | --- | --- | ---: | ---: | ---: |
-| Baseline JPEG, 12 MP | Converted | 234 ms | 137 ms (3 samples) | 16 MiB |
-| Baseline JPEG, 24 MP | Converted | 230 ms | 122 ms (3 samples) | 16 MiB |
-| Baseline JPEG, 48 MP | Converted | 570 ms | 308 ms (3 samples) | 16 MiB |
-| Non-interlaced PNG, 48 MP | Converted | 1,083 ms | 933 ms (3 samples) | 16 MiB |
-| Lowzag progressive JPEG, 24 MP | Converted | 952 ms | 686 ms (3 samples) | 27.75 MiB |
-| Lowzag progressive JPEG, 48 MP | Converted | 1,025 ms | 726 ms (3 samples) | 27.75 MiB |
-| Tiled/grid HEIC/HEIF, 12 MP | Converted | 560 ms | 422 ms (3 samples) | 16 MiB |
-| Tiled/grid HEIC/HEIF, 48 MP | Converted | 1,339 ms | 1,171 ms (3 samples) | 48.63 MiB |
+| Baseline JPEG, 12 MP | Converted | 234 ms | 111 ms (1 sample) | 16 MiB |
+| Baseline JPEG, 24 MP | Converted | 367 ms | 198 ms (1 sample) | 16 MiB |
+| Baseline JPEG, 48 MP | Converted | 630 ms | 346 ms (3 samples) | 16 MiB |
+| Non-interlaced PNG, 12 MP | Converted | 469 ms | 381 ms (3 samples) | 16 MiB |
+| Non-interlaced PNG, 24 MP | Converted | 547 ms | 426 ms (3 samples) | 16 MiB |
+| Non-interlaced PNG, 48 MP | Converted | 1,047 ms | 932 ms (3 samples) | 16 MiB |
+| Lowzag progressive JPEG, 12 MP | Converted | 671 ms | 438 ms (3 samples) | 16 MiB |
+| Lowzag progressive JPEG, 24 MP | Converted | 708 ms | 498 ms (3 samples) | 27.75 MiB |
+| Lowzag progressive JPEG, 48 MP | Converted | 1,359 ms | 1,032 ms (3 samples) | 27.75 MiB |
+| Tiled/grid HEIC/HEIF, 12 MP | Converted | 962 ms | 710 ms (3 samples) | 16 MiB |
+| Tiled/grid HEIC/HEIF, 24 MP | Converted | 885 ms | 734 ms (3 samples) | 36.88 MiB |
+| Tiled/grid HEIC/HEIF, 48 MP | Converted | 1,570 ms | 1,417 ms (3 samples) | 48.63 MiB |
 
 See the [raw Worker performance results](benchmarks/decoder-performance-worker.json) and [memory measurements](benchmarks/decoder-memory-worker.json). Both reports keep measurements for unsupported Adam7 PNG, non-grid HEIC/HEIF, and non-Lowzag progressive JPEG paths in `historicalUnsupportedResults`; those results do not describe current support. These small synthetic-fixture samples show this test run, not guaranteed production latency.
 

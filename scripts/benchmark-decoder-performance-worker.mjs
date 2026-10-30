@@ -16,10 +16,14 @@ const fixtures = [
   {label:'Baseline JPEG',mp:12,file:'input-12mp-baseline.jpg'},
   {label:'Baseline JPEG',mp:24,file:'input-24mp-baseline.jpg'},
   {label:'Baseline JPEG',mp:48,file:'input-48mp-baseline.jpg'},
+  {label:'Non-interlaced PNG',mp:12,file:'input-12mp-streaming.png'},
+  {label:'Non-interlaced PNG',mp:24,file:'input-24mp-streaming.png'},
   {label:'Non-interlaced PNG',mp:48,file:'input-48mp-streaming.png'},
+  {label:'Lowzag progressive JPEG',mp:12,file:'input-12mp-progressive.jpg'},
   {label:'Lowzag progressive JPEG',mp:24,file:'input-24mp-progressive.jpg'},
   {label:'Lowzag progressive JPEG',mp:48,file:'input-48mp-progressive.jpg'},
   {label:'Tiled/grid HEIC/HEIF',mp:12,file:'grid-12mp-512px-tiles.heic'},
+  {label:'Tiled/grid HEIC/HEIF',mp:24,file:'input-24mp-grid.heic'},
   {label:'Tiled/grid HEIC/HEIF',mp:48,file:'input-48mp-grid.heic'},
 ];
 const only = process.env.DECODER_BENCHMARK_ONLY?.split(',').map(value=>value.trim()).filter(Boolean);
