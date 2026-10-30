@@ -31,10 +31,10 @@ For WebP, `speed: 'fast'` selects a faster internal encoder setting and enables 
 | CMYK progressive JPEG | 12 MP | Lowzag reduced coefficient planes. | 19.25 MiB | 24.34 MiB (5 current-build requests); old build 117.72 MiB (1 request) |
 | YCCK progressive JPEG | 12 MP | Buffered coefficient compatibility path. | 71.56 MiB | 76.49 MiB (1 request) |
 | Adam7/interlaced PNG | 48 MP | Pngle callback downscaling with a <=48 MiB accumulator; full-frame fallback is limited to 12 MP. | 25.25 MiB | 46.07 MiB |
-| Non-grid HEIC/HEIF | 12 MP | Full source image is decoded into memory. | 97.94 MiB | 102.66 MiB |
-| Non-grid AVIF | 12 MP | Full source image is decoded into memory. | 90.25 MiB | 95.16 MiB |
-| Tiled/grid HEIC/HEIF | 48 MP | Decodes one tile row at a time. | 49 MiB | 54.97 MiB |
-| Tiled/grid AVIF | 48 MP | Decodes one tile row at a time. | No fixture available | Not measured |
+| Non-grid HEIC/HEIF | 12 MP | libde265 (HEVC); decodes the full source image into memory. | 97.94 MiB | 102.66 MiB |
+| Non-grid AVIF | 12 MP | dav1d (AV1); decodes the full source image into memory. | 90.25 MiB | 95.16 MiB |
+| Tiled/grid HEIC/HEIF | 48 MP | libde265 (HEVC); decodes one tile row at a time. | 49 MiB | 54.97 MiB |
+| Tiled/grid AVIF | 48 MP | dav1d (AV1); decodes one tile row at a time. | No fixture available | Not measured |
 
 All formats share a 20 MiB input limit and a 16,383-pixel dimension limit. `image(input,{maxPixels: ...})` bounds output pixels: 8 MP by default, maximum 16 MP. Decoder limits depend on the selected path and requested output size; Adam7 inputs above 12 MP require the callback downscaler and an output no larger than the 48 MiB accumulator permits. Other progressive JPEGs are also subject to a coefficient-plane memory check. CMYK progressive JPEGs use reduced Lowzag coefficient storage; YCCK retains the full-coefficient compatibility path. Both have a separate 12 MP source limit. WASM capacity is not total Worker memory. Cloudflare's per-invocation isolate-memory metric includes shared JavaScript and WebAssembly memory, but is sampled at invocation time rather than measuring exact peak memory. Cloudflare's isolate limit is 128 MiB. Image processing runs synchronously inside the terminal method's promise.
 

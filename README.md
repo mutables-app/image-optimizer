@@ -106,10 +106,10 @@ The published v0.1.0 Worker benchmark (before scanlines) compares two internal W
 | CMYK progressive JPEG | 12 MP | Lowzag reduced coefficient planes. | 19.25 MiB | 24.34 MiB (5 current-build requests); old build 117.72 MiB (1 request) |
 | YCCK progressive JPEG | 12 MP | Buffered coefficient compatibility path. | 71.56 MiB | 76.49 MiB (1 request) |
 | Adam7/interlaced PNG | 48 MP | Pngle callback downscaling with a <=48 MiB accumulator; full-frame fallback is limited to 12 MP. | 25.25 MiB | 46.07 MiB |
-| Non-grid HEIC/HEIF | 12 MP | Full source image is decoded into memory. | 97.94 MiB | 102.66 MiB |
-| Non-grid AVIF | 12 MP | Full source image is decoded into memory. | 90.25 MiB | 95.16 MiB |
-| Tiled/grid HEIC/HEIF | 48 MP | Decodes one tile row at a time. | 49 MiB | 54.97 MiB |
-| Tiled/grid AVIF | 48 MP | Decodes one tile row at a time. | No fixture available | Not measured |
+| Non-grid HEIC/HEIF | 12 MP | libde265 (HEVC); decodes the full source image into memory. | 97.94 MiB | 102.66 MiB |
+| Non-grid AVIF | 12 MP | dav1d (AV1); decodes the full source image into memory. | 90.25 MiB | 95.16 MiB |
+| Tiled/grid HEIC/HEIF | 48 MP | libde265 (HEVC); decodes one tile row at a time. | 49 MiB | 54.97 MiB |
+| Tiled/grid AVIF | 48 MP | dav1d (AV1); decodes one tile row at a time. | No fixture available | Not measured |
 
 All formats share a 20 MiB input limit and a 16,383-pixel dimension limit. The default output pixel limit (`maxPixels`) is 8 MP and can be raised to 16 MP. Decoder limits depend on path and output size; Adam7 inputs above 12 MP require callback downscaling within the 48 MiB accumulator limit. WASM capacity is not total Worker memory. Cloudflare's per-invocation isolate-memory metric includes shared JavaScript and WebAssembly memory, but is sampled at invocation time rather than measuring exact peak memory. Cloudflare Worker isolates have a 128 MiB total limit.
 
