@@ -1,0 +1,139 @@
+{
+  "timestamp": "2026-10-30T14:50:21.916Z",
+  "rounds": 3,
+  "output": "800x600 JPEG, quality 80",
+  "responseTime": "Client-observed round trip, p50 of warm requests; includes network latency.",
+  "cpuTime": "Per-invocation CPU time from Wrangler tail; median of captured warm-request samples.",
+  "note": "Synthetic baseline JPEG fixtures. Each size and decode mode ran in a fresh Worker, with one warm-up and three measured requests. Wrangler tail may omit CPU events; null CPU means no matching samples were captured.",
+  "results": [
+    {
+      "source": "Baseline JPEG, 12 MP",
+      "file": "input-12mp-baseline.jpg",
+      "inputBytes": 660107,
+      "mode": "default",
+      "output": "800x600 JPEG, quality 80",
+      "successes": 3,
+      "responseP50Ms": 520,
+      "workerCpuMedianMs": 309,
+      "workerCpuSamples": [
+        353,
+        265
+      ],
+      "wasmMemoryBytes": "16777216",
+      "outputBytesMedian": 99896,
+      "responseSamplesMs": [
+        647.43,
+        519.5,
+        397.21
+      ]
+    },
+    {
+      "source": "Baseline JPEG, 12 MP",
+      "file": "input-12mp-baseline.jpg",
+      "inputBytes": 660107,
+      "mode": "fast",
+      "output": "800x600 JPEG, quality 80",
+      "successes": 3,
+      "responseP50Ms": 316,
+      "workerCpuMedianMs": 81,
+      "workerCpuSamples": [
+        81
+      ],
+      "wasmMemoryBytes": "16777216",
+      "outputBytesMedian": 99232,
+      "responseSamplesMs": [
+        572.16,
+        195.73,
+        315.7
+      ]
+    },
+    {
+      "source": "Baseline JPEG, 24 MP",
+      "file": "input-24mp-baseline.jpg",
+      "inputBytes": 1317516,
+      "mode": "default",
+      "output": "800x600 JPEG, quality 80",
+      "successes": 3,
+      "responseP50Ms": 650,
+      "workerCpuMedianMs": 487,
+      "workerCpuSamples": [
+        565,
+        457,
+        487
+      ],
+      "wasmMemoryBytes": "16777216",
+      "outputBytesMedian": 114110,
+      "responseSamplesMs": [
+        856.28,
+        624.61,
+        649.52
+      ]
+    },
+    {
+      "source": "Baseline JPEG, 24 MP",
+      "file": "input-24mp-baseline.jpg",
+      "inputBytes": 1317516,
+      "mode": "fast",
+      "output": "800x600 JPEG, quality 80",
+      "successes": 3,
+      "responseP50Ms": 280,
+      "workerCpuMedianMs": 161,
+      "workerCpuSamples": [
+        166,
+        161,
+        125
+      ],
+      "wasmMemoryBytes": "16777216",
+      "outputBytesMedian": 114600,
+      "responseSamplesMs": [
+        430.85,
+        280.29,
+        243.96
+      ]
+    },
+    {
+      "source": "Baseline JPEG, 48 MP",
+      "file": "input-48mp-baseline.jpg",
+      "inputBytes": 6393295,
+      "mode": "default",
+      "output": "800x600 JPEG, quality 80",
+      "successes": 3,
+      "responseP50Ms": 1796,
+      "workerCpuMedianMs": 1154,
+      "workerCpuSamples": [
+        1154,
+        1574,
+        961
+      ],
+      "wasmMemoryBytes": "16777216",
+      "outputBytesMedian": 159023,
+      "responseSamplesMs": [
+        1795.85,
+        1919.72,
+        1347.19
+      ]
+    },
+    {
+      "source": "Baseline JPEG, 48 MP",
+      "file": "input-48mp-baseline.jpg",
+      "inputBytes": 6393295,
+      "mode": "fast",
+      "output": "800x600 JPEG, quality 80",
+      "successes": 3,
+      "responseP50Ms": 789,
+      "workerCpuMedianMs": 459,
+      "workerCpuSamples": [
+        493,
+        247,
+        459
+      ],
+      "wasmMemoryBytes": "16777216",
+      "outputBytesMedian": 150178,
+      "responseSamplesMs": [
+        1010.63,
+        633.44,
+        788.89
+      ]
+    }
+  ]
+}

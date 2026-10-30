@@ -127,6 +127,21 @@ These end-to-end samples convert supported synthetic inputs to 800×600 WebP. Ea
 
 See the [raw Worker performance results](benchmarks/decoder-performance-worker.json) and [memory measurements](benchmarks/decoder-memory-worker.json). Both reports keep measurements for unsupported Adam7 PNG, non-grid HEIC/HEIF, and non-Lowzag progressive JPEG paths in `historicalUnsupportedResults`; those results do not describe current support. These small synthetic-fixture samples show this test run, not guaranteed production latency.
 
+#### Baseline JPEG to optimized JPEG
+
+These synthetic baseline JPEG fixtures were resized to 800×600 and re-encoded as JPEG at quality 80. Each source size and decode mode ran in a fresh Worker with one warm-up and three measured requests. Response p50 includes network and transfer time; Wrangler sometimes captured fewer CPU events than requests. Output size is the median of the three responses. `speed: 'fast'` uses scaled JPEG decoding; JPEG encoding settings are the same in both modes.
+
+| JPEG source | Decode mode | Response p50 | Worker CPU median | WASM capacity | Output JPEG size |
+| ---: | --- | ---: | ---: | ---: | ---: |
+| 12 MP | Default full decode | 520 ms | 309 ms (2 samples) | 16 MiB | 99.9 kB |
+| 12 MP | `speed: 'fast'` scaled decode | 316 ms | 81 ms (1 sample) | 16 MiB | 99.2 kB |
+| 24 MP | Default full decode | 650 ms | 487 ms (3 samples) | 16 MiB | 114.1 kB |
+| 24 MP | `speed: 'fast'` scaled decode | 280 ms | 161 ms (3 samples) | 16 MiB | 114.6 kB |
+| 48 MP | Default full decode | 1,796 ms | 1,154 ms (3 samples) | 16 MiB | 159.0 kB |
+| 48 MP | `speed: 'fast'` scaled decode | 789 ms | 459 ms (3 samples) | 16 MiB | 150.2 kB |
+
+All 18 measured requests returned valid JPEGs. These are small synthetic-fixture samples, not guaranteed production timings. Cloudflare CPU events were incomplete for two cases. See the [raw JPEG-output Worker results](benchmarks/jpeg-output-worker.json); rerun with `node scripts/benchmark-jpeg-output-worker.mjs`.
+
 #### WebP input by source size
 
 These 2, 6, and 12 MP synthetic WebP fixtures were resized to fit within 800×600 and encoded as WebP. Each size/mode ran in a fresh Worker with one initial request and three warm requests. Response p50 uses the warm requests. CPU and isolate-memory sample counts show the invocations Cloudflare returned; isolate memory is `memoryUsageBytesP99`, not exact peak RSS.
