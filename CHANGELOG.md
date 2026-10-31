@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## 0.4.3 — 2026-10-31
+
+- Restore still AVIF input using libavif with Google’s libgav1 decoder, capped at 12 megapixels; animated AVIF remains unsupported.
+- Pre-scale decoded YUV planes before RGBA conversion on substantial downscales, reducing sampled 12 MP Worker isolate memory from 126.40 MiB to 49.84 MiB.
+- Add 2, 6, and 12 MP AVIF-to-WebP and AVIF-to-JPEG Worker benchmarks, plus fixtures and license notices.
+
 ## 0.4.2 — 2026-10-30
 
 - Add WebP input support up to 12 megapixels, including JPEG output for saved WebP images.

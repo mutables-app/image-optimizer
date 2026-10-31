@@ -1,5 +1,6 @@
 // Measure end-to-end response time and Cloudflare's per-invocation CPU time
-// for representative 12, 24, and 48 MP decoder paths.
+// for representative decoder paths. AVIF is measured at 2, 6, and 12 MP
+// with both WebP and JPEG output; other formats use their standard fixtures.
 import {readFile, writeFile, rm} from 'node:fs/promises';
 import {execFileSync, spawn} from 'node:child_process';
 import {randomUUID} from 'node:crypto';
@@ -26,10 +27,14 @@ const fixtures = [
   {label:'Tiled/grid HEIC/HEIF',mp:12,file:'grid-12mp-512px-tiles.heic'},
   {label:'Tiled/grid HEIC/HEIF',mp:24,file:'input-24mp-grid.heic'},
   {label:'Tiled/grid HEIC/HEIF',mp:48,file:'input-48mp-grid.heic'},
+  ...[2,6,12].flatMap(mp => ['webp','jpeg'].map(format => ({
+    label:`Still AVIF to ${format.toUpperCase()}`,mp,file:`input-${mp}mp${mp===12?'-single':''}.avif`,pipeline:format==='jpeg'?'jpeg':'reference',format,
+  }))),
 ];
 const only = process.env.DECODER_BENCHMARK_ONLY?.split(',').map(value=>value.trim()).filter(Boolean);
-const selectedFixtures = only ? fixtures.filter(item=>only.includes(item.file)) : fixtures;
-if (only && selectedFixtures.length !== only.length) throw new Error(`Unknown benchmark fixture(s): ${only.filter(file=>!fixtures.some(item=>item.file===file)).join(', ')}`);
+const key = item => `${item.file}:${item.format??'webp'}`;
+const selectedFixtures = only ? fixtures.filter(item=>only.includes(key(item)) || only.includes(item.file)) : fixtures;
+if (only && only.some(value=>!fixtures.some(item=>key(item)===value || item.file===value))) throw new Error(`Unknown benchmark fixture(s): ${only.filter(value=>!fixtures.some(item=>key(item)===value || item.file===value)).join(', ')}`);
 const rounds = Number(process.env.DECODER_BENCHMARK_ROUNDS ?? 3);
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 const median = values => {
@@ -68,18 +73,18 @@ try {
     const samples=[];
     const send = async phase => {
       const url = new URL(endpoint);
-      for (const [key,value] of Object.entries({width:800,height:600,quality:80,scaled:true,method:1,pipeline:'scanlines',variant:'decoder-performance',phase,image:item.file}))
+      for (const [key,value] of Object.entries({width:800,height:600,quality:80,scaled:true,method:1,pipeline:item.pipeline??'scanlines',variant:'decoder-performance',phase,image:item.file}))
         url.searchParams.set(key,String(value));
       const requestStartedAt = new Date().toISOString();
       const start = performance.now();
       const response = await fetch(url,{method:'POST',headers:{authorization:`Bearer ${BENCHMARK_TOKEN}`},body:input,signal:AbortSignal.timeout(90000)});
       const bytes = new Uint8Array(await response.arrayBuffer());
-      const webp = bytes.length >= 12 && new TextDecoder().decode(bytes.subarray(0,4))==='RIFF' && new TextDecoder().decode(bytes.subarray(8,12))==='WEBP';
-      const ok = item.expectReject ? response.status===400 : response.ok && webp;
+      const validOutput = item.format==='jpeg' ? bytes[0]===0xff && bytes[1]===0xd8 : bytes.length >= 12 && new TextDecoder().decode(bytes.subarray(0,4))==='RIFF' && new TextDecoder().decode(bytes.subarray(8,12))==='WEBP';
+      const ok = item.expectReject ? response.status===400 : response.ok && validOutput;
       samples.push({phase,status:response.status,ok,requestStartedAt,roundTripMs:performance.now()-start,outputBytes:ok?bytes.length:null,
         wasmMemoryBytes:response.headers.get('x-wasm-linear-memory-bytes'),decoded:response.headers.get('x-decoded-dimensions'),
         error:response.ok?null:new TextDecoder().decode(bytes).slice(0,300)});
-      if (!ok) throw new Error(`${item.label} ${item.mp} MP (${item.file}) returned ${response.status}: ${samples.at(-1).error ?? 'invalid WebP'}`);
+      if (!ok) throw new Error(`${item.label} ${item.mp} MP (${item.file}) returned ${response.status}: ${samples.at(-1).error ?? 'invalid output image'}`);
     };
     await send('warmup');
     for (let round=1;round<=rounds;round++) await send(`sample-${round}`);
@@ -130,7 +135,7 @@ try {
   await rm(configPath,{force:true});
 }
 
-const report={timestamp:new Date().toISOString(),rounds,output:'800x600 WebP',
+const report={timestamp:new Date().toISOString(),rounds,output:'800x600; WebP or JPEG as labeled per result',
   responseTime:'Client-observed round trip, p50 of warm requests; includes network latency.',
   cpuTime:'Per-invocation CPU time from Wrangler tail; median of warm requests.',
   note:'Synthetic fixtures for currently supported paths. Adam7 PNG and non-grid HEIC/HEIF are unsupported. Cloudflare analytics may omit invocation samples; Wrangler tail is the CPU fallback. Null CPU means neither source captured a sample.',results};
@@ -171,7 +176,13 @@ try { previous=JSON.parse(await readFile(path,'utf8')); } catch {}
 const unsupported=previous?.results.filter(item=>/^Adam7 PNG|^Non-grid HEIC\/HEIF|^Other progressive JPEG|^CMYK progressive JPEG|^YCCK progressive JPEG/.test(item.label))??[];
 report.historicalUnsupportedResults=[...(previous?.historicalUnsupportedResults??[]),...unsupported.map(item=>({...item,historical:true,note:'Historical measurement only; this input path is no longer supported.'}))];
 if (only && previous) {
-  const replaced=new Set(results.map(item=>item.file));
-  report.results=[...previous.results.filter(item=>!replaced.has(item.file)&&!unsupported.includes(item)),...results];
+  const replaced=new Set(results.map(item=>`${item.file}:${item.format??'webp'}`));
+  report.results=[...previous.results.filter(item=>!replaced.has(`${item.file}:${item.format??'webp'}`)&&!unsupported.includes(item)),...results];
+  const analyticsRows=[...(previous.analytics?.rows??[]),...(report.analytics?.rows??[])];
+  report.analytics.rows=[...new Map(analyticsRows.map(row=>[
+    `${row.dimensions?.datetime}|${row.dimensions?.coloCode}|${row.dimensions?.status}`,
+    row,
+  ])).values()];
+  report.analytics.errors=[...(previous.analytics?.errors??[]),...(report.analytics?.errors??[])];
 }
 await writeFile(path,`${JSON.stringify(report,null,2)}\n`);

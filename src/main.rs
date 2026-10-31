@@ -3,6 +3,11 @@ use wasm_bindgen::prelude::*;
 mod scanlines;
 fn main() {}
 struct DecodedPixels(*mut u8);
+impl DecodedPixels {
+    fn as_mut_slice(&mut self, len: usize) -> &mut [u8] {
+        unsafe { std::slice::from_raw_parts_mut(self.0, len) }
+    }
+}
 impl Drop for DecodedPixels {
     fn drop(&mut self) {
         unsafe { release_pixels(self.0) }
@@ -21,6 +26,20 @@ unsafe extern "C" {
         h: *mut u32,
     ) -> i32;
     fn jpeg_dimensions(data: *const u8, size: usize, w: *mut u32, h: *mut u32) -> i32;
+    #[link_name = "decode_avif"]
+    fn decode_avif_native(
+        data: *const u8,
+        size: usize,
+        requested_width: u32,
+        requested_height: u32,
+        inside: i32,
+        without_enlargement: i32,
+        pixels: *mut *mut u8,
+        source_w: *mut u32,
+        source_h: *mut u32,
+        decoded_w: *mut u32,
+        decoded_h: *mut u32,
+    ) -> i32;
     fn release_pixels(pixels: *mut u8);
     fn encode_webp(
         pixels: *const u8,
@@ -41,6 +60,51 @@ extern "C" {
 }
 fn error(message: &str) -> JsValue {
     JsValue::from_str(message)
+}
+fn is_avif(data: &[u8]) -> bool {
+    data.len() >= 12
+        && &data[4..8] == b"ftyp"
+        && (data[8..12] == *b"avif"
+            || (16..data.len().min(128))
+                .step_by(4)
+                .any(|i| data.get(i..i + 4) == Some(b"avif")))
+}
+
+fn decode_avif(
+    data: &[u8],
+    width: u32,
+    height: u32,
+    inside: bool,
+    without_enlargement: bool,
+) -> Result<(*mut u8, u32, u32, u32, u32), JsValue> {
+    let (mut pixels, mut source_w, mut source_h, mut decoded_w, mut decoded_h) =
+        (std::ptr::null_mut(), 0, 0, 0, 0);
+    let status = unsafe {
+        decode_avif_native(
+            data.as_ptr(),
+            data.len(),
+            width,
+            height,
+            inside as i32,
+            without_enlargement as i32,
+            &mut pixels,
+            &mut source_w,
+            &mut source_h,
+            &mut decoded_w,
+            &mut decoded_h,
+        )
+    };
+    if status == 0 {
+        return Ok((pixels, source_w, source_h, decoded_w, decoded_h));
+    }
+    Err(error(match status {
+        2 => "AVIF exceeds the 12 MP source limit",
+        3 => "Image allocation failed",
+        4 => "Animated AVIF input is not supported",
+        5 => "AVIF color conversion failed",
+        6 => "AVIF pre-scale failed",
+        _ => "AVIF decode failed",
+    }))
 }
 fn destination(
     w: u32,
@@ -107,6 +171,22 @@ pub fn optimize(
     method: i32,
     scaled: bool,
 ) -> Result<Vec<u8>, JsValue> {
+    if is_avif(input) {
+        return Ok(run(
+            input,
+            width,
+            height,
+            inside,
+            without_enlargement,
+            quality,
+            lossless,
+            max_pixels,
+            false,
+            method,
+            false,
+        )?
+        .bytes);
+    }
     Ok(run_scanlines(
         input,
         width,
@@ -201,35 +281,43 @@ fn run(
             without_enlargement,
         );
     }
-    let (mut pixels, mut w, mut h) = (std::ptr::null_mut(), 0, 0);
-    let status = unsafe {
-        decode_image(
-            input.as_ptr(),
-            input.len(),
-            max_pixels,
-            tw,
-            th,
-            (scaled && !lossless) as i32,
-            &mut pixels,
-            &mut w,
-            &mut h,
-        )
+    let (w, h, mut decoded) = if is_avif(input) {
+        let (pixels, source_w, source_h, decoded_w, decoded_h) =
+            decode_avif(input, width, height, inside, without_enlargement)?;
+        original_w = source_w;
+        original_h = source_h;
+        (decoded_w, decoded_h, DecodedPixels(pixels))
+    } else {
+        let (mut pixels, mut w, mut h) = (std::ptr::null_mut(), 0, 0);
+        let status = unsafe {
+            decode_image(
+                input.as_ptr(),
+                input.len(),
+                max_pixels,
+                tw,
+                th,
+                (scaled && !lossless) as i32,
+                &mut pixels,
+                &mut w,
+                &mut h,
+            )
+        };
+        if status != 0 {
+            return Err(error(match status {
+                2 => "Image exceeds pixel or dimension limit",
+                3 => "Image allocation failed",
+                4 => "Expected JPEG, PNG, WebP or HEIC/HEIF input",
+                5 => "Interlaced PNG input is not supported",
+                6 => "Non-grid HEIC/HEIF input is not supported",
+                7 => "Only Lowzag-compatible progressive JPEG is supported",
+                _ => "Image decode failed",
+            }));
+        }
+        (w, h, DecodedPixels(pixels))
     };
-    if status != 0 {
-        return Err(error(match status {
-            2 => "Image exceeds pixel or dimension limit",
-            3 => "Image allocation failed",
-            4 => "Expected JPEG, PNG or HEIC/HEIF input",
-            5 => "Interlaced PNG input is not supported",
-            6 => "Non-grid HEIC/HEIF input is not supported",
-            7 => "Only Lowzag-compatible progressive JPEG is supported",
-            _ => "Image decode failed",
-        }));
-    }
     let t1 = clock();
     // Keep the decoder allocation alive and let the resizer borrow it. This
     // avoids a full-frame RGBA allocation and copy for large inputs.
-    let decoded = DecodedPixels(pixels);
     let t2 = clock();
     if original_w == 0 {
         original_w = w;
@@ -247,8 +335,7 @@ fn run(
         return Err(error("Output exceeds pixel or dimension limit"));
     }
     let (result, t3, t4, t5) = {
-        let rgba =
-            unsafe { std::slice::from_raw_parts_mut(decoded.0, w as usize * h as usize * 4) };
+        let rgba = decoded.as_mut_slice(w as usize * h as usize * 4);
         let source = Image::from_slice_u8(w, h, rgba, PixelType::U8x4)
             .map_err(|_| error("Invalid pixel buffer"))?;
         let resized;
@@ -443,6 +530,55 @@ pub fn optimize_jpeg(
     }
     if max_pixels == 0 || max_pixels > 16_000_000 || width > 16383 || height > 16383 {
         return Err(error("Invalid image limits"));
+    }
+    if is_avif(input) {
+        let (pixels, source_w, source_h, decoded_w, decoded_h) =
+            decode_avif(input, width, height, inside, without_enlargement)?;
+        let mut decoded = DecodedPixels(pixels);
+        let (output_w, output_h) = destination(
+            source_w,
+            source_h,
+            width,
+            height,
+            inside,
+            without_enlargement,
+        );
+        if output_w > 16383
+            || output_h > 16383
+            || output_w as u64 * output_h as u64 > max_pixels as u64
+        {
+            return Err(error("Output exceeds pixel or dimension limit"));
+        }
+        let source_bytes = decoded_w as usize * decoded_h as usize * 4;
+        let source = Image::from_slice_u8(
+            decoded_w,
+            decoded_h,
+            decoded.as_mut_slice(source_bytes),
+            PixelType::U8x4,
+        )
+        .map_err(|_| error("Invalid image buffer"))?;
+        let resized;
+        let output = if output_w != source_w || output_h != source_h {
+            let mut destination = Image::new(output_w, output_h, PixelType::U8x4);
+            Resizer::new()
+                .resize(&source, &mut destination, &ResizeOptions::new())
+                .map_err(|_| error("Resize failed"))?;
+            resized = destination;
+            resized.buffer()
+        } else {
+            source.buffer()
+        };
+        let mut encoder = scanlines::JpegEncoder::new();
+        for y in 0..output_h as usize {
+            let start = y * output_w as usize * 4;
+            encoder.write(
+                &output[start..start + output_w as usize * 4],
+                output_w,
+                output_h,
+                quality,
+            )?;
+        }
+        return encoder.finish();
     }
     let mut encoder = scanlines::JpegEncoder::new();
     scanlines::resize(

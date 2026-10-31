@@ -32,7 +32,7 @@ for name, tag, repo, extra in [
         run(cmake, '--install', cache / (name + '-build'))
 
 # libheif provides HEIF container parsing and color conversion. Only the HEVC
-# decoder is enabled; AVIF/AV1 input is intentionally unsupported.
+# decoder is enabled; AV1 is handled separately through libavif/libgav1.
 
 de265 = cache / 'libde265'
 if not (prefix / 'lib' / 'libde265.a').exists():
@@ -57,10 +57,59 @@ run(cmake, '-S', heif, '-B', cache / 'libheif-build', f'-DCMAKE_TOOLCHAIN_FILE={
 run(cmake, '--build', cache / 'libheif-build', '-j2')
 run(cmake, '--install', cache / 'libheif-build')
 
+# libgav1 is Google's standalone AV1 decoder. Pin an upstream commit so the
+# Worker build does not follow an unreviewed moving branch.
+gav1_revision = 'c3c824dcc1b907eed484f88ca7af21c743d27494'
+gav1 = cache / 'libgav1-source'
+if not gav1.exists():
+    archive = cache / 'libgav1.tar.gz'
+    urllib.request.urlretrieve(
+        f'https://chromium.googlesource.com/codecs/libgav1/+archive/{gav1_revision}.tar.gz',
+        archive,
+    )
+    gav1.mkdir()
+    with tarfile.open(archive) as f: f.extractall(gav1, filter='data')
+    archive.unlink()
+run(cmake, '-S', gav1, '-B', cache / 'libgav1-build',
+    f'-DCMAKE_TOOLCHAIN_FILE={em}/cmake/Modules/Platform/Emscripten.cmake',
+    f'-DCMAKE_INSTALL_PREFIX={prefix}', '-DCMAKE_BUILD_TYPE=MinSizeRel',
+    '-DCMAKE_C_FLAGS=-Os -flto -msimd128',
+    '-DCMAKE_CXX_FLAGS=-Os -flto -msimd128 -fno-exceptions -fno-rtti',
+    '-DLIBGAV1_ENABLE_EXAMPLES=OFF', '-DLIBGAV1_ENABLE_TESTS=OFF',
+    '-DLIBGAV1_ENABLE_OPTIMIZATIONS=OFF', '-DLIBGAV1_THREADPOOL_USE_STD_MUTEX=1',
+    '-DLIBGAV1_MAX_BITDEPTH=12')
+run(cmake, '--build', cache / 'libgav1-build', '--parallel', '2')
+run(cmake, '--install', cache / 'libgav1-build')
+
+# libavif parses the AVIF container; libgav1 decodes the AV1 frame.
+avif = cache / 'libavif-source'
+if not avif.exists():
+    archive = cache / 'libavif-1.4.2.tar.gz'
+    urllib.request.urlretrieve(
+        'https://codeload.github.com/AOMediaCodec/libavif/tar.gz/refs/tags/v1.4.2',
+        archive,
+    )
+    unpack = cache / 'libavif-unpack'; unpack.mkdir(exist_ok=True)
+    with tarfile.open(archive) as f: f.extractall(unpack, filter='data')
+    next(unpack.iterdir()).rename(avif)
+    shutil.rmtree(unpack); archive.unlink()
+run(cmake, '-S', avif, '-B', cache / 'libavif-build',
+    f'-DCMAKE_TOOLCHAIN_FILE={em}/cmake/Modules/Platform/Emscripten.cmake',
+    f'-DCMAKE_INSTALL_PREFIX={prefix}', '-DCMAKE_BUILD_TYPE=MinSizeRel',
+    '-DBUILD_SHARED_LIBS=OFF', '-DAVIF_CODEC_LIBGAV1=SYSTEM',
+    '-DAVIF_CODEC_DAV1D=OFF', '-DAVIF_CODEC_AOM=OFF', '-DAVIF_LIBYUV=OFF',
+    '-DAVIF_LIBSHARPYUV=OFF', '-DAVIF_BUILD_APPS=OFF', '-DAVIF_BUILD_TESTS=OFF',
+    '-DAVIF_BUILD_EXAMPLES=OFF', f'-DLIBGAV1_INCLUDE_DIR={prefix}/include',
+    f'-DLIBGAV1_LIBRARY={prefix}/lib/libgav1.a')
+run(cmake, '--build', cache / 'libavif-build', '--parallel', '2')
+run(cmake, '--install', cache / 'libavif-build')
+
 licenses = root / 'packages' / 'optimizer' / 'licenses'
 licenses.mkdir(exist_ok=True)
 shutil.copy2(heif / 'COPYING', licenses / 'libheif-LICENSE')
 shutil.copy2(cache / 'libde265-1.1.3' / 'COPYING', licenses / 'libde265-LICENSE')
+shutil.copy2(gav1 / 'LICENSE', licenses / 'libgav1-LICENSE')
+shutil.copy2(avif / 'LICENSE', licenses / 'libavif-LICENSE')
 
 # lowzag keeps only coefficients needed for reduced-scale progressive JPEG
 # output. Pin the mirrored v2.3.0 commit rather than tracking its main branch.

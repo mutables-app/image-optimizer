@@ -1,6 +1,6 @@
 {
   "name": "@mutables.app/image-computer",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "type": "module",
   "license": "MIT",
   "repository": {
@@ -14,7 +14,7 @@
     }
   },
   "dependencies": {
-    "@mutables.app/image-optimizer": "0.4.2"
+    "@mutables.app/image-optimizer": "0.4.3"
   },
   "peerDependencies": {
     "@cloudflare/computer": "^0.8.0"

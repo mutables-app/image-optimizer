@@ -3,9 +3,9 @@
 [![npm: image-optimizer](https://img.shields.io/npm/v/%40mutables.app%2Fimage-optimizer?label=%40mutables.app%2Fimage-optimizer)](https://www.npmjs.com/package/@mutables.app/image-optimizer)
 [![npm: image-computer](https://img.shields.io/npm/v/%40mutables.app%2Fimage-computer?label=%40mutables.app%2Fimage-computer)](https://www.npmjs.com/package/@mutables.app/image-computer)
 
-**Current input support:** baseline JPEG, Lowzag-compatible progressive JPEG, non-interlaced PNG, WebP, and tiled/grid HEIC/HEIF. WebP is limited to 12 MP; resized WebP inputs use a reduced-output decode with `speed: 'fast'`. Other progressive/multi-scan JPEGs (including CMYK and YCCK), Adam7/interlaced PNG, non-grid HEIC/HEIF, and AVIF are rejected.
+**Current input support:** baseline JPEG, Lowzag-compatible progressive JPEG, non-interlaced PNG, WebP, still AVIF, and tiled/grid HEIC/HEIF. WebP and AVIF are limited to 12 MP; resized WebP inputs use a reduced-output decode with `speed: 'fast'`. Other progressive/multi-scan JPEGs (including CMYK and YCCK), Adam7/interlaced PNG, non-grid HEIC/HEIF, and animated AVIF are rejected.
 
-An image-processing pipeline written in Rust and compiled to WebAssembly for Node.js and Cloudflare Workers. It links JPEG, PNG, HEIF/HEIC, and WebP codec libraries into the same Emscripten module as the Rust resize pipeline, so the image pixels stay inside WASM instead of crossing between JavaScript libraries at each stage.
+An image-processing pipeline written in Rust and compiled to WebAssembly for Node.js and Cloudflare Workers. It links JPEG, PNG, HEIF/HEIC, and WebP codec libraries into the same Emscripten module as the Rust resize pipeline; still AVIF uses libavif with Google’s libgav1 AV1 decoder. Image pixels stay inside WASM instead of crossing between JavaScript libraries at each stage.
 
 ```js
 import { image } from '@mutables.app/image-optimizer';
@@ -29,25 +29,26 @@ flowchart LR
   RUST --> RESIZE[Scanline Lanczos3 resizer<br/>WASM SIMD128 · bounded row window]
   RUST --> CABI[C ABI bridge]
   CABI --> CODECS[libjpeg-turbo · libspng · libheif · libde265 · libwebp]
+  RUST --> AVIF[libavif container · Google libgav1 decoder]
   RESIZE --> LINK[Emscripten link<br/>wasm32-unknown-emscripten]
   CODECS --> LINK
   LINK --> WASM[WebAssembly module + JS glue]
   WASM --> HOST[Cloudflare Workers or Node.js]
 ```
 
-JPEG, non-interlaced PNG, WebP, and tiled/grid HEIC/HEIF decoding, resizing, and WebP/JPEG encoding execute in the compiled module. Baseline JPEG and non-interlaced PNG inputs are decoded sequentially. WebP input is capped at 12 MP; default decoding retains a full RGBA surface, while resized `speed: 'fast'` requests use libwebp's scaled-output decoder at up to 2× target size before the Rust Lanczos3 row resizer. Tiled HEIF grids decode one tile row at a time and support up to 48 megapixels. Adam7/interlaced PNG and non-grid HEIC/HEIF inputs are rejected; AVIF input is also unsupported. The Rust Lanczos3 resizer retains a bounded set of rows and uses premultiplied alpha through both passes, with SIMD128 for four-channel convolution.
+JPEG, non-interlaced PNG, WebP, still AVIF, and tiled/grid HEIC/HEIF decoding, resizing, and WebP/JPEG encoding execute in the compiled module. Baseline JPEG and non-interlaced PNG inputs are decoded sequentially. WebP input is capped at 12 MP; default decoding retains a full RGBA surface, while resized `speed: 'fast'` requests use libwebp's scaled-output decoder at up to 2× target size before the Rust Lanczos3 row resizer. AVIF input is capped at 12 MP and uses libavif with Google’s libgav1 decoder. For substantial downscales, it reduces the decoded YUV planes to at most twice the target dimensions before RGBA conversion, then uses the existing Lanczos resizer. Tiled HEIF grids decode one tile row at a time and support up to 48 megapixels. Adam7/interlaced PNG, non-grid HEIC/HEIF, and animated AVIF inputs are rejected. The Rust Lanczos3 resizer retains a bounded set of rows and uses premultiplied alpha through both passes, with SIMD128 for four-channel convolution.
 
 WebP encoding needs the complete **resized** RGBA image; the source image is not accumulated by the row resizer. JPEG output feeds each resized row directly into a baseline libjpeg-turbo encoder, with standard Huffman tables and 4:2:0 subsampling. Input and encoded output bytes are still buffered by `.bytes()`/`.blob()`; this is internal pixel processing, not a streaming HTTP API.
 
 Only Lowzag-compatible progressive JPEGs are supported; other progressive/multi-scan variants, including CMYK and YCCK, are rejected before coefficient buffering. The old `fast_image_resize` implementation remains only as a low-level benchmark reference, not the public processing path. The codec libraries are **compiled to WebAssembly**; they are not native host binaries running outside the Worker sandbox. Workers load the Wasm module statically. Node.js uses a separate file-based loader. The optional Computer adapter sits around the same optimizer and reads and writes files through `workspace.fs`.
 
-Cloudflare describes the Emscripten Rust target support as an experimental preview. This project demonstrates the image-processing use case; it does not imply native machine-code execution or guarantee a performance gain over other Workers image libraries. HEIF decoding adds LGPL-licensed libheif and libde265; their license notices are included in the optimizer package.
+Cloudflare describes the Emscripten Rust target support as an experimental preview. This project demonstrates the image-processing use case; it does not imply native machine-code execution or guarantee a performance gain over other Workers image libraries. HEIF decoding adds LGPL-licensed libheif and libde265; AVIF decoding adds BSD-2-Clause libavif and Apache-2.0 libgav1. Their notices are included in the optimizer package.
 
 ## Packages
 
 ### [`@mutables.app/image-optimizer`](https://www.npmjs.com/package/@mutables.app/image-optimizer)
 
-Accepts a `Blob`, `ArrayBuffer`, or typed array. Baseline JPEG, Lowzag-compatible progressive JPEG, non-interlaced PNG, WebP (up to 12 MP), and tiled/grid HEIF/HEIC input are sniffed automatically. Adam7/interlaced PNG, non-grid HEIF/HEIC, and AVIF are rejected. Tiled HEIF grids support up to 48 megapixels. Width-only resizing preserves aspect ratio; two dimensions default to `fill`.
+Accepts a `Blob`, `ArrayBuffer`, or typed array. Baseline JPEG, Lowzag-compatible progressive JPEG, non-interlaced PNG, WebP (up to 12 MP), still AVIF (up to 12 MP), and tiled/grid HEIF/HEIC input are sniffed automatically. Adam7/interlaced PNG, non-grid HEIF/HEIC, and animated AVIF are rejected. Tiled HEIF grids support up to 48 megapixels. Width-only resizing preserves aspect ratio; two dimensions default to `fill`.
 
 ```js
 import { image } from '@mutables.app/image-optimizer';
@@ -95,13 +96,14 @@ The published v0.1.0 Worker benchmark (before scanlines) compares two internal W
 
 ## Limits
 
-- JPEG, PNG, WebP, and HEIC/HEIF input; WebP and JPEG output. No animation, rotation, or metadata API.
+- JPEG, PNG, WebP, still AVIF, and HEIC/HEIF input; WebP and JPEG output. No animation, rotation, or metadata API.
 
 | Input type | Maximum source pixels | Decode path |
 | --- | ---: | --- |
 | Baseline JPEG | 48 MP | Sequential scanline decode; eligible resized JPEGs can use scaled decode with `speed: 'fast'`. |
 | Non-interlaced PNG | 48 MP | Sequential scanline decode. |
 | Lowzag-compatible progressive JPEG | 48 MP | Reduced coefficient decode when resizing; coefficient planes are checked before full-resolution fallback. |
+| Still AVIF | 12 MP | libavif with Google’s libgav1 AV1 decoder; substantial downscales reduce YUV planes to at most 2× target dimensions before RGBA conversion. |
 | WebP | 12 MP | Full decode by default; resized `speed: 'fast'` requests use libwebp scaled output. |
 | Tiled/grid HEIC/HEIF | 48 MP | libde265 (HEVC); decodes one tile row at a time. |
 
@@ -120,11 +122,16 @@ Each row converts a synthetic input to 800×600 WebP at quality 80 in a fresh te
 | Lowzag progressive JPEG, 12 MP | 4.48 MiB | 864 ms | 479 ms (3 samples) | 16.00 MiB | 32.21 MiB (3 samples) | 261.8 KiB |
 | Lowzag progressive JPEG, 24 MP | 4.63 MiB | 1,011 ms | 727 ms (3 samples) | 27.75 MiB | 41.15 MiB (4 samples) | 95.1 KiB |
 | Lowzag progressive JPEG, 48 MP | 7.53 MiB | 1,407 ms | 1,001 ms (3 samples) | 27.75 MiB | 45.12 MiB (4 samples) | 104.0 KiB |
+| Still AVIF to WebP, 2 MP | 0.02 MiB | 287 ms | 290 ms (2 samples) | 27.50 MiB | 32.31 MiB (3 samples) | 15.4 KiB |
+| Still AVIF to WebP, 6 MP | 0.04 MiB | 774 ms | 708 ms (3 samples) | 27.75 MiB | 32.62 MiB (4 samples) | 15.6 KiB |
+| Still AVIF to WebP, 12 MP | 0.04 MiB | 1,231 ms | 1,144 ms (3 samples) | 44.50 MiB | 49.84 MiB (3 samples) | 15.3 KiB |
 | Tiled/grid HEIC/HEIF, 12 MP | 0.77 MiB | 641 ms | 464 ms (2 samples) | 16.00 MiB | 26.06 MiB (3 samples) | 34.1 KiB |
 | Tiled/grid HEIC/HEIF, 24 MP | 0.30 MiB | 861 ms | 742 ms (3 samples) | 36.94 MiB | 44.27 MiB (4 samples) | 8.2 KiB |
 | Tiled/grid HEIC/HEIF, 48 MP | 0.61 MiB | 2,842 ms | 2,539 ms (3 samples) | 48.62 MiB | 55.66 MiB (4 samples) | 15.3 KiB |
 
 See the [raw Worker results](benchmarks/decoder-performance-worker.json) and [decoder memory measurements](benchmarks/decoder-memory-worker.json). Unsupported inputs retained in the raw reports are historical and do not describe current support. These synthetic-fixture samples show the tested run, not guaranteed production performance.
+
+
 
 #### Baseline JPEG to optimized JPEG
 
@@ -140,6 +147,18 @@ These synthetic baseline JPEG fixtures were resized to 800×600 and re-encoded a
 | Baseline JPEG, 48 MP, `speed: 'fast'` | 6.10 MiB | 639 ms | 292 ms (1 sample) | 16.00 MiB | 35.95 MiB (1 sample) | 146.7 KiB |
 
 All 18 measured requests returned valid JPEGs. These synthetic-fixture samples show the tested run, not guaranteed production timings. See the [raw JPEG-output Worker results](benchmarks/jpeg-output-worker.json); rerun with `node scripts/benchmark-jpeg-output-worker.mjs`.
+
+#### AVIF to optimized JPEG
+
+These synthetic still AVIF fixtures were resized to 800×600 and encoded as JPEG at quality 80 in a fresh Worker per size. Each case used one warm-up and three measured requests. Cloudflare isolate memory is sampled `memoryUsageBytesP99`, not exact peak RSS.
+
+| Input type and source size | Input file size | Response p50 | Worker CPU median | WASM capacity | Worker isolate memory, max sampled | Output JPEG size |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Still AVIF to JPEG, 2 MP | 0.02 MiB | 349 ms | 422 ms (2 samples) | 27.50 MiB | 32.33 MiB (2 samples) | 29.4 KiB |
+| Still AVIF to JPEG, 6 MP | 0.04 MiB | 600 ms | 588 ms (2 samples) | 27.75 MiB | 32.65 MiB (3 samples) | 29.7 KiB |
+| Still AVIF to JPEG, 12 MP | 0.04 MiB | 1,188 ms | 1,047 ms (3 samples) | 44.50 MiB | 49.75 MiB (1 sample) | 29.8 KiB |
+
+Prescaling reduced 12 MP WASM capacity from 121.00 to 44.50 MiB and sampled isolate memory from 126.40 to 49.84 MiB. Comparing decoded outputs with the earlier full-frame path gave 40.79 dB PSNR for WebP and 41.96 dB for JPEG on this synthetic chart. AV1 still reconstructs a full YUV frame; the memory saving comes from reducing those YUV planes before allocating RGBA. Cloudflare memory is sampled, not an exact peak. See the [raw Worker results](benchmarks/decoder-performance-worker.json).
 
 #### Worker benchmarks: WebP input to WebP output
 

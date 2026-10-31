@@ -11,7 +11,15 @@ test('single-image HEIC/HEIF is rejected while tiled HEIC/HEIF remains supported
  const tiled=await fixture('grid-12mp-512px-tiles.heic');
  assert.ok(scanline_experiment(tiled,800,600,false,false,80,false,8_000_000,false,-1,false).take_bytes().length>0);
 });
-test('AVIF input is rejected',async()=>{
- const input=await fixture('input-12mp-single.avif');
- await assert.rejects(image(input).resize(800).webp().bytes(),/Expected JPEG, PNG, WebP or HEIC\/HEIF/);
+test('libavif/libgav1 converts 2, 6, and 12 MP still AVIF to WebP and JPEG',async()=>{
+ for (const [mp,name] of [[2,'input-2mp.avif'],[6,'input-6mp.avif'],[12,'input-12mp-single.avif']]) {
+  const input=await fixture(name);
+  const output=await image(input).resize(800).webp().bytes();
+  assert.equal(Buffer.from(output.subarray(0,4)).toString(),'RIFF',`${mp} MP WebP signature`);
+  assert.equal(Buffer.from(output.subarray(8,12)).toString(),'WEBP');
+  const jpeg=await image(input).resize(800).jpeg().bytes();
+  assert.equal(jpeg[0],0xff);assert.equal(jpeg[1],0xd8);
+ }
+ const oversized=await fixture('input-48mp-grid.avif');
+ await assert.rejects(image(oversized).resize(800).webp().bytes(),/12 MP source limit/i);
 });

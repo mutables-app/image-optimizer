@@ -2,11 +2,13 @@ fn main() {
     let root = std::env::var("CARGO_MANIFEST_DIR").unwrap();
     cc::Build::new()
         .file("native/codecs.c")
+        .file("native/avif.c")
         .file("native/scanlines.c")
         .file("native/heif.cpp")
         .file(format!("{root}/.build/lowzag/src/lowzag.c"))
         .file(format!("{root}/.build/lowzag/src/lowzag_mem.c"))
         .include(format!("{root}/.build/install/include"))
+        .include(format!("{root}/.build/install/include/avif"))
         .include(format!("{root}/.build/lowzag/include"))
         .define("SPNG_STATIC", None)
         .flag("-msimd128")
@@ -18,10 +20,13 @@ fn main() {
     }
     println!("cargo:rustc-link-lib=static=heif");
     println!("cargo:rustc-link-lib=static=de265");
+    println!("cargo:rustc-link-lib=static=avif");
+    println!("cargo:rustc-link-lib=static=gav1");
     println!("cargo:rustc-link-lib=c++");
     println!("cargo:rustc-link-lib=c++abi");
     println!("cargo:rustc-link-arg=-sUSE_ZLIB=1");
     println!("cargo:rerun-if-changed=native/codecs.c");
+    println!("cargo:rerun-if-changed=native/avif.c");
     println!("cargo:rerun-if-changed=native/scanlines.c");
     println!("cargo:rerun-if-changed=native/heif.cpp");
     println!("cargo:rerun-if-changed=.build/lowzag/src/lowzag.c");

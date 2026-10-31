@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-10-30T15:06:26.775Z",
+  "timestamp": "2026-10-31T03:57:23.158Z",
   "rounds": 3,
-  "output": "800x600 WebP",
+  "output": "800x600; WebP or JPEG as labeled per result",
   "responseTime": "Client-observed round trip, p50 of warm requests; includes network latency.",
   "cpuTime": "Per-invocation CPU time from Wrangler tail; median of warm requests.",
   "note": "Synthetic fixtures for currently supported paths. Adam7 PNG and non-grid HEIC/HEIF are unsupported. Cloudflare analytics may omit invocation samples; Wrangler tail is the CPU fallback. Null CPU means neither source captured a sample.",
@@ -696,12 +696,399 @@
       "isolateMemoryMaxMiB": 55.66,
       "workerCpuSource": "Cloudflare invocation analytics",
       "workerCpuSampleCount": 3
+    },
+    {
+      "label": "Still AVIF to WEBP",
+      "mp": 2,
+      "file": "input-2mp.avif",
+      "pipeline": "reference",
+      "format": "webp",
+      "inputBytes": 21139,
+      "expected": "success",
+      "successes": 3,
+      "responseP50Ms": 287,
+      "workerCpuMedianMs": 289.58,
+      "workerCpuSamples": [
+        356.08,
+        223.076
+      ],
+      "wasmMemoryBytes": "28835840",
+      "decoded": "1633x1225",
+      "outputBytesMedian": 16146,
+      "isolateMemoryMaxBytes": 33877384,
+      "isolateMemorySampleCount": 3,
+      "wranglerTailCpuSamples": [
+        356,
+        220,
+        223
+      ],
+      "requestSamples": [
+        {
+          "phase": "warmup",
+          "requestStartedAt": "2026-10-31T03:55:03.776Z",
+          "roundTripMs": 558.66,
+          "outputBytes": 16146,
+          "wasmMemoryBytes": "28835840"
+        },
+        {
+          "phase": "sample-1",
+          "requestStartedAt": "2026-10-31T03:55:04.338Z",
+          "roundTripMs": 477.07,
+          "outputBytes": 16146,
+          "wasmMemoryBytes": "28835840"
+        },
+        {
+          "phase": "sample-2",
+          "requestStartedAt": "2026-10-31T03:55:04.815Z",
+          "roundTripMs": 269.72,
+          "outputBytes": 16146,
+          "wasmMemoryBytes": "28835840"
+        },
+        {
+          "phase": "sample-3",
+          "requestStartedAt": "2026-10-31T03:55:05.085Z",
+          "roundTripMs": 286.74,
+          "outputBytes": 16146,
+          "wasmMemoryBytes": "28835840"
+        }
+      ],
+      "responseSamplesMs": [
+        477.07,
+        269.72,
+        286.74
+      ],
+      "workerCpuSampleCount": 2,
+      "workerCpuSource": "Cloudflare invocation analytics",
+      "isolateMemoryMaxMiB": 32.31
+    },
+    {
+      "label": "Still AVIF to JPEG",
+      "mp": 2,
+      "file": "input-2mp.avif",
+      "pipeline": "jpeg",
+      "format": "jpeg",
+      "inputBytes": 21139,
+      "expected": "success",
+      "successes": 3,
+      "responseP50Ms": 349,
+      "workerCpuMedianMs": 421.72,
+      "workerCpuSamples": [
+        482.287,
+        361.16
+      ],
+      "wasmMemoryBytes": "28835840",
+      "decoded": "row-encoder",
+      "outputBytesMedian": 30153,
+      "isolateMemoryMaxBytes": 33905400,
+      "isolateMemorySampleCount": 2,
+      "wranglerTailCpuSamples": [
+        482,
+        205,
+        296
+      ],
+      "requestSamples": [
+        {
+          "phase": "warmup",
+          "requestStartedAt": "2026-10-31T03:55:28.408Z",
+          "roundTripMs": 502.95,
+          "outputBytes": 30153,
+          "wasmMemoryBytes": "28835840"
+        },
+        {
+          "phase": "sample-1",
+          "requestStartedAt": "2026-10-31T03:55:28.911Z",
+          "roundTripMs": 637.92,
+          "outputBytes": 30153,
+          "wasmMemoryBytes": "28835840"
+        },
+        {
+          "phase": "sample-2",
+          "requestStartedAt": "2026-10-31T03:55:29.549Z",
+          "roundTripMs": 269.89,
+          "outputBytes": 30153,
+          "wasmMemoryBytes": "28835840"
+        },
+        {
+          "phase": "sample-3",
+          "requestStartedAt": "2026-10-31T03:55:29.819Z",
+          "roundTripMs": 348.88,
+          "outputBytes": 30153,
+          "wasmMemoryBytes": "28835840"
+        }
+      ],
+      "responseSamplesMs": [
+        637.92,
+        269.89,
+        348.88
+      ],
+      "workerCpuSampleCount": 2,
+      "workerCpuSource": "Cloudflare invocation analytics",
+      "isolateMemoryMaxMiB": 32.33
+    },
+    {
+      "label": "Still AVIF to WEBP",
+      "mp": 6,
+      "file": "input-6mp.avif",
+      "pipeline": "reference",
+      "format": "webp",
+      "inputBytes": 39020,
+      "expected": "success",
+      "successes": 3,
+      "responseP50Ms": 774,
+      "workerCpuMedianMs": 708.29,
+      "workerCpuSamples": [
+        544.82,
+        708.291,
+        918.637
+      ],
+      "wasmMemoryBytes": "29097984",
+      "decoded": "1600x1200",
+      "outputBytesMedian": 15996,
+      "isolateMemoryMaxBytes": 34207760,
+      "isolateMemorySampleCount": 4,
+      "wranglerTailCpuSamples": [
+        918,
+        544,
+        708
+      ],
+      "requestSamples": [
+        {
+          "phase": "warmup",
+          "requestStartedAt": "2026-10-31T03:55:52.688Z",
+          "roundTripMs": 844.57,
+          "outputBytes": 15996,
+          "wasmMemoryBytes": "29097984"
+        },
+        {
+          "phase": "sample-1",
+          "requestStartedAt": "2026-10-31T03:55:53.532Z",
+          "roundTripMs": 1062.8,
+          "outputBytes": 15996,
+          "wasmMemoryBytes": "29097984"
+        },
+        {
+          "phase": "sample-2",
+          "requestStartedAt": "2026-10-31T03:55:54.595Z",
+          "roundTripMs": 607.63,
+          "outputBytes": 15996,
+          "wasmMemoryBytes": "29097984"
+        },
+        {
+          "phase": "sample-3",
+          "requestStartedAt": "2026-10-31T03:55:55.203Z",
+          "roundTripMs": 774.45,
+          "outputBytes": 15996,
+          "wasmMemoryBytes": "29097984"
+        }
+      ],
+      "responseSamplesMs": [
+        1062.8,
+        607.63,
+        774.45
+      ],
+      "workerCpuSampleCount": 3,
+      "workerCpuSource": "Cloudflare invocation analytics",
+      "isolateMemoryMaxMiB": 32.62
+    },
+    {
+      "label": "Still AVIF to JPEG",
+      "mp": 6,
+      "file": "input-6mp.avif",
+      "pipeline": "jpeg",
+      "format": "jpeg",
+      "inputBytes": 39020,
+      "expected": "success",
+      "successes": 3,
+      "responseP50Ms": 600,
+      "workerCpuMedianMs": 587.64,
+      "workerCpuSamples": [
+        640.883,
+        534.388
+      ],
+      "wasmMemoryBytes": "29097984",
+      "decoded": "row-encoder",
+      "outputBytesMedian": 30418,
+      "isolateMemoryMaxBytes": 34236604,
+      "isolateMemorySampleCount": 3,
+      "wranglerTailCpuSamples": [
+        640,
+        534,
+        519
+      ],
+      "requestSamples": [
+        {
+          "phase": "warmup",
+          "requestStartedAt": "2026-10-31T03:56:18.620Z",
+          "roundTripMs": 796.68,
+          "outputBytes": 30418,
+          "wasmMemoryBytes": "29097984"
+        },
+        {
+          "phase": "sample-1",
+          "requestStartedAt": "2026-10-31T03:56:19.417Z",
+          "roundTripMs": 765.85,
+          "outputBytes": 30418,
+          "wasmMemoryBytes": "29097984"
+        },
+        {
+          "phase": "sample-2",
+          "requestStartedAt": "2026-10-31T03:56:20.183Z",
+          "roundTripMs": 599.74,
+          "outputBytes": 30418,
+          "wasmMemoryBytes": "29097984"
+        },
+        {
+          "phase": "sample-3",
+          "requestStartedAt": "2026-10-31T03:56:20.783Z",
+          "roundTripMs": 594.02,
+          "outputBytes": 30418,
+          "wasmMemoryBytes": "29097984"
+        }
+      ],
+      "responseSamplesMs": [
+        765.85,
+        599.74,
+        594.02
+      ],
+      "workerCpuSampleCount": 2,
+      "workerCpuSource": "Cloudflare invocation analytics",
+      "isolateMemoryMaxMiB": 32.65
+    },
+    {
+      "label": "Still AVIF to WEBP",
+      "mp": 12,
+      "file": "input-12mp-single.avif",
+      "pipeline": "reference",
+      "format": "webp",
+      "inputBytes": 42712,
+      "expected": "success",
+      "successes": 3,
+      "responseP50Ms": 1231,
+      "workerCpuMedianMs": 1144.14,
+      "workerCpuSamples": [
+        1144.145,
+        1117.194,
+        1150.471
+      ],
+      "wasmMemoryBytes": "46661632",
+      "decoded": "1600x1200",
+      "outputBytesMedian": 15632,
+      "isolateMemoryMaxBytes": 52260510,
+      "isolateMemorySampleCount": 3,
+      "wranglerTailCpuSamples": [
+        1117,
+        1144,
+        1150
+      ],
+      "requestSamples": [
+        {
+          "phase": "warmup",
+          "requestStartedAt": "2026-10-31T03:56:44.884Z",
+          "roundTripMs": 1271.82,
+          "outputBytes": 15632,
+          "wasmMemoryBytes": "46661632"
+        },
+        {
+          "phase": "sample-1",
+          "requestStartedAt": "2026-10-31T03:56:46.156Z",
+          "roundTripMs": 1247.67,
+          "outputBytes": 15632,
+          "wasmMemoryBytes": "46661632"
+        },
+        {
+          "phase": "sample-2",
+          "requestStartedAt": "2026-10-31T03:56:47.404Z",
+          "roundTripMs": 1219.33,
+          "outputBytes": 15632,
+          "wasmMemoryBytes": "46661632"
+        },
+        {
+          "phase": "sample-3",
+          "requestStartedAt": "2026-10-31T03:56:48.623Z",
+          "roundTripMs": 1231.12,
+          "outputBytes": 15632,
+          "wasmMemoryBytes": "46661632"
+        }
+      ],
+      "responseSamplesMs": [
+        1247.67,
+        1219.33,
+        1231.12
+      ],
+      "workerCpuSampleCount": 3,
+      "workerCpuSource": "Cloudflare invocation analytics",
+      "isolateMemoryMaxMiB": 49.84
+    },
+    {
+      "label": "Still AVIF to JPEG",
+      "mp": 12,
+      "file": "input-12mp-single.avif",
+      "pipeline": "jpeg",
+      "format": "jpeg",
+      "inputBytes": 42712,
+      "expected": "success",
+      "successes": 3,
+      "responseP50Ms": 1188,
+      "workerCpuMedianMs": 1047,
+      "workerCpuSamples": [
+        1047,
+        903,
+        1111
+      ],
+      "wasmMemoryBytes": "46661632",
+      "decoded": "row-encoder",
+      "outputBytesMedian": 30497,
+      "isolateMemoryMaxBytes": 52167000,
+      "isolateMemorySampleCount": 1,
+      "wranglerTailCpuSamples": [
+        1047,
+        903,
+        1111
+      ],
+      "requestSamples": [
+        {
+          "phase": "warmup",
+          "requestStartedAt": "2026-10-31T03:57:12.595Z",
+          "roundTripMs": 1206.72,
+          "outputBytes": 30497,
+          "wasmMemoryBytes": "46661632"
+        },
+        {
+          "phase": "sample-1",
+          "requestStartedAt": "2026-10-31T03:57:13.802Z",
+          "roundTripMs": 1223.66,
+          "outputBytes": 30497,
+          "wasmMemoryBytes": "46661632"
+        },
+        {
+          "phase": "sample-2",
+          "requestStartedAt": "2026-10-31T03:57:15.025Z",
+          "roundTripMs": 978.46,
+          "outputBytes": 30497,
+          "wasmMemoryBytes": "46661632"
+        },
+        {
+          "phase": "sample-3",
+          "requestStartedAt": "2026-10-31T03:57:16.004Z",
+          "roundTripMs": 1188.35,
+          "outputBytes": 30497,
+          "wasmMemoryBytes": "46661632"
+        }
+      ],
+      "responseSamplesMs": [
+        1223.66,
+        978.46,
+        1188.35
+      ],
+      "workerCpuSampleCount": 3,
+      "workerCpuSource": "Wrangler tail",
+      "isolateMemoryMaxMiB": 49.75
     }
   ],
   "analytics": {
     "dataset": "workersInvocationsAdaptive",
     "colo": "WAW",
-    "note": "Temporary Worker names may appear as __unknown__; analytics rows are correlated to request timestamps. cpuTimeP99 and memoryUsageBytesP99 are sampled per invocation, not exact peaks. Delayed analytics rows for the final tiled HEIC case were fetched after the initial batch query.",
+    "note": "Temporary Worker names may appear as __unknown__; analytics rows are correlated to request timestamps. cpuTimeP99 and memoryUsageBytesP99 are sampled per invocation, not exact peaks.",
     "rows": [
       {
         "dimensions": {
@@ -1267,6 +1654,546 @@
         "quantiles": {
           "cpuTimeP99": 2538718,
           "memoryUsageBytesP99": 58364470
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T02:35:03Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 1223863,
+          "memoryUsageBytesP99": 120980620
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T02:35:02Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 1108592,
+          "memoryUsageBytesP99": 121242770
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T02:35:05Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 674898,
+          "memoryUsageBytesP99": 121351480
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:21:20Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 603512,
+          "memoryUsageBytesP99": 71021690
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:20:51Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 903286,
+          "memoryUsageBytesP99": 70993064
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:20:49Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 1210286,
+          "memoryUsageBytesP99": 70891950
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:19:59Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 466368,
+          "memoryUsageBytesP99": 33810244
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 2
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:20:00Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 291670,
+          "memoryUsageBytesP99": 33877080
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 2
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:22:13Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 1642294,
+          "memoryUsageBytesP99": 132448190
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:21:47Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 1296783,
+          "memoryUsageBytesP99": 132542480
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:20:52Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 638068,
+          "memoryUsageBytesP99": 70993064
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:20:50Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 895589,
+          "memoryUsageBytesP99": 70891950
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:21:43Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 1984179,
+          "memoryUsageBytesP99": 132433770
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:21:17Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 898743,
+          "memoryUsageBytesP99": 70906264
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:21:19Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 858499,
+          "memoryUsageBytesP99": 70906264
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:20:25Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 281586,
+          "memoryUsageBytesP99": 33905096
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 2
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:21:48Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 1586851,
+          "memoryUsageBytesP99": 132433770
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:20:24Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 488039,
+          "memoryUsageBytesP99": 33824252
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 2
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:21:18Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 868402,
+          "memoryUsageBytesP99": 70906264
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:21:45Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 1651059,
+          "memoryUsageBytesP99": 132433770
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:55:29Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 482287,
+          "memoryUsageBytesP99": 33905400
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 3
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:55:04Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 356080,
+          "memoryUsageBytesP99": 33877384
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 2
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:56:19Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 640883,
+          "memoryUsageBytesP99": 34121230
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:55:05Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 223076,
+          "memoryUsageBytesP99": 33877384
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:55:03Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 364833,
+          "memoryUsageBytesP99": 33810548
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:55:54Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 544820,
+          "memoryUsageBytesP99": 34207760
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:55:52Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 705795,
+          "memoryUsageBytesP99": 34106810
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:55:55Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 708291,
+          "memoryUsageBytesP99": 34207760
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:57:12Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 1073208,
+          "memoryUsageBytesP99": 52167000
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:56:20Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 534388,
+          "memoryUsageBytesP99": 34236604
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 2
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:56:47Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 1144145,
+          "memoryUsageBytesP99": 52260510
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:55:28Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 361160,
+          "memoryUsageBytesP99": 33824556
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:56:46Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 1117194,
+          "memoryUsageBytesP99": 52152136
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:55:53Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 918637,
+          "memoryUsageBytesP99": 34106810
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:56:48Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 1150471,
+          "memoryUsageBytesP99": 52260510
+        },
+        "sum": {
+          "errors": 0,
+          "requests": 1
+        }
+      },
+      {
+        "dimensions": {
+          "coloCode": "WAW",
+          "datetime": "2026-10-31T03:56:18Z",
+          "status": "success"
+        },
+        "quantiles": {
+          "cpuTimeP99": 644753,
+          "memoryUsageBytesP99": 34121230
         },
         "sum": {
           "errors": 0,
